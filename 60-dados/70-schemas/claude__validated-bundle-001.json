@@ -1,0 +1,144 @@
+{
+  "project": {
+    "project_name": "EXECUTAR App",
+    "corpus_id": "EXECUTAR_projetosaasentrypoint_EXPANDIDO(1).xlsx",
+    "corpus_version": "v2.0",
+    "extraction_run_id": "audit_20260913_001",
+    "generated_at": "2026-09-13T09:10:14.081172Z",
+    "notes": "Bundle gerado por auditoria automatizada. Evidências são stubs — precisam de mapeamento manual."
+  },
+  "domains": {
+    "domain_01_negocio_gtm": {
+      "1.1": {
+        "status": "found",
+        "answer": "Converter obrigações variáveis em uma próxima ação executável, preservando contexto para iniciar, interromper e retomar o trabalho.",
+        "confidence": "high",
+        "evidence": [
+          {
+            "source_id": "google_sheets_drive_20260913",
+            "source_title": "01_Formulario",
+            "locator": "E8",
+            "support": "supports"
+          }
+        ],
+        "notes": "Respostas diretas do Google Sheets. Rastreabilidade: Google Drive → Sheets → formulário."
+      },
+      "1.2": {
+        "status": "found",
+        "answer": "ICP canônico de negócio: trabalhador solo / knowledge worker / profissional multiprojeto definido pelo problema e comportamento — especialmente perda de contexto e dificuldade recorrente de selecionar a próxima ação.",
+        "confidence": "high",
+        "evidence": [
+          {
+            "source_id": "google_sheets_drive_20260913",
+            "locator": "E9",
+            "support": "supports"
+          }
+        ]
+      },
+      "1.10": {
+        "status": "not_found",
+        "evidence": [],
+        "notes": "Campo vazio na planilha — breakeven não foi preenchido."
+      },
+      "1.11": {
+        "status": "not_found",
+        "evidence": [],
+        "notes": "Campo vazio — teto de infraestrutura não definido."
+      },
+      "1.12": {
+        "status": "not_found",
+        "evidence": [],
+        "notes": "Campo vazio — gatilhos de upgrade não especificados."
+      }
+    },
+    "domain_02_produto": {
+      "2.1": {
+        "status": "found",
+        "answer": "EXECUTAR App",
+        "confidence": "high",
+        "evidence": [
+          {
+            "source_id": "google_sheets_drive_20260913",
+            "locator": "E23",
+            "support": "supports"
+          }
+        ]
+      },
+      "2.3": {
+        "status": "found",
+        "answer": "Reduzir carga cognitiva e fadiga decisória; persistir contexto e estado; converter objetivos/documentos em estrutura executável; identificar uma próxima ação elegível por capacidade e dependências; suportar execução WIP 1:1; e transformar execução em evidência, progresso, Status Report, Mapa-OS e próximos passos.",
+        "confidence": "high",
+        "evidence": [
+          {
+            "source_id": "google_sheets_drive_20260913",
+            "locator": "E25",
+            "support": "supports"
+          }
+        ]
+      }
+    },
+    "domain_03_arquitetura_full_stack": {
+      "3.1": {
+        "status": "found",
+        "answer": "Frontend final deve preservar as superfícies Next Forge apps/app, apps/web, apps/storybook e apps/email, adaptando o design-system do baseline ao Design System canônico do EXECUTAR. O contrato também explicita shadcn/ui (estilo New York), Tailwind e CSS variables no baseline visual, além de Expo/React Native para mobile.",
+        "confidence": "high",
+        "evidence": [
+          {
+            "source_id": "google_sheets_drive_20260913",
+            "locator": "E38",
+            "support": "supports"
+          }
+        ]
+      }
+    },
+    "domain_04_implementacao": {
+      "4.1": {
+        "status": "found",
+        "answer": "Schema mínimo requerido: User, Account, Workspace, Membership, Project, Process, Deliverable, Task, Action, Evidence, Dependency, Routine/RoutineRun, WorkflowDefinition/WorkflowRun, StatusReport, MapaOS, VisualSymbol, ScannerMutation, Attachment, IntegrationConnection, ExternalObjectRef, AgentRun, ToolCall, AIUsage, Notification, Subscription, UsageLedger, ExecutionCredit e AuditEvent; com migrations, constraints, indexes, tenancy, RLS, FKs, enums/estados, audit tables, storage, backup e restore.",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "source_id": "google_sheets_drive_20260913",
+            "locator": "E51",
+            "support": "supports"
+          }
+        ],
+        "notes": "Resposta descreve esq requisitos, mas implementação real não foi verificada."
+      },
+      "4.2": {
+        "status": "not_found",
+        "evidence": [],
+        "notes": "Endpoints de API principais não foram listados na planilha."
+      },
+      "4.3": {
+        "status": "not_found",
+        "evidence": [],
+        "notes": "MCP tools integradas não foram enumeradas — apenas mencionadas como 'blocked'."
+      }
+    },
+    "domain_05_operacao_deploy_rollback": {
+      "5.1": {
+        "status": "found",
+        "answer": "Gate pré-release mestre: nenhum RELEASE é permitido até todos os gates obrigatórios estarem PASS, incluindo produto, web, iOS/Android, backend/API, DB/RLS, auth, Copiloto/AI, Mapa-OS, Scanner, rotinas/workflows, integrações, billing, notifications, analytics, observability, security/privacy/accessibility/performance, testes/evals, CI, deploy/builds, backup/restore, documentação e handoff.",
+        "confidence": "high",
+        "evidence": [
+          {
+            "source_id": "google_sheets_drive_20260913",
+            "locator": "E62",
+            "support": "supports"
+          }
+        ]
+      },
+      "5.3": {
+        "status": "not_found",
+        "evidence": [],
+        "notes": "Limiar objetivo de erro para rollback não foi definido."
+      },
+      "5.4": {
+        "status": "not_found",
+        "evidence": [],
+        "notes": "Latência P50 limiar não foi especificado."
+      }
+    }
+  }
+}

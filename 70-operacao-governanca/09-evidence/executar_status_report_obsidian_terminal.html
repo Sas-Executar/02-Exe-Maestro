@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EXECUTAR · Status Report</title>
+<style>
+  html,body{margin:0;padding:0;background:#f4f4f3;color:#111111;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;padding:24px 12px 64px;}
+  .sheet{max-width:760px;margin:0 auto;background:#ffffff;border:1px solid #dedede;}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono',monospace;}
+  .header{background:#111111;color:#ffffff;padding:18px 22px;}
+  .kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#d8d8d8;}
+  .title{font-size:22px;font-weight:700;margin-top:6px;line-height:1.15;}
+  .meta{font-size:11px;color:#9a9a9a;margin-top:8px;line-height:1.5;}
+  .section{padding:18px 20px;border-top:1px solid #ececec;}
+  .section:first-of-type{border-top:none;}
+  .section-label{font-size:11px;color:#777777;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;}
+  .dashboard-table,.depth-table,.triptych-table,.properties{width:100%;border-collapse:collapse;table-layout:fixed;}
+  .dashboard-table td{vertical-align:bottom;padding:0;}
+  .hero{font-size:44px;line-height:1;font-weight:700;letter-spacing:-.04em;}
+  .hero-label{font-size:12px;color:#777777;margin-top:5px;}
+  .stat{text-align:right;vertical-align:bottom;}
+  .stat strong{display:block;font-size:18px;line-height:1.15;}
+  .stat span{font-size:11px;color:#777777;}
+  .progress-track{height:6px;background:#efefef;margin-top:16px;overflow:hidden;}
+  .progress-fill{height:6px;width:22%;background:#7c3aed;}
+  .depth-wrap{border-top:1px solid #ececec;border-bottom:1px solid #ececec;margin-top:16px;}
+  .depth-table td{padding:11px 8px;text-align:center;border-right:1px solid #ececec;}
+  .depth-table td:last-child{border-right:none;}
+  .depth-name{font-size:10px;color:#777777;text-transform:uppercase;letter-spacing:.05em;}
+  .depth-val{font-size:13px;font-weight:700;margin-top:3px;}
+  .depth-current{background:#f5f3ff;}
+  .depth-current .depth-name,.depth-current .depth-val{color:#7c3aed;}
+  .triptych-wrap{margin-top:16px;border:1px solid #ececec;}
+  .triptych-table td{padding:14px 14px 16px;vertical-align:top;border-right:1px solid #ececec;}
+  .triptych-table td:last-child{border-right:none;}
+  .triptych-table td.current{background:#faf8ff;}
+  .tri-top{font-size:11px;color:#777777;display:flex;justify-content:space-between;gap:10px;}
+  .tri-top b{font-weight:700;color:#111111;}
+  .current .tri-top,.current .tri-top b{color:#7c3aed;}
+  .tri-title{font-size:14px;line-height:1.35;font-weight:600;margin-top:12px;min-height:38px;}
+  .tri-state{font-size:11px;color:#777777;margin-top:14px;}
+  .current .tri-state{color:#7c3aed;font-weight:600;}
+  .now{margin-top:16px;border-top:2px solid #111111;padding-top:14px;}
+  .now-row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
+  .now-title{font-size:18px;font-weight:700;line-height:1.25;}
+  .now-meta{font-size:12px;color:#777777;margin-top:4px;}
+  .chip{display:inline-block;background:#ede9fe;color:#6d28d9;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:600;white-space:nowrap;}
+  .properties td{padding:12px 0;border-bottom:1px solid #ececec;vertical-align:top;font-size:15px;line-height:1.45;}
+  .properties tr:last-child td{border-bottom:none;}
+  .properties .key{width:132px;padding-right:12px;font-size:12px;font-weight:700;color:#555555;}
+  .properties .key.accent{color:#7c3aed;}
+  .properties strong{font-weight:700;}
+  .tags{padding-top:16px;border-top:2px solid #111111;margin-top:18px;}
+  .tag-label{font-size:11px;color:#777777;margin:10px 0 8px;}
+  .tag-label:first-child{margin-top:0;}
+  .tag-purple,.tag-grey{display:inline-block;border-radius:999px;padding:5px 10px;margin:0 6px 6px 0;font-size:12px;font-weight:600;}
+  .tag-purple{background:#ede9fe;color:#6d28d9;}
+  .tag-grey{background:#f1f1f1;color:#444444;}
+  .footer{padding:14px 20px 18px;border-top:1px solid #ececec;font-size:11px;color:#8a8a8a;line-height:1.5;}
+  @media(max-width:560px){
+    body{padding:0;background:#fff;}.sheet{border:none;}.header{padding:16px 16px;}.section{padding:16px;}
+    .hero{font-size:38px}.properties .key{width:104px}.properties td{font-size:14px}.properties .key{font-size:11px}
+    .triptych-table td{padding:12px 10px}.tri-title{font-size:13px}.depth-table td{padding:9px 4px}
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="header mono">
+      <div class="kicker">EXECUTAR / STATUS REPORT</div>
+      <div class="title">Campanha de lançamento</div>
+      <div class="meta">schema: EXECUTAR_SYNTHESIS_V2 &nbsp;&nbsp; status: ativo &nbsp;&nbsp; data: 26 Aug 2026</div>
+    </div>
+
+    <div class="section">
+      <div class="section-label mono">PROGRESSO / PROJETO</div>
+      <table class="dashboard-table" role="presentation">
+        <tr>
+          <td style="width:50%">
+            <div class="hero">22%</div>
+            <div class="hero-label">concluído</div>
+          </td>
+          <td class="stat" style="width:25%"><strong>03 / 08</strong><span>ciclo atual</span></td>
+          <td class="stat" style="width:25%"><strong>11%</strong><span>hoje</span></td>
+        </tr>
+      </table>
+      <div class="progress-track"><div class="progress-fill"></div></div>
+
+      <div class="depth-wrap">
+        <table class="depth-table" role="presentation">
+          <tr>
+            <td><div class="depth-name mono">Projeto</div><div class="depth-val">22%</div></td>
+            <td><div class="depth-name mono">Ciclo</div><div class="depth-val">33%</div></td>
+            <td class="depth-current"><div class="depth-name mono">Hoje</div><div class="depth-val">11%</div></td>
+            <td><div class="depth-name mono">Tarefa</div><div class="depth-val">33%</div></td>
+            <td><div class="depth-name mono">Ação</div><div class="depth-val">agora</div></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="triptych-wrap">
+        <table class="triptych-table" role="presentation">
+          <tr>
+            <td>
+              <div class="tri-top"><span>ONTEM</span><b>100%</b></div>
+              <div class="tri-title">Direção estratégica fechada</div>
+              <div class="tri-state">concluído</div>
+            </td>
+            <td class="current">
+              <div class="tri-top"><span>HOJE</span><b>11%</b></div>
+              <div class="tri-title">Landing e peças produzidas</div>
+              <div class="tri-state">em andamento</div>
+            </td>
+            <td>
+              <div class="tri-top"><span>AMANHÃ</span><b>0%</b></div>
+              <div class="tri-title">Campanha validada e publicada</div>
+              <div class="tri-state">planejado</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="now">
+        <div class="now-row">
+          <div>
+            <div class="section-label mono" style="margin-bottom:6px;color:#7c3aed">AGORA</div>
+            <div class="now-title">Revisar headline</div>
+            <div class="now-meta">Hoje · Preparar conteúdo · aproximadamente 15 minutos</div>
+          </div>
+          <span class="chip">próxima ação</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label mono">STATUS / PROPERTIES</div>
+      <table class="properties" role="presentation">
+        <tr><td class="key mono">contexto</td><td>Consolidar código maduro dos repositórios-fonte no canônico sem <strong>reimplementar</strong> capacidades já existentes.</td></tr>
+        <tr><td class="key mono accent">problema</td><td>O canônico tem a fundação SaaS, mas ainda não incorporou vários motores maduros de domínio, agente, pré-plan, scanner e execução.</td></tr>
+        <tr><td class="key mono">processo</td><td>Comparar cada capacidade e decidir objetivamente o que <strong>portar, adaptar, fundir ou descartar</strong>.</td></tr>
+        <tr><td class="key mono accent">progresso</td><td>Ter uma sequência clara de PRs para incorporar primeiro o núcleo reutilizável e depois integrações e canais.</td></tr>
+        <tr><td class="key mono">passo_1</td><td>Portar contracts, interpreter determinístico, ingest, evidence, methodology, verifier, policy, fractal e project-domain.</td></tr>
+        <tr><td class="key mono">passo_2</td><td>Integrar o núcleo ao Vercel AI SDK, MCP authority, Clerk e UnitOfWork local antes de Aurora.</td></tr>
+        <tr><td class="key mono">passo_3</td><td>Incorporar gateway, MCP tools, WhatsApp, projections, QR e ativos exclusivos do Scanner.</td></tr>
+        <tr><td class="key mono accent">risco</td><td>Misturar regras maduras com infraestrutura antiga pode gerar acoplamento, falhas multi-tenant e divergência de estado.</td></tr>
+        <tr><td class="key mono">prevencao</td><td>Migrar por contratos e testes, mantendo adapters de infraestrutura separados.</td></tr>
+        <tr><td class="key mono">entrega</td><td>Um único canônico com domínio, pré-plan, IA, MCP, evidências, QR, scanner e canais compartilhando o mesmo estado.</td></tr>
+      </table>
+
+      <div class="tags">
+        <div class="tag-label mono">FOCO</div>
+        <span class="tag-purple">problema</span><span class="tag-purple">progresso</span><span class="tag-purple">risco</span>
+        <div class="tag-label mono">ESTADO</div>
+        <span class="tag-purple">22%</span><span class="tag-purple">ciclo-03</span><span class="tag-purple">hoje-11</span>
+        <div class="tag-label mono">ORIGEM</div>
+        <span class="tag-grey">executar</span><span class="tag-grey">scanner</span><span class="tag-grey">sprint</span>
+      </div>
+    </div>
+
+    <div class="footer mono">EXECUTAR_SYNTHESIS_V2 · leitura: header → progresso → agora → properties → tags</div>
+  </div>
+</body>
+</html>

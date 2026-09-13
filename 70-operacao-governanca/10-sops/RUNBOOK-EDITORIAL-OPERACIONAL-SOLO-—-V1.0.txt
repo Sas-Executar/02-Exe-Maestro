@@ -1,0 +1,955 @@
+---
+id: DOC-CLX-042
+folder_id: FS-OPS-011
+tipo: documento-importado
+status: confirmado
+origem: export-claude-20260913
+origem_filename: "RUNBOOK EDITORIAL OPERACIONAL SOLO — V1.0.txt"
+sha256: b1b4564a7d48ed6bb648e98e48847892d7a5388aac911e894b4a5e335caf10c3
+projeto: ECOSSISTEMA_15-08_FILESYSTEM
+---
+
+Com base no mapa técnico anterior, no anexo e nas referências atuais, o runbook abaixo transforma o processo em um SOP/tutorial para operação individual, reduzindo troca de contexto, retrabalho e decisões repetitivas.
+
+RUNBOOK EDITORIAL OPERACIONAL SOLO — V1.0
+
+Sistema: Produção editorial multiformato
+Operação: 1 pessoa
+Objetivo: transformar uma ideia ou demanda do público em conteúdo pesquisável, compreensível, memorável e capaz de gerar uma ação verificável.
+Princípio central: produzir uma Unidade Editorial-Mãe e derivar dela os diferentes formatos, em vez de criar cada publicação isoladamente.
+
+⸻
+
+1. RESULTADO OPERACIONAL
+
+O ciclo só é considerado completo quando atravessa:
+
+FONTES → BUSCA → CONSCIÊNCIA → RETENÇÃO → VISÃO/AUDIÇÃO → COMPREENSÃO → RECONHECIMENTO → TRANSFORMAÇÃO → DECISÃO → CTA → ASSET/DESTINO → ANÁLISE → APRENDIZADO → NOVA VERSÃO
+
+O anexo estabelece a mesma lógica: vídeo curto para descoberta, carrossel/infográfico para aprofundamento e blog para autoridade, todos derivados de uma narrativa comum e adaptados ao comportamento de cada mídia.
+
+A publicação não deve funcionar como peça independente, mas como episódio de uma narrativa contínua em que ambiente, personagem, informação, câmera e tensão evoluem.
+
+⸻
+
+2. REGRA DE OURO
+
+Cada Unidade Editorial deve possuir exatamente:
+
+Variável	Regra
+Tema	1 assunto central
+Público	1 público prioritário
+Nível de consciência	1 estágio principal
+Busca	1 intenção de busca dominante
+Problema	1 problema reconhecível
+Transformação	1 mudança prometida
+Argumento	1 tese principal
+História	1 arco narrativo
+Ambiente	1 contexto visual dominante
+Clímax	1 descoberta principal
+CTA	1 ação primária
+Destino	1 próximo passo
+Métrica	1 indicador principal de sucesso
+
+Se houver dois problemas, duas transformações ou dois CTAs principais, dividir em duas Unidades Editoriais.
+
+⸻
+
+3. ARQUITETURA DO SISTEMA
+
+Camada A — Descoberta
+
+Fontes → SEO → Keywords → Busca → Nível de consciência
+
+Pergunta operacional:
+
+Como essa pessoa descreveria o que está acontecendo antes de conhecer a nossa explicação?
+
+O Google recomenda utilizar palavras que o próprio público empregaria para encontrar o conteúdo e priorizar informação útil e feita para pessoas. (Google for Developers⁠￼)
+
+⸻
+
+Camada B — Atenção
+
+Hook → Retenção → Visão → Audição
+
+A capa, thumbnail ou abertura deve antecipar exatamente a promessa que será entregue.
+
+Prometer uma coisa na capa e entregar outra imediatamente depois produz quebra de expectativa e tende a prejudicar retenção.
+
+⸻
+
+Camada C — Cognição
+
+Percepção → Compreensão → Reconhecimento → Significado
+
+O conteúdo deve conduzir:
+
+Ver/Ouvir → Entender → Relacionar → Reconhecer no cotidiano.
+
+Aplicar:
+
+* uma unidade significativa por quadro;
+* progressive disclosure;
+* hierarquia;
+* contraste funcional;
+* proximidade;
+* continuidade visual;
+* movimento somente quando orienta atenção.
+
+⸻
+
+Camada D — Transformação
+
+Situação atual → explicação → mecanismo → estado desejado
+
+O leitor precisa conseguir responder:
+
+“O que eu entendia antes e o que consigo entender ou fazer agora?”
+
+⸻
+
+Camada E — Conversão
+
+Transformação → decisão → CTA → asset → destino
+
+O CTA não aparece como interrupção.
+
+Ele deve ser consequência lógica do conteúdo.
+
+⸻
+
+Camada F — Aprendizado
+
+Publicação → dados → diagnóstico → ajuste → template atualizado
+
+O conteúdo publicado alimenta a próxima produção.
+
+⸻
+
+4. FUNIL + NÍVEIS DE CONSCIÊNCIA
+
+Utilizar operacionalmente os cinco estados clássicos associados ao modelo de Eugene Schwartz: Unaware → Problem Aware → Solution Aware → Product Aware → Most Aware. (Breakthrough Advertising⁠￼)
+
+Nível	Pensamento do público	Objetivo editorial	Conteúdo predominante	CTA adequado
+1 — Não consciente	“Isso nem é um problema para mim.”	Fazer perceber uma situação.	Cena cotidiana, história, pergunta, contraste, comportamento.	Observe, continue, descubra.
+2 — Consciente do problema	“Isso acontece comigo, mas não sei por quê.”	Nomear e explicar o problema.	Sintomas, sinais, exemplos, diagnóstico educacional.	Leia, identifique, salve.
+3 — Consciente da solução	“Existem formas de resolver isso?”	Apresentar mecanismos e alternativas.	Guia, framework, tutorial, comparação.	Aprenda, teste, baixe.
+4 — Consciente do método/produto	“Por que esta solução?”	Demonstrar diferenciação e prova.	Demonstração, caso, metodologia, FAQ, comparação.	Conheça, experimente, acesse.
+5 — Mais consciente	“Quero agir.”	Reduzir fricção da decisão.	Oferta, produto, serviço, formulário, inscrição.	Comprar, assinar, contratar, iniciar.
+
+Regra
+
+Uma publicação deve prioritariamente mover o público apenas um nível.
+
+Não tentar levar alguém de “não consciente” diretamente para compra.
+
+⸻
+
+5. FORMULÁRIO OBRIGATÓRIO ANTES DE PRODUZIR
+
+Preencher antes de abrir Canva, CapCut, Premiere ou qualquer ferramenta visual.
+
+Campo	Preenchimento
+CONTENT_ID	Identificador único
+Tema	Assunto
+Público	Para quem
+Nível de consciência	1–5
+Busca principal	O que pesquisa
+Keywords associadas	Termos relacionados
+Problema	O que está acontecendo
+Causa percebida	Por que acredita que acontece
+Causa explicada	O que a evidência indica
+Desejo	O que gostaria que acontecesse
+Emoção inicial	Como se sente
+Emoção final	Como deve terminar
+Transformação	Antes → depois
+Tese	Principal ideia defendida
+Fonte principal	Evidência de maior autoridade
+Hook	Por que continuar
+Ambiente	Onde acontece
+Personagem	Quem vive a situação
+Tensão	O que muda
+Clímax	Descoberta principal
+Resolução	O que passa a fazer sentido
+CTA	Próxima ação
+Asset	O que receberá
+Destino	Para onde irá
+Formato primário	Blog, vídeo, carrossel etc.
+Derivações	Outros formatos
+KPI	Métrica principal
+
+GATE 01: se Problema + Transformação + CTA não estiverem definidos, não iniciar produção.
+
+⸻
+
+6. TUTORIAL OPERACIONAL
+
+ETAPA 01 — Receber a pauta
+
+Fazer
+
+Registrar tema e pergunta central.
+
+Não fazer
+
+Abrir imediatamente o editor.
+
+Saída
+
+BRIEF_V1
+
+Gate
+
+É possível explicar o assunto em uma frase?
+
+⸻
+
+ETAPA 02 — Coletar fontes
+
+Separar:
+
+Primária → institucional → científica → técnica → editorial → comunidade.
+
+Para saúde, ciência, psicologia ou temas de maior impacto individual, priorizar fontes primárias, revisões, instituições reconhecidas e documentação técnica.
+
+Saída
+
+SOURCE_PACK
+
+Cada afirmação importante deve conseguir apontar para sua origem.
+
+⸻
+
+ETAPA 03 — Mapear a busca
+
+Criar quatro clusters:
+
+Cluster	Pergunta
+BUSCA	O que a pessoa digita?
+PROBLEMA	O que ela acha que está errado?
+SOLUÇÃO	O que procura para resolver?
+DESEJO	Como gostaria de se sentir ou funcionar?
+
+Adicionar palavras emocionais e linguagem cotidiana somente quando realmente utilizadas pelo público.
+
+Saída
+
+SEARCH_MAP
+
+Depois da publicação, Search Console deve validar quais consultas efetivamente estão produzindo impressões e cliques; seu relatório de Performance disponibiliza consultas, impressões, cliques, CTR e posição. (Google Support⁠￼)
+
+⸻
+
+ETAPA 04 — Determinar consciência e funil
+
+Escolher apenas um nível prioritário.
+
+Exemplo:
+
+Busca: “por que não consigo terminar tarefas?”
+Consciência: problema-aware.
+Conteúdo: explicar mecanismo.
+CTA: “veja os sinais”, não “compre agora”.
+
+Saída
+
+AWARENESS_TAG
+
+⸻
+
+ETAPA 05 — Definir transformação
+
+Escrever:
+
+ANTES → MECANISMO → DEPOIS
+
+Exemplo genérico:
+
+Confusão → compreensão do mecanismo → capacidade de reconhecer e agir.
+
+Gate
+
+A transformação precisa ser observável.
+
+Evitar:
+
+“gerar valor”, “aumentar consciência” ou “engajar”.
+
+Preferir:
+
+“ao terminar, a pessoa consegue identificar X e diferenciar X de Y”.
+
+⸻
+
+ETAPA 06 — Criar mapa argumentativo
+
+Estrutura padrão:
+
+Pergunta → contexto → problema → evidência → mecanismo → implicação → exemplo → transformação → conclusão.
+
+Cada argumento deve preparar o próximo.
+
+⸻
+
+ETAPA 07 — Converter argumento em história
+
+Usar o arco padrão estabelecido no anexo:
+
+GANCHO/COLD OPEN → EXPOSIÇÃO → AUMENTO DA AÇÃO → CLÍMAX → DECLÍNIO → DESFECHO/CTA.
+
+Tradução operacional
+
+Estágio	Função
+Gancho	Criar pergunta ou tensão
+Exposição	Onde estamos e quem está envolvido
+Aumento	Acrescentar sinais, consequências ou evidências
+Clímax	Entregar a descoberta principal
+Declínio	Explicar implicação
+Desfecho	Mostrar transformação e próximo passo
+
+⸻
+
+ETAPA 08 — Construir storyboard
+
+Cada quadro deve responder quatro perguntas:
+
+O que o leitor vê? → para onde olha? → o que muda? → por que continua?
+
+A imagem não é decoração.
+
+Ela participa do argumento.
+
+Direção visual prioritária:
+
+ambiente → personagem → ação → detalhe → consequência → reorganização → resolução.
+
+O anexo recomenda ação dominante por quadro, continuidade espacial, comportamento reconhecível e mudança perceptível entre cenas.
+
+⸻
+
+ETAPA 09 — Direção de arte
+
+Definir antes da geração/seleção das imagens:
+
+Elemento	Decisão
+Ambiente	Onde acontece
+Hora/luz	Estado emocional
+Perspectiva	Quem observa
+Plano	Geral, médio, detalhe
+Direção do olhar	Para onde conduz
+Movimento	O que muda
+Personagens	Quem participa
+Objeto focal	Principal sinal
+Profundidade	Primeiro/meio/fundo
+Cor	Função semântica
+Continuidade	Elementos que permanecem
+
+Regra de cor
+
+Cor reforça significado; não substitui significado.
+
+Nunca depender exclusivamente de vermelho/verde, som ou movimento para comunicar informação crítica.
+
+⸻
+
+ETAPA 10 — Produzir a UNIDADE EDITORIAL-MÃE
+
+Primeiro produzir a narrativa completa.
+
+Depois adaptar.
+
+Não criar:
+
+“um Reel + um carrossel + um artigo”.
+
+Criar:
+
+uma narrativa → três traduções da mesma narrativa.
+
+⸻
+
+7. TEMPLATES POR FORMATO
+
+TEMPLATE A — VÍDEO CURTO 9:16
+
+Percentual	Conteúdo
+0–10%	Hook visual/verbal
+10–25%	Contexto
+25–60%	Problema + tensão
+60–80%	Clímax/descoberta
+80–90%	Transformação
+90–100%	CTA
+
+Edição
+
+Cortar silêncio sem função.
+
+Movimento precisa significar:
+
+mudança de informação, atenção ou emoção.
+
+Evitar cortes simplesmente porque “vídeo curto precisa ser rápido”.
+
+CapCut oferece legendas automáticas em Web, Desktop e Mobile, com revisão manual posterior necessária. (CapCut⁠￼)
+
+⸻
+
+TEMPLATE B — CARROSSEL
+
+Frame	Função
+01	Promessa/conflito
+02	Contexto
+03	Primeiro sinal
+04	Agravamento
+05	Evidência/mecanismo
+06	Clímax
+07	Interpretação
+08	Transformação
+09	Síntese
+10	CTA
+
+Quantidade pode variar.
+
+A função narrativa não.
+
+O anexo recomenda capa com promessa/conflito, exposição precoce, revelações progressivas, clímax com o insight principal e desfecho utilitário.
+
+⸻
+
+TEMPLATE C — ARTIGO/BLOG
+
+Título pesquisável
+→ resposta essencial
+→ contexto
+→ problema
+→ evidência
+→ mecanismo
+→ exemplo cotidiano
+→ implicações
+→ solução/transformação
+→ conclusão
+→ CTA
+→ referências.
+
+A resposta principal deve aparecer cedo; blocos devem ser escaneáveis e títulos informativos.
+
+SEO não deve converter o artigo em texto para algoritmo; Google explicitamente recomenda conteúdo útil, confiável e people-first. (Google for Developers⁠￼)
+
+⸻
+
+TEMPLATE D — INFOGRÁFICO
+
+Pergunta → dado → representação → destaque → interpretação → conclusão → fonte.
+
+Um gráfico = uma pergunta principal.
+
+Não inserir gráfico apenas para “parecer científico”.
+
+⸻
+
+TEMPLATE E — SCROLLYTELLING
+
+Ambiente geral
+→ personagem
+→ aproximação
+→ sinais
+→ detalhe
+→ problema
+→ mecanismo
+→ clímax
+→ reorganização da cena
+→ resolução
+→ CTA.
+
+O scroll funciona como movimento de câmera.
+
+⸻
+
+TEMPLATE F — VÍDEO LONGO/AULA
+
+Cold open
+→ promessa
+→ mapa do conteúdo
+→ contexto
+→ capítulos
+→ exemplos
+→ descoberta central
+→ aplicação
+→ resumo
+→ CTA.
+
+No YouTube, utilizar posteriormente os pontos de retenção, picos e quedas para localizar segmentos fortes ou pontos de abandono. (Google Support⁠￼)
+
+⸻
+
+8. PADRÃO DE EDIÇÃO POR CONTEXTO
+
+Contexto	Ritmo	Imagem	Texto	Movimento	CTA
+Educacional	Médio	Diagramas + cenas	Explicativo	Progressivo	Aprender/salvar
+História cotidiana	Variável	Pessoas + ambiente	Mínimo	Narrativo	Reconhecer/continuar
+Ciência/evidência	Controlado	Dados + contexto	Preciso	Somente funcional	Ler fonte/artigo
+Tutorial	Sequencial	Demonstração	Instrucional	Mostra etapas	Testar/fazer
+Diagnóstico educacional	Lento-médio	Sinais/comparações	Perguntas	Revelação	Identificar
+Editorial/jornalístico	Contido	Evidência/documentação	Factual	Discreto	Aprofundar
+Comercial	Direto	Resultado/prova	Benefício	Foco na decisão	Converter
+Produto	Direto	Uso real	Diferencial	Demonstração	Experimentar
+Emoção	Respiração maior	Ambiente/expressão	Mínimo	Atmosférico	Compartilhar/refletir
+
+⸻
+
+9. ÁUDIO + ACESSIBILIDADE
+
+Legenda é item de produção, não acabamento opcional.
+
+WCAG 2.2 estabelece legendas para conteúdo de áudio pré-gravado em mídia sincronizada. (W3C⁠￼)
+
+Ordem
+
+voz → inteligibilidade → legenda → efeitos → música.
+
+Música nunca deve competir com a compreensão.
+
+Texto em tela deve complementar a fala, não simplesmente repetir parágrafos inteiros.
+
+⸻
+
+10. STACK OPERACIONAL PARA UMA PESSOA
+
+A prioridade é reduzir quantidade de softwares, não maximizar recursos.
+
+Função	Plataforma principal	Alternativa	Regra
+Pesquisa	Browser + fontes primárias	Scholar/bases específicas	Salvar fonte antes de roteiro
+Brief/roteiro	Google Docs	Markdown	Um documento-mãe
+Controle	Google Sheets	Banco editorial	Uma linha por conteúdo
+Arquivos	Google Drive	SSD/local	Drive é repositório canônico
+Design/carrossel	Canva	Figma	Templates bloqueados
+Vídeo social	CapCut Desktop	—	Velocidade operacional
+Vídeo avançado	DaVinci Resolve	Adobe Premiere	Escolher apenas um
+Legendas	CapCut/editor NLE	—	Sempre revisar
+Blog	CMS do projeto	—	Publicação canônica
+Instagram/Facebook	Meta Business Suite	Canva Planner	Preferir publicação nativa
+TikTok	TikTok Business Suite	Upload nativo	Preferir analytics nativos
+YouTube	YouTube Studio	—	Publicação + Analytics
+SEO	Search Console	—	Consultas, CTR, cliques
+Site	GA4	—	Engajamento/conversão
+Dashboard	Google Sheets	—	Consolidar somente KPIs
+
+Por que essa combinação
+
+CapCut: favorece velocidade de conteúdo social e oferece reconhecimento automático de legendas e recursos de automação de cortes. (CapCut⁠￼)
+
+Premiere: possui edição baseada em transcrição, permitindo reorganizar texto e refletir os cortes automaticamente na timeline. (helpx.adobe.com⁠￼)
+
+DaVinci Resolve: reúne edição, Fusion, cor, Fairlight, mídia e entrega em um único ambiente e inclui suporte a edição vertical e legendas. (Blackmagic Design⁠￼)
+
+Canva: pode reunir templates, planejamento e agendamento social; entretanto, para uma operação crítica, manter o scheduler nativo de cada rede como referência reduz dependência de uma camada intermediária. (Canva⁠￼)
+
+⸻
+
+11. SALVAMENTO E VERSIONAMENTO
+
+Estrutura obrigatória:
+
+/CONTENT_ID__slug/
+    /00_BRIEF/
+    /01_SOURCES/
+    /02_ARGUMENT/
+    /03_SCRIPT/
+    /04_STORYBOARD/
+    /05_ASSETS/
+        /IMAGE/
+        /VIDEO/
+        /AUDIO/
+    /06_EDIT/
+    /07_EXPORT/
+        /REELS/
+        /CAROUSEL/
+        /BLOG/
+        /SHORTS/
+        /TIKTOK/
+    /08_PUBLISH/
+    /09_ANALYTICS/
+
+Nome
+
+CONTENT-ID__slug__FORMAT__v01.ext
+
+Exemplo:
+
+CONT-20260902-001__sobrecarga-cognitiva__REEL__v03.mp4
+
+Nunca:
+
+video-final-final2-novo-agora-sim.mp4
+
+Estados
+
+DRAFT → REVIEW → APPROVED → PUBLISHED → MEASURED → LEARNED
+
+⸻
+
+12. PADRONIZAÇÃO DOS TEMPLATES
+
+Cada formato deve possuir um arquivo MASTER.
+
+Exemplos:
+
+MASTER_REEL_9X16
+MASTER_CAROUSEL_4X5
+MASTER_STORY_9X16
+MASTER_THUMB
+MASTER_INFOGRAPHIC
+MASTER_BLOG_HERO
+MASTER_SCROLYTELLING
+
+Bloquear no template:
+
+* grid;
+* margens;
+* tipografia;
+* tamanhos;
+* hierarquia;
+* zonas seguras;
+* estilos de legenda;
+* transições permitidas;
+* motion tokens;
+* cores;
+* ícones;
+* posição de fonte;
+* posição de CTA.
+
+O operador altera conteúdo, não reinventa o sistema visual.
+
+⸻
+
+13. DISTRIBUIÇÃO
+
+Uma narrativa-mãe pode produzir:
+
+BLOG → CARROSSEL → REEL → SHORT → TIKTOK → INFOGRÁFICO → STORY → CTA/ASSET.
+
+Mas a adaptação deve ser nativa.
+
+Não publicar o mesmo arquivo mecanicamente em todos os canais.
+
+Instagram/Facebook
+
+Meta Business Suite centraliza publicação e insights para Facebook e Instagram; o Painel Profissional do Instagram também disponibiliza orientações de criação, alcance e engajamento. (Sobre o Facebook⁠￼)
+
+TikTok
+
+A Web Business Suite oferece Analytics, Creative Hub e Scheduler para contas Business. (TikTok For Business⁠￼)
+
+YouTube
+
+YouTube Studio centraliza publicação e relatórios de conteúdo, público, alcance e engajamento. (Google Support⁠￼)
+
+Blog
+
+O artigo é o objeto canônico de profundidade e referência quando o tema justificar conteúdo longo.
+
+⸻
+
+14. MATRIZ DE CTA
+
+Consciência	CTA recomendado
+Não consciente	Veja / perceba / continue
+Problema	Identifique / salve / leia
+Solução	Compare / aprenda / teste
+Método/produto	Veja demonstração / baixe / experimente
+Mais consciente	Inscreva-se / contrate / compre / inicie
+
+Proibido
+
+Um conteúdo com:
+
+“curta + comente + compartilhe + siga + salve + clique no link”.
+
+Isso não é CTA.
+
+É uma lista de solicitações.
+
+Escolher uma ação primária.
+
+⸻
+
+15. GATES DE QUALIDADE
+
+Gate	Pergunta	Passa quando
+G01 Objetivo	Existe transformação?	Antes/depois definido
+G02 Evidência	As afirmações são sustentáveis?	Fonte registrada
+G03 Busca	Linguagem corresponde ao público?	Query definida
+G04 Consciência	Sei em qual estágio ele está?	1 nível marcado
+G05 Argumento	A sequência é causal/lógica?	Mapa fechado
+G06 Narrativa	Existe progressão?	Hook→clímax→resolução
+G07 Visual	Cada quadro tem função?	Sem decoração gratuita
+G08 Cognitivo	Existe excesso?	1 unidade principal por frame
+G09 Áudio	É compreensível sem música?	Voz limpa
+G10 Acessibilidade	Existe alternativa adequada?	Legenda/alt text
+G11 CTA	Existe uma ação dominante?	1 CTA
+G12 Destino	CTA leva a algum lugar válido?	Link/asset testado
+G13 Export	Arquivo correto?	Formato/qualidade aprovados
+G14 Distribuição	Metadata está correta?	Capa/título/caption/link
+G15 Medição	KPI está configurado?	Métrica registrada
+
+Nenhuma publicação é DONE antes do G15.
+
+⸻
+
+16. ANÁLISE DE PERFORMANCE
+
+Não avaliar apenas visualizações.
+
+O próprio anexo direciona a análise para retenção/completion e rewatch no vídeo, progressão e salvamento em carrosséis, compartilhamentos e profundidade no blog.
+
+Métricas por estágio
+
+Estágio	Métrica
+Descoberta	Impressões / alcance
+Interesse inicial	CTR / abertura
+Retenção	Watch time / curva
+Progressão	Completion / swipe
+Utilidade	Salvamentos
+Valor social	Compartilhamentos/envios
+Reconhecimento	Retorno / audiência recorrente
+Profundidade	Engajamento no site
+Intenção	Clique no CTA
+Conversão	Evento final
+SEO	Impressões, cliques, CTR, queries
+Aprendizado	melhoria versus baseline
+
+Instagram disponibiliza métricas como tempo total e médio de visualização de Reels, úteis para investigar abertura e retenção. (Sobre o Facebook⁠￼)
+
+No GA4, sessão engajada envolve critérios como mais de 10 segundos, evento principal ou duas ou mais visualizações de página/tela, permitindo acompanhar comportamento pós-clique no site. (Google Support⁠￼)
+
+⸻
+
+17. CADÊNCIA INTERNA DE ANÁLISE
+
+Utilizar como padrão operacional, não como regra dos algoritmos:
+
+Momento	Fazer
+Publicação	Registrar baseline
++24 h	Conferir distribuição inicial
++72 h	Diagnosticar hook/retenção
++7 dias	Comparar com conteúdos semelhantes
++28 dias	Avaliar cauda, busca e recorrência
+
+O YouTube informa que alguns dados de retenção podem levar aproximadamente 1–2 dias para processamento, reforçando que diagnóstico instantâneo não deve substituir uma análise posterior. (Google Support⁠￼)
+
+⸻
+
+18. DIAGNÓSTICO DE EDIÇÃO
+
+Retenção cai imediatamente
+
+Revisar:
+
+capa → promessa → primeiro frame → primeira frase.
+
+⸻
+
+Retenção cai no meio
+
+Revisar:
+
+exposição excessiva → ausência de mudança → repetição → desenvolvimento longo.
+
+⸻
+
+Há pico
+
+Perguntar:
+
+foi revelação, emoção, dado, replay por interesse ou replay porque não ficou claro?
+
+⸻
+
+Salvamentos altos
+
+Transformar o tema em:
+
+guia → checklist → artigo → asset.
+
+⸻
+
+Compartilhamentos altos
+
+Explorar:
+
+identificação social → situação cotidiana → problema coletivo.
+
+⸻
+
+CTR alto e retenção baixa
+
+Provável desalinhamento:
+
+thumbnail/título promete mais do que o conteúdo entrega.
+
+⸻
+
+Retenção alta e CTA baixo
+
+Revisar:
+
+transformação → oferta → destino → fricção.
+
+⸻
+
+19. LOOP DE MELHORIA
+
+Após a análise, mudar apenas a variável necessária.
+
+Exemplo:
+
+HOOK_V1 → HOOK_V2
+
+e não:
+
+refazer vídeo inteiro.
+
+O objetivo do analytics não é julgar a publicação.
+
+É localizar qual componente do sistema precisa ser atualizado.
+
+⸻
+
+20. OPERAÇÃO SOLO — REGRA DE BATCH
+
+Para evitar troca constante de contexto, trabalhar por função.
+
+Bloco A — Pensar
+
+Pesquisa + busca + consciência + argumento.
+
+Bloco B — Escrever
+
+Roteiro + narrativa + CTA.
+
+Bloco C — Visualizar
+
+Storyboard + direção de arte + assets.
+
+Bloco D — Produzir
+
+Design + vídeo + áudio + derivações.
+
+Bloco E — Publicar
+
+Exportar + metadata + distribuir.
+
+Bloco F — Analisar
+
+Analytics + diagnóstico + atualização do template.
+
+Nunca alternar continuamente Pesquisa → CapCut → Search Console → Canva → pesquisa → publicação.
+
+Batching reduz decisões operacionais e preserva foco.
+
+⸻
+
+21. CHECKLIST DE PUBLICAÇÃO
+
+Antes de apertar Publicar:
+
+[ ] Tema único
+[ ] Público definido
+[ ] Consciência definida
+[ ] Query definida
+[ ] Problema reconhecível
+[ ] Transformação explícita
+[ ] Fontes registradas
+[ ] Hook coerente com entrega
+[ ] Arco completo
+[ ] Clímax identificável
+[ ] Uma ação dominante por quadro
+[ ] Continuidade visual
+[ ] Cor funcional
+[ ] Legendas revisadas
+[ ] Texto legível em mobile
+[ ] Sem informação essencial apenas por cor/som
+[ ] CTA único
+[ ] Destino testado
+[ ] Nome/versionamento corretos
+[ ] Export correto
+[ ] KPI definido
+
+⸻
+
+22. DEFINITION OF DONE
+
+Uma Unidade Editorial está concluída somente quando:
+
+FOI PESQUISADA
+→ ENCONTRADA/ENCONTRÁVEL
+→ CAPTUROU ATENÇÃO
+→ FOI PERCEBIDA
+→ FOI COMPREENDIDA
+→ FOI RECONHECIDA NO CONTEXTO
+→ EXPLICOU UMA TRANSFORMAÇÃO
+→ PERMITIU UMA DECISÃO
+→ DIRECIONOU UMA AÇÃO
+→ FOI SALVA E VERSIONADA
+→ FOI DISTRIBUÍDA
+→ FOI MEDIDA
+→ GEROU APRENDIZADO PARA A PRÓXIMA PRODUÇÃO.
+
+Esse é o ciclo editorial completo.
+
+⸻
+
+23. FLUXO OPERACIONAL CANÔNICO
+
+PAUTA
+↓
+FONTES
+↓
+BUSCA / SEO
+↓
+NÍVEL DE CONSCIÊNCIA
+↓
+PROBLEMA
+↓
+DESEJO
+↓
+TRANSFORMAÇÃO
+↓
+MAPA ARGUMENTATIVO
+↓
+ARCO NARRATIVO
+↓
+STORYBOARD
+↓
+DIREÇÃO DE ARTE
+↓
+UNIDADE EDITORIAL-MÃE
+↓
+TEMPLATE DO FORMATO
+↓
+EDIÇÃO
+↓
+ACESSIBILIDADE
+↓
+QA
+↓
+VERSIONAMENTO
+↓
+EXPORT
+↓
+DISTRIBUIÇÃO
+↓
+CTA / ASSET / DESTINO
+↓
+ANALYTICS
+↓
+DIAGNÓSTICO
+↓
+ATUALIZAÇÃO DO TEMPLATE
+↓
+PRÓXIMA UNIDADE
+
+Princípio final: não padronizar criatividade; padronizar todas as decisões repetitivas ao redor dela.
+
+As plataformas citadas foram verificadas em documentação atual disponível em setembro de 2026; o desenho privilegia uma stack curta porque o operador será uma única pessoa.

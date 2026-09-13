@@ -1,0 +1,259 @@
+---
+id: DOC-CLX-006
+folder_id: FS-OPS-011
+tipo: documento-importado
+status: confirmado
+origem: export-claude-20260913
+origem_filename: "claude/VISAO_SISTEMICA_MESTRE_flowchart.txt"
+sha256: a31365f59683a9bc42f31b9284b2d20ac08cc43f9b1de63920a0a5e910899bc8
+projeto: ECOSSISTEMA_15-08_FILESYSTEM
+---
+
+==============================================================================
+MAPA: Map 1
+==============================================================================
+
+◉ EXECUTAR APP — VISÃO SISTÊMICA MESTRE
+├─ 1. Mapa Mestre Executivo
+│  ├─ Visão Geral Estratégica
+│  │  ├─ Formato: Radial A3 Paisagem
+│  │  ├─ Objetivo: Centralização de comando e controle do ecossistema Executar
+│  │  ├─ Conexão: Link para Customer Journey [VERDE]
+│  │  └─ Conexão: Link para Arquitetura Técnica [CIANO]
+│  ├─ Pilares de Valor
+│  │  ├─ Produtividade Assistida
+│  │  │  ├─ Foco: Redução de carga cognitiva via Copiloto [LARANJA]
+│  │  │  └─ Métrica: Tempo de execução vs. Planejado [TURQUESA]
+│  │  └─ Operações Estruturadas
+│  │     ├─ Foco: Governança e processos repetíveis [VERDE]
+│  │     └─ Métrica: Taxa de aderência ao Modo Rotina [TURQUESA]
+│  └─ Status do Sistema
+│     ├─ Saúde da API: Monitoramento via Vercel [CINZA]
+│     ├─ Estado dos Agentes: Ativos/Em Espera [LARANJA]
+│     └─ Pendências Críticas: A DEFINIR [ALERTA]
+├─ 2. Customer Journey (Timeline Horizontal)
+│  ├─ Fase: Descoberta e Cadastro
+│  │  └─ Atributos da Fase
+│  │     ├─ Objetivo: Converter visitante em usuário trial
+│  │     ├─ Ação do Usuário: Clicar em CTA na Landing Page [AZUL]
+│  │     ├─ Tela: /signup [ROXO]
+│  │     ├─ Ação Sistêmica: Criação de tenant no Clerk [CINZA]
+│  │     ├─ Ação do Copiloto: A DEFINIR [LARANJA]
+│  │     ├─ Dado: E-mail e Nome [TURQUESA]
+│  │     ├─ Pensamento: Isso vai resolver minha desorganização?
+│  │     ├─ Emoção: Esperança/Ansiedade
+│  │     ├─ Carga Cognitiva: Baixa
+│  │     ├─ Dor: Formulários longos
+│  │     ├─ Decisão: Aceitar Termos de Uso [AMARELO]
+│  │     ├─ Entregável: Conta criada [VERDE]
+│  │     ├─ Exceção: E-mail já cadastrado [VERMELHO]
+│  │     ├─ Métrica: Taxa de conversão Landing-to-Signup
+│  │     └─ Próxima Transição: Onboarding
+│  ├─ Fase: Onboarding e Consentimentos
+│  │  └─ Atributos da Fase
+│  │     ├─ Objetivo: Configurar permissões iniciais e contexto
+│  │     ├─ Ação do Usuário: Autorizar acesso a calendários e arquivos [AZUL]
+│  │     ├─ Tela: /app/onboarding [ROXO]
+│  │     ├─ Ação Sistêmica: Provisionamento de workspace [CINZA]
+│  │     ├─ Ação do Copiloto: Saudação inicial e guia de configuração [LARANJA]
+│  │     ├─ Dado: Tokens de OAuth [TURQUESA]
+│  │     ├─ Pensamento: É seguro compartilhar esses dados?
+│  │     ├─ Emoção: Cautela
+│  │     ├─ Carga Cognitiva: Média
+│  │     ├─ Dor: Excesso de permissões solicitadas
+│  │     ├─ Decisão: Quais conectores ativar [AMARELO]
+│  │     ├─ Entregável: Perfil configurado [VERDE]
+│  │     ├─ Exceção: Falha na conexão OAuth [VERMELHO]
+│  │     ├─ Métrica: Time-to-value (TTV)
+│  │     └─ Próxima Transição: Scanner
+│  ├─ Fase: Scanner e Diagnóstico
+│  │  └─ Atributos da Fase
+│  │     ├─ Objetivo: Mapear o estado atual da operação do usuário
+│  │     ├─ Ação do Usuário: Fazer upload de documentos ou vincular pastas [AZUL]
+│  │     ├─ Tela: /app/scanner [ROXO]
+│  │     ├─ Ação Sistêmica: Processamento de arquivos via Task Engine [CINZA]
+│  │     ├─ Ação do Copiloto: Interpretação de documentos e extração de tarefas [LARANJA]
+│  │     ├─ Dado: Metadados de arquivos e logs [TURQUESA]
+│  │     ├─ Pensamento: Ele realmente entendeu meu trabalho?
+│  │     ├─ Emoção: Curiosidade
+│  │     ├─ Carga Cognitiva: Alta
+│  │     ├─ Dor: CONFLITO: Scanner OCR versus DINOv2/ONNX [VERMELHO]
+│  │     ├─ Decisão: Confirmar diagnóstico gerado [AMARELO]
+│  │     ├─ Entregável: Mapa-OS inicial [VERDE]
+│  │     ├─ Exceção: Formato de arquivo não suportado [VERMELHO]
+│  │     ├─ Métrica: Precisão da extração de dados
+│  │     └─ Próxima Transição: Productivity
+│  └─ Fase: Execução e Evidência (Ciclo Diário)
+│     └─ Atributos da Fase
+│        ├─ Objetivo: Concluir tarefas com prova de entrega
+│        ├─ Ação do Usuário: Executar tarefa e anexar prova [AZUL]
+│        ├─ Tela: /app/agora [ROXO]
+│        ├─ Ação Sistêmica: Validação de DoD (Definition of Done) [CINZA]
+│        ├─ Ação do Copiloto: Comando /evidencia para registrar progresso [LARANJA]
+│        ├─ Dado: Arquivo de evidência e timestamp [TURQUESA]
+│        ├─ Pensamento: Terminei o que era prioritário?
+│        ├─ Emoção: Realização
+│        ├─ Carga Cognitiva: Média
+│        ├─ Dor: Esquecer de registrar a evidência
+│        ├─ Decisão: Marcar como Concluído [AMARELO]
+│        ├─ Entregável: Item de backlog finalizado [VERDE]
+│        ├─ Exceção: Bloqueio técnico [VERMELHO]
+│        ├─ Métrica: Throughput diário
+│        └─ Próxima Transição: Relatório e Rotina
+├─ 3. Sitemap e Rotas
+│  ├─ Site Público (Estrutura de Marketing)
+│  │  ├─ /: Home Page
+│  │  ├─ /produto: Visão geral da solução
+│  │  ├─ /como-funciona: Metodologia Executar
+│  │  ├─ /recursos: Funcionalidades específicas
+│  │  ├─ /copiloto: Detalhes da IA
+│  │  ├─ /mapa-os: Sistema operacional mental
+│  │  ├─ /scanner: Captura de dados
+│  │  ├─ /rotinas: Automações recorrentes
+│  │  ├─ /integracoes: Marketplace de conectores
+│  │  ├─ /mcp: Model Context Protocol
+│  │  ├─ /mobile: App Expo
+│  │  ├─ /precos: Planos e cobrança
+│  │  ├─ /seguranca: Criptografia e compliance
+│  │  ├─ /sobre: Institucional
+│  │  ├─ /contato: Suporte e vendas
+│  │  ├─ /blog: Conteúdo de autoridade
+│  │  ├─ /docs: Documentação técnica
+│  │  ├─ /changelog: Histórico de atualizações
+│  │  ├─ /status: Saúde do sistema
+│  │  ├─ /login: Acesso
+│  │  ├─ /signup: Cadastro
+│  │  ├─ /recuperacao: Reset de senha
+│  │  ├─ /privacidade: LGPD/GDPR
+│  │  ├─ /termos: Contrato de serviço
+│  │  └─ /cookies: Gestão de rastreio
+│  └─ Aplicativo (Core App)
+│     ├─ /app: Dashboard principal
+│     ├─ /app/onboarding: Fluxo de entrada
+│     ├─ Módulo de Projetos
+│     │  ├─ /app/projetos: Lista de workspaces
+│     │  ├─ /app/projeto/:id: Visão individual
+│     │  ├─ /app/projeto/:id/overview: Resumo executivo
+│     │  ├─ /app/projeto/:id/roadmap: Linha do tempo
+│     │  ├─ /app/projeto/:id/sprint: Ciclo atual
+│     │  ├─ /app/projeto/:id/documentos: Repositório
+│     │  └─ /app/projeto/:id/calendario: Datas críticas
+│     ├─ Módulo Temporal (Time Management)
+│     │  ├─ /app/agora: Foco imediato
+│     │  ├─ /app/hoje: Planejamento do dia
+│     │  ├─ /app/amanha: Antecipação
+│     │  └─ /app/ontem: Revisão e débitos
+│     ├─ Módulo de Inteligência
+│     │  ├─ /app/copiloto: Chat e comandos
+│     │  ├─ /app/mapa-os: Visualização sistêmica
+│     │  └─ /app/scanner: Interface de captura
+│     ├─ Módulo Operacional
+│     │  ├─ /app/reports: Relatórios automáticos
+│     │  ├─ /app/routines: Gestão de rotinas
+│     │  ├─ /app/automations: Configuração de triggers
+│     │  └─ /app/workflows: Desenho de processos
+│     ├─ Conexões e Configurações
+│     │  ├─ /app/integrations: Apps terceiros
+│     │  ├─ /app/connections: Status dos links
+│     │  ├─ /app/settings/perfil: Dados pessoais
+│     │  ├─ /app/settings/preferencias: UI/UX
+│     │  ├─ /app/settings/memoria: Contexto do Copiloto [TURQUESA]
+│     │  ├─ /app/settings/notificacoes: Canais e alertas
+│     │  ├─ /app/settings/seguranca: 2FA e sessões
+│     │  ├─ /app/settings/cobranca: Assinatura individual
+│     │  ├─ /app/workspace/membros: Gestão de time
+│     │  ├─ /app/workspace/papeis: RBAC
+│     │  ├─ /app/workspace/auditoria: Logs de conformidade
+│     │  └─ /app/workspace/cobranca: Faturamento corporativo
+│     └─ Visualizações Especiais (WIP)
+│        ├─ View 1:1: Foco em gestão de pessoas [TRACEJADA]
+│        ├─ View Lista: Produtividade clássica [CONTÍNUA]
+│        ├─ View Kanban: Fluxo de valor [CONTÍNUA]
+│        ├─ View Single Project: Imersão [CONTÍNUA]
+│        └─ View Remix Multiprojeto: Consolidação de contextos [TRACEJADA]
+├─ 4. Copiloto (Workflow e Agentes)
+│  ├─ Princípios de Operação
+│  │  ├─ Fonte Canônica: O banco de dados é a única verdade; o Mapa-OS é apenas projeção.
+│  │  └─ Metodologia de Ação: Capturar -> Interpretar -> Estruturar -> Priorizar -> Confirmar -> Executar -> Verificar -> Registrar -> Emitir -> Adaptar.
+│  ├─ Workflow Agentic (Ciclo de Vida)
+│  │  ├─ SYNC: Sincronização de dados externos [CIANO]
+│  │  ├─ UNDERSTAND: Processamento de linguagem natural [LARANJA]
+│  │  ├─ STRUCTURE: Organização em objetos de domínio [CINZA]
+│  │  ├─ VISUALIZE: Projeção no Mapa-OS [ROXO]
+│  │  ├─ PRE_APPROVE: Verificação de pré-requisitos [AMARELO]
+│  │  ├─ DECOMPOSE: Quebra em subtarefas [CINZA]
+│  │  ├─ EXECUTE: Disparo de ferramentas/skills [LARANJA]
+│  │  ├─ RECONCILE: Ajuste de estado pós-execução [TURQUESA]
+│  │  ├─ REPORT: Geração de evidência verbal/visual [VERDE]
+│  │  └─ REPLAN: Ajuste de rota baseado em desvios [AMARELO]
+│  ├─ Comandos de Interface
+│  │  ├─ /bomdia: Resumo do dia e prioridades
+│  │  ├─ /agora: Foco na tarefa atual
+│  │  ├─ /estado: Status de saúde do projeto
+│  │  ├─ /fechardia: Sumário de entregas e pendências
+│  │  ├─ /replanejamento: Ajuste de prazos e alocação
+│  │  ├─ /mapa: Abrir visualização sistêmica
+│  │  ├─ /evidencia: Anexar prova de conclusão
+│  │  ├─ /bloqueio: Reportar impedimento [VERMELHO]
+│  │  ├─ /capacidade: Analisar carga de trabalho
+│  │  ├─ /risco: Listar ameaças ao prazo
+│  │  ├─ /processo: Consultar SOP (Standard Operating Procedure)
+│  │  └─ /situacao: Briefing rápido para stakeholders
+│  └─ Modo Rotina
+│     ├─ Proposta: Sugestão de automação baseada em comportamento repetido
+│     ├─ Autorização: Consentimento explícito do usuário [AMARELO]
+│     ├─ Gatilho: Evento temporal ou sistêmico
+│     ├─ Frequência: Definição de cadência (diário, semanal, etc.)
+│     ├─ Ação: Execução automática de skill executar-* [LARANJA]
+│     ├─ Registro: Log em memória de longo prazo [TURQUESA]
+│     ├─ Notificação: Alerta de conclusão ou falha
+│     ├─ Retry: Política de tentativa em caso de erro [VERMELHO]
+│     ├─ Pausa/Retomada: Controle manual da rotina
+│     ├─ Auditoria: Rastro de todas as execuções automáticas
+│     └─ Automações para Redução de Carga Cognitiva
+│        ├─ Automação 1: Triagem de e-mails e criação de rascunhos de resposta
+│        ├─ Automação 2: Atualização de status de projeto baseada em commits/docs
+│        └─ Automação 3: Agendamento de reuniões de revisão baseado em marcos atingidos
+├─ 5. Domínio, Dados e Estados
+│  ├─ Estados de Tarefas e Entregáveis
+│  │  ├─ VALIDADO: Requisitos conferidos [CONTÍNUA]
+│  │  ├─ PRONTO: Disponível para início [CONTÍNUA]
+│  │  ├─ EM EXECUÇÃO: Trabalho ativo iniciado [CONTÍNUA]
+│  │  ├─ VERIFICAR: Aguardando validação de DoD [AMARELO]
+│  │  ├─ CONCLUÍDO: Evidência registrada e aprovada [VERDE]
+│  │  └─ BLOQUEADO: Impedimento externo ou interno [VERMELHO]
+│  └─ Estrutura de Memória
+│     ├─ Memória de Curto Prazo: Contexto da sessão atual (Model Routing) [TURQUESA]
+│     ├─ Memória de Longo Prazo: Histórico de decisões e preferências do usuário [TURQUESA]
+│     └─ MCP (Model Context Protocol): Interface de dados para LLMs [CIANO]
+├─ 6. Arquitetura Técnica
+│  ├─ Camadas de Sistema
+│  │  ├─ Frontend: Web e Mobile Expo (React Native) [ROXO]
+│  │  ├─ API: Camada de orquestração (Next.js/Node.js) [CINZA]
+│  │  ├─ Copilot Engine: Orquestrador de agentes e LLMs [LARANJA]
+│  │  ├─ Task Engine: Gerenciador de filas e jobs recorrentes [CINZA]
+│  │  └─ Agent SDK: Conjunto de ferramentas para automação (skills executar-*) [LARANJA]
+│  ├─ Infraestrutura e Serviços
+│  │  ├─ Banco de Dados: Neon (PostgreSQL) com Prisma ORM [TURQUESA]
+│  │  ├─ Autenticação: Clerk [CIANO]
+│  │  ├─ Pagamentos: Stripe [CIANO]
+│  │  ├─ Hosting: Vercel [CINZA]
+│  │  ├─ Telemetria: Monitoramento de performance e erros [CINZA]
+│  │  ├─ Segurança: Criptografia em repouso e em trânsito
+│  │  └─ Rollback: Sistema de reversão de estado em caso de falha crítica [VERMELHO]
+│  └─ Conflitos Técnicos
+│     └─ Scanner: CONFLITO: OCR Tradicional versus DINOv2/ONNX para visão computacional [VERMELHO] [ALERTA]
+└─ 7. Entregáveis e Governança
+   ├─ Primeiro Entregável (Template Oficial)
+   │  ├─ Onboarding Consolidado: Status da configuração inicial [VERDE]
+   │  ├─ Status Report: Visão atual dos projetos [VERDE]
+   │  ├─ Prisma: Alinhamento de objetivos e valores [VERDE]
+   │  ├─ Mapa-OS: Visualização da estrutura operacional [VERDE]
+   │  ├─ Backlog Inicial: Lista de tarefas prioritárias [VERDE]
+   │  ├─ IDs Verbais: Nomenclatura e taxonomia do workspace [VERDE]
+   │  ├─ Rotinas Propostas: Sugestões iniciais de automação [VERDE]
+   │  └─ Próximos Passos: Plano de ação imediato [VERDE]
+   └─ Regras de Governança
+      ├─ Verificação de Conclusão: Exige DoD (Definition of Done) e Evidência física/digital.
+      ├─ Auditoria: Todos os comandos do Copiloto são logados para transparência.
+      └─ Permissões: RBAC (Role Based Access Control) definido por workspace.

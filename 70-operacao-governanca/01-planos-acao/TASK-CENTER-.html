@@ -1,0 +1,324 @@
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+<h2><span class="s1"><b>Blueprint — EXECUTAR Control Center v2</b></span></h2>
+<h3><span class="s1"><b>1. Modelo operacional</b></span></h3>
+
+
+<table border="1" cellspacing="0" cellpadding="8" width="100%" style="width: 100%; border-collapse: collapse; border: 1px solid;"><thead><tr><th style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Nível</b></p>
+</th><th style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Função</b></p>
+</th><th style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Quantidade</b></p>
+</th></tr></thead><tbody><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Área</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Macrodomínio de execução</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>12</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Subárea</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Agrupamento funcional</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>64</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Objetivo</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Resultado que precisa ser alcançado</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>36</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Workflow</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Processo para alcançar o objetivo</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>54</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Fase</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Etapa interna do workflow</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>83</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Ação</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Unidade operacional intermediária</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>85</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Tarefa</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Menor unidade controlável</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>430</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Dependência</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Relação de precedência/bloqueio</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>111</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Pendência explícita</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Gap que exige resolução</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>6</b></p>
+</td></tr></tbody></table>
+
+
+<p class="p1">Hierarquia:</p>
+<p class="p2"><b>Área → Subárea → Objetivo → Workflow → Fase → Ação → Tarefa → Evidência</b></p>
+<hr>
+<h3><span class="s1"><b>2. Áreas e distribuição das tarefas</b></span></h3>
+
+
+<table border="1" cellspacing="0" cellpadding="8" width="100%" style="width: 100%; border-collapse: collapse; border: 1px solid;"><thead><tr><th style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>ID</b></p>
+</th><th style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Área</b></p>
+</th><th style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Subáreas</b></p>
+</th><th style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Tarefas</b></p>
+</th></tr></thead><tbody><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">AREA-01</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Desenvolvimento de Código e Ecossistema</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">6</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>60</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">AREA-02</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Executar App e Lançamento</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">8</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>82</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">AREA-03</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Executar Blog e Custo Cognitivo</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">6</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>48</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">AREA-04</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Workbook</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">2</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>2</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">AREA-05</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Financeiro Geral</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">4</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>10</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">AREA-06</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Tarefas, Linear e Operações</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">4</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>11</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">AREA-07</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Skills, Agentes e Ferramentas</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">4</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>16</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">AREA-08</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Governança e Repositórios</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">4</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>17</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">AREA-09</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">GTM, Comercial, Conteúdo e Campanhas</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">9</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>149</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">AREA-10</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Integrações e Omnichannel</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">3</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>18</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">AREA-11</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Marketplace, Produtos e Consultoria</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">3</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>10</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">AREA-12</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Pessoal e Logística</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">3</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>7</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;"></td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>TOTAL</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>64</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>430</b></p>
+</td></tr></tbody></table>
+
+
+<hr>
+<h3><span class="s1"><b>3. Estado atual</b></span></h3>
+
+
+<table border="1" cellspacing="0" cellpadding="8" width="100%" style="width: 100%; border-collapse: collapse; border: 1px solid;"><thead><tr><th style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Estado</b></p>
+</th><th style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Tarefas</b></p>
+</th></tr></thead><tbody><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">BACKLOG</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>396</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">IN_PROGRESS</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>11</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">DONE</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>21</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">BLOCKED</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>2</b></p>
+</td></tr></tbody></table>
+
+
+<p class="p1">Prioridades identificadas: </span><span class="s2"><b>228 P0</b></span><span class="s1">, </span><span class="s2"><b>46 P1</b></span><span class="s1">, </span><span class="s2"><b>38 P2</b></span><span class="s1"> e </span><span class="s2"><b>118 ainda não especificadas</b></span><span class="s1">.</p>
+<hr>
+<h3><span class="s1"><b>4. Arquitetura dos arquivos</b></span></h3>
+
+
+<pre><code class="language-text">EXECUTAR_CONTROL_CENTER/
+├── 00_MASTER/
+│   ├── MASTER_CONTROL.csv
+│   ├── TASKS_ALL.csv
+│   ├── OBJECTIVES.csv
+│   ├── WORKFLOWS.csv
+│   ├── PHASES.csv
+│   ├── ACTIONS.csv
+│   ├── DEPENDENCIES.csv
+│   ├── EXECUTION_QUEUE.csv
+│   ├── EXECUTION_CHAINS.csv
+│   └── WIP_CONTROL.csv
+│
+├── 01_DESENVOLVIMENTO/
+├── 02_EXECUTAR_APP/
+├── 03_BLOG/
+├── ...
+└── 12_PESSOAL_LOGISTICA/</code></pre>
+
+
+<p class="p1"><b>JSON = fonte estrutural canônica.</b></span><span class="s2"><br>
+</span><span class="s1"><b>CSV = camada operacional.</b></span><span class="s2"><br>
+</span><span class="s1"><b>Linear = futura interface de execução.</b></p>
+<hr>
+<h3><span class="s1"><b>5. Roadmap do sistema</b></span></h3>
+
+
+<table border="1" cellspacing="0" cellpadding="8" width="100%" style="width: 100%; border-collapse: collapse; border: 1px solid;"><thead><tr><th style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Etapa</b></p>
+</th><th style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Objetivo</b></p>
+</th><th style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>Status</b></p>
+</th></tr></thead><tbody><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>1. Ingestão</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Converter fontes para JSON preservando origem</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">✅</p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>2. Modelagem</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">IDs, taxonomia e hierarquia</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">✅</p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>3. Dependências</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Resolver relações e bloqueios</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">✅</p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>4. Control Center</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Gerar masters + CSVs por área</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">✅</p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>5. Execution Queue</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">WIP e tarefas elegíveis</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">✅ base criada</p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>6. Priorização Macro</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Definir P0/P1/P2/HOLD por objetivo/workflow</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>PRÓXIMO</b></p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>7. Execution Contract</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">DoD, evidências, owners e estados</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Pendente</p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>8. Piloto Linear</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Executar 1–2 workflows P0</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Pendente</p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>9. Sincronização</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Linear/GitHub/Drive ↔ Control Center</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Pendente</p>
+</td></tr><tr><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1"><b>10. Automação</b></p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Agentes atualizam controle e evidências</p>
+</td><td style="border: 1px solid; padding: 8px 12px; white-space: nowrap;">
+<p class="p1">Futuro</p>
+</td></tr></tbody></table>
+
+
+<p class="p1">O sistema já deixou de ser uma lista de tarefas: ele agora funciona como um </span><span class="s2"><b>grafo hierárquico de execução</b></span><span class="s1">, onde é possível partir de um objetivo macro e chegar até a próxima ação granular rastreável.</p>
+
+</body>
+</html>

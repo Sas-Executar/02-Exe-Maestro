@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Risco Cognitivo · Status Report Estratégico</title>
+<style>html,body{margin:0;padding:0;background:#f4f4f3;color:#111111;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;padding:24px 12px 64px;}
+.sheet{max-width:760px;margin:0 auto;background:#ffffff;border:1px solid #dedede;}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono',monospace;}
+.header{background:#111111;color:#ffffff;padding:18px 22px;}
+.kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#d8d8d8;}
+.title{font-size:22px;font-weight:700;margin-top:6px;line-height:1.15;}
+.meta{font-size:11px;color:#9a9a9a;margin-top:8px;line-height:1.5;}
+.section{padding:18px 20px;border-top:1px solid #ececec;}
+.section:first-of-type{border-top:none;}
+.section-label{font-size:11px;color:#777777;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;}
+.dashboard-table,.depth-table,.triptych-table,.properties{width:100%;border-collapse:collapse;table-layout:fixed;}
+.dashboard-table td{vertical-align:bottom;padding:0;}
+.hero{font-size:44px;line-height:1;font-weight:700;letter-spacing:-.04em;}
+.hero-label{font-size:12px;color:#777777;margin-top:5px;}
+.stat{text-align:right;vertical-align:bottom;}
+.stat strong{display:block;font-size:18px;line-height:1.15;}
+.stat span{font-size:11px;color:#777777;}
+.progress-track{height:6px;background:#efefef;margin-top:16px;overflow:hidden;}
+.progress-fill{height:6px;background:#7c3aed;}
+.depth-wrap{border-top:1px solid #ececec;border-bottom:1px solid #ececec;margin-top:16px;}
+.depth-table td{padding:11px 8px;text-align:center;border-right:1px solid #ececec;}
+.depth-table td:last-child{border-right:none;}
+.depth-name{font-size:10px;color:#777777;text-transform:uppercase;letter-spacing:.05em;}
+.depth-val{font-size:13px;font-weight:700;margin-top:3px;}
+.depth-current{background:#f5f3ff;}
+.depth-current .depth-name,.depth-current .depth-val{color:#7c3aed;}
+.triptych-wrap{margin-top:16px;border:1px solid #ececec;}
+.triptych-table td{padding:14px 14px 16px;vertical-align:top;border-right:1px solid #ececec;}
+.triptych-table td:last-child{border-right:none;}
+.triptych-table td.current{background:#faf8ff;}
+.tri-top{font-size:11px;color:#777777;display:flex;justify-content:space-between;gap:10px;}
+.tri-top b{font-weight:700;color:#111111;}
+.current .tri-top,.current .tri-top b{color:#7c3aed;}
+.tri-title{font-size:14px;line-height:1.35;font-weight:600;margin-top:12px;min-height:38px;}
+.tri-state{font-size:11px;color:#777777;margin-top:14px;}
+.current .tri-state{color:#7c3aed;font-weight:600;}
+.now{margin-top:16px;border-top:2px solid #111111;padding-top:14px;}
+.now-row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
+.now-label{margin-bottom:6px;color:#7c3aed;}
+.now-title{font-size:18px;font-weight:700;line-height:1.25;}
+.now-meta{font-size:12px;color:#777777;margin-top:4px;}
+.chip{display:inline-block;background:#ede9fe;color:#6d28d9;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:600;white-space:nowrap;}
+.properties td{padding:12px 0;border-bottom:1px solid #ececec;vertical-align:top;font-size:15px;line-height:1.45;}
+.properties tr:last-child td{border-bottom:none;}
+.properties .key{width:132px;padding-right:12px;font-size:12px;font-weight:700;color:#555555;}
+.properties .key.accent{color:#7c3aed;}
+.tags{padding-top:16px;border-top:2px solid #111111;margin-top:18px;}
+.tag-label{font-size:11px;color:#777777;margin:10px 0 8px;}
+.tag-label:first-child{margin-top:0;}
+.tag-purple,.tag-grey{display:inline-block;border-radius:999px;padding:5px 10px;margin:0 6px 6px 0;font-size:12px;font-weight:600;}
+.tag-purple{background:#ede9fe;color:#6d28d9;}
+.tag-grey{background:#f1f1f1;color:#444444;}
+.footer{padding:14px 20px 18px;border-top:1px solid #ececec;font-size:11px;color:#8a8a8a;line-height:1.5;}
+
+@media(max-width:560px){
+  body{padding:0;background:#fff;}
+  .sheet{border:none;}
+  .header{padding:16px;}
+  .section{padding:16px;}
+  .hero{font-size:38px;}
+  .properties .key{width:104px;font-size:11px;}
+  .properties td{font-size:14px;}
+  .triptych-table td{padding:12px 10px;}
+  .tri-title{font-size:13px;}
+  .depth-table td{padding:9px 4px;}
+}
+
+@page{size:A4;margin:12mm;}
+
+@media print{
+  html,body{background:#fff;}
+  body{padding:0;}
+  .sheet{width:100%;max-width:none;border:0;}
+  .section,.now,.triptych-wrap,.depth-wrap{break-inside:avoid;}
+  .header{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+<main class="sheet">
+<header class="header mono">
+<div class="kicker">EXECUTAR / STATUS REPORT</div>
+<div class="title">Risco Cognitivo · Status Report Estratégico</div>
+<div class="meta">schema: EXECUTAR_STATUS_REPORT_V1 &nbsp;&nbsp; status: fundação editorial definida; validação e publicação pendentes &nbsp;&nbsp; data: 2026-08-28</div>
+</header>
+<section class="section">
+<div class="section-label mono">PROGRESSO / PROJETO</div>
+<table class="dashboard-table" role="presentation"><tr>
+<td style="width:50%"><div class="hero">—</div><div class="hero-label">concluído</div></td>
+<td class="stat" style="width:25%"><strong>—</strong><span>ciclo atual</span></td>
+<td class="stat" style="width:25%"><strong>—</strong><span>hoje</span></td>
+</tr></table>
+<div class="progress-track"><div class="progress-fill" style="width:0%"></div></div>
+<div class="depth-wrap"><table class="depth-table" role="presentation"><tr>
+<td><div class="depth-name mono">Projeto</div><div class="depth-val">fundação definida</div></td>
+<td><div class="depth-name mono">Ciclo</div><div class="depth-val">pré-lançamento</div></td>
+<td class="depth-current"><div class="depth-name mono">Hoje</div><div class="depth-val">estrutura pronta</div></td>
+<td><div class="depth-name mono">Tarefa</div><div class="depth-val">pré-publicação</div></td>
+<td><div class="depth-name mono">Ação</div><div class="depth-val">reservar domínio</div></td>
+</tr></table></div>
+<div class="triptych-wrap"><table class="triptych-table" role="presentation"><tr><td><div class="tri-top"><span>ONTEM</span><b>—</b></div><div class="tri-title">Não identificado no documento</div><div class="tri-state">sem evidência temporal direta</div></td><td class="current"><div class="tri-top"><span>HOJE</span><b>—</b></div><div class="tri-title">Categoria, tese, campanha e plataforma estão estruturadas</div><div class="tri-state">base estratégica definida</div></td><td><div class="tri-top"><span>AMANHÃ</span><b>—</b></div><div class="tri-title">Publicar D1 e iniciar a campanha editorial de 14 dias</div><div class="tri-state">próxima evolução planejada</div></td></tr></table></div>
+<div class="now"><div class="now-row"><div>
+<div class="section-label mono now-label">AGORA</div>
+<div class="now-title">Confirmar domínio e reservar @riscocognitivo</div>
+<div class="now-meta">Primeiro item explícito da sequência de próximos passos</div>
+</div><span class="chip">próxima ação</span></div></div>
+</section>
+<section class="section">
+<div class="section-label mono">STATUS / PROPERTIES</div>
+<table class="properties" role="presentation"><tr><td class="key mono">contexto</td><td>Construir primeiro a categoria intelectual Risco Cognitivo, validar o framework e só depois apresentar o EXECUTAR como implementação tecnológica.</td></tr>
+<tr><td class="key mono accent">problema</td><td>Apresentar o EXECUTAR cedo demais pode reduzir a credibilidade da investigação e impedir distinguir interesse genuíno pelo problema de interesse no produto.</td></tr>
+<tr><td class="key mono">processo</td><td>Executar artigo fundador → campanha editorial → sinais de audiência → scoping review → crítica externa → framework v1 → piloto → white paper → aplicação no EXECUTAR.</td></tr>
+<tr><td class="key mono accent">progresso</td><td>A tese-mãe, limites científicos, artigo fundador, campanha de 14 dias, objetivo SMART, identidade, plataforma, ordem de próximos passos e source of truth já estão definidos.</td></tr>
+<tr><td class="key mono">passo_1</td><td>Confirmar domínio e reservar @riscocognitivo, criar o repositório e colocar site/CMS no ar.</td></tr>
+<tr><td class="key mono">passo_2</td><td>Fechar o artigo fundador de 1.200–1.800 palavras, realizar revisão científica/editorial e publicar o D1 com landing page.</td></tr>
+<tr><td class="key mono">passo_3</td><td>Executar a campanha D1–D14, medir a resposta do público e então iniciar scoping review, crítica externa e evolução do framework.</td></tr>
+<tr><td class="key mono accent">risco</td><td>Tratar a ausência de um framework equivalente nas buscas como prova de ineditismo pode comprometer a credibilidade científica e estratégica da proposta.</td></tr>
+<tr><td class="key mono">prevencao</td><td>Manter a reivindicação restrita à integração específica entre funções executivas, risco de execução, controles compensatórios e gestão de projetos, submetendo-a a revisão e tentativa de falsificação.</td></tr>
+<tr><td class="key mono">entrega</td><td>Entregar uma cadeia validada em estágios: território editorial → framework CERM → Mapa/Register → EXECUTAR → dados/casos → white paper e expansões posteriores.</td></tr></table>
+<div class="tags">
+<div class="tag-label mono">FOCO</div><span class="tag-purple">categoria intelectual</span><span class="tag-purple">validação</span><span class="tag-purple">campanha editorial</span>
+<div class="tag-label mono">ESTADO</div><span class="tag-purple">pré-lançamento</span><span class="tag-purple">14 dias</span><span class="tag-purple">18 ativos</span>
+<div class="tag-label mono">ORIGEM</div><span class="tag-grey">texto.txt</span><span class="tag-grey">texto 2.txt</span>
+</div>
+</section>
+<footer class="footer mono">EXECUTAR_STATUS_REPORT_V1 · leitura: header → progresso → agora → properties → tags</footer>
+</main>
+</body>
+</html>

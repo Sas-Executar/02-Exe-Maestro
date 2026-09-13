@@ -1,0 +1,1276 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: urn:executa:saas-project-schema-bundle:v1
+title: Projeto SaaS — Schema Bundle para extração documental
+description: Schema consolidado derivado da aba 01_Formulario. Preserva 17 domínios e 94 IDs canônicos e exige proveniência
+  para respostas extraídas de corpus documental.
+type: object
+additionalProperties: false
+required:
+- project
+- domains
+properties:
+  project:
+    type: object
+    additionalProperties: false
+    required:
+    - project_name
+    - corpus_id
+    properties:
+      project_name:
+        type: string
+        minLength: 1
+      corpus_id:
+        type: string
+        minLength: 1
+      corpus_version:
+        type:
+        - string
+        - 'null'
+      extraction_run_id:
+        type:
+        - string
+        - 'null'
+      generated_at:
+        type:
+        - string
+        - 'null'
+        format: date-time
+      notes:
+        type:
+        - string
+        - 'null'
+  domains:
+    type: object
+    additionalProperties: false
+    required:
+    - domain_01_negocio_gtm
+    - domain_02_produto
+    - domain_03_arquitetura_full_stack
+    - domain_04_implementacao
+    - domain_05_operacao_deploy_rollback
+    - domain_06_governanca_seguranca
+    - domain_07_documentacao_fundacional
+    - domain_08_gestao_de_projetos_pmbok
+    - domain_09_planejamento_estrategico_tatico_e_operacional
+    - domain_10_roadmap_cronograma_ciclos_e_backlog
+    - domain_11_editorial_campanhas_e_conteudo
+    - domain_12_stakeholders
+    - domain_13_runbooks_sops_e_rotinas
+    - domain_14_pesquisa_dados_e_conhecimento
+    - domain_15_skills_plugins_e_ferramentas
+    - domain_16_plataformas_contas_e_identificadores
+    - domain_17_prompt_engineering_comandos
+    properties:
+      domain_01_negocio_gtm:
+        $ref: '#/$defs/domain_01_negocio_gtm'
+      domain_02_produto:
+        $ref: '#/$defs/domain_02_produto'
+      domain_03_arquitetura_full_stack:
+        $ref: '#/$defs/domain_03_arquitetura_full_stack'
+      domain_04_implementacao:
+        $ref: '#/$defs/domain_04_implementacao'
+      domain_05_operacao_deploy_rollback:
+        $ref: '#/$defs/domain_05_operacao_deploy_rollback'
+      domain_06_governanca_seguranca:
+        $ref: '#/$defs/domain_06_governanca_seguranca'
+      domain_07_documentacao_fundacional:
+        $ref: '#/$defs/domain_07_documentacao_fundacional'
+      domain_08_gestao_de_projetos_pmbok:
+        $ref: '#/$defs/domain_08_gestao_de_projetos_pmbok'
+      domain_09_planejamento_estrategico_tatico_e_operacional:
+        $ref: '#/$defs/domain_09_planejamento_estrategico_tatico_e_operacional'
+      domain_10_roadmap_cronograma_ciclos_e_backlog:
+        $ref: '#/$defs/domain_10_roadmap_cronograma_ciclos_e_backlog'
+      domain_11_editorial_campanhas_e_conteudo:
+        $ref: '#/$defs/domain_11_editorial_campanhas_e_conteudo'
+      domain_12_stakeholders:
+        $ref: '#/$defs/domain_12_stakeholders'
+      domain_13_runbooks_sops_e_rotinas:
+        $ref: '#/$defs/domain_13_runbooks_sops_e_rotinas'
+      domain_14_pesquisa_dados_e_conhecimento:
+        $ref: '#/$defs/domain_14_pesquisa_dados_e_conhecimento'
+      domain_15_skills_plugins_e_ferramentas:
+        $ref: '#/$defs/domain_15_skills_plugins_e_ferramentas'
+      domain_16_plataformas_contas_e_identificadores:
+        $ref: '#/$defs/domain_16_plataformas_contas_e_identificadores'
+      domain_17_prompt_engineering_comandos:
+        $ref: '#/$defs/domain_17_prompt_engineering_comandos'
+$defs:
+  evidence_item:
+    type: object
+    additionalProperties: false
+    required:
+    - source_id
+    - locator
+    - support
+    properties:
+      source_id:
+        type: string
+        minLength: 1
+        description: Identificador estável do documento no corpus.
+      source_title:
+        type:
+        - string
+        - 'null'
+        description: Título/nome legível do documento, quando disponível.
+      locator:
+        type: string
+        minLength: 1
+        description: 'Localização reproduzível: página, seção, heading, linha, timestamp, URL/âncora ou caminho.'
+      excerpt:
+        type:
+        - string
+        - 'null'
+        description: Trecho curto que sustenta a extração; não substituir o locator.
+      support:
+        type: string
+        enum:
+        - supports
+        - contradicts
+        - context
+        description: Relação desta evidência com a resposta.
+      source_date:
+        type:
+        - string
+        - 'null'
+        description: Data declarada pelo documento, preferencialmente ISO 8601.
+      notes:
+        type:
+        - string
+        - 'null'
+  extracted_field:
+    type: object
+    additionalProperties: false
+    required:
+    - status
+    - answer
+    - confidence
+    - evidence
+    properties:
+      status:
+        type: string
+        enum:
+        - found
+        - not_found
+        - conflict
+        - inferred
+        description: found=explicitamente sustentado; not_found=ausente; conflict=fontes divergem; inferred=conclusão derivada,
+          claramente marcada.
+      answer:
+        type:
+        - string
+        - 'null'
+        description: Resposta pronta para a célula Resposta da planilha. Use texto conciso; listas podem ser multiline.
+      confidence:
+        type:
+        - string
+        - 'null'
+        enum:
+        - high
+        - medium
+        - low
+        - null
+      evidence:
+        type: array
+        items:
+          $ref: '#/$defs/evidence_item'
+        default: []
+      conflict_summary:
+        type:
+        - string
+        - 'null'
+        description: Obrigatório quando status=conflict.
+      notes:
+        type:
+        - string
+        - 'null'
+        description: Observações de extração; não usar para inventar resposta ausente.
+    allOf:
+    - if:
+        properties:
+          status:
+            const: found
+      then:
+        properties:
+          answer:
+            type: string
+            minLength: 1
+          evidence:
+            minItems: 1
+    - if:
+        properties:
+          status:
+            const: not_found
+      then:
+        properties:
+          answer:
+            const: null
+          confidence:
+            const: null
+          evidence:
+            maxItems: 0
+    - if:
+        properties:
+          status:
+            const: conflict
+      then:
+        properties:
+          evidence:
+            minItems: 2
+          conflict_summary:
+            type: string
+            minLength: 1
+    - if:
+        properties:
+          status:
+            const: inferred
+      then:
+        properties:
+          answer:
+            type: string
+            minLength: 1
+          evidence:
+            minItems: 1
+  domain_01_negocio_gtm:
+    type: object
+    title: Domínio 1 — NEGÓCIO & GTM
+    description: Por que o produto existe, para quem, e como se sustenta financeiramente
+    additionalProperties: false
+    required:
+    - '1.1'
+    - '1.2'
+    - '1.3'
+    - '1.4'
+    - '1.5'
+    - '1.6'
+    - '1.7'
+    - '1.8'
+    - '1.9'
+    - '1.10'
+    - '1.11'
+    - '1.12'
+    properties:
+      '1.1':
+        $ref: '#/$defs/extracted_field'
+        title: Problema central
+        description: Descreva em 1 frase o problema que o produto resolve.
+        x-field-id: '1.1'
+        x-example: 'Ex: Equipes técnicas perdem contexto entre sessões de IA e retrabalham decisões já tomadas.'
+        x-workbook-response-cell: 01_Formulario!E8
+        x-output-sheet: 02_Visao_Geral
+      '1.2':
+        $ref: '#/$defs/extracted_field'
+        title: Público-alvo / ICP
+        description: Quem é o cliente ideal — perfil, tamanho, contexto de uso.
+        x-field-id: '1.2'
+        x-example: 'Ex: Founders técnicos solo ou squads pequenos construindo produtos com IA integrada.'
+        x-workbook-response-cell: 01_Formulario!E9
+        x-output-sheet: 02_Visao_Geral
+      '1.3':
+        $ref: '#/$defs/extracted_field'
+        title: Proposta de valor
+        description: O que torna esse produto a escolha óbvia frente a alternativas.
+        x-field-id: '1.3'
+        x-example: 'Ex: Único agente que mantém memória estruturada entre sessões sem configuração manual.'
+        x-workbook-response-cell: 01_Formulario!E10
+        x-output-sheet: 02_Visao_Geral
+      '1.4':
+        $ref: '#/$defs/extracted_field'
+        title: Canais de aquisição
+        description: Como novos usuários vão descobrir o produto (orgânico, paid, parcerias, comunidade).
+        x-field-id: '1.4'
+        x-example: 'Ex: Conteúdo técnico + comunidade de early adopters + parcerias com ferramentas complementares.'
+        x-workbook-response-cell: 01_Formulario!E11
+        x-output-sheet: 02_Visao_Geral
+      '1.5':
+        $ref: '#/$defs/extracted_field'
+        title: Métrica North Star
+        description: A métrica única que melhor representa sucesso do produto.
+        x-field-id: '1.5'
+        x-example: 'Ex: Número de sessões semanais com reuso de contexto salvo.'
+        x-workbook-response-cell: 01_Formulario!E12
+        x-output-sheet: 02_Visao_Geral
+      '1.6':
+        $ref: '#/$defs/extracted_field'
+        title: Métricas guardrail
+        description: Métricas que não podem degradar enquanto a North Star sobe.
+        x-field-id: '1.6'
+        x-example: 'Ex: Latência de resposta, taxa de erro em produção.'
+        x-workbook-response-cell: 01_Formulario!E13
+        x-output-sheet: 02_Visao_Geral
+      '1.7':
+        $ref: '#/$defs/extracted_field'
+        title: CAC (custo de aquisição)
+        description: Custo estimado para adquirir um cliente pagante.
+        x-field-id: '1.7'
+        x-example: 'Ex: A definir após primeiro ciclo de aquisição paga.'
+        x-workbook-response-cell: 01_Formulario!E14
+        x-output-sheet: 02_Visao_Geral
+      '1.8':
+        $ref: '#/$defs/extracted_field'
+        title: LTV (valor do tempo de vida)
+        description: Valor estimado que um cliente gera ao longo do relacionamento.
+        x-field-id: '1.8'
+        x-example: 'Ex: A definir com base em churn projetado.'
+        x-workbook-response-cell: 01_Formulario!E15
+        x-output-sheet: 02_Visao_Geral
+      '1.9':
+        $ref: '#/$defs/extracted_field'
+        title: Margem por unidade/usuário
+        description: Custo variável (infra, API/tokens) por usuário ativo vs. receita.
+        x-field-id: '1.9'
+        x-example: 'Ex: Custo de API de IA por usuário/mês vs. preço do plano.'
+        x-workbook-response-cell: 01_Formulario!E16
+        x-output-sheet: 02_Visao_Geral
+      '1.10':
+        $ref: '#/$defs/extracted_field'
+        title: Ponto de equilíbrio (breakeven)
+        description: Quantos clientes/receita necessários para cobrir custos fixos.
+        x-field-id: '1.10'
+        x-example: 'Ex: N clientes no plano X cobrem a infraestrutura base mensal.'
+        x-workbook-response-cell: 01_Formulario!E17
+        x-output-sheet: 02_Visao_Geral
+      '1.11':
+        $ref: '#/$defs/extracted_field'
+        title: Teto de gasto de infraestrutura
+        description: Limite mensal aprovado por serviço (hosting, banco, API de IA).
+        x-field-id: '1.11'
+        x-example: 'Ex: Vercel $X, Supabase $X, Anthropic API $X — tetos configurados no console de cada provedor.'
+        x-workbook-response-cell: 01_Formulario!E18
+        x-output-sheet: 02_Visao_Geral
+      '1.12':
+        $ref: '#/$defs/extracted_field'
+        title: Gatilhos de upgrade de infra
+        description: Condição objetiva que dispara upgrade de plano/tier.
+        x-field-id: '1.12'
+        x-example: 'Ex: Uso de API acima de 80% do teto por 3 dias consecutivos.'
+        x-workbook-response-cell: 01_Formulario!E19
+        x-output-sheet: 02_Visao_Geral
+    x-domain-number: 1
+    x-domain-title: NEGÓCIO & GTM
+    x-field-count: 12
+    x-output-sheet: 02_Visao_Geral
+  domain_02_produto:
+    type: object
+    title: Domínio 2 — PRODUTO
+    description: PRD, requisitos funcionais e jornada do usuário — a mesma informação em três granularidades
+    additionalProperties: false
+    required:
+    - '2.1'
+    - '2.2'
+    - '2.3'
+    - '2.4'
+    - '2.5'
+    - '2.6'
+    - '2.7'
+    - '2.8'
+    - '2.9'
+    - '2.10'
+    - '2.11'
+    - '2.12'
+    properties:
+      '2.1':
+        $ref: '#/$defs/extracted_field'
+        title: Nome do produto/feature
+        description: Nome de referência usado em toda a documentação.
+        x-field-id: '2.1'
+        x-example: 'Ex: EXECUTA Journal'
+        x-workbook-response-cell: 01_Formulario!E23
+        x-output-sheet: 02_Visao_Geral
+      '2.2':
+        $ref: '#/$defs/extracted_field'
+        title: Contexto do PRD
+        description: Situação atual e por que este produto/feature é necessário agora.
+        x-field-id: '2.2'
+        x-example: 'Ex: Publicação editorial hoje exige edição manual de código; produto elimina essa fricção.'
+        x-workbook-response-cell: 01_Formulario!E24
+        x-output-sheet: 02_Visao_Geral
+      '2.3':
+        $ref: '#/$defs/extracted_field'
+        title: Objetivos (goals)
+        description: O que o produto DEVE alcançar, de forma verificável.
+        x-field-id: '2.3'
+        x-example: 'Ex: Permitir publicar um artigo do celular sem tocar em código.'
+        x-workbook-response-cell: 01_Formulario!E25
+        x-output-sheet: 02_Visao_Geral
+      '2.4':
+        $ref: '#/$defs/extracted_field'
+        title: Não-objetivos (non-goals)
+        description: O que está explicitamente fora de escopo, para evitar scope creep.
+        x-field-id: '2.4'
+        x-example: 'Ex: Não inclui edição colaborativa multi-usuário nesta fase.'
+        x-workbook-response-cell: 01_Formulario!E26
+        x-output-sheet: 02_Visao_Geral
+      '2.5':
+        $ref: '#/$defs/extracted_field'
+        title: Requisitos funcionais (FRD)
+        description: Lista testável do que o sistema deve fazer.
+        x-field-id: '2.5'
+        x-example: 'Ex: Sistema deve gerar PR automaticamente a partir de um briefing preenchido.'
+        x-workbook-response-cell: 01_Formulario!E27
+        x-output-sheet: 02_Visao_Geral
+      '2.6':
+        $ref: '#/$defs/extracted_field'
+        title: Critérios de aceite
+        description: Como se prova, de forma objetiva, que um requisito foi cumprido.
+        x-field-id: '2.6'
+        x-example: 'Ex: Artigo real publicado ponta a ponta sem edição manual de TypeScript.'
+        x-workbook-response-cell: 01_Formulario!E28
+        x-output-sheet: 02_Visao_Geral
+      '2.7':
+        $ref: '#/$defs/extracted_field'
+        title: Persona principal
+        description: Quem usa o produto no dia a dia — nome fictício e papel.
+        x-field-id: '2.7'
+        x-example: 'Ex: ''Marina'', editora solo que aprova publicações pelo celular.'
+        x-workbook-response-cell: 01_Formulario!E29
+        x-output-sheet: 02_Visao_Geral
+      '2.8':
+        $ref: '#/$defs/extracted_field'
+        title: Jornada — Descoberta
+        description: Como o usuário chega até o produto pela primeira vez.
+        x-field-id: '2.8'
+        x-example: 'Ex: Recebe link de preview gerado automaticamente pelo pipeline.'
+        x-workbook-response-cell: 01_Formulario!E30
+        x-output-sheet: 02_Visao_Geral
+      '2.9':
+        $ref: '#/$defs/extracted_field'
+        title: Jornada — Ativação
+        description: O primeiro momento em que o usuário obtém valor real.
+        x-field-id: '2.9'
+        x-example: 'Ex: Primeira publicação aprovada e no ar via QR code físico.'
+        x-workbook-response-cell: 01_Formulario!E31
+        x-output-sheet: 02_Visao_Geral
+      '2.10':
+        $ref: '#/$defs/extracted_field'
+        title: Jornada — Uso recorrente
+        description: O que traz o usuário de volta, sessão após sessão.
+        x-field-id: '2.10'
+        x-example: 'Ex: Fluxo semanal de briefing → preview → aprovação.'
+        x-workbook-response-cell: 01_Formulario!E32
+        x-output-sheet: 02_Visao_Geral
+      '2.11':
+        $ref: '#/$defs/extracted_field'
+        title: Momento 'aha'
+        description: O instante exato em que o valor fica óbvio para o usuário.
+        x-field-id: '2.11'
+        x-example: 'Ex: Ver o artigo publicado automaticamente após aprovar pelo celular.'
+        x-workbook-response-cell: 01_Formulario!E33
+        x-output-sheet: 02_Visao_Geral
+      '2.12':
+        $ref: '#/$defs/extracted_field'
+        title: User story de referência
+        description: 'Formato: Como [persona], quero [ação] para que [benefício].'
+        x-field-id: '2.12'
+        x-example: 'Ex: Como editora solo, quero aprovar publicações pelo celular para não depender do computador.'
+        x-workbook-response-cell: 01_Formulario!E34
+        x-output-sheet: 02_Visao_Geral
+    x-domain-number: 2
+    x-domain-title: PRODUTO
+    x-field-count: 12
+    x-output-sheet: 02_Visao_Geral
+  domain_03_arquitetura_full_stack:
+    type: object
+    title: Domínio 3 — ARQUITETURA & FULL STACK
+    description: Como as peças se conectam — front, back, banco, infra, rotas
+    additionalProperties: false
+    required:
+    - '3.1'
+    - '3.2'
+    - '3.3'
+    - '3.4'
+    - '3.5'
+    - '3.6'
+    - '3.7'
+    - '3.8'
+    - '3.9'
+    - '3.10'
+    properties:
+      '3.1':
+        $ref: '#/$defs/extracted_field'
+        title: Stack — Frontend
+        description: Framework, biblioteca de estilo, ferramentas principais.
+        x-field-id: '3.1'
+        x-example: 'Ex: Next.js + Tailwind + design tokens DESK-OS.'
+        x-workbook-response-cell: 01_Formulario!E38
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '3.2':
+        $ref: '#/$defs/extracted_field'
+        title: Stack — Backend
+        description: Runtime, linguagem, framework de servidor.
+        x-field-id: '3.2'
+        x-example: 'Ex: Node.js + TypeScript, funções serverless na Vercel.'
+        x-workbook-response-cell: 01_Formulario!E39
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '3.3':
+        $ref: '#/$defs/extracted_field'
+        title: Banco de dados
+        description: Sistema, provedor, e por quê essa escolha.
+        x-field-id: '3.3'
+        x-example: 'Ex: Postgres via Supabase (dados de produto) + Neon (dados serverless).'
+        x-workbook-response-cell: 01_Formulario!E40
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '3.4':
+        $ref: '#/$defs/extracted_field'
+        title: Infraestrutura / hosting
+        description: Onde a aplicação roda e é servida.
+        x-field-id: '3.4'
+        x-example: 'Ex: Vercel (apps), Supabase (auth+db), GitHub (código).'
+        x-workbook-response-cell: 01_Formulario!E41
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '3.5':
+        $ref: '#/$defs/extracted_field'
+        title: Autenticação
+        description: Método de login e provedor.
+        x-field-id: '3.5'
+        x-example: 'Ex: Supabase Auth com email/senha + OAuth Google.'
+        x-workbook-response-cell: 01_Formulario!E42
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '3.6':
+        $ref: '#/$defs/extracted_field'
+        title: Estrutura de repositório
+        description: Organização de pastas (monorepo, multi-repo, apps/packages).
+        x-field-id: '3.6'
+        x-example: 'Ex: Monorepo com apps/ (web-client, orchestrator) e packages/ (core, configs).'
+        x-workbook-response-cell: 01_Formulario!E43
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '3.7':
+        $ref: '#/$defs/extracted_field'
+        title: Mapa de rotas principais
+        description: Rotas-chave da aplicação e o que cada uma faz.
+        x-field-id: '3.7'
+        x-example: 'Ex: /app/journal — editor; /health — status; /api/health — status detalhado.'
+        x-workbook-response-cell: 01_Formulario!E44
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '3.8':
+        $ref: '#/$defs/extracted_field'
+        title: 'Decisão de arquitetura #1 (ADR)'
+        description: Uma decisão técnica relevante e a alternativa descartada.
+        x-field-id: '3.8'
+        x-example: 'Ex: Monorepo único em vez de múltiplos repositórios — decidido para reduzir divergência de versão.'
+        x-workbook-response-cell: 01_Formulario!E45
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '3.9':
+        $ref: '#/$defs/extracted_field'
+        title: 'Decisão de arquitetura #2 (ADR)'
+        description: Segunda decisão relevante, se houver.
+        x-field-id: '3.9'
+        x-example: 'Ex: Origem de produção lida de variável de ambiente, nunca hardcoded.'
+        x-workbook-response-cell: 01_Formulario!E46
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '3.10':
+        $ref: '#/$defs/extracted_field'
+        title: Trade-offs aceitos
+        description: O que foi conscientemente sacrificado por outra vantagem.
+        x-field-id: '3.10'
+        x-example: 'Ex: Menor flexibilidade de deploy independente em troca de consistência de versão.'
+        x-workbook-response-cell: 01_Formulario!E47
+        x-output-sheet: 03_Arquitetura_Tecnica
+    x-domain-number: 3
+    x-domain-title: ARQUITETURA & FULL STACK
+    x-field-count: 10
+    x-output-sheet: 03_Arquitetura_Tecnica
+  domain_04_implementacao:
+    type: object
+    title: Domínio 4 — IMPLEMENTAÇÃO
+    description: Backend, frontend, APIs, agentes integrados e dependências
+    additionalProperties: false
+    required:
+    - '4.1'
+    - '4.2'
+    - '4.3'
+    - '4.4'
+    - '4.5'
+    - '4.6'
+    - '4.7'
+    - '4.8'
+    properties:
+      '4.1':
+        $ref: '#/$defs/extracted_field'
+        title: Modelo de dados / schema
+        description: Entidades principais e como se relacionam.
+        x-field-id: '4.1'
+        x-example: 'Ex: users, posts, previews, publications — relacionados por post_id.'
+        x-workbook-response-cell: 01_Formulario!E51
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '4.2':
+        $ref: '#/$defs/extracted_field'
+        title: Endpoints de API principais
+        description: Lista dos endpoints mais importantes, método e função.
+        x-field-id: '4.2'
+        x-example: 'Ex: POST /api/publish — dispara publicação; GET /health — status do sistema.'
+        x-workbook-response-cell: 01_Formulario!E52
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '4.3':
+        $ref: '#/$defs/extracted_field'
+        title: Agentes/Tools MCP integrados
+        description: Nome de cada agente/tool, servidor MCP e escopo de permissão.
+        x-field-id: '4.3'
+        x-example: 'Ex: 11 tools EXECUTA + 10 tools Vault, servidor executar-ai canônico.'
+        x-workbook-response-cell: 01_Formulario!E53
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '4.4':
+        $ref: '#/$defs/extracted_field'
+        title: Dependências núcleo (obrigatórias)
+        description: Pacotes/serviços sem os quais o build falha.
+        x-field-id: '4.4'
+        x-example: 'Ex: 6 variáveis de ambiente núcleo exigidas no build.'
+        x-workbook-response-cell: 01_Formulario!E54
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '4.5':
+        $ref: '#/$defs/extracted_field'
+        title: Dependências condicionais
+        description: Pacotes/serviços ativados apenas sob feature flag.
+        x-field-id: '4.5'
+        x-example: 'Ex: Tokens Editorial E2 exigidos apenas quando EDITORIAL_E2_ENABLED=true.'
+        x-workbook-response-cell: 01_Formulario!E55
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '4.6':
+        $ref: '#/$defs/extracted_field'
+        title: Política de atualização de dependências
+        description: 'Como e quando dependências são atualizadas (ex: Dependabot).'
+        x-field-id: '4.6'
+        x-example: 'Ex: PRs de risco baixo mesclados imediatamente; risco alto isolado, um de cada vez, com suíte de testes
+          rodando.'
+        x-workbook-response-cell: 01_Formulario!E56
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '4.7':
+        $ref: '#/$defs/extracted_field'
+        title: Componente frontend principal
+        description: A tela/fluxo mais crítico do produto.
+        x-field-id: '4.7'
+        x-example: 'Ex: Editor de Journal em /app/journal — criar, publicar, despublicar posts.'
+        x-workbook-response-cell: 01_Formulario!E57
+        x-output-sheet: 03_Arquitetura_Tecnica
+      '4.8':
+        $ref: '#/$defs/extracted_field'
+        title: Testes automatizados
+        description: O que é coberto por CI (lint, typecheck, test, build).
+        x-field-id: '4.8'
+        x-example: 'Ex: 204 testes (api) + 14 testes (web), rodando em todo PR.'
+        x-workbook-response-cell: 01_Formulario!E58
+        x-output-sheet: 03_Arquitetura_Tecnica
+    x-domain-number: 4
+    x-domain-title: IMPLEMENTAÇÃO
+    x-field-count: 8
+    x-output-sheet: 03_Arquitetura_Tecnica
+  domain_05_operacao_deploy_rollback:
+    type: object
+    title: Domínio 5 — OPERAÇÃO (DEPLOY & ROLLBACK)
+    description: O que garante que o lançamento não quebra silenciosamente
+    additionalProperties: false
+    required:
+    - '5.1'
+    - '5.2'
+    - '5.3'
+    - '5.4'
+    - '5.5'
+    - '5.6'
+    properties:
+      '5.1':
+        $ref: '#/$defs/extracted_field'
+        title: Checklist pré-deploy
+        description: O que precisa estar verde antes de subir para produção.
+        x-field-id: '5.1'
+        x-example: 'Ex: Testes passando em CI, migrations testadas, segredos configurados.'
+        x-workbook-response-cell: 01_Formulario!E62
+        x-output-sheet: 04_Operacao_Seguranca
+      '5.2':
+        $ref: '#/$defs/extracted_field'
+        title: Checks de saúde pós-deploy
+        description: Endpoints/sinais verificados logo após o deploy.
+        x-field-id: '5.2'
+        x-example: 'Ex: GET /health retorna status ok; rotas principais respondem 200.'
+        x-workbook-response-cell: 01_Formulario!E63
+        x-output-sheet: 04_Operacao_Seguranca
+      '5.3':
+        $ref: '#/$defs/extracted_field'
+        title: Gatilho de rollback — taxa de erro
+        description: Limiar objetivo de erro que dispara rollback.
+        x-field-id: '5.3'
+        x-example: 'Ex: Taxa de erro acima de 5% em 15 minutos.'
+        x-workbook-response-cell: 01_Formulario!E64
+        x-output-sheet: 04_Operacao_Seguranca
+      '5.4':
+        $ref: '#/$defs/extracted_field'
+        title: Gatilho de rollback — latência
+        description: Limiar objetivo de latência que dispara rollback.
+        x-field-id: '5.4'
+        x-example: 'Ex: Latência P50 acima de 800ms sustentada.'
+        x-workbook-response-cell: 01_Formulario!E65
+        x-output-sheet: 04_Operacao_Seguranca
+      '5.5':
+        $ref: '#/$defs/extracted_field'
+        title: Gatilho de rollback — fluxo crítico
+        description: Qual fluxo, se falhar, exige rollback imediato.
+        x-field-id: '5.5'
+        x-example: 'Ex: Fluxo de publicação (briefing → PR → preview → produção).'
+        x-workbook-response-cell: 01_Formulario!E66
+        x-output-sheet: 04_Operacao_Seguranca
+      '5.6':
+        $ref: '#/$defs/extracted_field'
+        title: Procedimento de rollback
+        description: Passo a passo de como reverter um deploy problemático.
+        x-field-id: '5.6'
+        x-example: 'Ex: Reverter para o último deploy estável via painel Vercel + confirmar /health.'
+        x-workbook-response-cell: 01_Formulario!E67
+        x-output-sheet: 04_Operacao_Seguranca
+    x-domain-number: 5
+    x-domain-title: OPERAÇÃO (DEPLOY & ROLLBACK)
+    x-field-count: 6
+    x-output-sheet: 04_Operacao_Seguranca
+  domain_06_governanca_seguranca:
+    type: object
+    title: Domínio 6 — GOVERNANÇA & SEGURANÇA
+    description: Quem pode fazer o quê, onde segredos vivem, e como decisões de política são tomadas
+    additionalProperties: false
+    required:
+    - '6.1'
+    - '6.2'
+    - '6.3'
+    - '6.4'
+    - '6.5'
+    - '6.6'
+    properties:
+      '6.1':
+        $ref: '#/$defs/extracted_field'
+        title: Estratégia de branch
+        description: Trabalho direto em main vs. PR obrigatório — e quando cada um se aplica.
+        x-field-id: '6.1'
+        x-example: 'Ex: PR obrigatório para mudanças de produto; correções de config podem ir direto com aprovação.'
+        x-workbook-response-cell: 01_Formulario!E71
+        x-output-sheet: 04_Operacao_Seguranca
+      '6.2':
+        $ref: '#/$defs/extracted_field'
+        title: Gate humano obrigatório
+        description: Em quais mudanças um humano precisa aprovar antes do merge/deploy.
+        x-field-id: '6.2'
+        x-example: 'Ex: Toda mudança de schema de banco exige aprovação humana explícita.'
+        x-workbook-response-cell: 01_Formulario!E72
+        x-output-sheet: 04_Operacao_Seguranca
+      '6.3':
+        $ref: '#/$defs/extracted_field'
+        title: Armazenamento de segredos
+        description: Onde credenciais vivem — nunca em código versionado.
+        x-field-id: '6.3'
+        x-example: 'Ex: Variáveis de ambiente na Vercel, nunca em .env commitado.'
+        x-workbook-response-cell: 01_Formulario!E73
+        x-output-sheet: 04_Operacao_Seguranca
+      '6.4':
+        $ref: '#/$defs/extracted_field'
+        title: Rotação de credenciais
+        description: Frequência e gatilho para trocar chaves/segredos.
+        x-field-id: '6.4'
+        x-example: 'Ex: Rotação imediata se uma chave for exposta; revisão trimestral por padrão.'
+        x-workbook-response-cell: 01_Formulario!E74
+        x-output-sheet: 04_Operacao_Seguranca
+      '6.5':
+        $ref: '#/$defs/extracted_field'
+        title: Riscos de segurança conhecidos
+        description: Vulnerabilidades ou fallbacks inseguros já identificados.
+        x-field-id: '6.5'
+        x-example: 'Ex: Fallback público/OWNER identificado em auditoria — remediação em andamento.'
+        x-workbook-response-cell: 01_Formulario!E75
+        x-output-sheet: 04_Operacao_Seguranca
+      '6.6':
+        $ref: '#/$defs/extracted_field'
+        title: Escopo de autonomia do agente de AI
+        description: O que um agente (Claude Code etc.) pode fazer sem aprovação humana.
+        x-field-id: '6.6'
+        x-example: 'Ex: Pode abrir PR draft; não pode mesclar em main sem revisão humana.'
+        x-workbook-response-cell: 01_Formulario!E76
+        x-output-sheet: 04_Operacao_Seguranca
+    x-domain-number: 6
+    x-domain-title: GOVERNANÇA & SEGURANÇA
+    x-field-count: 6
+    x-output-sheet: 04_Operacao_Seguranca
+  domain_07_documentacao_fundacional:
+    type: object
+    title: Domínio 7 — DOCUMENTAÇÃO FUNDACIONAL
+    description: O que permite que qualquer pessoa ou agente entre no projeto sem reconstruir contexto
+    additionalProperties: false
+    required:
+    - '7.1'
+    - '7.2'
+    - '7.3'
+    - '7.4'
+    - '7.5'
+    properties:
+      '7.1':
+        $ref: '#/$defs/extracted_field'
+        title: README existe?
+        description: Status do README principal do repositório.
+        x-field-id: '7.1'
+        x-example: 'Ex: Pendente — precisa cobrir problema, público, arquitetura, resultados em até 3 min de leitura.'
+        x-workbook-response-cell: 01_Formulario!E80
+        x-output-sheet: 04_Operacao_Seguranca
+      '7.2':
+        $ref: '#/$defs/extracted_field'
+        title: ADRs documentados
+        description: Quantas decisões de arquitetura estão formalizadas como ADR.
+        x-field-id: '7.2'
+        x-example: 'Ex: 0 formalizados; 2 decisões implícitas identificadas, pendentes de registro.'
+        x-workbook-response-cell: 01_Formulario!E81
+        x-output-sheet: 04_Operacao_Seguranca
+      '7.3':
+        $ref: '#/$defs/extracted_field'
+        title: Documentação de API
+        description: Status da referência de endpoints.
+        x-field-id: '7.3'
+        x-example: 'Ex: Pendente — endpoints existem no código mas sem doc formal.'
+        x-workbook-response-cell: 01_Formulario!E82
+        x-output-sheet: 04_Operacao_Seguranca
+      '7.4':
+        $ref: '#/$defs/extracted_field'
+        title: Guia de onboarding
+        description: Existe um guia para alguém novo configurar o ambiente?
+        x-field-id: '7.4'
+        x-example: 'Ex: Não existe ainda; setup depende de conhecimento tácito.'
+        x-workbook-response-cell: 01_Formulario!E83
+        x-output-sheet: 04_Operacao_Seguranca
+      '7.5':
+        $ref: '#/$defs/extracted_field'
+        title: Catálogo de skills/ferramentas
+        description: Se o projeto usa um conjunto de skills/agentes, estão documentados?
+        x-field-id: '7.5'
+        x-example: 'Ex: 13 skills usadas no projeto, catálogo navegável pendente de publicação.'
+        x-workbook-response-cell: 01_Formulario!E84
+        x-output-sheet: 04_Operacao_Seguranca
+    x-domain-number: 7
+    x-domain-title: DOCUMENTAÇÃO FUNDACIONAL
+    x-field-count: 5
+    x-output-sheet: 04_Operacao_Seguranca
+  domain_08_gestao_de_projetos_pmbok:
+    type: object
+    title: Domínio 8 — GESTÃO DE PROJETOS & PMBOK
+    description: Iniciação e governança do projeto — valor, sponsor e decisão Go/No-Go
+    additionalProperties: false
+    required:
+    - '8.1'
+    - '8.2'
+    - '8.3'
+    - '8.4'
+    - '8.5'
+    properties:
+      '8.1':
+        $ref: '#/$defs/extracted_field'
+        title: Problema/oportunidade que justifica o projeto
+        description: Descreva em 1 frase por que este projeto deve existir, conforme o Project Charter.
+        x-field-id: '8.1'
+        x-example: 'Ex: Consolidar toda a gestão do projeto em uma única fonte de verdade, eliminando divergência entre documentos.'
+        x-workbook-response-cell: 01_Formulario!E88
+        x-output-sheet: 05_Gestao_Projetos
+      '8.2':
+        $ref: '#/$defs/extracted_field'
+        title: Sponsor / Patrocinador
+        description: Nome de quem tem autoridade para aprovar o projeto formalmente.
+        x-field-id: '8.2'
+        x-example: 'Ex: A definir — nenhum sponsor formal designado ainda.'
+        x-workbook-response-cell: 01_Formulario!E89
+        x-output-sheet: 05_Gestao_Projetos
+      '8.3':
+        $ref: '#/$defs/extracted_field'
+        title: Critério de sucesso principal
+        description: Indicador objetivo que mostrará que o projeto deu certo, com meta e prazo.
+        x-field-id: '8.3'
+        x-example: 'Ex: 100% dos domínios do formulário preenchidos até 2026-09-30.'
+        x-workbook-response-cell: 01_Formulario!E90
+        x-output-sheet: 05_Gestao_Projetos
+      '8.4':
+        $ref: '#/$defs/extracted_field'
+        title: Decisão Go/No-Go
+        description: 'Status atual da autorização formal do projeto: Proposto, Em avaliação, Autorizado, Suspenso ou Cancelado.'
+        x-field-id: '8.4'
+        x-example: 'Ex: Em avaliação — aguardando confirmação do sponsor.'
+        x-workbook-response-cell: 01_Formulario!E91
+        x-output-sheet: 05_Gestao_Projetos
+      '8.5':
+        $ref: '#/$defs/extracted_field'
+        title: Abordagem do projeto
+        description: Preditiva, Adaptativa/Ágil ou Híbrida, e por quê.
+        x-field-id: '8.5'
+        x-example: 'Ex: Híbrida — planejamento macro fixo, execução semanal iterativa.'
+        x-workbook-response-cell: 01_Formulario!E92
+        x-output-sheet: 05_Gestao_Projetos
+    x-domain-number: 8
+    x-domain-title: GESTÃO DE PROJETOS & PMBOK
+    x-field-count: 5
+    x-output-sheet: 05_Gestao_Projetos
+  domain_09_planejamento_estrategico_tatico_e_operacional:
+    type: object
+    title: Domínio 9 — PLANEJAMENTO ESTRATÉGICO, TÁTICO E OPERACIONAL
+    description: Os três horizontes de decisão — onde queremos chegar, como, e o que fazer esta semana
+    additionalProperties: false
+    required:
+    - '9.1'
+    - '9.2'
+    - '9.3'
+    - '9.4'
+    properties:
+      '9.1':
+        $ref: '#/$defs/extracted_field'
+        title: Objetivo estratégico (12+ meses)
+        description: Descreva a direção de longo prazo do projeto.
+        x-field-id: '9.1'
+        x-example: 'Ex: Tornar-se a fonte única de operação do ecossistema Executar.'
+        x-workbook-response-cell: 01_Formulario!E96
+        x-output-sheet: 05_Gestao_Projetos
+      '9.2':
+        $ref: '#/$defs/extracted_field'
+        title: Objetivo tático (trimestre/ciclo)
+        description: O que precisa ser verdade daqui a 3 meses para o estratégico avançar.
+        x-field-id: '9.2'
+        x-example: 'Ex: Central de Controle com todos os domínios preenchidos e em uso ativo.'
+        x-workbook-response-cell: 01_Formulario!E97
+        x-output-sheet: 05_Gestao_Projetos
+      '9.3':
+        $ref: '#/$defs/extracted_field'
+        title: Prioridade operacional da semana
+        description: O que precisa avançar nos próximos 7 dias.
+        x-field-id: '9.3'
+        x-example: 'Ex: Confirmar owner e resolver as sobreposições de domínio pendentes.'
+        x-workbook-response-cell: 01_Formulario!E98
+        x-output-sheet: 05_Gestao_Projetos
+      '9.4':
+        $ref: '#/$defs/extracted_field'
+        title: Dependência entre horizontes
+        description: O que no nível tático bloqueia ou depende do estratégico.
+        x-field-id: '9.4'
+        x-example: 'Ex: O objetivo tático de preenchimento completo depende de um owner estratégico confirmado.'
+        x-workbook-response-cell: 01_Formulario!E99
+        x-output-sheet: 05_Gestao_Projetos
+    x-domain-number: 9
+    x-domain-title: PLANEJAMENTO ESTRATÉGICO, TÁTICO E OPERACIONAL
+    x-field-count: 4
+    x-output-sheet: 05_Gestao_Projetos
+  domain_10_roadmap_cronograma_ciclos_e_backlog:
+    type: object
+    title: Domínio 10 — ROADMAP, CRONOGRAMA, CICLOS E BACKLOG
+    description: Marcos de médio prazo e o ritmo semanal de execução
+    additionalProperties: false
+    required:
+    - '10.1'
+    - '10.2'
+    - '10.3'
+    - '10.4'
+    properties:
+      '10.1':
+        $ref: '#/$defs/extracted_field'
+        title: 'Marco de médio prazo #1'
+        description: Próximo grande marco do projeto e data-alvo.
+        x-field-id: '10.1'
+        x-example: 'Ex: Central de Controle validada e em uso — 2026-09-15.'
+        x-workbook-response-cell: 01_Formulario!E103
+        x-output-sheet: 06_Roadmap_Editorial
+      '10.2':
+        $ref: '#/$defs/extracted_field'
+        title: Ciclo semanal atual
+        description: 'Em qual fase do ciclo o projeto está agora: Editorial, Desenvolvimento ou Governança.'
+        x-field-id: '10.2'
+        x-example: 'Ex: Governança — revisão de domingo.'
+        x-workbook-response-cell: 01_Formulario!E104
+        x-output-sheet: 06_Roadmap_Editorial
+      '10.3':
+        $ref: '#/$defs/extracted_field'
+        title: Item de backlog crítico
+        description: Tarefa pendente que bloqueia o próximo marco.
+        x-field-id: '10.3'
+        x-example: 'Ex: Sincronizar backlog do Linear com a aba de execução.'
+        x-workbook-response-cell: 01_Formulario!E105
+        x-output-sheet: 06_Roadmap_Editorial
+      '10.4':
+        $ref: '#/$defs/extracted_field'
+        title: Cadência de revisão
+        description: Com que frequência o roadmap é revisado e por quem.
+        x-field-id: '10.4'
+        x-example: 'Ex: Toda segunda-feira, pelo owner do projeto.'
+        x-workbook-response-cell: 01_Formulario!E106
+        x-output-sheet: 06_Roadmap_Editorial
+    x-domain-number: 10
+    x-domain-title: ROADMAP, CRONOGRAMA, CICLOS E BACKLOG
+    x-field-count: 4
+    x-output-sheet: 06_Roadmap_Editorial
+  domain_11_editorial_campanhas_e_conteudo:
+    type: object
+    title: Domínio 11 — EDITORIAL, CAMPANHAS E CONTEÚDO
+    description: Conteúdo, calendário editorial, campanhas e trilhas de comunicação
+    additionalProperties: false
+    required:
+    - '11.1'
+    - '11.2'
+    - '11.3'
+    - '11.4'
+    properties:
+      '11.1':
+        $ref: '#/$defs/extracted_field'
+        title: Linha editorial
+        description: Tema ou pilar de conteúdo predominante do período.
+        x-field-id: '11.1'
+        x-example: 'Ex: Bastidores da construção do sistema Executar.'
+        x-workbook-response-cell: 01_Formulario!E110
+        x-output-sheet: 06_Roadmap_Editorial
+      '11.2':
+        $ref: '#/$defs/extracted_field'
+        title: Calendário de publicação
+        description: Frequência e canais de publicação de conteúdo.
+        x-field-id: '11.2'
+        x-example: 'Ex: 2x por semana, LinkedIn e newsletter.'
+        x-workbook-response-cell: 01_Formulario!E111
+        x-output-sheet: 06_Roadmap_Editorial
+      '11.3':
+        $ref: '#/$defs/extracted_field'
+        title: Campanha ativa
+        description: Nome e objetivo da campanha em andamento, se houver.
+        x-field-id: '11.3'
+        x-example: 'Ex: Nenhuma campanha ativa no momento.'
+        x-workbook-response-cell: 01_Formulario!E112
+        x-output-sheet: 06_Roadmap_Editorial
+      '11.4':
+        $ref: '#/$defs/extracted_field'
+        title: Trilha de conteúdo
+        description: Sequência de peças que levam o público de um ponto a outro.
+        x-field-id: '11.4'
+        x-example: 'Ex: Post de bastidor → thread técnica → case de uso.'
+        x-workbook-response-cell: 01_Formulario!E113
+        x-output-sheet: 06_Roadmap_Editorial
+    x-domain-number: 11
+    x-domain-title: EDITORIAL, CAMPANHAS E CONTEÚDO
+    x-field-count: 4
+    x-output-sheet: 06_Roadmap_Editorial
+  domain_12_stakeholders:
+    type: object
+    title: Domínio 12 — STAKEHOLDERS
+    description: Quem afeta ou é afetado pelo projeto, e como engajar cada um
+    additionalProperties: false
+    required:
+    - '12.1'
+    - '12.2'
+    - '12.3'
+    properties:
+      '12.1':
+        $ref: '#/$defs/extracted_field'
+        title: Stakeholder principal
+        description: Nome/grupo, papel, nível de interesse e influência.
+        x-field-id: '12.1'
+        x-example: 'Ex: Owner do projeto — interesse alto, influência alta.'
+        x-workbook-response-cell: 01_Formulario!E117
+        x-output-sheet: 07_Conhecimento_Stakeholders
+      '12.2':
+        $ref: '#/$defs/extracted_field'
+        title: Forma de comunicação
+        description: Como e com que frequência este stakeholder é atualizado.
+        x-field-id: '12.2'
+        x-example: 'Ex: Resumo semanal aos domingos, no ciclo de governança.'
+        x-workbook-response-cell: 01_Formulario!E118
+        x-output-sheet: 07_Conhecimento_Stakeholders
+      '12.3':
+        $ref: '#/$defs/extracted_field'
+        title: Expectativa não alinhada
+        description: Ponto de expectativa que ainda precisa de alinhamento explícito.
+        x-field-id: '12.3'
+        x-example: 'Ex: Nenhuma pendência identificada.'
+        x-workbook-response-cell: 01_Formulario!E119
+        x-output-sheet: 07_Conhecimento_Stakeholders
+    x-domain-number: 12
+    x-domain-title: STAKEHOLDERS
+    x-field-count: 3
+    x-output-sheet: 07_Conhecimento_Stakeholders
+  domain_13_runbooks_sops_e_rotinas:
+    type: object
+    title: Domínio 13 — RUNBOOKS, SOPS E ROTINAS
+    description: Procedimentos padronizados e repetíveis do dia a dia operacional
+    additionalProperties: false
+    required:
+    - '13.1'
+    - '13.2'
+    - '13.3'
+    properties:
+      '13.1':
+        $ref: '#/$defs/extracted_field'
+        title: 'Runbook crítico #1'
+        description: Nome do procedimento e quando ele é acionado.
+        x-field-id: '13.1'
+        x-example: 'Ex: Fechamento de ciclo — rodado toda quarta e sábado.'
+        x-workbook-response-cell: 01_Formulario!E123
+        x-output-sheet: 07_Conhecimento_Stakeholders
+      '13.2':
+        $ref: '#/$defs/extracted_field'
+        title: Responsável pela rotina
+        description: Quem executa este runbook hoje.
+        x-field-id: '13.2'
+        x-example: 'Ex: Owner do projeto, manualmente.'
+        x-workbook-response-cell: 01_Formulario!E124
+        x-output-sheet: 07_Conhecimento_Stakeholders
+      '13.3':
+        $ref: '#/$defs/extracted_field'
+        title: SOP documentado?
+        description: Existe um documento formal deste procedimento? Onde vive.
+        x-field-id: '13.3'
+        x-example: 'Ex: Não determinado.'
+        x-workbook-response-cell: 01_Formulario!E125
+        x-output-sheet: 07_Conhecimento_Stakeholders
+    x-domain-number: 13
+    x-domain-title: RUNBOOKS, SOPS E ROTINAS
+    x-field-count: 3
+    x-output-sheet: 07_Conhecimento_Stakeholders
+  domain_14_pesquisa_dados_e_conhecimento:
+    type: object
+    title: Domínio 14 — PESQUISA, DADOS E CONHECIMENTO
+    description: Base de conhecimento, evidências, pesquisa e o papel de agentes de IA no projeto
+    additionalProperties: false
+    required:
+    - '14.1'
+    - '14.2'
+    - '14.3'
+    properties:
+      '14.1':
+        $ref: '#/$defs/extracted_field'
+        title: Fonte de evidência principal
+        description: 'Onde ficam guardadas as provas objetivas de estado: documentos, commits, tickets.'
+        x-field-id: '14.1'
+        x-example: 'Ex: Google Drive, pasta Prompt-Enginner, e o próprio XLSX Central.'
+        x-workbook-response-cell: 01_Formulario!E129
+        x-output-sheet: 07_Conhecimento_Stakeholders
+      '14.2':
+        $ref: '#/$defs/extracted_field'
+        title: Pesquisa/dado pendente
+        description: Informação que ainda precisa ser levantada antes de uma decisão.
+        x-field-id: '14.2'
+        x-example: 'Ex: Confirmar se existe uma planilha anterior com domínios já preenchidos.'
+        x-workbook-response-cell: 01_Formulario!E130
+        x-output-sheet: 07_Conhecimento_Stakeholders
+      '14.3':
+        $ref: '#/$defs/extracted_field'
+        title: Papel de agentes de IA no projeto
+        description: Que tarefas um agente de IA está autorizado a executar sozinho vs. só propor.
+        x-field-id: '14.3'
+        x-example: 'Ex: Agente propõe preenchimento; humano aprova antes de mudar status.'
+        x-workbook-response-cell: 01_Formulario!E131
+        x-output-sheet: 07_Conhecimento_Stakeholders
+    x-domain-number: 14
+    x-domain-title: PESQUISA, DADOS E CONHECIMENTO
+    x-field-count: 3
+    x-output-sheet: 07_Conhecimento_Stakeholders
+  domain_15_skills_plugins_e_ferramentas:
+    type: object
+    title: Domínio 15 — SKILLS, PLUGINS E FERRAMENTAS
+    description: Inventário de skills, plugins e ferramentas usados para operar o projeto
+    additionalProperties: false
+    required:
+    - '15.1'
+    - '15.2'
+    - '15.3'
+    properties:
+      '15.1':
+        $ref: '#/$defs/extracted_field'
+        title: Skill/plugin principal em uso
+        description: Nome da skill/plugin e para que ela serve neste projeto.
+        x-field-id: '15.1'
+        x-example: 'Ex: executar-xls — gera este próprio workbook.'
+        x-workbook-response-cell: 01_Formulario!E135
+        x-output-sheet: 08_Skills_Plataformas
+      '15.2':
+        $ref: '#/$defs/extracted_field'
+        title: Ferramenta de automação conectada
+        description: Sistema externo conectado (Linear, Drive, etc.) e o que ele resolve.
+        x-field-id: '15.2'
+        x-example: 'Ex: Google Drive — repositório de documentos e evidências.'
+        x-workbook-response-cell: 01_Formulario!E136
+        x-output-sheet: 08_Skills_Plataformas
+      '15.3':
+        $ref: '#/$defs/extracted_field'
+        title: Lacuna de ferramenta
+        description: Automação que falta e seria útil.
+        x-field-id: '15.3'
+        x-example: 'Ex: Não determinado.'
+        x-workbook-response-cell: 01_Formulario!E137
+        x-output-sheet: 08_Skills_Plataformas
+    x-domain-number: 15
+    x-domain-title: SKILLS, PLUGINS E FERRAMENTAS
+    x-field-count: 3
+    x-output-sheet: 08_Skills_Plataformas
+  domain_16_plataformas_contas_e_identificadores:
+    type: object
+    title: Domínio 16 — PLATAFORMAS, CONTAS E IDENTIFICADORES
+    description: Atalhos, links, contas, logins e identificadores usados no dia a dia
+    additionalProperties: false
+    required:
+    - '16.1'
+    - '16.2'
+    - '16.3'
+    properties:
+      '16.1':
+        $ref: '#/$defs/extracted_field'
+        title: Plataforma principal
+        description: Nome da plataforma e para que ela é usada no projeto.
+        x-field-id: '16.1'
+        x-example: 'Ex: claude.ai — projeto Control Center.'
+        x-workbook-response-cell: 01_Formulario!E141
+        x-output-sheet: 08_Skills_Plataformas
+      '16.2':
+        $ref: '#/$defs/extracted_field'
+        title: Link/atalho crítico
+        description: URL ou identificador que precisa estar sempre à mão.
+        x-field-id: '16.2'
+        x-example: 'Ex: Não determinado.'
+        x-workbook-response-cell: 01_Formulario!E142
+        x-output-sheet: 08_Skills_Plataformas
+      '16.3':
+        $ref: '#/$defs/extracted_field'
+        title: Responsável pela conta
+        description: Quem tem acesso administrativo a esta plataforma.
+        x-field-id: '16.3'
+        x-example: 'Ex: Owner do projeto.'
+        x-workbook-response-cell: 01_Formulario!E143
+        x-output-sheet: 08_Skills_Plataformas
+    x-domain-number: 16
+    x-domain-title: PLATAFORMAS, CONTAS E IDENTIFICADORES
+    x-field-count: 3
+    x-output-sheet: 08_Skills_Plataformas
+  domain_17_prompt_engineering_comandos:
+    type: object
+    title: Domínio 17 — PROMPT ENGINEERING & COMANDOS
+    description: Prompts canônicos e comandos operacionais que governam os agentes de IA deste projeto
+    additionalProperties: false
+    required:
+    - '17.1'
+    - '17.2'
+    - '17.3'
+    properties:
+      '17.1':
+        $ref: '#/$defs/extracted_field'
+        title: Prompt canônico principal
+        description: Nome do prompt-fonte e onde ele vive.
+        x-field-id: '17.1'
+        x-example: 'Ex: 02 · Project Control Agent — Google Drive, Prompt-Enginner/02-PROMPTS.'
+        x-workbook-response-cell: 01_Formulario!E147
+        x-output-sheet: 08_Skills_Plataformas
+      '17.2':
+        $ref: '#/$defs/extracted_field'
+        title: Comando/gatilho operacional
+        description: Palavra ou frase que aciona uma rotina específica do agente.
+        x-field-id: '17.2'
+        x-example: 'Ex: Não determinado.'
+        x-workbook-response-cell: 01_Formulario!E148
+        x-output-sheet: 08_Skills_Plataformas
+      '17.3':
+        $ref: '#/$defs/extracted_field'
+        title: Regra anti-alucinação específica
+        description: Restrição adicional que os agentes deste projeto devem sempre respeitar.
+        x-field-id: '17.3'
+        x-example: 'Ex: Nunca promover Status sem evidência registrada.'
+        x-workbook-response-cell: 01_Formulario!E149
+        x-output-sheet: 08_Skills_Plataformas
+    x-domain-number: 17
+    x-domain-title: PROMPT ENGINEERING & COMANDOS
+    x-field-count: 3
+    x-output-sheet: 08_Skills_Plataformas
+x-source-workbook: EXECUTAR_projetosaasentrypoint_EXPANDIDO(1).xlsx
+x-source-entrypoint-sheet: 01_Formulario
+x-field-count: 94
+x-domain-count: 17
+x-policy:
+- Nunca preencher sem evidência documental ou marcação explícita como inferred.
+- Se não houver evidência, usar status=not_found, answer=null, evidence=[].
+- Se fontes relevantes divergirem, usar status=conflict e registrar evidências contraditórias.
+- IDs 1.1–17.3 são canônicos e não devem ser renumerados.

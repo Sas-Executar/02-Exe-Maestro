@@ -1,0 +1,329 @@
+---
+id: DOC-CLX-007
+folder_id: FS-IDX-005
+tipo: documento-importado
+status: confirmado
+origem: export-claude-20260913
+origem_filename: "claude/ARQUITETURA_FLUXOS_CUSTOMER_JOURNEY_flowchart.txt"
+sha256: 228a28abfa126e06cc6508c1cdb3aca03330654281fbd33719671e04012aa63e
+projeto: ECOSSISTEMA_15-08_FILESYSTEM
+---
+
+==============================================================================
+MAPA: Map 1
+==============================================================================
+
+◉ EXECUTAR APP — ARQUITETURA, FLUXOS E CUSTOMER JOURNEY
+├─ 1. MAPA MESTRE EXECUTIVO (ÍNDICE NAVEGÁVEL)
+│  ├─ 👤 Visão Geral do Ecossistema
+│  │  └─ Este mapa serve como hub central para navegação entre as folhas especializadas do projeto Executar App.
+│  ├─ 🖥️ Folha 2: Fluxo Completo do Usuário
+│  │  ├─ Mapeamento cronológico de 25 etapas desde a descoberta até o encerramento da conta.
+│  │  └─ [Link para Folha 2]
+│  ├─ ⚙️ Folha 3: Arquitetura Sistêmica
+│  │  ├─ Estrutura de backend, integrações MCP, persistência de dados e segurança.
+│  │  └─ [Link para Folha 3]
+│  ├─ 🤖 Folha 4: Agente Copiloto e Automações
+│  │  ├─ Lógica de inteligência artificial dividida em Productivity, Operations e Modo Rotina.
+│  │  └─ [Link para Folha 4]
+│  ├─ 📄 Folha 5: Entregáveis, Contratos e Governança
+│  │  ├─ Gestão de documentos legais, SLAs, conformidade LGPD e marcos de entrega.
+│  │  └─ [Link para Folha 5]
+│  └─ 🔶 Legenda e Padrões Visuais
+│     └─ Azul: Jornada | Roxo: Interface | Laranja: Copiloto | Cinza: Sistema | Turquesa: Dados | Verde: Resultado | Amarelo: Decisão | Vermelho: Risco | Ciano: Conector.
+├─ 2. FLUXO COMPLETO DO USUÁRIO (DETALHAMENTO CRONOLÓGICO)
+│  ├─ 👤 01. Descoberta do Produto
+│  │  ├─ 👤 O usuário visualiza anúncio ou recomendação sobre gestão de produtividade.
+│  │  ├─ 🖥️ Landing page com proposta de valor e CTAs claros.
+│  │  ├─ ⚙️ Rastreamento de origem de tráfego e cookies de marketing.
+│  │  ├─ 🤖 N/A nesta etapa inicial.
+│  │  ├─ 🏦 Registro de lead potencial no banco de marketing.
+│  │  ├─ 📄 Relatório de conversão de landing page.
+│  │  ├─ ⚠️ Falha no carregamento da página ou bloqueio de cookies.
+│  │  └─ Próxima etapa: Cadastro e Autenticação.
+│  ├─ 👤 02. Cadastro, Autenticação e Recuperação
+│  │  ├─ 👤 Usuário insere dados para criação de conta ou login social.
+│  │  ├─ 🖥️ Tela de Sign-up/Login com validação em tempo real.
+│  │  ├─ ⚙️ Processamento de hashes de senha e tokens JWT.
+│  │  ├─ 🤖 N/A nesta etapa.
+│  │  ├─ 🏦 Persistência de credenciais criptografadas e perfil básico.
+│  │  ├─ 📄 Comprovante de criação de conta enviado por e-mail.
+│  │  ├─ ⚠️ E-mail já cadastrado ou erro no provedor de OAuth.
+│  │  └─ Próxima etapa: Criação ou Entrada na Organização.
+│  ├─ 👤 03. Criação ou Entrada na Organização
+│  │  ├─ 👤 Usuário define nome da empresa ou aceita convite de time.
+│  │  ├─ 🖥️ Interface de criação de Workspace ou lista de convites pendentes.
+│  │  ├─ ⚙️ Atribuição de permissões de administrador ou membro.
+│  │  ├─ 🤖 N/A nesta etapa.
+│  │  ├─ 🏦 Vínculo entre UserID e OrgID na tabela de permissões.
+│  │  ├─ 📄 Estrutura de diretório da organização criada.
+│  │  ├─ ⚠️ Nome de organização indisponível ou convite expirado.
+│  │  └─ Próxima etapa: Onboarding.
+│  ├─ 👤 04. Onboarding
+│  │  ├─ 👤 Usuário responde breve questionário sobre perfil de trabalho.
+│  │  ├─ 🖥️ Sequência de telas interativas de boas-vindas.
+│  │  ├─ ⚙️ Configuração inicial de preferências de usuário.
+│  │  ├─ 🤖 Copiloto sugere trilha personalizada com base nas respostas.
+│  │  ├─ 🏦 Estado de onboarding marcado como em progresso.
+│  │  ├─ 📄 Perfil de usuário inicializado.
+│  │  ├─ ⚠️ Abandono do fluxo de boas-vindas pelo usuário.
+│  │  └─ Próxima etapa: Consentimentos e Permissões.
+│  ├─ 👤 05. Consentimentos e Permissões
+│  │  ├─ 👤 Usuário autoriza acesso a dados sensíveis e notificações.
+│  │  ├─ 🖥️ Modais de permissão do sistema operacional e termos de uso.
+│  │  ├─ ⚙️ Registro de logs de consentimento para conformidade legal.
+│  │  ├─ 🤖 Explicação contextual do porquê cada permissão é necessária.
+│  │  ├─ 🏦 Flags de permissão ativas no banco de dados.
+│  │  ├─ 📄 Termo de aceite assinado digitalmente.
+│  │  ├─ ⚠️ Recusa de permissões críticas para o funcionamento.
+│  │  └─ Próxima etapa: Integração de Calendário e Ferramentas.
+│  ├─ 👤 06. Integração de Calendário, Tarefas e Conectores
+│  │  ├─ 👤 Usuário conecta Google Calendar, Outlook, Slack e Notion.
+│  │  ├─ 🖥️ Painel de conexões com status de sincronização.
+│  │  ├─ ⚙️ Handshake via OAuth2 e registro de webhooks.
+│  │  ├─ 🤖 Sugestão de quais conectores trarão mais valor imediato.
+│  │  ├─ 🏦 Tokens de acesso armazenados em cofre seguro.
+│  │  ├─ 📄 Mapa de conexões ativas.
+│  │  ├─ ⚠️ Erro de API de terceiros ou expiração de token.
+│  │  └─ Próxima etapa: Scanner e Normalização.
+│  ├─ 👤 07. Scanner e Normalização dos Dados
+│  │  ├─ 👤 Usuário aguarda a leitura inicial de suas pendências.
+│  │  ├─ 🖥️ Barra de progresso visual da varredura de dados.
+│  │  ├─ ⚙️ ETL para transformar dados brutos em formato padronizado.
+│  │  ├─ 🤖 Identificação de padrões e duplicatas nos dados importados.
+│  │  ├─ 🏦 Buffer de dados normalizados prontos para análise.
+│  │  ├─ 📄 Relatório de integridade de dados importados.
+│  │  ├─ ⚠️ Dados corrompidos ou formato não suportado.
+│  │  └─ Próxima etapa: Processamento por Productivity.
+│  ├─ 👤 08. Processamento Inicial por Productivity
+│  │  ├─ 👤 Usuário observa a priorização automática de suas tarefas.
+│  │  ├─ 🖥️ Dashboard de triagem com pesos de urgência e importância.
+│  │  ├─ ⚙️ Algoritmo de priorização baseado em prazos e carga horária.
+│  │  ├─ 🤖 Agente Productivity define o que deve ser feito primeiro.
+│  │  ├─ 🏦 Backlog priorizado gravado na memória de curto prazo.
+│  │  ├─ 📄 Grade de prioridades executivas.
+│  │  ├─ ⚠️ Conflito de prioridades manuais vs. automáticas.
+│  │  └─ Próxima etapa: Organização Operacional por Operations.
+│  ├─ 👤 09. Organização Operacional por Operations
+│  │  ├─ 👤 Usuário visualiza o sequenciamento lógico de suas atividades.
+│  │  ├─ 🖥️ Timeline de execução com alocação de recursos.
+│  │  ├─ ⚙️ Distribuição de carga de trabalho e previsão de gargalos.
+│  │  ├─ 🤖 Agente Operations define como e quando cada tarefa será feita.
+│  │  ├─ 🏦 Plano operacional salvo no banco de projetos.
+│  │  ├─ 📄 Cronograma de execução detalhado.
+│  │  ├─ ⚠️ Falta de recursos ou tempo insuficiente no calendário.
+│  │  └─ Próxima etapa: Primeiro Entregável.
+│  ├─ 👤 10. Apresentação e Confirmação do Primeiro Entregável
+│  │  ├─ 👤 Usuário valida o plano gerado pela IA.
+│  │  ├─ 🖥️ Visualização do template oficial de planejamento.
+│  │  ├─ ⚙️ Geração de documento PDF ou Dashboard interativo.
+│  │  ├─ 🤖 Explicação do raciocínio por trás do plano proposto.
+│  │  ├─ 🏦 Registro da aprovação do plano inicial.
+│  │  ├─ 📄 Template Oficial de Planejamento Consolidado.
+│  │  ├─ ⚠️ Rejeição do plano pelo usuário por incoerência.
+│  │  └─ Próxima etapa: Entrada na Home.
+│  ├─ 👤 11. Entrada na Home
+│  │  ├─ 👤 Usuário acessa o centro de comando do aplicativo.
+│  │  ├─ 🖥️ Tela principal com resumo do dia e atalhos rápidos.
+│  │  ├─ ⚙️ Carregamento de widgets dinâmicos conforme perfil.
+│  │  ├─ 🤖 Saudação contextual e lembrete da tarefa atual.
+│  │  ├─ 🏦 Estado atual da sessão do usuário.
+│  │  ├─ 📄 N/A.
+│  │  ├─ ⚠️ Lentidão no carregamento dos widgets de terceiros.
+│  │  └─ Próxima etapa: Visualização de Backlog e Projetos.
+│  ├─ 👤 12. Visualização de Backlog e Projetos
+│  │  ├─ 👤 Usuário navega pela lista completa de demandas.
+│  │  ├─ 🖥️ Lista hierárquica com filtros de projeto e tags.
+│  │  ├─ ⚙️ Consultas indexadas para alta performance de busca.
+│  │  ├─ 🤖 Agrupamento inteligente de tarefas relacionadas.
+│  │  ├─ 🏦 Persistência de filtros e visualizações customizadas.
+│  │  ├─ 📄 Visão geral do portfólio de projetos.
+│  │  ├─ ⚠️ Excesso de informação causando sobrecarga cognitiva.
+│  │  └─ Próxima etapa: Seleção da Próxima Ação.
+│  ├─ 👤 13. Seleção da Próxima Ação
+│  │  ├─ 👤 Usuário escolhe em qual tarefa focar agora.
+│  │  ├─ 🖥️ Botão de ação em destaque ou seleção na lista.
+│  │  ├─ ⚙️ Bloqueio de outras tarefas para evitar multitarefa.
+│  │  ├─ 🤖 Sugestão da tarefa com melhor custo-benefício no momento.
+│  │  ├─ 🏦 Registro da tarefa ativa.
+│  │  ├─ 📄 N/A.
+│  │  ├─ ⚠️ Indecisão do usuário ou mudança de contexto súbita.
+│  │  └─ Próxima etapa: Execução Individual da Tarefa.
+│  ├─ 👤 14. Execução Individual da Tarefa
+│  │  ├─ 👤 Usu
+│  │  ├─ 🖥️ Interface de foco com cronômetro e notas de apoio.
+│  │  ├─ ⚙️ Monitoramento de tempo e atividade.
+│  │  ├─ 🤖 Fornecimento de prompts e dicas para a tarefa específica.
+│  │  ├─ 🏦 Log de tempo iniciado.
+│  │  ├─ 📄 Rascunho de progresso da tarefa.
+│  │  ├─ ⚠️ Interrupções externas detectadas pelo sistema.
+│  │  └─ Próxima etapa: Timer de 15, 30 ou 45 minutos.
+│  ├─ 👤 15. Timer de 15, 30 ou 45 minutos
+│  │  ├─ 👤 Usuário define o bloco de tempo para o sprint de trabalho.
+│  │  ├─ 🖥️ Timer visual regressivo com alertas sonoros discretos.
+│  │  ├─ ⚙️ Gestão de sessões de foco (estilo Pomodoro customizado).
+│  │  ├─ 🤖 Sugestão do tempo ideal baseado na complexidade da tarefa.
+│  │  ├─ 🏦 Persistência de blocos de tempo realizados.
+│  │  ├─ 📄 Relatório de foco por sessão.
+│  │  ├─ ⚠️ Timer ignorado pelo usuário.
+│  │  └─ Próxima etapa: Execução Sequencial ou Seleção Manual.
+│  ├─ 👤 16. Execução Sequencial ou Seleção Manual
+│  │  ├─ 👤 Usuário decide seguir a fila da IA ou pular para outra tarefa.
+│  │  ├─ 🖥️ Interface de fluxo contínuo (Next Up).
+│  │  ├─ ⚙️ Reordenamento dinâmico da fila de execução.
+│  │  ├─ 🤖 Ajuste do plano em tempo real se o usuário mudar a ordem.
+│  │  ├─ 🏦 Atualização da ordem de prioridade no banco.
+│  │  ├─ 📄 N/A.
+│  │  ├─ ⚠️ Quebra da lógica de dependência entre tarefas.
+│  │  └─ Próxima etapa: Scanner Visual e Comandos.
+│  ├─ 👤 17. Scanner Visual e Comandos
+│  │  ├─ 👤 Usuário utiliza voz ou câmera para adicionar novas demandas.
+│  │  ├─ 🖥️ Interface de captura rápida (Quick Capture).
+│  │  ├─ ⚙️ OCR e processamento de linguagem natural (NLP).
+│  │  ├─ 🤖 Extração de intenções e criação automática de tarefas.
+│  │  ├─ 🏦 Entrada de dados não estruturados na caixa de entrada.
+│  │  ├─ 📄 Nota rápida ou tarefa rascunhada.
+│  │  ├─ ⚠️ Falha no reconhecimento de voz ou imagem borrada.
+│  │  └─ Próxima etapa: Conclusão, Desfazer e Atualização.
+│  ├─ 👤 18. Conclusão, Desfazer e Atualização de Estado
+│  │  ├─ 👤 Usuário marca tarefa como feita ou desfaz ação por erro.
+│  │  ├─ 🖥️ Feedback visual de sucesso e botão de Undo temporário.
+│  │  ├─ ⚙️ Atualização de status para Done e trigger de automações.
+│  │  ├─ 🤖 Celebração da conquista e sugestão de breve pausa.
+│  │  ├─ 🏦 Mudança de estado no banco de dados (Status: Completed).
+│  │  ├─ 📄 Registro de conclusão no log de produtividade.
+│  │  ├─ ⚠️ Conclusão acidental de tarefa errada.
+│  │  └─ Próxima etapa: Mapa-OS e Prisma.
+│  ├─ 👤 19. Mapa-OS e Prisma
+│  │  ├─ 👤 Usuário consulta a visão estratégica de longo prazo.
+│  │  ├─ 🖥️ Visualização em rede (Prisma) das conexões entre projetos.
+│  │  ├─ ⚙️ Renderização de grafos de relacionamento de dados.
+│  │  ├─ 🤖 Insights sobre como as tarefas diárias impactam os OKRs.
+│  │  ├─ 🏦 Dados consolidados de performance estratégica.
+│  │  ├─ 📄 Mapa Operacional Estratégico (Mapa-OS).
+│  │  ├─ ⚠️ Complexidade visual excessiva no gráfico Prisma.
+│  │  └─ Próxima etapa: Status Report.
+│  ├─ 👤 20. Status Report
+│  │  ├─ 👤 Usuário recebe resumo do que foi realizado no período.
+│  │  ├─ 🖥️ Tela de relatório com gráficos e destaques.
+│  │  ├─ ⚙️ Agregação de métricas de tempo, tarefas e eficiência.
+│  │  ├─ 🤖 Escrita automática de sumário executivo.
+│  │  ├─ 🏦 Snapshot de performance semanal/diária.
+│  │  ├─ 📄 Status Report Executivo (PDF/Email).
+│  │  ├─ ⚠️ Dados insuficientes para gerar relatório relevante.
+│  │  └─ Próxima etapa: Configuração do Modo Rotina.
+│  ├─ 👤 21. Configuração do Modo Rotina
+│  │  ├─ 👤 Usuário define hábitos e tarefas recorrentes.
+│  │  ├─ 🖥️ Interface de calendário de rotinas e rituais.
+│  │  ├─ ⚙️ Agendamento de eventos cíclicos e lembretes fixos.
+│  │  ├─ 🤖 Identificação de padrões de comportamento para sugerir rotinas.
+│  │  ├─ 🏦 Tabela de recorrências e horários preferenciais.
+│  │  ├─ 📄 Plano de rotina semanal.
+│  │  ├─ ⚠️ Sobreposição de rotinas com compromissos variáveis.
+│  │  └─ Próxima etapa: Notificações e Automações.
+│  ├─ 👤 22. Notificações e Automações
+│  │  ├─ 👤 Usuário recebe alertas e vê ações automáticas ocorrerem.
+│  │  ├─ 🖥️ Central de notificações e editor de regras If-This-Then-That.
+│  │  ├─ ⚙️ Engine de regras e push notification service.
+│  │  ├─ 🤖 Envio de notificações inteligentes (apenas no momento certo).
+│  │  ├─ 🏦 Logs de automações executadas.
+│  │  ├─ 📄 N/A.
+│  │  ├─ ⚠️ Spam de notificações ou falha no trigger da automação.
+│  │  └─ Próxima etapa: Revisão Diária e Semanal.
+│  ├─ 👤 23. Revisão Diária e Semanal
+│  │  ├─ 👤 Usuário reflete sobre o progresso e planeja o próximo ciclo.
+│  │  ├─ 🖥️ Interface de retrospectiva guiada.
+│  │  ├─ ⚙️ Fechamento de ciclos de dados e abertura de novos.
+│  │  ├─ 🤖 Facilitação da revisão com perguntas reflexivas.
+│  │  ├─ 🏦 Histórico de revisões concluídas.
+│  │  ├─ 📄 Plano de ação para a próxima semana.
+│  │  ├─ ⚠️ Usuário pula a etapa de revisão por falta de tempo.
+│  │  └─ Próxima etapa: Configurações, Privacidade e Integrações.
+│  ├─ 👤 24. Configurações, Privacidade e Integrações
+│  │  ├─ 👤 Usuário ajusta detalhes técnicos e gerencia seus dados.
+│  │  ├─ 🖥️ Painel de configurações avançadas e LGPD (Exportar/Excluir).
+│  │  ├─ ⚙️ Gestão de conta, upgrade de plano e chaves de API.
+│  │  ├─ 🤖 N/A nesta etapa.
+│  │  ├─ 🏦 Atualização de metadados da conta.
+│  │  ├─ 📄 Comprovante de alteração de plano ou privacidade.
+│  │  ├─ ⚠️ Erro no processamento de pagamento ou mudança de plano.
+│  │  └─ Próxima etapa: Pausa, Exclusão ou Encerramento.
+│  └─ 👤 25. Pausa, Exclusão ou Encerramento da Conta
+│     ├─ 👤 Usuário decide parar de usar o serviço ou apagar dados.
+│     ├─ 🖥️ Fluxo de cancelamento com pesquisa de churn.
+│     ├─ ⚙️ Soft delete ou Hard delete conforme política de dados.
+│     ├─ 🤖 Tentativa de retenção com oferta personalizada (A DEFINIR).
+│     ├─ 🏦 Remoção de registros ou marcação de inatividade.
+│     ├─ 📄 Confirmação de encerramento de contrato.
+│     ├─ ⚠️ Perda acidental de dados sem backup.
+│     └─ Próxima etapa: Fim do Fluxo.
+├─ 3. CUSTOMER JOURNEY (MAPEAMENTO DE EXPERIÊNCIA)
+│  ├─ 👤 FASE: Onboarding e Scanner
+│  │  ├─ Objetivo: Reduzir o Time-to-Value inicial.
+│  │  ├─ Ação: Conectar contas e aguardar processamento.
+│  │  ├─ Ponto de Contato: App Mobile / Web Dashboard.
+│  │  ├─ Pensamento: "Será que este app vai realmente organizar minha bagunça?".
+│  │  ├─ Emoção: Ansiedade positiva misturada com ceticismo.
+│  │  ├─ Carga Cognitiva: M
+│  │  ├─ Dor: Medo de compartilhar dados privados.
+│  │  ├─ Expectativa: Ver algo organizado em menos de 5 minutos.
+│  │  ├─ Resposta do App: Feedback visual de que a IA está trabalhando.
+│  │  ├─ Oportunidade: Gamificar a conexão de cada nova ferramenta.
+│  │  └─ Indicador de Sucesso: Primeira conexão de calendário concluída.
+│  ├─ 👤 FASE: Execução e Foco
+│  │  ├─ Objetivo: Completar tarefas sem interrupções.
+│  │  ├─ Ação: Iniciar timer e trabalhar na tarefa sugerida.
+│  │  ├─ Ponto de Contato: Interface de Foco / Timer.
+│  │  ├─ Pensamento: "Finalmente sei exatamente o que fazer agora".
+│  │  ├─ Emoção: Foco, determinação e alívio.
+│  │  ├─ Carga Cognitiva: Baixa (a decisão já foi tomada pela IA).
+│  │  ├─ Dor: Interrupções externas e notificações de outros apps.
+│  │  ├─ Expectativa: Silêncio digital e suporte da IA.
+│  │  ├─ Resposta do App: Bloqueio de distrações e cronômetro visível.
+│  │  ├─ Oportunidade: Sugerir músicas ou sons ambientais de foco.
+│  │  └─ Indicador de Sucesso: Conclusão de um bloco de 30 minutos sem pausas.
+│  └─ 👤 FASE: Revisão e Estratégia
+│     ├─ Objetivo: Entender o progresso e ajustar a rota.
+│     ├─ Ação: Analisar o Status Report e o Mapa-OS.
+│     ├─ Ponto de Contato: Dashboard Executivo.
+│     ├─ Pensamento: "Estou sendo produtivo ou apenas ocupado?".
+│     ├─ Emoção: Satisfação ou senso de urgência para correção.
+│     ├─ Carga Cognitiva: Alta (exige análise e reflexão).
+│     ├─ Dor: Ver que metas importantes foram negligenciadas.
+│     ├─ Expectativa: Insights claros que não demandem muito esforço analítico.
+│     ├─ Resposta do App: Gráficos simplificados e sumários em texto.
+│     ├─ Oportunidade: Oferecer coaching baseado em IA para melhoria de performance.
+│     └─ Indicador de Sucesso: Abertura do Status Report semanal.
+├─ 4. AGENTE COPILOTO E AUTOMAÇÕES
+│  ├─ 🤖 Sequência Lógica do Agente
+│  │  ├─ 🤖 ONBOARDING: Coleta de perfil e definição de tom de voz.
+│  │  ├─ 🤖 SCANNER: Extração de entidades e datas de fontes externas.
+│  │  ├─ 🤖 PRODUCTIVITY (Prioridade): Aplicação de matriz de decisão sobre o backlog.
+│  │  ├─ 🤖 OPERATIONS (Execução): Distribuição das tarefas na agenda real do usuário.
+│  │  ├─ 🤖 PRIMEIRO ENTREGÁVEL: Geração do plano inicial via template oficial.
+│  │  ├─ 🤖 MODO ROTINA: Manutenção de hábitos e rituais diários.
+│  │  └─ 🤖 OPERAÇÃO CONTÍNUA: Ajustes dinâmicos baseados em imprevistos.
+│  ├─ 🤖 Inteligência de Productivity
+│  │  ├─ ⚙️ Análise de urgência vs. importância (Eisenhower adaptado).
+│  │  ├─ ⚙️ Cálculo de Energy Score (A DEFINIR): Estimativa de esforço mental necessário.
+│  │  └─ 🤖 Sugestão de "Quick Wins" para momentos de baixa energia.
+│  └─ 🤖 Inteligência de Operations
+│     ├─ ⚙️ Agrupamento por contexto (Batching) para evitar troca de contexto.
+│     ├─ ⚙️ Verificação de conflitos de agenda em tempo real via Ciano Conectores.
+│     └─ 🤖 Replanejamento automático após detecção de tarefa atrasada.
+└─ 5. ENTREGÁVEIS, CONTRATOS E GOVERNANÇA
+   ├─ 📄 Entregáveis do Sistema
+   │  ├─ 📄 Template Oficial de Planejamento Consolidado (Verde).
+   │  ├─ 📄 Mapa Operacional Estratégico (Mapa-OS) (Verde).
+   │  ├─ 📄 Status Report Executivo (Verde).
+   │  └─ 📄 Log de Auditoria de Dados (Verde).
+   ├─ ⚠️ Governança e Riscos
+   │  ├─ ⚠️ Risco: Vazamento de tokens de integração (Reduzir via Cofre Ciano).
+   │  ├─ ⚠️ Risco: Alucinação da IA em prazos críticos (Mitigar via Confirmação Amarela).
+   │  └─ 🔶 Decisão Humana: Aprovação final de cronogramas de alta prioridade.
+   └─ 📄 Contratos e Requisitos
+      ├─ 📄 Contrato de Licenciamento de Software (SaaS).
+      ├─ 📄 Acordo de Processamento de Dados (DPA/LGPD).
+      ├─ 📄 SLA de Disponibilidade de APIs (A DEFINIR).
+      ├─ ⚙️ Requisito de Implementação: Criptografia ponta-a-ponta em notas (A DEFINIR).
+      └─ ⚙️ Requisito de Implementação: Suporte a conectores customizados via MCP (A DEFINIR).

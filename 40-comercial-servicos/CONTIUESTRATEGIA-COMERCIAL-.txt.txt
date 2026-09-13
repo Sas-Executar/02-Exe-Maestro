@@ -1,0 +1,41 @@
+---
+id: DOC-CLX-014
+folder_id: FS-COM-001
+tipo: documento-importado
+status: confirmado
+origem: export-claude-20260913
+origem_filename: "CONTIUESTRATEGIA COMERCIAL .txt.txt"
+sha256: b4ac3d37a71160a32a294b3559fc7401cafc49df1d793002efdd585d6763f051
+projeto: ECOSSISTEMA_15-08_FILESYSTEM
+---
+
+Criei o pacote completo de governança e produção audiovisual para o Claude Design:
+Baixar EXECUTAR_GTM_VIDEO_CLAUDE_DESIGN.zip⁠
+Conteúdo principal:
+
+* Master Index e ordem de leitura.
+* Resumo comercial e primeiro slide obrigatório.
+* ADR do sistema criativo Split View.
+* ADR da arquitetura de UI e assets.
+* PRD da campanha audiovisual.
+* Especificação dos filmes:
+   * Split View — 30s;
+   * Manifesto — 60s;
+   * Demo de Produto — 45s;
+   * cutdowns — 6s e 15s.
+* Catálogo de vídeos, stills, thumbnails, hero loops e packshots.
+* Handoff operacional para Claude Design.
+* Prompt pronto para iniciar em modo Plan.
+* Governança de claims, QA e aprovações.
+* Fontes originais de GTM, UIX, tokens e componentes.
+
+A arquitetura de UI foi definida com estas fronteiras:
+
+* packages/design-system: autoridade visual canônica existente.
+* apps/storybook: documentação e validação dos componentes.
+* packages/brand-assets: proposta para logos, SVGs e lockups.
+* packages/marketing-ui: proposta para composições comerciais.
+* packages/motion-system: proposta para motion tokens e animações.
+* packages/video-compositions: proposta para cenas, formatos e manifests.
+
+Os packages novos estão corretamente marcados como propostas dependentes da inspeção do Turborepo. O handoff proíbe criar uma segunda identidade visual e determina que app, web, e-mail, mobile e vídeos consumam o mesmo Design System.

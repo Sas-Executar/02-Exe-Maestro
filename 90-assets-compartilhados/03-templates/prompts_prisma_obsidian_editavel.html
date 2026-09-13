@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Prompts Editáveis · Prisma + Obsidian</title>
+<style>
+  :root{
+    --bg:#f3f3f3;
+    --paper:#ffffff;
+    --ink:#0b0b0b;
+    --muted:#747474;
+    --line:#dddddd;
+    --chip:#f0f0f0;
+    --shadow:0 16px 48px rgba(0,0,0,.08);
+    --radius:28px;
+    --maxw:920px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+  body{padding:24px}
+  .toolbar{
+    position:sticky;top:12px;z-index:20;
+    display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+    margin-bottom:22px;
+  }
+  .toolbar button{
+    border:1px solid #d5d5d5;background:#fff;color:#111;
+    border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,.06)
+  }
+  .toolbar button:hover{background:#f7f7f7}
+  .workspace{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:26px;
+    max-width:1900px;
+    margin:0 auto;
+    align-items:start;
+  }
+  .page{
+    width:100%;
+    max-width:var(--maxw);
+    margin:0 auto;
+    background:var(--paper);
+    border:1px solid #e7e7e7;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:56px 58px 54px;
+    position:relative;
+    min-height:1180px;
+  }
+  .chip{
+    display:inline-flex;align-items:center;
+    background:var(--chip);
+    border-radius:999px;
+    padding:10px 20px;
+    font-size:18px;
+    letter-spacing:.24em;
+    font-weight:700;
+    margin-bottom:34px;
+  }
+  h1{
+    margin:0;
+    font-size:clamp(48px,6vw,76px);
+    line-height:.98;
+    letter-spacing:-.045em;
+    font-weight:800;
+  }
+  .subtitle{
+    margin:18px 0 40px;
+    color:var(--muted);
+    font-size:clamp(28px,3vw,40px);
+    line-height:1.1;
+    font-weight:500;
+  }
+  .row{
+    display:grid;
+    grid-template-columns:170px 1fr;
+    gap:26px;
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .row:last-of-type{border-bottom:0}
+  .label{
+    font-size:22px;
+    line-height:1.35;
+    font-weight:800;
+    letter-spacing:-.02em;
+  }
+  .value{
+    font-size:22px;
+    line-height:1.42;
+    letter-spacing:-.018em;
+  }
+  .counter{
+    position:absolute;
+    right:42px;
+    bottom:34px;
+    background:#1d1d1d;
+    color:#fff;
+    border-radius:18px;
+    padding:11px 16px;
+    font-size:20px;
+    font-weight:700;
+  }
+  [contenteditable="true"]{
+    outline:none;
+    border-radius:8px;
+    transition:background .15s ease, box-shadow .15s ease;
+  }
+  body.editing [contenteditable="true"]:hover,
+  body.editing [contenteditable="true"]:focus{
+    background:#fff7bf;
+    box-shadow:0 0 0 4px #fff7bf;
+  }
+  .hint{
+    text-align:center;
+    color:#777;
+    font-size:13px;
+    margin:10px 0 0;
+  }
+  @media (max-width:1200px){
+    .workspace{grid-template-columns:1fr}
+  }
+  @media (max-width:760px){
+    body{padding:10px}
+    .page{padding:34px 26px 48px;min-height:auto;border-radius:20px}
+    .row{grid-template-columns:1fr;gap:8px;padding:18px 0}
+    .label{font-size:18px}
+    .value{font-size:19px}
+    .chip{font-size:14px}
+    .subtitle{margin-bottom:24px}
+    .counter{right:24px;bottom:22px}
+  }
+  @page{size:A4 portrait;margin:10mm}
+  @media print{
+    body{background:#fff;padding:0}
+    .toolbar,.hint{display:none!important}
+    .workspace{display:block;max-width:none}
+    .page{
+      box-shadow:none;border:1px solid #ddd;border-radius:18px;
+      max-width:none;width:100%;min-height:277mm;
+      page-break-after:always;
+      break-after:page;
+      margin:0;
+    }
+    .page:last-child{page-break-after:auto}
+    body.editing [contenteditable="true"]{background:transparent!important;box-shadow:none!important}
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <button id="toggleEdit" type="button">Editar conteúdo</button>
+    <button id="saveBtn" type="button">Salvar no navegador</button>
+    <button id="resetBtn" type="button">Restaurar padrão</button>
+    <button type="button" onclick="window.print()">Imprimir / PDF</button>
+  </div>
+
+  <main class="workspace">
+    <section class="page" data-page="prisma">
+      <div class="chip" contenteditable="true">PRISMA</div>
+      <h1 contenteditable="true">Prompt · Prisma</h1>
+      <div class="subtitle" contenteditable="true">Calendário com QR Codes</div>
+
+      <div class="row">
+        <div class="label" contenteditable="true">ROLE</div>
+        <div class="value" contenteditable="true">Atue como gerador de Calendário Prisma com QR Codes para impressão A4.</div>
+      </div>
+
+      <div class="row">
+        <div class="label" contenteditable="true">INPUT</div>
+        <div class="value" contenteditable="true">Receba datas, tarefas ou eventos, títulos curtos, URLs e, opcionalmente, categoria, prioridade e observações.</div>
+      </div>
+
+      <div class="row">
+        <div class="label" contenteditable="true">PROCESS</div>
+        <div class="value" contenteditable="true">Converta cada URL em QR Code; associe ao item; organize cronologicamente; estruture A1 AGORA, A2 PROCESSO e A3 REFERÊNCIAS; aplique layout Prisma A4.</div>
+      </div>
+
+      <div class="row">
+        <div class="label" contenteditable="true">RULES</div>
+        <div class="value" contenteditable="true">Preserve somente os dados fornecidos; não invente; mantenha alto contraste, baixa carga cognitiva, hierarquia clara e margens seguras; oculte URLs longas quando o QR bastar.</div>
+      </div>
+
+      <div class="row">
+        <div class="label" contenteditable="true">OUTPUT</div>
+        <div class="value" contenteditable="true">Gere HTML autocontido, responsivo e pronto para impressão ou PDF, com calendário, QR Codes incorporados, títulos, legendas e botão “Imprimir / Exportar PDF”.</div>
+      </div>
+
+      <div class="row">
+        <div class="label" contenteditable="true">VALIDATE</div>
+        <div class="value" contenteditable="true">Verifique se cada QR Code funciona e corresponde exatamente à URL correta.</div>
+      </div>
+
+      <div class="counter">1/2</div>
+    </section>
+
+    <section class="page" data-page="obsidian">
+      <div class="chip" contenteditable="true">OBSIDIAN</div>
+      <h1 contenteditable="true">Prompt · Obsidian</h1>
+      <div class="subtitle" contenteditable="true">Conversor Custo Cognitivo</div>
+
+      <div class="row">
+        <div class="label" contenteditable="true">ROLE</div>
+        <div class="value" contenteditable="true">Atue como especialista em conversão de relatórios para HTML navegável no padrão Custo Cognitivo, inspirado nos callouts do Obsidian.</div>
+      </div>
+
+      <div class="row">
+        <div class="label" contenteditable="true">INPUT</div>
+        <div class="value" contenteditable="true">Receba PDF, DOCX, TXT, Markdown ou texto colado.</div>
+      </div>
+
+      <div class="row">
+        <div class="label" contenteditable="true">PROCESS</div>
+        <div class="value" contenteditable="true">Converta o conteúdo em HTML autocontido; preserve significado, estrutura, hierarquia e dados; crie índice clicável, busca e callouts quando semanticamente adequados; use blocos expansíveis e links ativos quando fizer sentido.</div>
+      </div>
+
+      <div class="row">
+        <div class="label" contenteditable="true">RULES</div>
+        <div class="value" contenteditable="true">Não invente informações; mantenha linguagem clara, objetiva, profissional e didática; evite excesso visual e callouts desnecessários.</div>
+      </div>
+
+      <div class="row">
+        <div class="label" contenteditable="true">OUTPUT</div>
+        <div class="value" contenteditable="true">Entregue HTML pronto para navegar, ler, imprimir, salvar em PDF e copiar Markdown para Obsidian.</div>
+      </div>
+
+      <div class="row">
+        <div class="label" contenteditable="true">VALIDATE</div>
+        <div class="value" contenteditable="true">Confirme fidelidade ao conteúdo original, funcionamento da navegação e utilidade dos recursos.</div>
+      </div>
+
+      <div class="counter">2/2</div>
+    </section>
+  </main>
+
+  <div class="hint">Clique em “Editar conteúdo” para alterar qualquer texto. As alterações podem ser salvas localmente no navegador.</div>
+
+<script>
+(() => {
+  const storageKey = "prompts_prisma_obsidian_editavel_v1";
+  const editable = [...document.querySelectorAll('[contenteditable="true"]')];
+  const toggleBtn = document.getElementById('toggleEdit');
+  const saveBtn = document.getElementById('saveBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  const original = editable.map(el => el.innerHTML);
+  let editing = false;
+
+  function setEditing(on){
+    editing = on;
+    document.body.classList.toggle('editing', on);
+    editable.forEach(el => el.setAttribute('contenteditable', on ? 'true' : 'false'));
+    toggleBtn.textContent = on ? 'Concluir edição' : 'Editar conteúdo';
+  }
+
+  toggleBtn.addEventListener('click', () => setEditing(!editing));
+
+  saveBtn.addEventListener('click', () => {
+    const data = editable.map(el => el.innerHTML);
+    localStorage.setItem(storageKey, JSON.stringify(data));
+    saveBtn.textContent = 'Salvo';
+    setTimeout(() => saveBtn.textContent = 'Salvar no navegador', 1200);
+  });
+
+  resetBtn.addEventListener('click', () => {
+    editable.forEach((el, i) => el.innerHTML = original[i]);
+    localStorage.removeItem(storageKey);
+  });
+
+  const saved = localStorage.getItem(storageKey);
+  if(saved){
+    try{
+      const data = JSON.parse(saved);
+      if(Array.isArray(data) && data.length === editable.length){
+        editable.forEach((el, i) => el.innerHTML = data[i]);
+      }
+    }catch(e){}
+  }
+
+  setEditing(false);
+})();
+</script>
+</body>
+</html>
