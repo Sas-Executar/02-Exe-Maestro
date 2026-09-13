@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>EXECUTAR · Prisma operacional A4</title>
+<style>
+  :root{
+    color-scheme: light;
+    --background:#fafafa;
+    --paper:#ffffff;
+    --foreground:#1d1d1f;
+    --gray-50:#fafafa;
+    --gray-100:#f2f2f2;
+    --gray-200:#eaeaea;
+    --gray-300:#d8d8d8;
+    --gray-500:#8f8f8f;
+    --gray-600:#666666;
+    --gray-700:#444444;
+    --gray-900:#1d1d1f;
+    --blue:#0070f3;
+    --blue-bg:#eef6ff;
+    --green:#0a8f57;
+    --green-bg:#e9f7ef;
+    --amber:#a96800;
+    --amber-bg:#fff5d6;
+    --red:#c62828;
+    --red-bg:#fff0f0;
+    --radius:6px;
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+    --focus:0 0 0 2px #fff, 0 0 0 4px var(--blue);
+  }
+
+  *{box-sizing:border-box}
+  html{background:var(--background)}
+  body{
+    margin:0;
+    padding:28px;
+    background:
+      radial-gradient(circle at 50% -15%,rgba(0,0,0,.035),transparent 38%),
+      var(--background);
+    color:var(--foreground);
+    font-family:Geist,"Geist Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  button,[contenteditable="true"]{touch-action:manipulation}
+  button:focus-visible,[contenteditable="true"]:focus-visible{
+    outline:none;
+    box-shadow:var(--focus);
+  }
+
+  .editorbar{
+    position:sticky;
+    top:12px;
+    z-index:50;
+    width:min(210mm,calc(100vw - 32px));
+    min-height:52px;
+    margin:0 auto 16px;
+    display:flex;
+    gap:8px;
+    align-items:center;
+    flex-wrap:wrap;
+    padding:8px;
+    background:rgba(255,255,255,.96);
+    border:1px solid var(--gray-200);
+    border-radius:10px;
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+    backdrop-filter:saturate(180%) blur(16px);
+  }
+  .editorbar strong{
+    font-size:12px;
+    line-height:1;
+    letter-spacing:-.01em;
+    margin:0 auto 0 4px;
+    white-space:nowrap;
+  }
+  .editorbar button{
+    appearance:none;
+    min-height:36px;
+    border:1px solid var(--gray-200);
+    background:#fff;
+    color:var(--foreground);
+    padding:0 12px;
+    font:600 12px/1 Geist,"Geist Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    cursor:pointer;
+    border-radius:6px;
+  }
+  .editorbar button:hover{background:var(--gray-100);border-color:var(--gray-300)}
+  .editorbar button:nth-of-type(3){background:#000;color:#fff;border-color:#000}
+  .editorbar .state{
+    min-height:28px;
+    display:inline-flex;
+    align-items:center;
+    padding:0 9px;
+    border-radius:999px;
+    background:var(--gray-100);
+    color:var(--gray-600);
+    font-size:10px;
+    font-weight:600;
+    white-space:nowrap;
+  }
+
+  .a4{
+    width:210mm;
+    min-height:297mm;
+    margin:0 auto;
+    background:var(--paper);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    position:relative;
+    border:1px solid var(--gray-200);
+  }
+
+  .grid-bg{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      linear-gradient(to right,rgba(0,0,0,.022) 1px,transparent 1px),
+      linear-gradient(to bottom,rgba(0,0,0,.022) 1px,transparent 1px);
+    background-size:18px 18px;
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.12));
+  }
+
+  .page{
+    position:relative;
+    z-index:1;
+    padding:7mm 7mm 8mm;
+  }
+
+  .workspace-top{
+    min-height:14mm;
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:center;
+    padding:0 0 4mm;
+    border-bottom:1px solid var(--gray-200);
+  }
+  .eyebrow{
+    font-size:6.2pt;
+    font-weight:600;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--gray-600);
+  }
+  .workspace-name{
+    font-size:8.2pt;
+    font-weight:600;
+    letter-spacing:-.01em;
+    margin-top:1.1mm;
+  }
+  .sync{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    min-height:24px;
+    padding:0 8px;
+    border:1px solid var(--gray-200);
+    border-radius:999px;
+    background:rgba(255,255,255,.82);
+    font-size:6pt;
+    color:var(--gray-600);
+    white-space:nowrap;
+  }
+  .dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--green);
+    display:inline-block;
+    flex:none;
+  }
+
+  .hero{
+    padding:8mm 0 6mm;
+    border-bottom:1px solid var(--gray-200);
+  }
+  .hero-row{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:8mm;
+    align-items:end;
+  }
+  h1{
+    font-size:25pt;
+    line-height:1;
+    margin:2.6mm 0 3mm;
+    letter-spacing:-.055em;
+    font-weight:700;
+  }
+  .subtitle{
+    font-size:7pt;
+    line-height:1.5;
+    color:var(--gray-600);
+    max-width:130mm;
+  }
+  .new-project{
+    min-height:34px;
+    align-self:end;
+    border:1px solid #000;
+    background:#000;
+    color:#fff;
+    padding:0 14px;
+    border-radius:6px;
+    font-size:6.8pt;
+    font-weight:600;
+    letter-spacing:-.005em;
+  }
+
+  .stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border:1px solid var(--gray-200);
+    border-radius:8px;
+    overflow:hidden;
+    margin-top:6mm;
+    background:rgba(255,255,255,.9);
+  }
+  .stat{
+    min-height:22mm;
+    padding:4.5mm;
+    border-right:1px solid var(--gray-200);
+    border-bottom:1px solid var(--gray-200);
+  }
+  .stat:nth-child(2n){border-right:0}
+  .stat:nth-child(n+3){border-bottom:0}
+  .stat-top{display:flex;justify-content:space-between;gap:8px}
+  .stat-label{
+    font-size:5.8pt;
+    font-weight:600;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gray-600);
+  }
+  .stat-icon{font-size:8pt;color:var(--gray-500)}
+  .stat-value{
+    font-size:17pt;
+    font-weight:650;
+    letter-spacing:-.045em;
+    line-height:1;
+    margin-top:3.7mm;
+    font-variant-numeric:tabular-nums;
+  }
+  .stat-note{font-size:6pt;color:var(--gray-600);margin-top:1.2mm}
+
+  .epics{
+    display:flex;
+    flex-direction:column;
+    gap:4mm;
+    margin-top:5mm;
+  }
+  .epic{
+    border:1px solid var(--gray-200);
+    border-radius:8px;
+    background:rgba(255,255,255,.94);
+    overflow:hidden;
+    break-inside:avoid;
+  }
+  .epic-head{
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr) 35mm;
+    gap:4mm;
+    align-items:center;
+    min-height:16mm;
+    padding:3.7mm 4mm;
+    border-bottom:1px solid var(--gray-200);
+  }
+  .num{
+    width:8.5mm;
+    height:8.5mm;
+    border:1px solid var(--gray-300);
+    border-radius:5px;
+    background:var(--gray-50);
+    display:grid;
+    place-items:center;
+    font-size:5.8pt;
+    font-weight:650;
+    font-variant-numeric:tabular-nums;
+  }
+  .epic-meta{
+    font-size:5.5pt;
+    font-weight:500;
+    letter-spacing:.12em;
+    color:var(--gray-500);
+    text-transform:uppercase;
+  }
+  .epic-title{
+    font-size:9pt;
+    font-weight:650;
+    margin-top:1.1mm;
+    letter-spacing:-.02em;
+  }
+  .progress-wrap{
+    font-size:5.5pt;
+    color:var(--gray-600);
+    font-variant-numeric:tabular-nums;
+  }
+  .progress-line{display:flex;justify-content:space-between;margin-bottom:1.8mm}
+  .progress-line b{font-size:6pt;color:var(--foreground)}
+  .track{
+    height:1.5mm;
+    background:var(--gray-200);
+    border-radius:999px;
+    overflow:hidden;
+  }
+  .fill{height:100%;background:#000;border-radius:999px;width:0}
+  .p100{width:100%}
+  .p33{width:33%}
+  .p0{width:0}
+
+  .epic-body{
+    display:grid;
+    grid-template-columns:42% 58%;
+    gap:0;
+    padding:4.5mm 4mm 4mm;
+  }
+  .deliverable{
+    padding-right:5mm;
+    border-right:1px solid var(--gray-200);
+  }
+  .deliverable-badge{
+    display:inline-flex;
+    align-items:center;
+    min-height:20px;
+    border:1px solid var(--gray-200);
+    border-radius:999px;
+    padding:0 7px;
+    background:var(--gray-50);
+    font-size:5.2pt;
+    font-weight:600;
+    letter-spacing:.08em;
+    color:var(--gray-600);
+    text-transform:uppercase;
+  }
+  .deliverable-id{
+    font-size:5.4pt;
+    color:var(--gray-500);
+    margin-left:1.8mm;
+    font-variant-numeric:tabular-nums;
+  }
+  .deliverable-title{
+    font-size:8.2pt;
+    font-weight:650;
+    line-height:1.35;
+    letter-spacing:-.012em;
+    margin:3mm 0 2.1mm;
+  }
+  .deliverable-desc{
+    font-size:6.2pt;
+    line-height:1.5;
+    color:var(--gray-600);
+  }
+  .microblock{
+    margin-top:3mm;
+    padding:2.2mm 2.4mm;
+    border-radius:8px;
+    background:var(--gray-50);
+    border:1px solid var(--gray-200);
+  }
+  .microblock .mini{
+    font-size:5.2pt;
+    font-weight:600;
+    letter-spacing:.11em;
+    text-transform:uppercase;
+    color:var(--gray-500);
+  }
+  .microblock .text{
+    margin-top:1.3mm;
+    font-size:6.1pt;
+    line-height:1.35;
+    color:var(--gray-700);
+  }
+
+  .tasks{padding-left:5mm}
+  .tasks-label{
+    font-size:5.3pt;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--gray-500);
+    margin-bottom:2.4mm;
+  }
+  .task{
+    min-height:8.5mm;
+    border:1px solid var(--gray-200);
+    border-radius:6px;
+    background:#fff;
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr) auto;
+    gap:2.4mm;
+    align-items:center;
+    padding:2mm 2.4mm;
+    margin-bottom:2mm;
+  }
+  .task:last-child{margin-bottom:0}
+  .circle{
+    width:3.3mm;
+    height:3.3mm;
+    border:1px solid var(--gray-500);
+    border-radius:50%;
+    position:relative;
+  }
+  .task.done{background:#fbfffc}
+  .task.done .circle{
+    border-color:var(--green);
+    background:var(--green-bg);
+  }
+  .task.done .circle:after{
+    content:"✓";
+    position:absolute;
+    inset:-1.3mm 0 0 .15mm;
+    color:var(--green);
+    font-size:5.8pt;
+  }
+  .task-text{
+    font-size:6.35pt;
+    line-height:1.28;
+    min-width:0;
+  }
+  .task.done .task-text{
+    text-decoration:line-through;
+    text-decoration-thickness:1px;
+    color:var(--gray-600);
+  }
+  .status{
+    display:inline-flex;
+    align-items:center;
+    min-height:19px;
+    border:1px solid var(--gray-200);
+    border-radius:999px;
+    padding:0 7px;
+    white-space:nowrap;
+    background:var(--gray-50);
+    font-size:4.9pt;
+    font-weight:600;
+    letter-spacing:.06em;
+    color:var(--gray-600);
+  }
+  .status.today{background:var(--blue-bg);border-color:#cfe5ff;color:var(--blue)}
+  .status.warn{background:var(--amber-bg);border-color:#f1dda0;color:var(--amber)}
+  .status.late{background:var(--red-bg);border-color:#efc9c9;color:var(--red)}
+  .status.done{
+    border-color:#b9e2ca;
+    background:var(--green-bg);
+    color:var(--green);
+  }
+
+  .footer-note{
+    margin-top:5mm;
+    padding:3mm 3.4mm;
+    border:1px solid var(--gray-200);
+    border-radius:8px;
+    background:rgba(255,255,255,.92);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:4mm;
+  }
+  .footer-note .box-title{
+    font-size:5.4pt;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--gray-500);
+  }
+  .footer-note .box-text{
+    margin-top:1mm;
+    font-size:6.1pt;
+    line-height:1.4;
+    color:var(--gray-700);
+  }
+
+  [contenteditable="true"]{border-radius:2px;min-width:1ch}
+  body.editing [contenteditable="true"]:hover{background:rgba(0,112,243,.045)}
+  body.editing [contenteditable="true"]:focus{background:rgba(0,112,243,.06)}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+      scroll-behavior:auto!important;
+      transition:none!important;
+      animation:none!important;
+    }
+  }
+
+  @media (max-width:900px){
+    body{
+      padding:
+        max(8px,env(safe-area-inset-top))
+        max(8px,env(safe-area-inset-right))
+        max(8px,env(safe-area-inset-bottom))
+        max(8px,env(safe-area-inset-left));
+    }
+    .editorbar{
+      top:max(6px,env(safe-area-inset-top));
+      width:calc(100vw - 16px);
+      margin-bottom:8px;
+    }
+    .editorbar strong{width:100%;margin:4px 4px 2px}
+    .editorbar .state{margin-right:auto}
+    .editorbar button{min-height:44px}
+    .a4{transform-origin:top left}
+  }
+
+  @page{size:A4 portrait;margin:0}
+  @media print{
+    html,body{background:#fff;padding:0}
+    .editorbar{display:none!important}
+    .a4{
+      box-shadow:none;
+      border:0;
+      margin:0;
+      width:210mm;
+      min-height:297mm;
+    }
+    body.editing [contenteditable="true"]{background:transparent}
+  }
+</style>
+</head>
+<body>
+<div class="editorbar" aria-label="Controles de edição">
+  <strong>EXECUTAR · A4 editável</strong>
+  <span class="state" id="editState">Edição ativa</span>
+  <button id="toggleEdit" type="button">Bloquear edição</button>
+  <button id="saveHtml" type="button">Salvar HTML</button>
+  <button type="button" onclick="window.print()">Imprimir / PDF</button>
+  <button id="resetDoc" type="button">Restaurar</button>
+</div>
+
+<main class="a4" id="document" aria-label="Documento A4 editável">
+  <div class="grid-bg"></div>
+  <section class="page">
+    <header class="workspace-top">
+      <div>
+        <div class="eyebrow" contenteditable="true">PRISMA OPERACIONAL</div>
+        <div class="workspace-name" contenteditable="true">Lançamento EXECUTAR · 28/08/2026</div>
+      </div>
+      <div class="sync"><span class="dot"></span><span contenteditable="true">Painel sincronizado</span></div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-row">
+        <div>
+          <div class="eyebrow" contenteditable="true">CENTRO DE COMANDO</div>
+          <h1 contenteditable="true">Agora, próximo e depois.</h1>
+          <div class="subtitle" contenteditable="true">
+            A folha mantém a estrutura do prisma e organiza o sprint por horizonte de ação, para que você saiba o que fechar agora, o que vem na sequência e o que entra depois.
+          </div>
+        </div>
+        <button class="new-project" type="button" contenteditable="true">Pergunta: a prova existe?</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-top"><span class="stat-label" contenteditable="true">HORIZONTES</span><span class="stat-icon">◫</span></div>
+          <div class="stat-value" contenteditable="true">3</div>
+          <div class="stat-note" contenteditable="true">agora · próximo · depois</div>
+        </div>
+        <div class="stat">
+          <div class="stat-top"><span class="stat-label" contenteditable="true">ENTREGAS ATIVAS</span><span class="stat-icon">⌘</span></div>
+          <div class="stat-value" contenteditable="true">9</div>
+          <div class="stat-note" contenteditable="true">itens em foco operacional</div>
+        </div>
+        <div class="stat">
+          <div class="stat-top"><span class="stat-label" contenteditable="true">EM ATRASO</span><span class="stat-icon">△</span></div>
+          <div class="stat-value" contenteditable="true">8</div>
+          <div class="stat-note" contenteditable="true">pedem nova previsão</div>
+        </div>
+        <div class="stat">
+          <div class="stat-top"><span class="stat-label" contenteditable="true">LANÇAMENTO</span><span class="stat-icon">✓</span></div>
+          <div class="stat-value" contenteditable="true">07/09</div>
+          <div class="stat-note" contenteditable="true">preparação final em 05/09</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="epics">
+      <article class="epic">
+        <div class="epic-head">
+          <div class="num" contenteditable="true">01</div>
+          <div>
+            <div class="epic-meta" contenteditable="true">HORIZONTE · AGORA</div>
+            <div class="epic-title" contenteditable="true">Fechar o que tem prazo hoje e sustenta o caminho técnico</div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-line"><span contenteditable="true">Foco</span><b contenteditable="true">28/08</b></div>
+            <div class="track"><div class="fill p33"></div></div>
+          </div>
+        </div>
+        <div class="epic-body">
+          <div class="deliverable">
+            <div><span class="deliverable-badge" contenteditable="true">RESULTADO</span><span class="deliverable-id" contenteditable="true">AGORA-01</span></div>
+            <div class="deliverable-title" contenteditable="true">Base técnica validada e três vídeos principais concluídos.</div>
+            <div class="deliverable-desc" contenteditable="true">Primeiro fechar o que vence hoje · Depois preservar evidência · Só então mover o foco para o conteúdo da sequência.</div>
+            <div class="microblock">
+              <div class="mini" contenteditable="true">ATENÇÃO</div>
+              <div class="text" contenteditable="true">APP-01, APP-02 e APP-03 estão vencidos e continuam compondo a cadeia técnica crítica que desemboca em APP-04 e APP-05.</div>
+            </div>
+          </div>
+          <div class="tasks">
+            <div class="tasks-label" contenteditable="true">3 ENTREGAS DE HOJE</div>
+            <div class="task"><span class="circle"></span><span class="task-text" contenteditable="true">APP-04 · Validar a integração final das partes A e B do pacote técnico.</span><span class="status today" contenteditable="true">HOJE</span></div>
+            <div class="task"><span class="circle"></span><span class="task-text" contenteditable="true">APP-05 · Executar a verificação pública e multiusuário sem bloqueio crítico.</span><span class="status today" contenteditable="true">HOJE</span></div>
+            <div class="task"><span class="circle"></span><span class="task-text" contenteditable="true">SHOW-02 · Fechar os três vídeos de demonstração principais.</span><span class="status today" contenteditable="true">HOJE</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="epic">
+        <div class="epic-head">
+          <div class="num" contenteditable="true">02</div>
+          <div>
+            <div class="epic-meta" contenteditable="true">HORIZONTE · PRÓXIMO</div>
+            <div class="epic-title" contenteditable="true">Transformar conteúdo e mostruário em objetos completos até 31/08</div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-line"><span contenteditable="true">Foco</span><b contenteditable="true">29–31/08</b></div>
+            <div class="track"><div class="fill p0"></div></div>
+          </div>
+        </div>
+        <div class="epic-body">
+          <div class="deliverable">
+            <div><span class="deliverable-badge" contenteditable="true">RESULTADO</span><span class="deliverable-id" contenteditable="true">PROX-01</span></div>
+            <div class="deliverable-title" contenteditable="true">Peças canônicas, proposta do Studio e comparativos concluídos e utilizáveis.</div>
+            <div class="deliverable-desc" contenteditable="true">Fechar peças-mãe · Consolidar proposta e mostruário · Tornar a prova comparativa clara antes da fase de disponibilização pública.</div>
+            <div class="microblock">
+              <div class="mini" contenteditable="true">REGRA</div>
+              <div class="text" contenteditable="true">Texto isolado não encerra o trabalho: cada item só avança quando o objeto final existir e puder ser usado como prova.</div>
+            </div>
+          </div>
+          <div class="tasks">
+            <div class="tasks-label" contenteditable="true">3 ENTREGAS EM SEQUÊNCIA</div>
+            <div class="task"><span class="circle"></span><span class="task-text" contenteditable="true">BLOG-02 · Concluir os três artigos canônicos.</span><span class="status warn" contenteditable="true">31/08</span></div>
+            <div class="task"><span class="circle"></span><span class="task-text" contenteditable="true">CONS-03 · Fechar a proposta e o mostruário do Studio.</span><span class="status warn" contenteditable="true">31/08</span></div>
+            <div class="task"><span class="circle"></span><span class="task-text" contenteditable="true">SHOW-03 · Finalizar os comparativos previstos.</span><span class="status warn" contenteditable="true">31/08</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="epic">
+        <div class="epic-head">
+          <div class="num" contenteditable="true">03</div>
+          <div>
+            <div class="epic-meta" contenteditable="true">HORIZONTE · DEPOIS</div>
+            <div class="epic-title" contenteditable="true">Disponibilizar, medir, publicar e preparar o lançamento entre 01/09 e 07/09</div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-line"><span contenteditable="true">Foco</span><b contenteditable="true">01–07/09</b></div>
+            <div class="track"><div class="fill p0"></div></div>
+          </div>
+        </div>
+        <div class="epic-body">
+          <div class="deliverable">
+            <div><span class="deliverable-badge" contenteditable="true">RESULTADO</span><span class="deliverable-id" contenteditable="true">DEPOIS-01</span></div>
+            <div class="deliverable-title" contenteditable="true">Ofertas disponíveis, medição funcionando, publicação concluída e lançamento operado sem trabalho de última hora.</div>
+            <div class="deliverable-desc" contenteditable="true">01/09 materializar ofertas · 02/09 fechar fluxo e medição · 03/09 disponibilizar ao público · 05/09 preparação final · 07/09 operar o lançamento.</div>
+            <div class="microblock">
+              <div class="mini" contenteditable="true">MARCOS</div>
+              <div class="text" contenteditable="true">01/09 ofertas · 02/09 medição e fluxo · 03/09 publicação · 05/09 preparação final · 07/09 lançamento.</div>
+            </div>
+          </div>
+          <div class="tasks">
+            <div class="tasks-label" contenteditable="true">3 BLOCOS DE FECHAMENTO</div>
+            <div class="task"><span class="circle"></span><span class="task-text" contenteditable="true">01/09 · Fechar especificações e materialização de produtos físicos e digitais.</span><span class="status" contenteditable="true">SEQUÊNCIA</span></div>
+            <div class="task"><span class="circle"></span><span class="task-text" contenteditable="true">02–03/09 · Fechar medição, campanhas, fluxos e publicação pública.</span><span class="status" contenteditable="true">SEQUÊNCIA</span></div>
+            <div class="task"><span class="circle"></span><span class="task-text" contenteditable="true">05–07/09 · Fazer preparação final, observação e operação do lançamento.</span><span class="status" contenteditable="true">SEQUÊNCIA</span></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="footer-note">
+      <div>
+        <div class="box-title" contenteditable="true">PERGUNTA DE CONTROLE</div>
+        <div class="box-text" contenteditable="true">Se a prova de conclusão descrita para o item não existe, ele ainda não terminou.</div>
+      </div>
+      <div>
+        <div class="box-title" contenteditable="true">REGRAS DE USO</div>
+        <div class="box-text" contenteditable="true">Comece pelo bloco “Agora”, avance para “Próximo” apenas quando o prazo de hoje estiver resolvido e use “Depois” como orientação de sequência, não como foco imediato.</div>
+      </div>
+    </section>
+  </section>
+</main>
+
+<script>
+(() => {
+  const body = document.body;
+  const doc = document.getElementById('document');
+  const toggle = document.getElementById('toggleEdit');
+  const state = document.getElementById('editState');
+  const reset = document.getElementById('resetDoc');
+  const save = document.getElementById('saveHtml');
+  const storageKey = 'executar-prisma-agora-proximo-depois-v1';
+  const original = doc.innerHTML;
+
+  function setEditing(on){
+    body.classList.toggle('editing', on);
+    doc.querySelectorAll('[contenteditable]').forEach(el => el.setAttribute('contenteditable', on ? 'true' : 'false'));
+    toggle.textContent = on ? 'Bloquear edição' : 'Ativar edição';
+    state.textContent = on ? 'Edição ativa' : 'Edição bloqueada';
+  }
+
+  function persist(){
+    localStorage.setItem(storageKey, doc.innerHTML);
+  }
+
+  const cached = localStorage.getItem(storageKey);
+  if(cached) doc.innerHTML = cached;
+  setEditing(true);
+
+  toggle.addEventListener('click', () => setEditing(!body.classList.contains('editing')));
+
+  doc.querySelectorAll('button[contenteditable="true"]').forEach(btn => {
+    btn.addEventListener('click', ev => {
+      if(body.classList.contains('editing')) ev.preventDefault();
+    });
+  });
+
+  doc.addEventListener('input', () => {
+    clearTimeout(window.__saveTimer);
+    window.__saveTimer = setTimeout(persist, 250);
+  });
+
+  reset.addEventListener('click', () => {
+    if(confirm('Restaurar o conteúdo original deste A4?')){
+      doc.innerHTML = original;
+      localStorage.removeItem(storageKey);
+      setEditing(true);
+    }
+  });
+
+  save.addEventListener('click', () => {
+    persist();
+    const html = '<!doctype html>\n' + document.documentElement.outerHTML;
+    const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'executar_prisma_agora_proximo_depois.html';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+
+  function scaleA4(){
+    if(window.innerWidth > 900){ doc.style.transform=''; doc.style.marginBottom=''; return; }
+    const available = Math.max(320, window.innerWidth - 16);
+    const scale = Math.min(1, available / doc.offsetWidth);
+    doc.style.transform = `scale(${scale})`;
+    doc.style.marginBottom = `${-(doc.offsetHeight * (1-scale))}px`;
+  }
+  window.addEventListener('resize', scaleA4);
+  scaleA4();
+})();
+</script>
+</body>
+</html>

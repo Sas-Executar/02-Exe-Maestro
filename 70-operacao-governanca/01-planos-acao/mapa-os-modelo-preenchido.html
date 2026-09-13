@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>MAPA OS · PRJ EXEC · macOS UI</title>
+<style>
+:root{
+  --page-w:210mm; --page-h:297mm; --face-h:99mm;
+  --bg:#f5f5f7; --surface:rgba(255,255,255,.86); --surface-solid:#fff;
+  --ink:#1d1d1f; --muted:#6e6e73; --muted2:#86868b; --faint:#c7c7cc;
+  --line:rgba(0,0,0,.10); --line-strong:rgba(0,0,0,.16);
+  --blue:#007aff; --green:#34c759; --orange:#ff9f0a; --red:#ff3b30;
+  --shadow:0 10px 30px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.05);
+  --shadow-sm:0 4px 14px rgba(0,0,0,.06),0 1px 1px rgba(0,0,0,.04);
+  --r-xl:18px; --r-lg:14px; --r-md:11px; --r-sm:8px;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,"Segoe UI",Arial,sans-serif;
+
+  /* ===== ESCALA DE ESPAÇAMENTO PADRONIZADA (base 0.8mm) ===== */
+  --sp-1:.8mm; --sp-2:1.6mm; --sp-3:2.4mm; --sp-4:3.2mm; --sp-5:4mm; --sp-6:4.8mm; --sp-7:5.6mm;
+
+  /* ===== ESCALA TIPOGRÁFICA PADRONIZADA (consolidada) ===== */
+  --tx-micro:5.5pt;   /* rótulos mínimos: date-pill, legendas pequenas */
+  --tx-xs:6pt;         /* eyebrow, step-no, captions */
+  --tx-sm:6.5pt;       /* meta, pill, day-code, corpo secundário */
+  --tx-base:7.5pt;     /* corpo padrão: actions, bullets, notes-hint */
+  --tx-md:9pt;         /* strong labels: quick-title, process-label, step-copy */
+  --tx-lg:14pt;        /* h2 de seção (Face 2 / Face 3) */
+  --tx-xl:20pt;        /* h1 (Face 1) */
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#e9e9ec;color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased}
+body{display:flex;justify-content:center;padding:22px 0 48px}
+.sheet{width:var(--page-w);height:var(--page-h);display:grid;grid-template-rows:repeat(3,var(--face-h));background:var(--bg);box-shadow:0 30px 70px rgba(0,0,0,.18);overflow:hidden}
+.face{height:var(--face-h);padding:var(--sp-5) 7mm;position:relative;overflow:hidden;background:linear-gradient(180deg,#fafafa 0%,#f5f5f7 100%);display:flex;flex-direction:column}
+.face + .face{border-top:.2mm solid rgba(0,0,0,.12)}
+
+/* ===== CHROME HEADER (comum às 3 faces) ===== */
+.chrome{height:7mm;flex:none;display:flex;align-items:center;justify-content:space-between;border-bottom:.2mm solid var(--line);padding-bottom:var(--sp-2);margin-bottom:var(--sp-4)}
+.traffic{display:flex;gap:1.6mm;align-items:center} .dot{width:2.5mm;height:2.5mm;border-radius:50%} .dot.r{background:#ff5f57} .dot.y{background:#febc2e} .dot.g{background:#28c840}
+.meta{font-size:var(--tx-sm);color:var(--muted);font-weight:600;letter-spacing:.01em}
+.pill{display:inline-flex;align-items:center;gap:1.2mm;padding:1.4mm 2.2mm;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.78);font-size:var(--tx-sm);color:var(--muted);font-weight:650}
+.progress{width:26mm;height:2mm;border-radius:999px;background:#e5e5ea;overflow:hidden} .progress>i{display:block;width:62%;height:100%;background:var(--ink)}
+
+h1,h2,h3,p{margin:0}
+.eyebrow{font-size:var(--tx-xs);letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);font-weight:750}
+
+/* ===== SECTION HEAD padrão (Face 2 e 3 reusam) ===== */
+.section-head{flex:none;display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:var(--sp-3);margin-bottom:var(--sp-4);border-bottom:1px solid var(--line)}
+.section-head h2{font-size:var(--tx-lg);letter-spacing:-.04em;font-weight:760}
+.section-head .eyebrow{margin-bottom:.6mm;display:block}
+
+/* ===== ICONBOX padrão ===== */
+.icon-ref{width:100%;height:100%;object-fit:contain;display:block;filter:contrast(1.25)}
+.iconbox{display:grid;place-items:center;width:11mm;height:11mm;border-radius:3.2mm;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm);padding:2.2mm;flex:none}
+.iconbox.dark{background:#1d1d1f;border-color:#1d1d1f} .iconbox.dark .icon-ref{filter:invert(1) contrast(1.5)}
+.iconbox.green{background:#eafbea;border-color:#b8e7bf}
+
+/* ===================== FACE 1 — INÍCIO ===================== */
+.start-main{min-width:0;flex:none}
+.start-main h1{font-size:var(--tx-xl);line-height:1.08;letter-spacing:-.05em;font-weight:780;color:#000}
+
+/* Grid único: 5 cards no mesmo padrão (3 passos + boas-vindas + ferramentas) */
+.action-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--sp-3);margin-top:var(--sp-4)}
+.action-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-3);height:34mm;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;justify-content:space-between;min-width:0}
+.action-card .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--sp-2)}
+.action-card .card-label{font-size:var(--tx-xs);color:var(--muted2);font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+.action-card .card-copy{font-size:var(--tx-md);line-height:1.18;font-weight:680;letter-spacing:-.02em}
+.action-card .card-sub{font-size:var(--tx-sm);color:var(--muted);font-weight:560;margin-top:.6mm}
+
+/* variante: card centrado no ícone (Bom dia / Ferramentas) — mesmo tamanho, ícone/símbolo ao centro */
+.action-card.centered{align-items:center;text-align:center;justify-content:center;gap:var(--sp-2)}
+.action-card.centered .card-top{justify-content:center;width:100%}
+.action-card.centered .card-copy{margin-top:.4mm}
+
+.sun{width:11mm;height:11mm;border-radius:50%;display:grid;place-items:center;background:#fff7d6;border:1px solid #f3d66c;box-shadow:var(--shadow-sm)}
+.sun svg{width:6mm;height:6mm;stroke:#cf8a00;fill:none;stroke-width:2.2;stroke-linecap:round}
+
+/* Legenda de símbolos */
+.symbol-strip-wrap{margin-top:var(--sp-4)}
+.symbol-strip-label{font-size:var(--tx-xs);letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);font-weight:750;margin-bottom:var(--sp-4)}
+.symbol-strip{position:relative;height:18mm;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--r-lg);background:rgba(255,255,255,.86);box-shadow:var(--shadow-sm)}
+.symbol-slot{position:relative;display:grid;place-items:center} .symbol-slot + .symbol-slot{border-left:1px solid var(--line)}
+.symbol-label{position:absolute;top:-4.6mm;left:50%;transform:translateX(-50%);font-size:var(--tx-micro);font-weight:700;color:var(--muted);white-space:nowrap}
+.symbol-slot .iconbox{width:11mm;height:11mm;border-radius:50%;padding:2.3mm;box-shadow:none}
+.qr{width:11mm;height:11mm;border:1px solid var(--line-strong);border-radius:3mm;background:#fff;padding:1.1mm;display:grid;grid-template-columns:repeat(7,1fr);gap:.45mm}
+.qr i{background:#111;border-radius:.35mm} .qr i:nth-child(2n){opacity:.08} .qr i:nth-child(3n){opacity:1}
+
+/* ===================== FACE 2 — CALENDÁRIO ===================== */
+.segmented{display:flex;padding:.8mm;border-radius:999px;background:#e9e9ed;border:1px solid rgba(0,0,0,.06)} .segmented span{padding:1.1mm 2.4mm;border-radius:999px;font-size:var(--tx-sm);color:var(--muted);font-weight:650} .segmented .active{background:#fff;color:#111;box-shadow:0 1px 3px rgba(0,0,0,.10)}
+
+.week-grid{flex:1;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr 1fr;gap:var(--sp-3);min-height:0}
+.day-card,.deliverables{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-sm);padding:var(--sp-3);min-width:0;min-height:0;overflow:hidden}
+.day-card{display:flex;flex-direction:column}
+.day-head{flex:none;display:flex;justify-content:space-between;align-items:center;gap:var(--sp-2)}
+.day-code{font-size:var(--tx-sm);font-weight:760;letter-spacing:-.01em} .date-pill{font-size:var(--tx-micro);color:var(--muted);padding:.7mm 1.4mm;border:1px solid var(--line);border-radius:999px;background:#fff;flex:none}
+.commit{flex:none;margin-top:var(--sp-1);font-size:var(--tx-sm);color:var(--muted2);min-height:2.8mm;line-height:1.2;overflow:hidden;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical}
+.commit.empty{color:var(--faint)}
+.actions{flex:1;display:grid;align-content:start;gap:var(--sp-2);margin-top:var(--sp-2);min-height:0}
+.action{font-size:var(--tx-base);line-height:1.25;color:#343438;font-weight:560;overflow:hidden;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical}
+.action::before{content:'→';color:var(--muted2);margin-right:1mm}
+.deliverable{flex:none;margin-top:var(--sp-2);padding-top:var(--sp-1);border-top:1px solid var(--line);font-size:var(--tx-base);line-height:1.2;font-weight:760;color:#111;overflow:hidden;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical}
+
+/* Fim de semana: card único e leve, não preenchido por padrão */
+.weekend-card{grid-column:4;grid-row:1;background:linear-gradient(180deg,#fbfbfc,#f6f6f8);border:1px dashed var(--line-strong);border-radius:var(--r-md);padding:var(--sp-3);display:flex;flex-direction:column;justify-content:space-between;min-height:0}
+.weekend-card .day-head{margin-bottom:0}
+.weekend-row{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-2)}
+.weekend-row + .weekend-row{margin-top:var(--sp-2);padding-top:var(--sp-2);border-top:1px solid var(--line)}
+.weekend-row .day-code{font-size:var(--tx-sm);font-weight:700;color:var(--muted)}
+.weekend-row .weekend-status{font-size:var(--tx-micro);color:var(--faint);font-weight:600;letter-spacing:.03em;text-transform:uppercase}
+
+.d1{grid-column:1;grid-row:1} .d2{grid-column:1;grid-row:2} .d3{grid-column:2;grid-row:1} .d4{grid-column:2;grid-row:2} .d5{grid-column:3;grid-row:1}
+.deliverables{grid-column:3 / 5;grid-row:2;display:grid;grid-template-rows:auto 1fr;background:linear-gradient(180deg,#fff,#f9f9fb)}
+.deliverables-head{flex:none;display:flex;align-items:center;justify-content:space-between;padding-bottom:var(--sp-1);margin-bottom:var(--sp-2);border-bottom:1px solid var(--line)}
+.deliverables-head strong{font-size:var(--tx-sm)} .deliverables-head span{font-size:var(--tx-micro);color:var(--muted)}
+.bullets-wrap{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);min-height:0}
+.bullets{display:grid;align-content:start;gap:var(--sp-2);margin:0;padding:0}
+.bullets li{display:flex;align-items:baseline;gap:var(--sp-2);list-style:none}
+.bullets .bullet-index{flex:none;font-size:var(--tx-micro);font-weight:750;color:var(--muted2);min-width:3mm}
+.bullets .bullet-text{font-size:var(--tx-base);line-height:1.25;color:#313136;font-weight:560;overflow:hidden;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical}
+
+/* ===================== FACE 3 — WORKFLOW ===================== */
+.workflow-body{flex:1;display:grid;grid-template-columns:1.08fr 1fr;gap:var(--sp-3);min-height:0}
+.notes{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:var(--sp-4);display:flex;flex-direction:column;min-height:0}
+.notes-top{flex:none;display:flex;align-items:center;gap:var(--sp-3)}
+.notes-top .iconbox{width:9mm;height:9mm;padding:1.8mm} .notes-top strong{font-size:var(--tx-md)}
+.notes-body{flex:1;margin-top:var(--sp-4);min-height:0}
+.note-hint{flex:none;margin-top:auto;padding-top:var(--sp-3);font-size:var(--tx-sm);line-height:1.35;color:var(--muted)}
+
+.workflow-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:var(--sp-3);min-height:0}
+.process{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:var(--sp-3);display:flex;flex-direction:column;justify-content:space-between;min-height:0}
+.process .iconbox{width:10mm;height:10mm;padding:2mm}
+.process strong{display:block;font-size:var(--tx-md);line-height:1.15;letter-spacing:-.02em;margin-top:var(--sp-2)}
+.process small{display:block;font-size:var(--tx-xs);color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-top:var(--sp-2);margin-bottom:.6mm}
+
+@page{size:A4 portrait;margin:0}
+@media print{html,body{background:#fff}body{padding:0}.sheet{box-shadow:none}}
+</style>
+</head>
+<body>
+<main class="sheet">
+
+<!-- ============ FACE 1 — INÍCIO ============ -->
+<section class="face face-start">
+<header class="chrome">
+<div class="traffic"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i><span class="meta" style="margin-left:2mm" data-key="DOC_TITLE_META">MAPA OS · PRJ EXEC · W37</span></div>
+<div style="display:flex;align-items:center;gap:2.4mm"><span class="pill" data-key="WEEK_RANGE">11–17 SET</span><div class="progress"><i data-key="WEEK_PROGRESS_PCT" style="width:62%"></i></div><span class="meta" data-key="WEEK_PROGRESS_LABEL">62%</span></div>
+</header>
+
+<div class="start-main">
+<div class="eyebrow" data-key="FACE1_EYEBROW">INÍCIO · SISTEMA OPERACIONAL</div>
+<h1 data-key="FACE1_TITLE">Como iniciar o sistema</h1>
+</div>
+
+<div class="action-grid">
+<article class="action-card">
+<div class="card-top"><span class="card-label" data-key="STEP_01_LABEL">PASSO 01</span><span class="iconbox"><img alt="Símbolo copiloto" class="icon-ref" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAABpCAYAAAA5gg06AAACE0lEQVR4nO3dv00bcRiH8S8oIhUVC7iiYgeyAwNkAZghCyRVulRUDEHHACxAxQJp4ooqKexIFJHt8/3ufu+Tez6SK0un9+7x/bNPkEiSJEnSIFdJfu94qbNdcd6/vvQasIWT3gOMcMxeglzf094DHOnYw9ivplPMhPjJGnuewa0zdU8aA3cxQYuE28At0CItkpEAjARgJABapNfeA/SAu2dImys81HrT9qQWUIESZqQxGxkXKGFGSo7b2HfNp5gJ8pP1zqHnJ/R6Uvekv06yO8DNnvclSdIAQ0+q10nuk3xP8qn1MP9wNvHyf+55/3zk8l+SXCZZJ3lOssrmVmDQdh8aaZE/uk1g0HanX4IvgpEAjARgJAAjARgJwEgAQyP9mGQK7VT9a/w5b57LbovKh7uvvQeoonKkde8Bqqgc6aX3AFVUjjT2G+j/RuVIU/9MgVE5kuekrcqRtGUkACMBGAnASABGAjASgJEAjARgJAAjARgJwEgARgIwEoCRAIwEYCQAIwEYCcBIAEYCMBKAkQA+9B6ggW/ZPO36MclbNo8nr5I8JnnIQv9u61w+57B/u3OIVsvpwsMdgJEAjARgJAAjARgJwEgARgIwEoCRAIwEYCQAIwEYCcBIAEYCMBKAkQCMBGAkACMBVI502XuAKipHeuo9QBWVI130HqCKJUQy9sT2PXV622g5pZ9glSRJkjSrP/Q8UJMCCeAcAAAAAElFTkSuQmCC"/></span></div>
+<div class="card-copy" data-key="STEP_01_ACTION">Abra o Copiloto</div>
+</article>
+
+<article class="action-card">
+<div class="card-top"><span class="card-label" data-key="STEP_02_LABEL">PASSO 02</span><span class="iconbox"><img alt="Símbolo seletor" class="icon-ref" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAB60lEQVR4nO3dIVLDQBjF8VeGAQMKTDE4OEAvUMUdOAEGTsM1cOBRSBQOhWEw4BAMpohW0uZL85Jv2/3/Zmo65Zvdfd1NG5qNBAAAAGyMiaRZD48hbWT7H3tq+LYE0Lofuy0bjJiZpFHkhTvBgu/rt6VaoTdsJIBrSSfd2lKtxhAi02TIpSc0bU2G6tfKPkWXIKxvZdBNAXDg7RkzoHAlfn4vyak6jk/TQS8yuPuSfgOv21aRMVo6zo4laGKoUS1HAGeGGtXiIJyMAJIRQDICSEYAyQggGQEkcwRwZKhRLUcAX4Ya1eKbcDJHAM+GGtVyBHBsqFEtRwCfhhrVcgRwbqhRraZ/yFxIupN0q/l5/1dJU83X/efF80P+kqFEP5IeJB1I+pA0lvSt+fiMJd2IMQIAAAAAAAAAAAAAAAAAAGWI7ARymda6MnTaLcXx6+hDQw0sEUm39kuU0mfA1FCjWo4AXgw1qsVVksm4Uj4ZASQjgGQEkIwAkhFAMgJI5gjg1VCjWpyMS+YIYM9Qo1qOAN4MNbBE5FTrU1rrypC+fb3TNt5DRup5+3p00BQA+9z0jBnQv863sboyNQT/iC4xRdz0zGyIPjX2J7oEcSxoz3ozz3BBSGoxVm0PwqPF477l39XiXLxRAQAAUL4/1JfFSi8UmR8AAAAASUVORK5CYII="/></span></div>
+<div class="card-copy" data-key="STEP_02_ACTION">Selecione a habilidade</div>
+</article>
+
+<article class="action-card">
+<div class="card-top"><span class="card-label" data-key="STEP_03_LABEL">PASSO 03</span><span class="iconbox green"><img alt="Símbolo feito" class="icon-ref" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAADH0lEQVR4nO3doXLbQBDG8U2nk5CWFfUB+jRFeYEWBcUkrCVGYUFhQUZhQUFleYeisqJOQVhQpkQFrUcejRV5P92tTqf/b0ZQ/u60o7NWkhMzAAAAAAAAAAAAAAAAAAAAAAAAAACQXGNm68wZ3/7nIFizs51myrju5CBIs2f7kjjjricHme076NvtPCCDImc0dOAbM/s+MuPpwBwkdshB325PYsazM+dFr8RBLJH3jHkrZNya2YlznzdCDjo8Z5S6fPZdUL203agTQiuiuGdCxkd1QmhFFPdWyPigTgitUot77Ak4Ega1BEqxvMcyIoOr6D1KLe5K2AcdEcvyDyFjo04IrYjiPggZl+qE0Ioo7kbIWKsTQiuiuOdCBjcxEogortIKXagTQqvU4rr63CFL7YOVYhXZ5w5ZYh8cceCfhYyvwj7oiFiWH4WMe3VCaEUUdyNk0OcmUOoFFcVNIKK4yvNcWqEEIoqrvIlxpk4IrYji3gRkjFJrH6wcyFn2uUNq7IMjDvyjkPFZ2GcyEUvNdvlT5Fwyfzk/v7F/V9izEfF90m05vI4tT3G3v/LzbNdCzmQiLhouEuakLG71fW7EleFp4py+M9lL6XOvhJzJRFz+DxU31ZnspfS5n8RxTsIzMdVl5pztmex17xxXjq+sUYbaA2XASq8XleOhjOnEzP6kHsgYQ31wycXKebYoz3NXVlhxPbzLVIrvyqmWROW95Vm1Qn2WUOQHIbuqtx9rLrLS586qFTpUjUVW+twqluU+NRWZ57k9aiiycm95Vl6P2PfI/BNuzN8S5cpRivVe2GdSY58Hz7VPVv7E0crMfgv7VWFOy/VP4TM24nirMociV//IL7eSi3wl7LMWx1e1kovs2aq6Q5Xa3ItczUvpOR+5KUUr4alSVa8S53xttuQWqs/s+twSzGW5XsTtx1xKL/KdmIcdpRaZPjeh3MX15qxH5mCP3MU9NKfKh/WlyF3coZxU/xmleFP2fPuKmWM83Zyq+twhU/58tHugcx343c99lykDL0j938IAAAAAAAAAAAAAAAAAAAAAAAAAAAAW7C8rZQD7zOidcQAAAABJRU5ErkJggg=="/></span></div>
+<div class="card-copy" data-key="STEP_03_ACTION">Execute a próxima ação</div>
+</article>
+
+<article class="action-card centered">
+<span class="sun"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"></path></svg></span>
+<div class="card-copy" data-key="GREETING_TITLE">Bom dia, Copiloto</div>
+<div class="card-sub" data-key="GREETING_SUBTITLE">Iniciar rotina</div>
+</article>
+
+<article class="action-card centered">
+<span class="iconbox"><svg class="icon-ref" viewBox="0 0 24 24" fill="none" stroke="#1d1d1f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2z"></path></svg></span>
+<div class="card-copy" data-key="TOOLS_TITLE">Ferramentas</div>
+<div class="card-sub" data-key="TOOLS_SUBTITLE">Skills e habilidades</div>
+</article>
+</div>
+
+<div class="symbol-strip-wrap">
+<div class="symbol-strip-label">Legenda</div>
+<div class="symbol-strip">
+<div class="symbol-slot"><span class="symbol-label">Copiloto</span><span class="iconbox dark"><img alt="Copiloto" class="icon-ref" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAABpCAYAAAA5gg06AAACE0lEQVR4nO3dv00bcRiH8S8oIhUVC7iiYgeyAwNkAZghCyRVulRUDEHHACxAxQJp4ooqKexIFJHt8/3ufu+Tez6SK0un9+7x/bNPkEiSJEnSIFdJfu94qbNdcd6/vvQasIWT3gOMcMxeglzf094DHOnYw9ivplPMhPjJGnuewa0zdU8aA3cxQYuE28At0CItkpEAjARgJABapNfeA/SAu2dImys81HrT9qQWUIESZqQxGxkXKGFGSo7b2HfNp5gJ8pP1zqHnJ/R6Uvekv06yO8DNnvclSdIAQ0+q10nuk3xP8qn1MP9wNvHyf+55/3zk8l+SXCZZJ3lOssrmVmDQdh8aaZE/uk1g0HanX4IvgpEAjARgJAAjARgJwEgAQyP9mGQK7VT9a/w5b57LbovKh7uvvQeoonKkde8Bqqgc6aX3AFVUjjT2G+j/RuVIU/9MgVE5kuekrcqRtGUkACMBGAnASABGAjASgJEAjARgJAAjARgJwEgARgIwEoCRAIwEYCQAIwEYCcBIAEYCMBKAkQA+9B6ggW/ZPO36MclbNo8nr5I8JnnIQv9u61w+57B/u3OIVsvpwsMdgJEAjARgJAAjARgJwEgARgIwEoCRAIwEYCQAIwEYCcBIAEYCMBKAkQCMBGAkACMBVI502XuAKipHeuo9QBWVI130HqCKJUQy9sT2PXV622g5pZ9glSRJkjSrP/Q8UJMCCeAcAAAAAElFTkSuQmCC"/></span></div>
+<div class="symbol-slot"><span class="symbol-label">Seletor</span><span class="iconbox"><img alt="Seletor" class="icon-ref" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAB60lEQVR4nO3dIVLDQBjF8VeGAQMKTDE4OEAvUMUdOAEGTsM1cOBRSBQOhWEw4BAMpohW0uZL85Jv2/3/Zmo65Zvdfd1NG5qNBAAAAGyMiaRZD48hbWT7H3tq+LYE0Lofuy0bjJiZpFHkhTvBgu/rt6VaoTdsJIBrSSfd2lKtxhAi02TIpSc0bU2G6tfKPkWXIKxvZdBNAXDg7RkzoHAlfn4vyak6jk/TQS8yuPuSfgOv21aRMVo6zo4laGKoUS1HAGeGGtXiIJyMAJIRQDICSEYAyQggGQEkcwRwZKhRLUcAX4Ya1eKbcDJHAM+GGtVyBHBsqFEtRwCfhhrVcgRwbqhRraZ/yFxIupN0q/l5/1dJU83X/efF80P+kqFEP5IeJB1I+pA0lvSt+fiMJd2IMQIAAAAAAAAAAAAAAAAAAGWI7ARymda6MnTaLcXx6+hDQw0sEUm39kuU0mfA1FCjWo4AXgw1qsVVksm4Uj4ZASQjgGQEkIwAkhFAMgJI5gjg1VCjWpyMS+YIYM9Qo1qOAN4MNbBE5FTrU1rrypC+fb3TNt5DRup5+3p00BQA+9z0jBnQv863sboyNQT/iC4xRdz0zGyIPjX2J7oEcSxoz3ozz3BBSGoxVm0PwqPF477l39XiXLxRAQAAUL4/1JfFSi8UmR8AAAAASUVORK5CYII="/></span></div>
+<div class="symbol-slot"><span class="symbol-label">Feito</span><span class="iconbox green"><img alt="Feito" class="icon-ref" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAADH0lEQVR4nO3doXLbQBDG8U2nk5CWFfUB+jRFeYEWBcUkrCVGYUFhQUZhQUFleYeisqJOQVhQpkQFrUcejRV5P92tTqf/b0ZQ/u60o7NWkhMzAAAAAAAAAAAAAAAAAAAAAAAAAACQXGNm68wZ3/7nIFizs51myrju5CBIs2f7kjjjricHme076NvtPCCDImc0dOAbM/s+MuPpwBwkdshB325PYsazM+dFr8RBLJH3jHkrZNya2YlznzdCDjo8Z5S6fPZdUL203agTQiuiuGdCxkd1QmhFFPdWyPigTgitUot77Ak4Ega1BEqxvMcyIoOr6D1KLe5K2AcdEcvyDyFjo04IrYjiPggZl+qE0Ioo7kbIWKsTQiuiuOdCBjcxEogortIKXagTQqvU4rr63CFL7YOVYhXZ5w5ZYh8cceCfhYyvwj7oiFiWH4WMe3VCaEUUdyNk0OcmUOoFFcVNIKK4yvNcWqEEIoqrvIlxpk4IrYji3gRkjFJrH6wcyFn2uUNq7IMjDvyjkPFZ2GcyEUvNdvlT5Fwyfzk/v7F/V9izEfF90m05vI4tT3G3v/LzbNdCzmQiLhouEuakLG71fW7EleFp4py+M9lL6XOvhJzJRFz+DxU31ZnspfS5n8RxTsIzMdVl5pztmex17xxXjq+sUYbaA2XASq8XleOhjOnEzP6kHsgYQ31wycXKebYoz3NXVlhxPbzLVIrvyqmWROW95Vm1Qn2WUOQHIbuqtx9rLrLS586qFTpUjUVW+twqluU+NRWZ57k9aiiycm95Vl6P2PfI/BNuzN8S5cpRivVe2GdSY58Hz7VPVv7E0crMfgv7VWFOy/VP4TM24nirMociV//IL7eSi3wl7LMWx1e1kovs2aq6Q5Xa3ItczUvpOR+5KUUr4alSVa8S53xttuQWqs/s+twSzGW5XsTtx1xKL/KdmIcdpRaZPjeh3MX15qxH5mCP3MU9NKfKh/WlyF3coZxU/xmleFP2fPuKmWM83Zyq+twhU/58tHugcx343c99lykDL0j938IAAAAAAAAAAAAAAAAAAAAAAAAAAAAW7C8rZQD7zOidcQAAAABJRU5ErkJggg=="/></span></div>
+<div class="symbol-slot"><span class="symbol-label">QR Code</span><div aria-label="QR Code" class="qr"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+</div>
+</div>
+</section>
+
+<!-- ============ FACE 2 — CALENDÁRIO ============ -->
+<section class="face face-calendar">
+<header class="section-head">
+<div><div class="eyebrow" data-key="FACE2_EYEBROW">SEMANA · EXECUÇÃO</div><h2 data-key="FACE2_TITLE">Calendário operacional</h2></div>
+<div class="segmented"><span class="active" data-key="TAB_1_LABEL">Semana</span><span data-key="TAB_2_LABEL">Entregáveis</span></div>
+</header>
+
+<div class="week-grid">
+<article class="day-card d1">
+<div class="day-head"><span class="day-code" data-key="DAY1_CODE">SEG · 01</span><span class="date-pill" data-key="DAY1_DATE">11 SET</span></div>
+<div class="commit" data-key="DAY1_COMMIT">Compromisso opcional</div>
+<div class="actions">
+<div class="action" data-key="DAY1_ACTION1">Defina a ação 1</div>
+<div class="action" data-key="DAY1_ACTION2">Execute a ação 2</div>
+<div class="action" data-key="DAY1_ACTION3">Conclua a ação 3</div>
+</div>
+<div class="deliverable" data-key="DAY1_DELIVERABLE">Entregue o resultado do dia</div>
+</article>
+
+<article class="day-card d3">
+<div class="day-head"><span class="day-code" data-key="DAY3_CODE">QUA · 03</span><span class="date-pill" data-key="DAY3_DATE">13 SET</span></div>
+<div class="commit" data-key="DAY3_COMMIT">Compromisso opcional</div>
+<div class="actions">
+<div class="action" data-key="DAY3_ACTION1">Organize a ação 1</div>
+<div class="action" data-key="DAY3_ACTION2">Revise a ação 2</div>
+<div class="action" data-key="DAY3_ACTION3">Aprove a ação 3</div>
+</div>
+<div class="deliverable" data-key="DAY3_DELIVERABLE">Entregue o resultado do dia</div>
+</article>
+
+<article class="day-card d5">
+<div class="day-head"><span class="day-code" data-key="DAY5_CODE">SEX · 05</span><span class="date-pill" data-key="DAY5_DATE">15 SET</span></div>
+<div class="commit" data-key="DAY5_COMMIT">Compromisso opcional</div>
+<div class="actions">
+<div class="action" data-key="DAY5_ACTION1">Publique a ação 1</div>
+<div class="action" data-key="DAY5_ACTION2">Compartilhe a ação 2</div>
+<div class="action" data-key="DAY5_ACTION3">Registre a ação 3</div>
+</div>
+<div class="deliverable" data-key="DAY5_DELIVERABLE">Entregue o resultado do dia</div>
+</article>
+
+<div class="weekend-card">
+<div class="weekend-row">
+<span class="day-code" data-key="DAY6_CODE">SÁB · 06</span>
+<span class="weekend-status" data-key="DAY6_STATUS">Sem agenda</span>
+</div>
+<div class="weekend-row">
+<span class="day-code" data-key="DAY7_CODE">DOM · 07</span>
+<span class="weekend-status" data-key="DAY7_STATUS">Sem agenda</span>
+</div>
+</div>
+
+<article class="day-card d2">
+<div class="day-head"><span class="day-code" data-key="DAY2_CODE">TER · 02</span><span class="date-pill" data-key="DAY2_DATE">12 SET</span></div>
+<div class="commit" data-key="DAY2_COMMIT">Compromisso opcional</div>
+<div class="actions">
+<div class="action" data-key="DAY2_ACTION1">Prepare a ação 1</div>
+<div class="action" data-key="DAY2_ACTION2">Valide a ação 2</div>
+<div class="action" data-key="DAY2_ACTION3">Finalize a ação 3</div>
+</div>
+<div class="deliverable" data-key="DAY2_DELIVERABLE">Entregue o resultado do dia</div>
+</article>
+
+<article class="day-card d4">
+<div class="day-head"><span class="day-code" data-key="DAY4_CODE">QUI · 04</span><span class="date-pill" data-key="DAY4_DATE">14 SET</span></div>
+<div class="commit" data-key="DAY4_COMMIT">Compromisso opcional</div>
+<div class="actions">
+<div class="action" data-key="DAY4_ACTION1">Produza a ação 1</div>
+<div class="action" data-key="DAY4_ACTION2">Teste a ação 2</div>
+<div class="action" data-key="DAY4_ACTION3">Feche a ação 3</div>
+</div>
+<div class="deliverable" data-key="DAY4_DELIVERABLE">Entregue o resultado do dia</div>
+</article>
+
+<section class="deliverables">
+<div class="deliverables-head"><strong data-key="DELIVERABLES_TITLE">Entregáveis da semana</strong><span data-key="DELIVERABLES_CAP">ATÉ 10</span></div>
+<div class="bullets-wrap">
+<ul class="bullets">
+<li><span class="bullet-index">01</span><span class="bullet-text" data-key="WEEK_DELIVERABLE_01">Entregável 01</span></li>
+<li><span class="bullet-index">02</span><span class="bullet-text" data-key="WEEK_DELIVERABLE_02">Entregável 02</span></li>
+<li><span class="bullet-index">03</span><span class="bullet-text" data-key="WEEK_DELIVERABLE_03">Entregável 03</span></li>
+<li><span class="bullet-index">04</span><span class="bullet-text" data-key="WEEK_DELIVERABLE_04">Entregável 04</span></li>
+<li><span class="bullet-index">05</span><span class="bullet-text" data-key="WEEK_DELIVERABLE_05">Entregável 05</span></li>
+</ul>
+<ul class="bullets">
+<li><span class="bullet-index">06</span><span class="bullet-text" data-key="WEEK_DELIVERABLE_06">Entregável 06</span></li>
+<li><span class="bullet-index">07</span><span class="bullet-text" data-key="WEEK_DELIVERABLE_07">Entregável 07</span></li>
+<li><span class="bullet-index">08</span><span class="bullet-text" data-key="WEEK_DELIVERABLE_08">Entregável 08</span></li>
+<li><span class="bullet-index">09</span><span class="bullet-text" data-key="WEEK_DELIVERABLE_09">Entregável 09</span></li>
+<li><span class="bullet-index">10</span><span class="bullet-text" data-key="WEEK_DELIVERABLE_10">Entregável 10</span></li>
+</ul>
+</div>
+</section>
+</div>
+</section>
+
+<!-- ============ FACE 3 — WORKFLOW ============ -->
+<section class="face face-workflow">
+<header class="section-head">
+<div><div class="eyebrow" data-key="FACE3_EYEBROW">PROCESSO · SISTEMA</div><h2 data-key="FACE3_TITLE">Workflow Processo</h2></div>
+<span class="pill" data-key="FACE3_STEP_COUNT">4 ETAPAS</span>
+</header>
+
+<div class="workflow-body">
+<section class="notes">
+<div class="notes-top"><span class="iconbox"><img alt="Notas" class="icon-ref" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGoAAABqCAYAAABUIcSXAAACnUlEQVR4nO3crXIUQRTF8QuFXFTw66JwKBzPgEPFoaJw8AIYFA7FC4AHtS+QF8CBBgcGDBgoSGWZj8ztvufM/H9VU3E9d/qk56t7NgIAAADAxuwi4uT33zX5c1y2XkXEz41uTdxo0GazYs2k9u3NzMaCkP6V2heZQRHSVRdZDWUNz88RcSeprbVJ6eOsoBhNwxb3c8apb5/QBkZkBPU+oQ2MyDj1cdob1+IxaLYpD4Fpdz+CujwE9xxREv9VDUw5fombiSk+dtrPajGillvViMJCBGWiV1BfO+1ntbhGLcc1Cn8pBfU06mdnu8zWXodSUN+rC1CmdI06iYgvC2vJNqV/NneNOq8uQJlSUG+rC1CmFJT1+rjWlILCAKWbiV3ovcHgZuKIB9UFKFMaUa42N6IwgKBMEJQJgjJBUCYIygRBmSAoE0pBvYn6GV3ZGd4MWQd9f0ZbSkF1CVxpRN2uLkCZUlCsmRigFNSP6gKUKQXFDO8ApaBOqwtQpjQftQ+976iY4T3iWXUBypRGlKvNjSgMICgTBGWCoEwQlAmCMkFQJgjKBEGZICgTvYJS+zbXTq+gPnXaz2q5v5TdRcS3Bu3O0eWl7K2lDczQavnVWt/KX8LNhAmCMpER1IeENjAiI6jnCW2gk4ehvey4JYcaL7kbBKVa4xVnQVCKNR71KAhKrcb/6vlrltUcahx0CIJSqXHUuyAohRonOQ+CstHys89qDjXO0uo5q5pDjbM9DoKykR1WNYcar+1FEJSNrFv3ag41LnYIgrLxJAjKxr0gKBuKv4WUta3O66jvVIKaaOk1S3FbrZdR37kENdEh6juYkCZaQ1ib0XsNBiEtULluUCIkpy8hTsNj+bRTnzazj/qRcmw7a3nQAAAAAKT8AiaKxdEig035AAAAAElFTkSuQmCC"/></span><strong data-key="NOTES_TITLE">Notas</strong></div>
+<div class="notes-body"></div>
+<div class="note-hint" data-key="NOTES_HINT">Registre decisões, bloqueios, referências de arquivos e observações rápidas da semana.</div>
+</section>
+
+<section class="workflow-grid">
+<article class="process">
+<div><span class="iconbox"><img alt="Processo 1" class="icon-ref" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAABpCAYAAAA5gg06AAAD4ElEQVR4nO2doXIUQRCG/yCCoTAUIgoXDC4KXgCPS0xegBfA8QCoSEwwVEwwOBQYUGDABBWFAwMKDIi7K65Sdzs9O93Tf+/2V3Xqdmf+7p7u2d2Z2wOSJEmSJEmSJEmSJEmSGbLjLUCZ+wAOAPwAcOasJVlyDuCv4HPiJXDOPIEsOJs+4YhY7jQcHcrua94CKtHKhFAZFSlI2o4NE6goQbJyaIhARQmSJW+9BZSIMIH2GO3UfshMWrDnLWAI6hGEuizaZEvr+RRMJZO2OZjW8TVMIUifCt+HDxS7AZJyJbFBqx0XppBJkyeDFIApBKlUykI8VRhiCkECgNfeAuZOzVrRnZHnUWcb7RXNGvlYyFuAgKfeAryhHkFrWGYTvQ8iZBJg58gXRu2qQj+K1rDIphD2R8mkWRMlSLl8PnNueAsoEaEmz/4+iVrcktZlBmmQaX3BXu401oFonS+FOUinim0dCY6hvYhgHmXaq6lhV2dZM0ni0F+VbWots3eHNUgSbhq1e2zU7mgY09u6LIUre2yZdOgtYAlV2aMaMeg3ykNlE1Mm9Ry9DwXH0GQTzWhB/9Et6e86gD+KfY6CJZMkDnul3Kck4L+V+wzLPvx280j6vTTqWwxDufOexL37L+Jd7hg2NX4VHON6EeGdSSyjmEXHRjwzSeKYD+YqFoR9rmcN29ZfiZ5nnTW5InHILVJds2APvM6g3NzvMRlST9Ig1Nf7wiFCuXggOKarHb1HLN0o3QKVzp6ZJDH8ubkKGbO9JKebkAtI9F70ENIrZanKRwUUunuUu4MOfVjxRnAMWwUocgrgG4CfWLz+GYhX5q4ivXeite0E7UZ87K66jl2029gUMOutUdYaeqGZEdX2jpmTNNNYcuPIgPbeipeK7W3sQPMTCW3bTRY8tUVGCtIxHO2XpvEu7HbOzG1OukrRfumcZLm16dywbQ2sM77YvmQUXwC4266lWYcXPcpys/01NfZw5Hmsf50zdo45qDzvcy+hVud70qq95mbfXOgQj3uINELDweZBkvzTl4QpB8m8ndLVXeQn2JOhFKR3PUQkw2gsE38HcLuxDamW3mjolj4I2NpOj7fTS+t21CABxvZrrcxuEyIVWPq/CXZa7R+EZVcMYxYBwD0AXzr0M2i/1DnWgWINEkAwSL1/RAZwBwiQvTyqhaL92i9QGgN7kADbbFJbqhA1NoIIAQLsdIrarS13mmKjBGiFtl5xe2PmJA2x0QK0Qkt3VTtjLxx2MO73rDuIG6AVLfqPGs9vYujp7qWXqA68h+wJ9yMvgclm9vF/i3WSJEmSJEmSJEmSJEmSjOUfpKg9LN09eOkAAAAASUVORK5CYII="/></span></div>
+<div>
+<small data-key="PROCESS1_NUMBER">01</small>
+<strong data-key="PROCESS1_LABEL">Defina o processo</strong>
+</div>
+</article>
+
+<article class="process">
+<div><span class="iconbox"><img alt="Processo 2" class="icon-ref" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAABpCAYAAAA5gg06AAAFB0lEQVR4nO2dr1cVQRTHLx4P/gEcg+mRoNC0YOEfIGnSYrNZaCQsmLDQsGixYcFCw6KJhIX2LFK0Wd6xPMKyhz0Lu3vvnftrlvmcM23fvd+5d2bezOzsLkChUCgUCoVCoVAo9LIFAPOE8sdechoL3gIQzA18hI5DVHEWiekiXEzueQtosAPXQ5InzaExBBFazRQAlr1FDOAaJ8+etAdVa1121IAlVM+yImV25l22FeLRi3U3HlNrNIud5XA3pgQBVPV5ZOHIIkmHoJOgd1C1Zmx5qaDhAgwan3aXlayAhtbo+gBAtydJBOApXPcEDWrbqwK21HqUVuVTBXuuS8Jp1+hJKZXU7DVWGhalhNRIJ4mboCfgn5w2nGStAsB/BS1icBeHOVDPUPvKlps6JJzk7LsoTSPMLgSHMfaeLtp1WfOVg8MzQVifMwDYVPD7TNCmGtYJOmX4zL4330/47Tnx+pTZm0ZQa5vRZpU3sAoc149liw+bLO46STtB9Q1BS8IOgynDHYafjN94B2oOwXoVR4xmL/JOUJMwiaIOdyuEa3NOEEC+C2709PZMya51odYjBBprEIlg9i0quTbFd7MtiJYgDr+RtiV3J0yRDp5lctp87LH/WsiHOduAC+AEaW8RaU86OW3aPh4r+THBuxdpUvugzFxN0V7M3saUeL32eiXMeqgLrEBMa5a0RbU5ajCLWcnh5oRwbUnQFZhAYJNkbevOIPWfFCGotzWACLqSiXhgn7Pn12U7+7UPhiWQmyJLT7c5t9JHyQHYJgl7dm0Xae9OJEqy4p6L4WbJ8vZDH5hK7yHsYLeVpDTlWDoZ+pPGBO4BDJ9/xiZAchqfG511l5jdSR1Q/ydkZ3REetnGF8Q14Q/FaxApSZge+V5dRUAiJQlz8P2ttoiISEwcou7/5YbqxGEDcc1XAT+FDjDz+1NBWxiwuyC5FTaSDiSFWgTDulGxwb5KE4NHELm2NwTtqfckrBMvsRoJktaKsXNE1MdyguEz0tYSUd/mgL1Doj1A6pRMUvJJJYwTbCBMun4i0hqTbUVe43jc+p5BtWGMwSx2mHXSB6QjDNHPHGAT9ElTBBdMl50I2vIY9jR0YWyJHW32EG+ZKIqeXWGbg0ifOtU4xUqxy0FLi1jMsHt3Xsls2pXuVTOGTaxu7DmKN0T/g0gPT9jjYu1ykliPoXWV5XAuzrGCc+yTdxKVPDfyRfkqDQqtJ8QpdlValDAa9UHb1LozSwl89LWTe4OjJokimPKasaiJ0nyLsqoIzV4SaejT1E6yzRnuNLv/AgA8J/5GmgsIlKAUzkBvFlaTMhOzmC3WUGa95iMFRdjMyA+3TJja1ol+XKAIPDb0ZRU0ii/Mgw0qUINy4OS3WV4I+J8w/Lri0YLbrMDN2/NHoPOGkx3wry+LCImygLO1lIzk0+dUQXOIu4i9DU7Awz1gwN1dlvqf0oRTr7AvNEzZaY5IygQlNNSFbsTKTSH/OgyS8gi/Z0VTNWeToJo1kKk09XMLHCR0ZpegJlIBmEP1mI3EC2xT79K2S9ZvnKyRDEhXb3vV8rkO1YJW27c6luuUKeTxMXoKJvHzWExmPXZfYRo3j6fPFwDgh4NfKcwbtve2TE69yi1W3u9xqL/l+tdZRx/uHyj2TlLNQ6gC8c1ZR80vCJCcHPgO+tPn0SxGI7ABOkmRuEtbGGAf8DsVWXxVuVAoFAqFQqFQKLhzCcyWraR4FslSAAAAAElFTkSuQmCC"/></span></div>
+<div>
+<small data-key="PROCESS2_NUMBER">02</small>
+<strong data-key="PROCESS2_LABEL">Execute a etapa</strong>
+</div>
+</article>
+
+<article class="process">
+<div><span class="iconbox"><img alt="Processo 3" class="icon-ref" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAABXCAYAAABxyNlsAAACBElEQVR4nO2ZwVHDMBBFNwwzNEABnDhxg2boAXqgjbRBN1QTDow5MGBb0v7dtXhvJqc41t8nxZIsMwAAAABI4rTx/SUkxRdbWVookfsqMMQar8738+woGZeAz8vB85cN9zwSrkgNJYM9jgQrVMefXPvXsYvoZ+LJBkdZDxkTWtZkE95utNzsWTy0/Ui52WIXwnJEyX0LamcvIYKjdmhVRu1PPOorv0PLQL56iJIbvgzaICRP5MitIjgsR/RjIVtwaPsZz9wswf9ih2YWX2hKh3rJ/ej4TVTBPe14v1/+lT1vhc6N17u9snPKv5Yn9ZXjvaAgL7xydGcf2aGt/bZHWPYZWm897ju0243ve0R5jWBFx3Z1fM/IbWkoegSr22vy0TpyWwuPHMERHdl0fYvcp8YgC1GC7xqv7/2HuM0Ny4z44Hgv9SoianXishR798nyfb9swZ4MLcUURE1yo5PxMEc5/fXokOlPfxeiBN8MtDdM9tlW9k5OSvYZWuZOTk62XLOJBVeQazap4CpyzSYUXEmu2YEmqz1Uk2s2keCKcs0mEVxVrtkEgivLPTzIFYJcIcgVglwhyBWCXCHIFYJcIcgVglwhyBWCXCHIFYJcIcgVglwhyBWCXCHIFYJcIcgVglwhyBWCXCHIFYJcIcgVglwhyBWCXCHIFYJcIcgFAAAAgBn5BGmOQrlXT73BAAAAAElFTkSuQmCC"/></span></div>
+<div>
+<small data-key="PROCESS3_NUMBER">03</small>
+<strong data-key="PROCESS3_LABEL">Direcione a saída</strong>
+</div>
+</article>
+
+<article class="process">
+<div><span class="iconbox green"><img alt="Processo 4" class="icon-ref" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAADH0lEQVR4nO3doXLbQBDG8U2nk5CWFfUB+jRFeYEWBcUkrCVGYUFhQUZhQUFleYeisqJOQVhQpkQFrUcejRV5P92tTqf/b0ZQ/u60o7NWkhMzAAAAAAAAAAAAAAAAAAAAAAAAAACQXGNm68wZ3/7nIFizs51myrju5CBIs2f7kjjjricHme076NvtPCCDImc0dOAbM/s+MuPpwBwkdshB325PYsazM+dFr8RBLJH3jHkrZNya2YlznzdCDjo8Z5S6fPZdUL203agTQiuiuGdCxkd1QmhFFPdWyPigTgitUot77Ak4Ega1BEqxvMcyIoOr6D1KLe5K2AcdEcvyDyFjo04IrYjiPggZl+qE0Ioo7kbIWKsTQiuiuOdCBjcxEogortIKXagTQqvU4rr63CFL7YOVYhXZ5w5ZYh8cceCfhYyvwj7oiFiWH4WMe3VCaEUUdyNk0OcmUOoFFcVNIKK4yvNcWqEEIoqrvIlxpk4IrYji3gRkjFJrH6wcyFn2uUNq7IMjDvyjkPFZ2GcyEUvNdvlT5Fwyfzk/v7F/V9izEfF90m05vI4tT3G3v/LzbNdCzmQiLhouEuakLG71fW7EleFp4py+M9lL6XOvhJzJRFz+DxU31ZnspfS5n8RxTsIzMdVl5pztmex17xxXjq+sUYbaA2XASq8XleOhjOnEzP6kHsgYQ31wycXKebYoz3NXVlhxPbzLVIrvyqmWROW95Vm1Qn2WUOQHIbuqtx9rLrLS586qFTpUjUVW+twqluU+NRWZ57k9aiiycm95Vl6P2PfI/BNuzN8S5cpRivVe2GdSY58Hz7VPVv7E0crMfgv7VWFOy/VP4TM24nirMociV//IL7eSi3wl7LMWx1e1kovs2aq6Q5Xa3ItczUvpOR+5KUUr4alSVa8S53xttuQWqs/s+twSzGW5XsTtx1xKL/KdmIcdpRaZPjeh3MX15qxH5mCP3MU9NKfKh/WlyF3coZxU/xmleFP2fPuKmWM83Zyq+twhU/58tHugcx343c99lykDL0j938IAAAAAAAAAAAAAAAAAAAAAAAAAAAAW7C8rZQD7zOidcQAAAABJRU5ErkJggg=="/></span></div>
+<div>
+<small data-key="PROCESS4_NUMBER">04</small>
+<strong data-key="PROCESS4_LABEL">Conclua o ciclo</strong>
+</div>
+</article>
+</section>
+</div>
+</section>
+
+</main>
+</body>
+</html>

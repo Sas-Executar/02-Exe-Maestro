@@ -1,0 +1,604 @@
+<title>GTM Launch Deck 07/09</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F3F2;
+    --surface:#FFFFFF;
+    --surface-2:#E7ECEA;
+    --ink:#14211F;
+    --ink-soft:#3C4A47;
+    --muted:#657270;
+    --line:#D8DEDB;
+    --accent:#0E7C7B;
+    --accent-ink:#FFFFFF;
+    --accent-soft:#E3F1EF;
+    --signal:#C1541F;
+    --signal-soft:#FBEDE5;
+    --good:#3D7A4E;
+    --code-bg:#EBEEED;
+    --shadow: 0 1px 2px rgba(20,33,31,0.06), 0 8px 24px -12px rgba(20,33,31,0.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E1614;
+      --surface:#15201D;
+      --surface-2:#1B2724;
+      --ink:#EAF1EE;
+      --ink-soft:#C3D0CB;
+      --muted:#8CA09A;
+      --line:#2A3733;
+      --accent:#3FD9C7;
+      --accent-ink:#06201D;
+      --accent-soft:#16302C;
+      --signal:#F0895A;
+      --signal-soft:#2B1A12;
+      --good:#7FBE8E;
+      --code-bg:#18211E;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E1614;
+    --surface:#15201D;
+    --surface-2:#1B2724;
+    --ink:#EAF1EE;
+    --ink-soft:#C3D0CB;
+    --muted:#8CA09A;
+    --line:#2A3733;
+    --accent:#3FD9C7;
+    --accent-ink:#06201D;
+    --accent-soft:#16302C;
+    --signal:#F0895A;
+    --signal-soft:#2B1A12;
+    --good:#7FBE8E;
+    --code-bg:#18211E;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+
+  h1,h2,h3{
+    font-family:'Barlow', 'Arial Narrow', sans-serif;
+    font-weight:700;
+    text-wrap:balance;
+    color:var(--ink);
+    margin:0;
+  }
+
+  .mono{ font-family:'IBM Plex Mono', 'SF Mono', Consolas, monospace; font-variant-numeric: tabular-nums; }
+
+  a{ color:var(--accent); }
+
+  /* ---------- top nav ---------- */
+  .topnav{
+    position:sticky; top:0; z-index:20;
+    display:flex; align-items:center; gap:2px;
+    background:color-mix(in srgb, var(--surface) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom:1px solid var(--line);
+    padding: 0 clamp(16px, 4vw, 40px);
+    overflow-x:auto;
+  }
+  .topnav a{
+    display:inline-block;
+    padding:14px 16px;
+    font-family:'Barlow', sans-serif;
+    font-weight:600;
+    font-size:0.86rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    text-decoration:none;
+    border-bottom:2px solid transparent;
+    white-space:nowrap;
+  }
+  .topnav a:hover, .topnav a.active{ color:var(--ink); border-bottom-color:var(--accent); }
+  .topnav .src{
+    margin-left:auto; padding:14px 0;
+    font-size:0.76rem; color:var(--muted); font-family:'IBM Plex Mono', monospace;
+    white-space:nowrap;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    padding: clamp(28px,5vw,52px) clamp(16px,4vw,40px) 32px;
+    max-width:1040px; margin:0 auto;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:10px;
+  }
+  .masthead h1{ font-size: clamp(1.9rem, 4vw, 2.7rem); line-height:1.1; }
+  .masthead .sub{ color:var(--ink-soft); font-size:1.05rem; max-width:62ch; margin-top:14px; }
+
+  .stat-strip{
+    margin-top:28px;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .stat{
+    background:var(--surface);
+    padding:14px 16px;
+  }
+  .stat .n{ font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:1.5rem; color:var(--ink); }
+  .stat .l{ font-size:0.74rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; margin-top:2px; }
+  .stat.signal .n{ color:var(--signal); }
+
+  .frame-note{
+    margin-top:26px;
+    padding:16px 18px;
+    background:var(--surface-2);
+    border-left:3px solid var(--accent);
+    border-radius:0 8px 8px 0;
+    font-size:0.94rem;
+    color:var(--ink-soft);
+  }
+  .frame-note b{ color:var(--ink); }
+
+  /* ---------- sections ---------- */
+  main{ max-width:1040px; margin:0 auto; padding:0 clamp(16px,4vw,40px) 80px; }
+
+  section.obj{
+    padding-top:56px;
+    scroll-margin-top:64px;
+  }
+  section.obj:first-of-type{ padding-top:36px; }
+
+  .obj-head{
+    display:flex; align-items:baseline; gap:14px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:14px; margin-bottom:26px;
+  }
+  .obj-head .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem; font-weight:600;
+    color:var(--accent-ink); background:var(--accent);
+    padding:3px 9px; border-radius:5px;
+  }
+  .obj-head h2{ font-size:1.6rem; }
+  .obj-head .answers{ margin-left:auto; font-size:0.8rem; color:var(--muted); font-style:italic; }
+
+  h3.subhead{
+    font-size:1.05rem;
+    margin:34px 0 12px;
+    padding-bottom:6px;
+    border-bottom:1px dashed var(--line);
+  }
+  h3.subhead .n{ color:var(--muted); font-weight:500; font-family:'IBM Plex Mono',monospace; font-size:0.85em; margin-right:8px; }
+
+  p{ color:var(--ink-soft); margin:0 0 14px; }
+  p:last-child{ margin-bottom:0; }
+
+  .chain{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.86rem;
+    background:var(--code-bg);
+    border-radius:8px;
+    padding:12px 14px;
+    color:var(--ink-soft);
+    margin:14px 0;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+
+  blockquote{
+    margin:20px 0; padding:16px 18px;
+    background:var(--signal-soft);
+    border-left:3px solid var(--signal);
+    border-radius:0 8px 8px 0;
+    font-family:'Barlow', sans-serif;
+    font-weight:600;
+    font-size:1.02rem;
+    color:var(--ink);
+  }
+  blockquote span{ display:block; font-family:'Public Sans',sans-serif; font-weight:400; font-size:0.88rem; color:var(--ink-soft); margin-top:6px; }
+
+  .tablewrap{ overflow-x:auto; margin:14px 0 22px; border:1px solid var(--line); border-radius:10px; }
+  table{ border-collapse:collapse; width:100%; min-width:520px; background:var(--surface); }
+  table.narrow{ min-width:0; }
+  th,td{ text-align:left; padding:10px 14px; border-bottom:1px solid var(--line); font-size:0.92rem; vertical-align:top; }
+  thead th{
+    font-family:'Barlow', sans-serif; font-weight:600; font-size:0.78rem;
+    text-transform:uppercase; letter-spacing:0.04em; color:var(--muted);
+    background:var(--surface-2);
+  }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr:hover td{ background:var(--surface-2); }
+  td.id, th.id{ font-family:'IBM Plex Mono', monospace; font-weight:600; color:var(--accent); white-space:nowrap; }
+  td.num{ font-family:'IBM Plex Mono', monospace; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  tr.total td{ font-weight:700; background:var(--accent-soft); color:var(--ink); }
+  tr.buffer td{ font-style:italic; color:var(--muted); }
+
+  .gate-flow{
+    font-family:'IBM Plex Mono', monospace; font-size:0.82rem;
+    color:var(--ink-soft); display:flex; flex-wrap:wrap; gap:6px; align-items:center;
+    margin:10px 0 24px;
+  }
+  .gate-flow .arrow{ color:var(--muted); }
+
+  details{
+    margin:26px 0; border:1px solid var(--line); border-radius:10px; background:var(--surface);
+  }
+  details summary{
+    cursor:pointer; padding:14px 16px; font-family:'Barlow',sans-serif; font-weight:600;
+    color:var(--ink-soft); list-style:none; display:flex; align-items:center; gap:8px;
+  }
+  details summary::-webkit-details-marker{ display:none; }
+  details summary::before{ content:"▸"; color:var(--accent); transition:transform .15s; }
+  details[open] summary::before{ transform:rotate(90deg); }
+  details .inner{ padding:0 18px 20px; border-top:1px solid var(--line); }
+  details pre{
+    background:var(--code-bg); padding:14px; border-radius:8px; overflow-x:auto;
+    font-family:'IBM Plex Mono', monospace; font-size:0.8rem; line-height:1.55; color:var(--ink-soft);
+  }
+
+  .daybox{
+    display:grid; grid-template-columns: 56px 1fr; gap:14px;
+    padding:14px 0; border-bottom:1px solid var(--line);
+  }
+  .daybox:last-child{ border-bottom:none; }
+  .daybox .dcode{ font-family:'IBM Plex Mono',monospace; font-weight:700; color:var(--accent); font-size:1rem; }
+  .daybox .ddate{ font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--muted); margin-top:2px; }
+  .daybox .dwork{ font-weight:500; color:var(--ink); font-size:0.94rem; }
+  .daybox .ddod{ color:var(--muted); font-size:0.84rem; margin-top:3px; }
+  .daybox .dh{ font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--accent); float:right; }
+
+  .split{
+    display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:20px 0;
+  }
+  @media (max-width:640px){ .split{ grid-template-columns:1fr; } }
+  .split .card{ padding:16px 18px; border-radius:10px; border:1px solid var(--line); background:var(--surface); }
+  .split .card h4{ margin:0 0 8px; font-family:'Barlow',sans-serif; font-size:0.95rem; text-transform:uppercase; letter-spacing:0.03em; }
+  .split .yes h4{ color:var(--good); }
+  .split .no h4{ color:var(--signal); }
+  .split ol,.split ul{ margin:0; padding-left:18px; color:var(--ink-soft); font-size:0.9rem; }
+  .split li{ margin-bottom:4px; }
+
+  footer{
+    max-width:1040px; margin:40px auto 0; padding:24px clamp(16px,4vw,40px) 60px;
+    border-top:1px solid var(--line);
+    color:var(--muted); font-size:0.82rem;
+  }
+  footer .mono{ display:block; margin-top:6px; word-break:break-all; }
+</style>
+
+<nav class="topnav">
+  <a href="#plano">Plano</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#cronograma">Cronograma</a>
+  <span class="src mono">fonte: Sas-07(1).md</span>
+</nav>
+
+<header class="masthead">
+  <div class="eyebrow">EXECUTAR · GTM 0709</div>
+  <h1>Plano, Roadmap e Cronograma do lançamento de 07/09</h1>
+  <p class="sub">Três leituras do mesmo lançamento, extraídas na íntegra do workbook (Sas-07(1).md) e organizadas como três objetos separados — sem fundir o que responde <em>o quê</em>, o que responde <em>em qual ordem</em> e o que responde <em>quando</em>.</p>
+
+  <div class="stat-strip">
+    <div class="stat"><div class="n mono">25/08</div><div class="l">início</div></div>
+    <div class="stat signal"><div class="n mono">07/09</div><div class="l">launch</div></div>
+    <div class="stat"><div class="n mono">12</div><div class="l">dias de produção</div></div>
+    <div class="stat"><div class="n mono">10</div><div class="l">gates · G0–G9</div></div>
+    <div class="stat"><div class="n mono">60h</div><div class="l">comprometidas</div></div>
+    <div class="stat"><div class="n mono">12h</div><div class="l">reserva</div></div>
+  </div>
+
+  <div class="frame-note">
+    <b>Entenda:</b> Plano = lógica de execução (regras, dependências, critérios). Roadmap = trajetória de gates G0→G9. Cronograma = calendário D1–D12. Os três existem no mesmo documento-fonte; aqui aparecem como três artefatos visuais distintos, sem perder nenhum dado original.
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= PLANO ================= -->
+  <section class="obj" id="plano">
+    <div class="obj-head">
+      <span class="tag">01</span>
+      <h2>Plano</h2>
+      <span class="answers">o quê · por quê</span>
+    </div>
+
+    <p>O ponto central é mudar a unidade de trabalho: em vez de avançar por "texto", depois "imagem", depois "vídeo", depois "CMS", o trabalho passa a ser organizado em <strong>pacotes editoriais fechados</strong>. Um pacote só termina quando:</p>
+    <div class="chain">conteúdo → assets → CTA → brinde → destino → CMS → distribuição → agendamento → tracking → evidência = DONE</div>
+    <p>Trabalho só entra como executável quando escopo, dependências, saída e critérios estão claros — "produzido" não deve ser confundido com "publicado/operacional".</p>
+
+    <h3 class="subhead"><span class="n">1.</span>Objetivo operacional do GTM</h3>
+    <p>Hoje é 25/08/2026. O lançamento é 07/09/2026. Com capacidade de 6h executáveis/dia, existem 72h potenciais nos 12 dias produtivos — recomendação: <strong>60h comprometidas + 12h de reserva</strong> (83% da capacidade), para que qualquer problema de upload, edição, plataforma ou renderização não vire atraso automático.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Fase</th><th>Período</th><th>Dias</th><th>Objetivo</th></tr></thead>
+        <tbody>
+          <tr><td>Produção + configuração</td><td class="num">25/08 → 05/09</td><td class="num">12</td><td>Tudo produzido, integrado, configurado e agendado</td></tr>
+          <tr><td>Buffer administrativo</td><td class="num">06/09</td><td class="num">1</td><td>Observar, testar, corrigir somente exceções</td></tr>
+          <tr><td>Lançamento</td><td class="num">07/09</td><td class="num">1</td><td>Ativar, observar, responder, medir</td></tr>
+          <tr><td>Desenvolvimento novo</td><td>Até lançamento</td><td>mínimo</td><td>Somente bloqueadores reais</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subhead"><span class="n">2.</span>Unidade de trabalho: Content Package</h3>
+    <p>Cada artigo, vídeo principal, página ou peça comercial recebe um ID (ex.: <span class="mono">PKG-ART-001</span>) com os seguintes campos obrigatórios:</p>
+    <div class="tablewrap">
+      <table class="narrow">
+        <thead><tr><th>Campo</th><th>Obrigatório</th></tr></thead>
+        <tbody>
+          <tr><td>Conteúdo canônico</td><td>Texto final</td></tr>
+          <tr><td>Macro 4E</td><td>Entender / Estruturar / Executar / Evoluir</td></tr>
+          <tr><td>Pilar editorial</td><td>Gestão / Risk / Funções Executivas</td></tr>
+          <tr><td>Nível de consciência</td><td>Problema / solução / método / ação</td></tr>
+          <tr><td>Imagem hero</td><td>Sim/não + link</td></tr>
+          <tr><td>Diagramas/infográficos</td><td>Quantidade + links</td></tr>
+          <tr><td>Vídeo principal</td><td>Sim/não + link</td></tr>
+          <tr><td>Derivados</td><td>Shorts/Reels/posts/PDF</td></tr>
+          <tr><td>CTA primário</td><td>Destino</td></tr>
+          <tr><td>CTA secundário</td><td>Destino</td></tr>
+          <tr><td>Brinde</td><td>Nome + arquivo + landing</td></tr>
+          <tr><td>Afiliados</td><td>Livro/referência, se aplicável</td></tr>
+          <tr><td>SEO</td><td>title + description + slug</td></tr>
+          <tr><td>CMS</td><td>rota + status</td></tr>
+          <tr><td>Data publicação</td><td>definida</td></tr>
+          <tr><td>Distribuição</td><td>canais</td></tr>
+          <tr><td>Agendamento</td><td>confirmado</td></tr>
+          <tr><td>Tracking</td><td>UTM/eventos</td></tr>
+          <tr><td>Evidência DONE</td><td>URLs/screenshots/status</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <blockquote>Definition of Done editorial<span>texto aprovado + assets presentes + CTA funcional + brinde funcional + CMS carregado + SEO preenchido + links testados + publicação/agendamento confirmado + evidência registrada.</span></blockquote>
+
+    <h3 class="subhead"><span class="n">3.</span>CTA Registry — obrigatório antes de produzir</h3>
+    <p>Assim nenhuma peça termina com "adicionar CTA depois".</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th class="id">ID</th><th>CTA</th><th>Destino</th><th>Oferta</th></tr></thead>
+        <tbody>
+          <tr><td class="id">CTA-001</td><td>Experimentar Executar</td><td>App/Landing</td><td>App</td></tr>
+          <tr><td class="id">CTA-002</td><td>Ver como funciona</td><td>Showroom</td><td>Produto</td></tr>
+          <tr><td class="id">CTA-003</td><td>Explorar biblioteca</td><td>Biblioteca</td><td>Conteúdo</td></tr>
+          <tr><td class="id">CTA-004</td><td>Aplicar com o e-book</td><td>E-book</td><td>Infoproduto</td></tr>
+          <tr><td class="id">CTA-005</td><td>Conhecer o curso</td><td>Curso</td><td>Infoproduto</td></tr>
+          <tr><td class="id">CTA-006</td><td>Ver se meu projeto cabe</td><td>Studio</td><td>Serviço</td></tr>
+          <tr><td class="id">CTA-007</td><td>Ver o livro</td><td>Amazon Affiliate</td><td>Afiliado</td></tr>
+          <tr><td class="id">CTA-008</td><td>Baixar o material</td><td>Landing brinde</td><td>Lead</td></tr>
+          <tr><td class="id">CTA-009</td><td>Conhecer Office Kit</td><td>Produto</td><td>Físico</td></tr>
+          <tr><td class="id">CTA-010</td><td>Entrar na lista</td><td>Formulário</td><td>Lead</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subhead"><span class="n">4.</span>Brindes também são dependências</h3>
+    <p>Um brinde não pode ser tratado como uma imagem anexada — <span class="mono">GIFT-001</span> é uma cadeia própria:</p>
+    <div class="chain">asset → capa → landing → formulário → confirmação → entrega/download → CTA → tracking → evidence</div>
+    <p>Se o artigo depende do GIFT-001, ele não está DONE enquanto essa cadeia não funcionar.</p>
+
+    <details>
+      <summary>Anexo — estrutura Obsidian, diretório GitHub/CMS e templates diário/semanal (íntegra)</summary>
+      <div class="inner">
+        <p>Vault como grafo operacional, não depósito de notas:</p>
+        <pre>EXECUTAR-GTM-0709/
+├── 00-MASTER/
+│   ├── GTM-0709-MASTER.md
+│   ├── DEPENDENCY-MAP.md
+│   ├── CTA-REGISTRY.md
+│   ├── ROUTE-REGISTRY.md
+│   └── ASSET-REGISTRY.md
+├── 01-WEEKS/
+│   ├── WEEK-01-25-31-AUG.md
+│   └── WEEK-02-01-05-SEP.md
+├── 02-DAYS/  (2026-08-25 … 2026-09-05)
+├── 03-EDITORIAL/ (PKG-ART-001/002/003)
+├── 04-SHOWROOM/   ├── 05-PRODUCTS/   ├── 06-INFOPRODUCTS/
+├── 07-SERVICES/   ├── 08-AFFILIATES/ ├── 09-FORMS/
+├── 10-ASSETS/     ├── 11-CMS/        ├── 12-SCHEDULE/
+├── 13-ANALYTICS/  ├── 14-EVIDENCE/   └── 15-LAUNCH/</pre>
+        <p>Nó central <span class="mono">[[GTM-0709-MASTER]]</span> aponta para tudo. Cada dia aponta: Week → Gate → Package → Asset → CTA → Destination → Evidence.</p>
+
+        <p>Template diário (frontmatter):</p>
+        <pre>id: DAY-2026-08-28
+date: 2026-08-28
+week: WEEK-01
+launch: 2026-09-07
+gate: G3-EDITORIAL
+status: READY
+capacity_h: 6
+planned_h: 5
+buffer_h: 1
+primary_deliverable: PKG-ART-001
+predecessors: [G1-DESTINATIONS]
+cta_ids: [CTA-001]
+asset_ids: [IMG-ART-001-HERO, VID-ART-001]
+cms_route: /blog/...
+publish_date:
+evidence:
+deep_link:</pre>
+        <p>Corpo da nota diária: OUTCOME DO DIA → NOW → DEPENDÊNCIAS → PRODUÇÃO (checklist: texto, hero, imagens, vídeo, CTA, brinde, referências, SEO) → INTEGRAÇÃO (CMS, links, tracking) → DISTRIBUIÇÃO (blog, YouTube, Instagram/TikTok, LinkedIn, agenda) → EVIDÊNCIA (URL/CMS/agenda/assets) → DONE? (FALSE/TRUE).</p>
+
+        <p>Template semanal:</p>
+        <div class="tablewrap">
+          <table class="narrow">
+            <thead><tr><th>Campo</th><th>WEEK 01 · 25–31/08</th><th>WEEK 02 · 01–05/09</th></tr></thead>
+            <tbody>
+              <tr><td>Outcome</td><td>Todo conteúdo principal consegue terminar em um CTA real</td><td>Todo lançamento carregado, agendado, rastreável e testado</td></tr>
+              <tr><td>Gate inicial → final</td><td>Estrutura → Editorial</td><td>Showroom → Freeze</td></tr>
+              <tr><td>Packages</td><td>Institucional + Commerce + ART-001/002/003</td><td>Vídeos/demo + commerce + distribuição + tracking</td></tr>
+              <tr><td>Principal risco</td><td>Produzir antes de existir destino</td><td>"Pronto no computador" ≠ "pronto para lançamento"</td></tr>
+              <tr><td>Regra</td><td>Nenhum pacote fechado pode ficar aguardando integração</td><td>05/09 encerra produção crítica</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Diretório canônico (GitHub + CMS) — conteúdo GTM separado dos componentes da aplicação:</p>
+        <pre>/content/gtm/2026-09-07/
+├── 00-master/     ├── 01-pages/ (home, about, services, studio, products, library)
+├── 02-editorial/ (art-001/002/003)
+├── 03-showroom/   ├── 04-products/  ├── 05-infoproducts/
+├── 06-services/   ├── 07-affiliates/├── 08-forms/
+├── 09-cta/        ├── 10-assets/    ├── 11-cms/
+├── 12-schedule/   ├── 13-analytics/ └── 14-launch/</pre>
+      </div>
+    </details>
+
+    <blockquote>Regra de ouro dos próximos 12 dias<span>Nenhum output produzido pode ficar órfão. Acaba quando o objeto chegou ao destino final exigido pelo lançamento e existe evidência de que ele está pronto para funcionar — texto terminado, vídeo pronto ou subido no CMS ainda não significam "acabou".</span></blockquote>
+  </section>
+
+  <!-- ================= ROADMAP ================= -->
+  <section class="obj" id="roadmap">
+    <div class="obj-head">
+      <span class="tag">02</span>
+      <h2>Roadmap</h2>
+      <span class="answers">em qual sequência</span>
+    </div>
+
+    <div class="frame-note">
+      <b>Atenção:</b> "Roadmap" não aparece no workbook como um artefato canônico único nomeado — é inferido diretamente da cadeia de gates abaixo (a "cadeia única de valor do lançamento").
+    </div>
+
+    <h3 class="subhead">A cadeia única de valor do lançamento</h3>
+    <div class="tablewrap">
+      <table class="narrow">
+        <thead><tr><th class="id">Ordem</th><th>Gate</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="id">G0</td><td>Control Plane</td><td>Obsidian + Master Index + IDs + diretórios</td></tr>
+          <tr><td class="id">G1</td><td>Destinos</td><td>Todas as páginas, ofertas e CTAs possuem destino definido</td></tr>
+          <tr><td class="id">G2</td><td>Commerce</td><td>Produtos, e-books, serviços, Hotmart, afiliados e formulários configurados</td></tr>
+          <tr><td class="id">G3</td><td>Editorial</td><td>Peças-mãe completamente produzidas</td></tr>
+          <tr><td class="id">G4</td><td>Derivados</td><td>Imagens, vídeos, shorts, PDFs, brindes e CTAs vinculados</td></tr>
+          <tr><td class="id">G5</td><td>Showroom</td><td>Demonstrações do app, Agent 007, Studio e sistemas prontas</td></tr>
+          <tr><td class="id">G6</td><td>Distribuição</td><td>CMS carregado + redes/plataformas agendadas</td></tr>
+          <tr><td class="id">G7</td><td>Tracking</td><td>Links, formulários, checkout e analytics funcionando</td></tr>
+          <tr><td class="id">G8</td><td>Freeze</td><td>Nenhum entregável crítico esperando produção/publicação</td></tr>
+          <tr><td class="id">G9</td><td>Launch</td><td>Apenas ativar, observar e responder</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="gate-flow">
+      <span>fundação</span><span class="arrow">→</span><span>destinos</span><span class="arrow">→</span><span>produção</span><span class="arrow">→</span><span>derivados</span><span class="arrow">→</span><span>integração</span><span class="arrow">→</span><span>publicação</span><span class="arrow">→</span><span>agendamento</span><span class="arrow">→</span><span>verificação</span>
+    </div>
+    <p><strong>Não:</strong> produzir tudo → acumular → tentar publicar tudo em 06/09.</p>
+  </section>
+
+  <!-- ================= CRONOGRAMA ================= -->
+  <section class="obj" id="cronograma">
+    <div class="obj-head">
+      <span class="tag">03</span>
+      <h2>Cronograma</h2>
+      <span class="answers">quando</span>
+    </div>
+
+    <h3 class="subhead">Cronograma factível — 25/08 a 05/09</h3>
+    <p>Capacidade comprometida: <strong>60h / 72h</strong> disponíveis.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th class="id">Dia</th><th>Data</th><th>Trabalho principal</th><th>DoD do dia</th><th class="id">H</th></tr></thead>
+        <tbody>
+          <tr><td class="id">D1</td><td>25/08 · ter</td><td>Control Plane: vault, Master Index, IDs, registries, dependencies; iniciar dependências externas Amazon/Hotmart</td><td>Obsidian navegável + inventário integral + pendências externas disparadas</td><td class="num">6h</td></tr>
+          <tr><td class="id">D2</td><td>26/08 · qua</td><td>Destinos e CTAs: home, app, serviços, Studio, produtos, biblioteca, e-books; mapear rotas e formulários</td><td>Todo CTA crítico tem um destino real ou predecessor explícito</td><td class="num">6h</td></tr>
+          <tr><td class="id">D3</td><td>27/08 · qui</td><td>Commerce: produtos físicos, e-books, curso, Studio, afiliados, Hotmart, pricing/copy/formulários</td><td>Ofertas cadastráveis + assets identificados + checkouts/links configuráveis</td><td class="num">6h</td></tr>
+          <tr><td class="id">D4</td><td>28/08 · sex</td><td>PKG-ART-001 completo</td><td>Texto + imagens + vídeo + CTA + brinde + SEO + CMS preparados</td><td class="num">5h</td></tr>
+          <tr><td class="id">D5</td><td>29/08 · sáb</td><td>Publicar/agendar ART-001; depois PKG-ART-002</td><td>ART-001 encerrado; ART-002 produzido</td><td class="num">5h</td></tr>
+          <tr><td class="id">D6</td><td>30/08 · dom</td><td>Publicar/agendar ART-002; depois PKG-ART-003</td><td>ART-002 encerrado; ART-003 produzido</td><td class="num">5h</td></tr>
+          <tr><td class="id">D7</td><td>31/08 · seg</td><td>Agendar ART-003 + Showroom 01 — Executar</td><td>3 peças editoriais fechadas; demo 01 pronta</td><td class="num">5h</td></tr>
+          <tr><td class="id">D8</td><td>01/09 · ter</td><td>Publicar/agendar Showroom 01 + Showroom 02 — Agent 007</td><td>Demo 01 encerrada; demo 02 pronta</td><td class="num">5h</td></tr>
+          <tr><td class="id">D9</td><td>02/09 · qua</td><td>Publicar/agendar Showroom 02 + Showroom 03 — Studio / físico-digital</td><td>Showroom principal completo</td><td class="num">5h</td></tr>
+          <tr><td class="id">D10</td><td>03/09 · qui</td><td>CMS + distribuição final: derivados, redes, newsletter, produtos, Hotmart, afiliados</td><td>Todo package em CMS e calendário</td><td class="num">5h</td></tr>
+          <tr><td class="id">D11</td><td>04/09 · sex</td><td>QA ponta a ponta: mobile, CTA, forms, checkout, downloads, links, afiliados, tracking, SEO</td><td>Broken links = 0; fluxo de conversão testado</td><td class="num">4h</td></tr>
+          <tr><td class="id">D12</td><td>05/09 · sáb</td><td>Dress rehearsal + Freeze</td><td>Tudo agendado; backlog crítico = 0; GTM READY</td><td class="num">3h</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Reserva de 12h:</strong> não é "tempo livre" — absorve re-render de vídeo, problema de CMS/Hotmart, formulário, link, exportação, revisão ou qualquer predecessor inesperado.</p>
+
+    <h3 class="subhead">06/09 · Domingo — admin/observation only</h3>
+    <p>Nada de produzir uma nova campanha; somente corrigir bloqueadores reais.</p>
+    <div class="tablewrap">
+      <table class="narrow">
+        <thead><tr><th>Verificar</th><th>Estado esperado</th></tr></thead>
+        <tbody>
+          <tr><td>CMS</td><td>publicado/agendado</td></tr>
+          <tr><td>Hotmart</td><td>oferta disponível</td></tr>
+          <tr><td>Produtos</td><td>rotas funcionando</td></tr>
+          <tr><td>Afiliados</td><td>links corretos</td></tr>
+          <tr><td>Formulários</td><td>leads chegando</td></tr>
+          <tr><td>E-mail</td><td>automação funcionando</td></tr>
+          <tr><td>Vídeos</td><td>uploads agendados</td></tr>
+          <tr><td>Social</td><td>agenda correta</td></tr>
+          <tr><td>Analytics</td><td>eventos chegando</td></tr>
+          <tr><td>App</td><td>produção estável</td></tr>
+          <tr><td>Showroom</td><td>vídeos acessíveis</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subhead">07/09 · Segunda — LAUNCH</h3>
+    <div class="split">
+      <div class="card yes">
+        <h4>É</h4>
+        <ol>
+          <li>Ativar</li>
+          <li>Conferir</li>
+          <li>Observar</li>
+          <li>Responder</li>
+          <li>Registrar</li>
+        </ol>
+      </div>
+      <div class="card no">
+        <h4>Não é</h4>
+        <ul>
+          <li>Editar landing</li>
+          <li>Terminar vídeo</li>
+          <li>Produzir post</li>
+          <li>Cadastrar produto</li>
+        </ul>
+      </div>
+    </div>
+    <blockquote>Se isso estiver acontecendo em 07/09, o Freeze falhou.</blockquote>
+
+    <h3 class="subhead">Somatório por Value Stream</h3>
+    <div class="tablewrap">
+      <table class="narrow">
+        <thead><tr><th>Value Stream</th><th class="id">Horas</th></tr></thead>
+        <tbody>
+          <tr><td>Control Plane / Obsidian / inventário</td><td class="num">6h</td></tr>
+          <tr><td>Páginas, destinos, CTAs e formulários</td><td class="num">10h</td></tr>
+          <tr><td>Commerce / Hotmart / afiliados / produtos</td><td class="num">8h</td></tr>
+          <tr><td>3 Packages editoriais</td><td class="num">15h</td></tr>
+          <tr><td>3 Showrooms / demos</td><td class="num">9h</td></tr>
+          <tr><td>CMS + distribuição + agendamento</td><td class="num">5h</td></tr>
+          <tr><td>QA / tracking / rehearsal</td><td class="num">7h</td></tr>
+          <tr class="total"><td>TOTAL</td><td class="num">60h</td></tr>
+          <tr class="buffer"><td>BUFFER</td><td class="num">12h</td></tr>
+          <tr class="total"><td>CAPACIDADE TOTAL · 12 DIAS</td><td class="num">72h</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Fonte única: <strong>Sas-07(1).md</strong> — seção "Plano Final Integrado" (2.103 linhas · 76.536 caracteres), preservada na íntegra no workbook original enviado (EXECUTAR_WORKBOOK_REPORT_READER.html). Este report reorganiza o mesmo conteúdo em três leituras visuais — Plano, Roadmap, Cronograma — sem resumir ou substituir nenhum dado de origem.
+  <span class="mono">sha256 9c058435c9230eff25c5a3f6486e7b2b97b144a1a38ac8d8044135de31cd3dc3</span>
+</footer>

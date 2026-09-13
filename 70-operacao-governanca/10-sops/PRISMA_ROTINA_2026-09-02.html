@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PRISMA · Rotina Operacional · Setembro 2026</title>
+<style>
+@page { size: A4 portrait; margin: 8mm; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; background:#eef1f4; color:#111827;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+.sheet {
+  width: 194mm; min-height: 281mm; margin: 8mm auto; background:#fff;
+  border:1px solid #d8dee6; padding:7mm; box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+.header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:5mm; }
+.brand { font-size:24px; font-weight:850; letter-spacing:.02em; }
+.brand small { display:block; font-size:10px; font-weight:650; color:#667085; margin-top:2px; }
+.meta { text-align:right; font-size:11px; font-weight:700; }
+.section { display:grid; grid-template-columns:29mm 1fr; border:1px solid #cfd7e3; border-radius:9px; overflow:hidden; margin-bottom:4mm; }
+.side { color:white; padding:5mm 4mm; min-height:43mm; display:flex; flex-direction:column; justify-content:space-between; }
+.a1 { background:#0b5fb3; } .a2 { background:#14804a; } .a3 { background:#7356a7; }
+.code { font-size:23px; font-weight:900; line-height:1; }
+.label { font-size:12px; font-weight:850; margin-top:4px; }
+.side p { font-size:9px; line-height:1.25; margin:8px 0 0; }
+.content { padding:4mm; }
+h2 { font-size:12px; margin:0 0 3mm; letter-spacing:.02em; }
+.calendar { width:100%; border-collapse:collapse; table-layout:fixed; font-size:8px; }
+.calendar th { background:#0b67b9; color:#fff; padding:2mm 1mm; }
+.calendar td { border:1px solid #d9e0e8; height:22mm; vertical-align:top; padding:1.5mm; position:relative; }
+.calendar td.empty { background:#f8fafc; }
+.calendar .day { text-align:right; font-weight:800; color:#475467; margin-bottom:1mm; }
+.calendar td.today { outline:2px solid #0b67b9; outline-offset:-2px; }
+.evt { display:flex; gap:1.2mm; align-items:flex-start; margin:1mm 0; line-height:1.15; font-size:7.4px; }
+.dot { width:4px; height:4px; min-width:4px; border-radius:50%; background:#0b67b9; margin-top:2px; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:3mm; margin-top:3mm; }
+.box { border:1px solid #d7dee8; border-radius:7px; padding:3mm; background:#fbfcfe; }
+.box h3 { font-size:9px; margin:0 0 2mm; text-transform:uppercase; color:#344054; }
+.prio { display:flex; align-items:flex-start; gap:2mm; font-size:8px; margin:1.5mm 0; }
+.num { background:#0b67b9; color:#fff; border-radius:50%; width:16px; height:16px; display:inline-grid; place-items:center; font-size:8px; font-weight:800; flex:0 0 auto; }
+.flow { display:grid; grid-template-columns:repeat(3,1fr); gap:3mm; }
+.step { border:1px solid #cfe5d8; background:#f3faf6; border-radius:8px; padding:3mm; min-height:27mm; }
+.step b { display:block; font-size:9px; margin-bottom:1.5mm; color:#0d6c3d; }
+.step span { font-size:7.8px; line-height:1.25; display:block; }
+.rule { margin-top:3mm; display:grid; grid-template-columns:repeat(4,1fr); gap:2mm; }
+.rule div { background:#edf8f1; border:1px solid #d7eadf; border-radius:6px; padding:2.5mm; font-size:7.6px; text-align:center; }
+.qr-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3mm; }
+.qr-card { border:1px solid #e1d9ed; background:#fbf9fd; border-radius:7px; padding:2.5mm; text-align:center; overflow:hidden; }
+.qr-card img { width:25mm; height:25mm; image-rendering:pixelated; }
+.qr-title { font-weight:800; font-size:8px; margin-top:1mm; }
+.qr-url { font-size:5.5px; line-height:1.15; color:#667085; word-break:break-all; margin-top:1mm; }
+.notes { display:grid; grid-template-columns:1.5fr 1fr; gap:3mm; margin-top:3mm; }
+.notes ul { padding-left:4mm; margin:1mm 0; font-size:7.6px; line-height:1.35; }
+.ids { font-size:7.6px; line-height:1.4; }
+.footer { display:flex; justify-content:space-between; align-items:center; gap:4mm; margin-top:2mm; font-size:8px; color:#475467; }
+.print-btn { border:1px solid #0b67b9; background:#fff; color:#0b5fb3; border-radius:6px; padding:2mm 4mm; font-weight:800; cursor:pointer; }
+.status { font-weight:700; }
+@media print {
+  body { background:white; }
+  .sheet { margin:0; box-shadow:none; border:none; width:auto; min-height:auto; }
+  .print-btn { display:none; }
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="header">
+    <div class="brand">▲ PRISMA<small>Rotina operacional · baixa carga cognitiva</small></div>
+    <div class="meta">PAINEL OPERACIONAL<br>SETEMBRO / 2026<br><span style="font-weight:500">Base: tarefas e marcos já declarados</span></div>
+  </div>
+
+  <section class="section">
+    <div class="side a1">
+      <div><div class="code">A1</div><div class="label">AGORA</div></div>
+      <p>Calendário, prioridades e atalhos principais.</p>
+    </div>
+    <div class="content">
+      <h2>CALENDÁRIO · SETEMBRO 2026</h2>
+      <table class="calendar">
+        <thead><tr><th>SEG</th><th>TER</th><th>QUA</th><th>QUI</th><th>SEX</th><th>SÁB</th><th>DOM</th></tr></thead>
+        <tbody><tr><td class="empty"></td><td class=""><div class="day">1</div></td><td class="today"><div class="day">2</div><div class="evt"><span class="dot"></span><span>DAT-03</span></div><div class="evt"><span class="dot"></span><span>BLOG-03</span></div></td><td class=""><div class="day">3</div><div class="evt"><span class="dot"></span><span>Organizar diretório local + Drive</span></div><div class="evt"><span class="dot"></span><span>Selecionar skills da fase</span></div><div class="evt"><span class="dot"></span><span>BLOG-04</span></div></td><td class=""><div class="day">4</div><div class="evt"><span class="dot"></span><span>DAT-04</span></div><div class="evt"><span class="dot"></span><span>Validar documentação e centralizar plugin editorial</span></div></td><td class=""><div class="day">5</div></td><td class=""><div class="day">6</div></td></tr><tr><td class=""><div class="day">7</div><div class="evt"><span class="dot"></span><span>Lançar blog + artigos + redes</span></div></td><td class=""><div class="day">8</div></td><td class=""><div class="day">9</div></td><td class=""><div class="day">10</div></td><td class=""><div class="day">11</div></td><td class=""><div class="day">12</div></td><td class=""><div class="day">13</div></td></tr><tr><td class=""><div class="day">14</div><div class="evt"><span class="dot"></span><span>App EXECUTAR · beta</span></div></td><td class=""><div class="day">15</div></td><td class=""><div class="day">16</div></td><td class=""><div class="day">17</div></td><td class=""><div class="day">18</div></td><td class=""><div class="day">19</div></td><td class=""><div class="day">20</div></td></tr><tr><td class=""><div class="day">21</div><div class="evt"><span class="dot"></span><span>Lançar serviços</span></div></td><td class=""><div class="day">22</div></td><td class=""><div class="day">23</div></td><td class=""><div class="day">24</div></td><td class=""><div class="day">25</div></td><td class=""><div class="day">26</div></td><td class=""><div class="day">27</div></td></tr><tr><td class=""><div class="day">28</div><div class="evt"><span class="dot"></span><span>Infoprodutos + produtos + afiliados</span></div></td><td class=""><div class="day">29</div></td><td class=""><div class="day">30</div></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr></tbody>
+      </table>
+      <div class="grid2">
+        <div class="box">
+          <h3>Prioridades imediatas</h3>
+          <div class="prio"><span class="num">1</span><span>Fechar os itens com prazo registrado em 02–04/09 e validar o que já foi concluído.</span></div>
+          <div class="prio"><span class="num">2</span><span>Organizar diretório local + Drive e padronizar nomes antes de produzir novos artefatos.</span></div>
+          <div class="prio"><span class="num">3</span><span>Consolidar skills, documentação, plugin editorial e testes dos runbooks.</span></div>
+        </div>
+        <div class="box">
+          <h3>Regra cognitiva</h3>
+          <div class="prio"><span class="num">1</span><span>Uma prioridade visível por vez.</span></div>
+          <div class="prio"><span class="num">2</span><span>Externalizar memória em diretório, IDs e checklists.</span></div>
+          <div class="prio"><span class="num">3</span><span>Não iniciar novo bloco antes de registrar a saída do anterior.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="side a2">
+      <div><div class="code">A2</div><div class="label">PROCESSO</div></div>
+      <p>Sequência de ações para reduzir decisões repetidas e WIP.</p>
+    </div>
+    <div class="content">
+      <h2>SEQUÊNCIA OPERACIONAL</h2>
+      <div class="flow">
+        <div class="step"><b>1 · ORGANIZAR</b><span>Diretório local + Drive; identificar, nomear e separar arquivos por contexto.</span></div>
+        <div class="step"><b>2 · SELECIONAR</b><span>Definir as skills necessárias para a fase e registrar quais serão usadas.</span></div>
+        <div class="step"><b>3 · VALIDAR</b><span>Revisar documentação e confirmar que a base está correta antes da centralização.</span></div>
+        <div class="step"><b>4 · CENTRALIZAR</b><span>Usar a referência Admin Standalone para consolidar arquivos no plugin editorial.</span></div>
+        <div class="step"><b>5 · TESTAR</b><span>Executar os runbooks produzidos e registrar evidências, falhas e ajustes.</span></div>
+        <div class="step"><b>6 · MAPEAR</b><span>Imprimir mapa de palavras/conceitos e cruzar pilares × objetivo × problema × público para gerar CTAs e assets.</span></div>
+      </div>
+      <div class="rule">
+        <div><b>Entrada</b><br>capturar tarefa</div>
+        <div><b>Foco</b><br>1 bloco ativo</div>
+        <div><b>Entrega</b><br>saída verificável</div>
+        <div><b>Registro</b><br>ID + evidência</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="side a3">
+      <div><div class="code">A3</div><div class="label">REFERÊNCIAS</div></div>
+      <p>QR Codes, links, IDs e notas operacionais.</p>
+    </div>
+    <div class="content">
+      <h2>REFERÊNCIAS E ATALHOS</h2>
+      <div class="qr-grid">
+    <div class="qr-card">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUgAAAFIAQAAAAAab1qeAAACYUlEQVR4nO1a4W6DIQi8W773f+XbDzh0S7bYZI2yaNfO1ks+IAgHSmFxfKwCL/Ii/wwJ2UEFQBBUU+WvAeui0V7kg7QZIYJgWpMUIH8Fd8vZCkkSsFuChACRIKbVA+RsgHzGlBJAEWLsexv0fU//38iwn8SYUz8i3/H0/4F8gEo6IihQECVGGB2rXTTab8+xq0VQ8QLSP73aRaO9yGlTUyD8BgB92fFdNNqOdLjExDbrH0ny8qVl5AMIwTWDbFIAy7B0yt8tZyNkOGaSI4p2WJBOSjpBzj5IcSZHtHWTgzLi6QFyNkBCLtMlVf0uL7mov/X74gjC6TmDcIZHKovQKJjaaLTdnjkBIh3RuSkiZ1X2XTTab8/IN+GdKgKf7DMdVW002h8/R59TyIAqOW7m342fi0NpOqch5TwW/V3XnutIZVbybueUoWCyf4CcXZCVcrJsR4ZMZX8katH9cnZAZtKJLnJ+ZFK3iW999Ko9k3QyydGwMYTqOXXRaD+Sgy5FCsoS3qYmdfn8C0hRckMePumklLbNLLVfziZIQiApQu7Ky4bN+HnrzdUxMSWgSiXkkUcFz+1yNkIKlPKUXSAHd3Kr7gw5WyCdy5MZOcObJbmGv/t9cfgQrkw5hc1yzrvfl5Hf+vKouJndOpXJu2i0F/mM/lxsd2bF7jKpaFQXjbbbEyNGTh4ZWap6y9c/18YD5EFx8iJRYjnmdHeki0bHIAUSzCa9u0qojvMxcjZCupE815q+VHuSnOci5/t1eQXUqSivhtz7Ia8gv9yfl68oj19UR/JdNDqGf254+kVe5O/jEwNuVElHAtfbAAAAAElFTkSuQmCC" alt="QR Code HUB Editorial">
+      <div class="qr-title">HUB Editorial</div>
+      <div class="qr-url">https://drive.google.com/drive/folders/12v_RxSvRRilo3zkCWCkrDTy4y8MlhVK2</div>
+    </div>
+    
+    <div class="qr-card">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUgAAAFIAQAAAAAab1qeAAACZElEQVR4nO2a24rcMBBET4X9/1+uPHTpsoQsMiQra5GGGQ92gaWipa6+yCyOX6vAi7zIf4b8ANU/C4ww5Bfk/vSYFW3ns7gTYDmMWljG09NTVrSfTzRxitW4ze1cTlnRC/isYRlZfZcLo+GuTlnRa5CyZIwtGYz1jW//IcgPyGbHIbQOUfp+9xvmeQoStx3tv3wa7JQV7UVOB2S5ISa1RDfO//T2n4fE/sNEbRvXo/q59rk65NkOS9JbLic/HJJ3z/MUZIzT/Ts8UNkoYPva5+pwCHQjsJHZaS3CL5/PkAJIvOnw6orob3z0SH82nQmAjJGtul+xknXPz0dICaERDmlSnkTav2GeRyBV+kh4xO3t4qFQt8/zCKRMCy1r2wsreVB17XT10upQD4iKun6vWJ7un7Ki7f6ohpL3pGfsjHOkyrr5+XVkbXF1fZQdLiX05NrnMjJ6CEj2WCl1lFX26tHueZ6CLPHeLok9TbfKSo3ceHN1fNR2b8VNaJKenKRw/dEzZMqZ2fQ2qPL0ydjp6qWHer4CzGh3WXbkqBqrNz5aHFUvdlR8ZUS6t69USBIip6zoBf6dnlTOsZn4iNQ/rNsf8gDZm0JinZWzI6VjVAHT/nkehKySe/0jPkiyysNz83UPkNGZVMIuGqlVO6I/rz9aR6oGo4IkYp5Mxbrt8zwC+am/7lNKPo1h/eEpK9rP50ybe56peB0B/CkreheydYRBK3Y2cf+ueR6ArCzIqHgk/mxG+pp5vho59deNhF3r++wNtff8fIKMe0+clKxnbxtROpj2z/ME5Nxf9/1vv8iL/Hr8Bvvgai54h6rqAAAAAElFTkSuQmCC" alt="QR Code Governança HUB">
+      <div class="qr-title">Governança HUB</div>
+      <div class="qr-url">https://drive.google.com/drive/folders/1c-WH5LBkQNa_roT8s4V4yj0mc9NvJTu-</div>
+    </div>
+    
+    <div class="qr-card">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASgAAAEoAQAAAADDfFG0AAAB6UlEQVR4nO2awWrEMAxEZ0r+/5dfD5JsJ0thL12r1ArE3mRgByHLIzlGb9jXO6CDOqhXowKMuEAg5ZCQruw/j7okIUmWhJHB+YTxpiv7Pf6SJSSsdJu8/GQLrz+AMhldFpbb8GqFuuYUj8GPXbMr+03+Su+Ep8JrGV7s4tUV9bI/3q6CdGX/edSy8hwbY67Kzby6ogQi3JOyq0Ir1Jg48XWzcIlguCxiK2VrTLqy35XvrdKosSJjWVohLfqy36UnMqLCaUQKQ8KEYO3Kfpu+x5LATIFvOPr+xUp/zf0wFqRHUeQTX4u5gsixHI2qiJxjW/bbUDaaWR6QbI9c1pz9p1GZqYxB2NGZiIS/k1dD1BVuGjnMI4FFZEUe68p+Vz0UAmKuP1ztiqiRurLfg4qlhwl3IUwJi5Pv72ZGC6eyVW6RkblCWnRlvw1FRJUsO7ZGYsqJr7tBlNqzH8EqYDn9iRdUSocUX1VIkk9PPfRARdE4EhYyUP0JTj10s7W/umiIOlTz2R/vdi1HG+TouofCOPG12Hq+7Xli62qBHT3xsOpH5044utH1+vSjf0JVcEnxCQVQZ7h/gP0WlOtrgND6LiW2m1cf1HK+Pcqgmcfym4q27Pfkr5zk7Sn24eSvac8vS37/Hw/qP6G+AbfGJd44t7DzAAAAAElFTkSuQmCC" alt="QR Code Blog · GitHub">
+      <div class="qr-title">Blog · GitHub</div>
+      <div class="qr-url">https://github.com/Sas-Executar/payload-website-starter</div>
+    </div>
+    </div>
+      <div class="notes">
+        <div class="box">
+          <h3>Notas operacionais</h3>
+          <ul>
+            <li>Os QR Codes acima correspondem exatamente às URLs exibidas.</li>
+            <li>Não há eventos no Google Calendar primário entre 02/09 e 09/09; o painel usa apenas tarefas e marcos já declarados.</li>
+            <li>Antes de avançar, validar o status real dos prazos herdados de DAT-03, BLOG-03, BLOG-04 e DAT-04.</li>
+            <li>Escanear os QR Codes com o celular antes da impressão definitiva.</li>
+          </ul>
+        </div>
+        <div class="box ids">
+          <h3>Marcos registrados</h3>
+          <b>07/09</b> · Blog + artigos + redes<br>
+          <b>14/09</b> · App EXECUTAR beta<br>
+          <b>21/09</b> · Serviços<br>
+          <b>28/09</b> · Infoprodutos + produtos + afiliados
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <button class="print-btn" onclick="window.print()">IMPRIMIR / EXPORTAR PDF</button>
+    <div>Formato: A4 · Escala: 100% · Alto contraste · QR Codes testáveis</div>
+    <div class="status">▲ PRISMA</div>
+  </div>
+</div>
+</body>
+</html>

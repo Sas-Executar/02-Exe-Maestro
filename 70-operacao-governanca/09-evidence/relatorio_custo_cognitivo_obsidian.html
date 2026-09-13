@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Use IA para Diminuir carga cognitiva no trabalho</title>
+<meta name="description" content="Relatório navegável em HTML, estruturado em estilo de Callouts do Obsidian." />
+<style>
+:root{
+  --bg:#f6f7f9;
+  --panel:#ffffff;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --line:#e5e7eb;
+  --shadow:0 8px 28px rgba(17,24,39,.08);
+  --radius:16px;
+  --info-bg:#eff6ff; --info-bd:#93c5fd; --info-fg:#1d4ed8;
+  --tip-bg:#f0fdf4; --tip-bd:#86efac; --tip-fg:#15803d;
+  --success-bg:#ecfdf5; --success-bd:#6ee7b7; --success-fg:#047857;
+  --warning-bg:#fffbeb; --warning-bd:#fcd34d; --warning-fg:#a16207;
+  --danger-bg:#fef2f2; --danger-bd:#fca5a5; --danger-fg:#b91c1c;
+  --question-bg:#faf5ff; --question-bd:#d8b4fe; --question-fg:#7e22ce;
+  --example-bg:#f5f3ff; --example-bd:#c4b5fd; --example-fg:#6d28d9;
+  --note-bg:#f8fafc; --note-bd:#cbd5e1; --note-fg:#475569;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.6;
+}
+a{color:#2563eb;text-decoration:none}
+a:hover{text-decoration:underline}
+.app{display:grid;grid-template-columns:290px minmax(0,1fr);min-height:100vh}
+.sidebar{
+  position:sticky;top:0;height:100vh;padding:24px 18px;border-right:1px solid var(--line);
+  background:rgba(255,255,255,.92);backdrop-filter:blur(14px);overflow:auto
+}
+.brand{font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.brand a{color:var(--text);text-decoration:none}
+.subtitle{font-size:13px;color:var(--muted);margin-bottom:18px}
+.search{
+  width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;
+  font-size:14px;outline:none;margin-bottom:16px
+}
+.search:focus{border-color:#94a3b8}
+.nav a{
+  display:block;padding:9px 10px;border-radius:10px;color:#334155;font-size:14px;margin:2px 0
+}
+.nav a:hover{background:#f1f5f9;text-decoration:none}
+.controls{display:grid;gap:8px;margin-top:18px}
+button,.btn{
+  appearance:none;border:1px solid var(--line);background:#fff;color:#111827;padding:10px 12px;
+  border-radius:11px;font-weight:650;cursor:pointer;text-align:center;font-size:14px
+}
+button:hover,.btn:hover{background:#f8fafc;text-decoration:none}
+.main{padding:48px 32px 72px}
+.wrap{max-width:980px;margin:0 auto}
+.hero{
+  background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:var(--shadow);margin-bottom:24px
+}
+.kicker{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#64748b}
+h1{font-size:clamp(30px,5vw,50px);line-height:1.04;letter-spacing:-.04em;margin:10px 0 12px}
+.hero p{font-size:17px;color:#475569;max-width:760px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.pill{border:1px solid var(--line);background:#f8fafc;border-radius:999px;padding:6px 10px;font-size:12px;color:#475569}
+.callout{
+  border:1px solid;border-radius:var(--radius);padding:0;margin:14px 0;overflow:hidden;box-shadow:0 2px 10px rgba(15,23,42,.03)
+}
+.callout summary{
+  list-style:none;cursor:pointer;padding:16px 18px;font-weight:800;display:flex;align-items:center;gap:10px
+}
+.callout summary::-webkit-details-marker{display:none}
+.callout summary::after{content:"+";margin-left:auto;font-size:20px;font-weight:400;opacity:.6}
+.callout[open] summary::after{content:"–"}
+.callout .content{padding:0 18px 18px}
+.callout p:last-child{margin-bottom:0}
+.info{background:var(--info-bg);border-color:var(--info-bd)} .info summary{color:var(--info-fg)}
+.tip{background:var(--tip-bg);border-color:var(--tip-bd)} .tip summary{color:var(--tip-fg)}
+.success{background:var(--success-bg);border-color:var(--success-bd)} .success summary{color:var(--success-fg)}
+.warning{background:var(--warning-bg);border-color:var(--warning-bd)} .warning summary{color:var(--warning-fg)}
+.danger{background:var(--danger-bg);border-color:var(--danger-bd)} .danger summary{color:var(--danger-fg)}
+.question{background:var(--question-bg);border-color:var(--question-bd)} .question summary{color:var(--question-fg)}
+.example{background:var(--example-bg);border-color:var(--example-bd)} .example summary{color:var(--example-fg)}
+.note{background:var(--note-bg);border-color:var(--note-bd)} .note summary{color:var(--note-fg)}
+.section-title{margin:34px 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#64748b;font-weight:800}
+.formula{
+  font-weight:800;padding:16px;border-radius:13px;background:#fff;border:1px dashed rgba(15,23,42,.16);
+  overflow:auto
+}
+footer{color:#64748b;font-size:13px;margin-top:34px;padding-top:18px;border-top:1px solid var(--line)}
+.hidden{display:none!important}
+@media(max-width:820px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .main{padding:24px 16px 52px}
+  .hero{padding:22px}
+}
+@media print{
+  body{background:#fff}
+  .app{display:block}
+  .sidebar{display:none}
+  .main{padding:0}
+  .wrap{max-width:none}
+  .hero{box-shadow:none}
+  .callout{break-inside:avoid}
+  details .content{display:block!important}
+  details:not([open]) .content{display:block!important}
+  details summary::after{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><a href="#top">Custo Cognitivo</a></div>
+    <div class="subtitle">Relatório navegável · estilo Obsidian</div>
+    <input id="search" class="search" type="search" placeholder="Buscar no relatório…" aria-label="Buscar no relatório">
+    <nav class="nav">
+      <a href="#aprender">O que você vai aprender</a>
+      <a href="#contexto">Contexto</a>
+      <a href="#risco">O que é risco cognitivo?</a>
+      <a href="#controle">Como controlar e gerir</a>
+      <a href="#ia">Como a IA pode ajudar</a>
+      <a href="#leitura">Para leitura</a>
+      <a href="#fisico">Ambiente físico</a>
+      <a href="#entender">Para entender mais</a>
+      <a href="#cta">Interação</a>
+    </nav>
+    <div class="controls">
+      <button onclick="window.print()">Imprimir / Salvar PDF</button>
+      <button onclick="copyMarkdown()">Copiar Markdown p/ Obsidian</button>
+      <a class="btn" href="https://custocognitivo.org/blog" target="_blank" rel="noopener">Abrir blog Custo Cognitivo</a>
+    </div>
+  </aside>
+
+  <main class="main" id="top">
+    <div class="wrap">
+      <header class="hero">
+        <div class="kicker">Dica prática · Custo Cognitivo</div>
+        <h1>Use IA para diminuir carga cognitiva no trabalho</h1>
+        <p>3 estratégias operacionais para incluir na rotina, reorganizadas em uma leitura navegável inspirada em Callouts do Obsidian.</p>
+        <div class="meta">
+          <span class="pill">HTML autocontido</span>
+          <span class="pill">Navegável</span>
+          <span class="pill">Imprimível</span>
+          <span class="pill">Copiável para Obsidian</span>
+        </div>
+      </header>
+
+      <div id="content">
+        <div class="section-title">Relatório convertido</div>
+
+        <details class="callout info" id="aprender" open>
+          <summary>ℹ️ INFO | O que você vai aprender</summary>
+          <div class="content">
+            <p>Como identificar custos cognitivos, quais estratégias usar e como Inteligência Artificial pode te ajudar.</p>
+          </div>
+        </details>
+
+        <details class="callout info" id="contexto" open>
+          <summary>ℹ️ INFO | Contexto</summary>
+          <div class="content">
+            <p>Identificar, prevenir e reduzir riscos cognitivos da neurodivergência promove desempenho, segurança e autonomia no trabalho.</p>
+          </div>
+        </details>
+
+        <details class="callout example" id="risco" open>
+          <summary>📖 EXAMPLE | O que é um risco cognitivo?</summary>
+          <div class="content">
+            <p>Uma pessoa recebe três demandas simultâneas, é interrompida várias vezes e acaba esquecendo uma etapa crítica do trabalho.</p>
+            <p>Nesse caso, o risco cognitivo é a possibilidade de erro, atraso ou omissão causada pela combinação entre exigência do trabalho e funções cognitivas mais vulneráveis naquele contexto.</p>
+            <p>Exemplos comuns no trabalho incluem: esquecimento de etapas, perda de prazos, dificuldade de priorização, sobrecarga sensorial, distração, troca excessiva de contexto e decisões impulsivas.</p>
+          </div>
+        </details>
+
+        <details class="callout danger" open>
+          <summary>⛔ DANGER | Em uma frase</summary>
+          <div class="content">
+            <p>“É o risco de esquecer, atrasar, confundir ou errar uma tarefa quando as demandas ultrapassam os recursos cognitivos disponíveis.”</p>
+          </div>
+        </details>
+
+        <details class="callout tip" id="controle" open>
+          <summary>💡 TIP | Como controlar e gerir riscos cognitivos?</summary>
+          <div class="content">
+            <div class="formula">Vulnerabilidade cognitiva + demanda do trabalho → risco → barreira de controle → menor probabilidade de falha.</div>
+            <p>Não é tentar corrigir a pessoa; é estruturar tarefa, ambiente e ferramentas para impedir que uma vulnerabilidade cognitiva se transforme em falha.</p>
+          </div>
+        </details>
+
+        <details class="callout tip" id="ia" open>
+          <summary>🤖 TIP | Como a Inteligência Artificial pode ajudar?</summary>
+          <div class="content">
+            <p>Tire um print e envie à sua IA preferida para obter esses mesmos resultados operacionais.</p>
+          </div>
+        </details>
+
+        <details class="callout note" id="leitura">
+          <summary>📝 NOTE | Para leitura</summary>
+          <div class="content">
+            <p>Formatação Callout Obsidian.</p>
+          </div>
+        </details>
+
+        <details class="callout note" id="fisico">
+          <summary>📱 NOTE | Para ambiente físico</summary>
+          <div class="content">
+            <p>Prisma Atalho QR Code.</p>
+          </div>
+        </details>
+
+        <details class="callout note" id="entender">
+          <summary>🔗 NOTE | Para entender mais</summary>
+          <div class="content">
+            <p>Acesse o Blog: <a href="https://custocognitivo.org/blog" target="_blank" rel="noopener">Custo Cognitivo</a>.</p>
+          </div>
+        </details>
+
+        <details class="callout warning">
+          <summary>⚠️ WARNING | Disclaimer médico</summary>
+          <div class="content">
+            <p>O relatório original indica a necessidade de um disclaimer médico, mas não fornece o texto específico; por isso ele não foi inventado nesta conversão.</p>
+          </div>
+        </details>
+
+        <details class="callout question" id="cta">
+          <summary>❓ QUESTION | Interação</summary>
+          <div class="content">
+            <p>Comente aqui qual estratégia você utilizaria e envie para um amigo neurodivergente.</p>
+          </div>
+        </details>
+      </div>
+
+      <footer>
+        Conversão estrutural do relatório original para HTML navegável; o conteúdo foi preservado e reorganizado visualmente.
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script>
+const search = document.getElementById('search');
+const cards = [...document.querySelectorAll('.callout')];
+search.addEventListener('input', () => {
+  const q = search.value.trim().toLowerCase();
+  cards.forEach(card => {
+    const match = card.innerText.toLowerCase().includes(q);
+    card.classList.toggle('hidden', q && !match);
+    if (q && match) card.open = true;
+  });
+});
+
+function copyMarkdown(){
+  const md = `# Use IA para diminuir carga cognitiva no trabalho
+
+## 3 estratégias operacionais para incluir na rotina
+
+> [!info] O que você vai aprender
+> Como identificar custos cognitivos, quais estratégias usar e como Inteligência Artificial pode te ajudar.
+
+> [!info] Contexto
+> Identificar, prevenir e reduzir riscos cognitivos da neurodivergência promove desempenho, segurança e autonomia no trabalho.
+
+> [!example] O que é um risco cognitivo?
+> Uma pessoa recebe três demandas simultâneas, é interrompida várias vezes e acaba esquecendo uma etapa crítica do trabalho.
+>
+> Nesse caso, o risco cognitivo é a possibilidade de erro, atraso ou omissão causada pela combinação entre exigência do trabalho e funções cognitivas mais vulneráveis naquele contexto.
+>
+> Exemplos comuns no trabalho incluem: esquecimento de etapas, perda de prazos, dificuldade de priorização, sobrecarga sensorial, distração, troca excessiva de contexto e decisões impulsivas.
+
+> [!danger] Em uma frase
+> É o risco de esquecer, atrasar, confundir ou errar uma tarefa quando as demandas ultrapassam os recursos cognitivos disponíveis.
+
+> [!tip] Como controlar e gerir riscos cognitivos?
+> Vulnerabilidade cognitiva + demanda do trabalho → risco → barreira de controle → menor probabilidade de falha.
+>
+> Não é tentar corrigir a pessoa; é estruturar tarefa, ambiente e ferramentas para impedir que uma vulnerabilidade cognitiva se transforme em falha.
+
+> [!tip] Como a Inteligência Artificial pode ajudar?
+> Tire um print e envie à sua IA preferida para obter esses mesmos resultados operacionais.
+
+> [!note] Para leitura
+> Formatação Callout Obsidian.
+
+> [!note] Para ambiente físico
+> Prisma Atalho QR Code.
+
+> [!note] Para entender mais
+> Acesse o Blog: https://custocognitivo.org/blog
+
+> [!warning] Disclaimer médico
+> O relatório original indica a necessidade de um disclaimer médico, mas não fornece o texto específico.
+
+> [!question] Interação
+> Comente aqui qual estratégia você utilizaria e envie para um amigo neurodivergente.
+`;
+  navigator.clipboard.writeText(md).then(()=>{
+    alert('Markdown copiado. Cole diretamente no Obsidian.');
+  }).catch(()=>{
+    alert('Não foi possível copiar automaticamente. Use a seleção manual.');
+  });
+}
+</script>
+</body>
+</html>

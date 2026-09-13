@@ -1,0 +1,79 @@
+---
+id: DOC-CLX-013
+folder_id: FS-COM-001
+tipo: documento-importado
+status: confirmado
+origem: export-claude-20260913
+origem_filename: "ESTRATEGIA COMERCIAL .txt"
+sha256: 7e4ca61cf38a08a8da33fdfa7d4804678e42ef8980498b87d80c405da3f13658
+projeto: ECOSSISTEMA_15-08_FILESYSTEM
+---
+
+O posicionamento deve evitar que “produtividade” seja a categoria principal. Produtividade pode aparecer apenas como mercado de comparação. A categoria proprietária deve ser sistema de execução e entrega.
+
+Arquitetura recomendada
+
+* Categoria: Sistema de execução e entrega.
+* Público prioritário: Profissionais neurodivergentes que gerenciam projetos, processos ou múltiplas frentes.
+* Problema: O usuário gasta atenção administrando o trabalho antes de conseguir executá-lo.
+* Promessa: Reduzir o esforço entre intenção e entrega.
+* Mecanismo: Estruturação, decomposição, priorização, continuidade e próxima ação.
+* Fundamento: Práticas de gestão de projetos e processos, design cognitivo e decisões orientadas por evidências.
+* Diferencial: O sistema incorpora riscos cognitivos e operacionais à forma como o trabalho é organizado.
+* Resultado: Mais clareza para iniciar, continuar e concluir entregas.
+
+Posicionamento mestre
+
+O Executar é um sistema de execução e entrega desenvolvido para transformar projetos e processos em próximas ações claras.
+
+Desenhado com foco nas demandas cognitivas e operacionais de profissionais neurodivergentes, o aplicativo assume parte do trabalho de estruturar, decompor, priorizar e preservar o contexto.
+
+Sua metodologia combina práticas de gestão de projetos e processos, design cognitivo e decisões orientadas por evidências para reduzir a fricção entre intenção, ação e entrega.
+
+Você não precisa administrar um sistema para conseguir trabalhar.
+
+Pare de organizar. Comece a executar.
+
+Sistema de mensagens
+
+Core message
+
+Menos trabalho antes do trabalho.
+
+Princípio de marca
+
+Organizar é função do sistema. Executar é função sua.
+
+Big Idea
+
+O aplicativo estruturado para você sair dele.
+
+“Estruturado” é melhor que “desenhado” porque comunica método, arquitetura e intencionalidade.
+
+Promessa funcional
+
+Do projeto à próxima ação. Da próxima ação à entrega.
+
+Mensagem para neurodivergência
+
+Um sistema que considera como o trabalho exige atenção, memória, decisão, iniciação e retomada.
+
+Prova metodológica
+
+Gestão de projetos e processos aplicada por agentes especializados, com critérios explícitos de priorização, continuidade e execução.
+
+CTA
+
+Pare de organizar. Comece a executar.
+
+Formulação pública de evidências
+
+Prefira:
+
+“Desenvolvido com decisões orientadas por evidências, princípios de ergonomia cognitiva e práticas consolidadas de gestão.”
+
+Evite:
+
+“Cientificamente comprovado para neurodivergentes.”
+
+A primeira formulação posiciona a metodologia com força e transparência sem transformar princípios e hipóteses de produto em promessa clínica.

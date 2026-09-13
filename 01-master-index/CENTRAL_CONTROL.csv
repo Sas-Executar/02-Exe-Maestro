@@ -114,3 +114,7 @@ FS-MVP-002,500-saas-mvp/01-product,FS-MVP-001,ativo
 FS-MVP-003,500-saas-mvp/02-experience,FS-MVP-001,ativo
 FS-MVP-004,500-saas-mvp/03-engineering,FS-MVP-001,ativo
 FS-MVP-005,500-saas-mvp/04-reference,FS-MVP-001,ativo
+FS-DAT-011,60-dados/10-raw/01-xls,FS-DAT-003,ativo
+FS-DAT-012,60-dados/10-raw/02-csv,FS-DAT-003,ativo
+FS-DAT-013,60-dados/10-raw/03-json,FS-DAT-003,ativo
+FS-DAT-014,60-dados/10-raw/04-docs,FS-DAT-003,ativo

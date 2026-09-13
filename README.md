@@ -28,3 +28,17 @@ git clone --recurse-submodules https://github.com/Sas-Executar/Docs.git
 cd Docs
 bash 80-tecnologia-plataformas/05-gpt/02-agents/maestro/scripts/bootstrap.sh
 ```
+
+## Ingestão de lotes externos
+
+```bash
+python3 80-tecnologia-plataformas/05-gpt/02-agents/maestro/scripts/ingest_export.py \
+  --export <dir-do-export> --root . --dry-run   # simula o roteamento
+python3 80-tecnologia-plataformas/05-gpt/02-agents/maestro/scripts/ingest_export.py \
+  --export <dir-do-export> --root .             # ingere
+python3 80-tecnologia-plataformas/05-gpt/02-agents/maestro/scripts/validate_governance.py
+```
+
+Procedimento completo em `70-operacao-governanca/02-workflows/WF-MAESTRO-INGESTAO.md`.
+Habilidades por classe de material em
+`80-tecnologia-plataformas/05-gpt/02-agents/maestro/config/SKILL_ROUTING.md`.

@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Manual de Uso · RC Domain Expert OS v1.0</title>
+<style>
+:root {
+  --bg:#f3f5f4; --paper:#ffffff; --ink:#111312; --mut:#68706b; --line:#dfe5e1;
+  --purple:#b8a9e4; --blue:#5a78ec; --orange:#f56f49; --yellow:#c5af28;
+  --soft:#eef1ef; --radius:18px; --shadow:0 18px 55px rgba(17,19,18,.07);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);line-height:1.55}
+a{color:inherit}
+button,input{font:inherit}
+.layout{display:grid;grid-template-columns:290px minmax(0,1fr);min-height:100vh}
+aside{position:sticky;top:0;height:100vh;padding:22px;background:#111312;color:#fff;overflow:auto}
+.brand{font-weight:850;letter-spacing:-.02em;font-size:19px;margin-bottom:4px}
+.version{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#aeb7b1;margin-bottom:20px}
+.search{width:100%;border:1px solid #ffffff22;background:#ffffff0d;color:white;border-radius:12px;padding:10px 12px;outline:none}
+.search::placeholder{color:#aeb7b1}
+nav{margin-top:18px;display:grid;gap:4px}
+nav a{text-decoration:none;color:#c6cdc8;padding:8px 10px;border-radius:9px;font-size:13px}
+nav a:hover,nav a.active{background:#ffffff12;color:#fff}
+main{min-width:0}
+.hero{padding:64px clamp(22px,5vw,72px) 46px;border-bottom:1px solid var(--line);background:
+radial-gradient(circle at 90% 10%,rgba(184,169,228,.25),transparent 28%),
+radial-gradient(circle at 70% 0%,rgba(90,120,236,.10),transparent 24%),var(--bg)}
+.eyebrow{font-size:12px;font-weight:850;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+h1{font-size:clamp(42px,6vw,78px);line-height:.96;letter-spacing:-.06em;margin:13px 0 18px;max-width:900px}
+.hero p{max-width:780px;font-size:18px;color:var(--mut)}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.badge{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:750}
+.content{width:min(1120px,calc(100% - 40px));margin:auto;padding:42px 0 100px}
+section{scroll-margin-top:24px;margin:0 0 58px}
+h2{font-size:34px;letter-spacing:-.04em;margin:0 0 16px}
+h3{font-size:20px;letter-spacing:-.025em;margin:0 0 9px}
+.lead{font-size:17px;color:var(--mut);max-width:900px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.card p{color:var(--mut);margin:.4rem 0 0}
+.kicker{font:11px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--mut);text-transform:uppercase;letter-spacing:.07em}
+.mode{border-top:4px solid var(--blue)}
+.mode:nth-child(3n+2){border-top-color:var(--purple)} .mode:nth-child(3n){border-top-color:var(--orange)}
+.copy{margin-top:12px;border:1px solid var(--line);background:var(--soft);border-radius:12px;padding:12px;font:12px ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap}
+.copy button{float:right;border:0;background:#111312;color:white;border-radius:8px;padding:5px 8px;font-size:11px;cursor:pointer}
+.flow{background:#111312;color:white;border-radius:22px;padding:24px;font:14px ui-monospace,SFMono-Regular,Menlo,monospace;overflow:auto}
+.flow strong{color:#fff}
+.flow span{color:#aeb7b1}
+table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+th,td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{background:#f8faf9;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+tr:last-child td{border-bottom:0}
+code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;background:#edf0ee;padding:2px 5px;border-radius:5px}
+.notice{border-left:4px solid var(--orange);background:#fff7f4;border-radius:12px;padding:14px 16px}
+.good{border-left-color:#4e7f56;background:#f3faf4}
+.list{display:grid;gap:9px;margin:14px 0}
+.item{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+.num{min-width:28px;height:28px;border-radius:8px;background:#111312;color:white;display:grid;place-items:center;font-weight:800;font-size:12px}
+.tree{background:#111312;color:#dce2de;border-radius:18px;padding:20px;max-height:540px;overflow:auto;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre}
+.footer{border-top:1px solid var(--line);padding-top:26px;color:var(--mut);font-size:12px}
+.hidden-by-search{display:none!important}
+@media(max-width:930px){.layout{grid-template-columns:1fr} aside{position:relative;height:auto} nav{grid-template-columns:repeat(2,minmax(0,1fr))} .grid3{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.hero{padding:44px 20px 32px} .content{width:min(100% - 24px,1120px)} .grid2,.grid3{grid-template-columns:1fr} nav{grid-template-columns:1fr 1fr} h1{font-size:48px} table{font-size:13px} th,td{padding:10px}}
+@media print{aside{display:none} .layout{display:block} .hero{padding:20px 0} .content{width:100%;padding:20px 0} .card{box-shadow:none;break-inside:avoid} body{background:white} section{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <div class="brand">RC Domain Expert OS</div>
+  <div class="version">SKILL-RC-EXPERT-001 · v1.0.0</div>
+  <input class="search" id="search" placeholder="Buscar no manual…" aria-label="Buscar no manual">
+  <nav id="nav">
+    <a href="#inicio">01 · Comece aqui</a>
+    <a href="#modelo">02 · Como funciona</a>
+    <a href="#funcoes">03 · Funções</a>
+    <a href="#utilidades">04 · Utilidades</a>
+    <a href="#areas">05 · Áreas</a>
+    <a href="#prompts">06 · Prompts</a>
+    <a href="#claims">07 · Claims</a>
+    <a href="#research">08 · Pesquisa</a>
+    <a href="#audit">09 · Audit/Refactor</a>
+    <a href="#product">10 · Produto</a>
+    <a href="#design">11 · Editorial/Design</a>
+    <a href="#states">12 · Estados</a>
+    <a href="#safety">13 · Invariantes</a>
+    <a href="#smoke">14 · Smoke tests</a>
+    <a href="#troubleshooting">15 · Troubleshooting</a>
+    <a href="#tree">16 · Diretório</a>
+  </nav>
+</aside>
+
+<main>
+<header class="hero" id="inicio">
+  <div class="eyebrow">Manual de Uso · HTML standalone</div>
+  <h1>RC Cognitive Risk Expert</h1>
+  <p>Especialista canônico do Mapa Interativo de Risco Cognitivo. Use esta skill para consultar, explicar, pesquisar, auditar, verificar claims, refatorar produto/conteúdo/design, produzir ADR/PRD e preparar handoffs de implementação sem perder a distinção entre ciência, decisão interna e framework proprietário.</p>
+  <div class="badges">
+    <span class="badge">Source-first</span><span class="badge">Progressive Disclosure</span>
+    <span class="badge">Claims governados</span><span class="badge">Research quarantine</span>
+    <span class="badge">10 modos operacionais</span>
+  </div>
+</header>
+
+<div class="content">
+
+<section id="modelo" data-search>
+  <div class="eyebrow">02 · Modelo operacional</div>
+  <h2>Como a skill funciona</h2>
+  <p class="lead">Você não precisa conhecer os nomes dos arquivos internos. A skill classifica a intenção, resolve a fonte de verdade vigente e carrega apenas os módulos necessários.</p>
+  <div class="flow">REQUEST <span>→</span> INTENT <span>→</span> MODE <span>→</span> CANONICAL SOT <span>→</span> DOMAIN REFERENCES <span>→</span> CLAIM/EVIDENCE GATE <span>→</span> EXECUTION <span>→</span> QA <span>→</span> OUTPUT</div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="card"><div class="kicker">Projeto</div><h3>Source-first</h3><p>Quando existe fonte canônica interna, a skill resolve essa fonte antes de responder. Memória do modelo não substitui o SOT.</p></div>
+    <div class="card"><div class="kicker">Pesquisa</div><h3>Research quarantine</h3><p>Pesquisa externa nova entra como <code>CANDIDATE_EVIDENCE</code>. Ela não atualiza claims ou decisões vigentes automaticamente.</p></div>
+  </div>
+</section>
+
+<section id="funcoes" data-search>
+  <div class="eyebrow">03 · Funções</div>
+  <h2>10 modos operacionais</h2>
+  <div class="grid2">
+  <article class="card mode" data-search>
+      <div class="kicker">CONSULT</div><h3>Consultar a fonte de verdade vigente do projeto.</h3>
+      <div class="copy"><button onclick="copyText(this)">copiar</button>Qual é a tese vigente do produto?</div>
+      <p><strong>Saída:</strong> ANSWER → SOURCE/STATE → LIMIT/CONFLICT → NEXT</p>
+    </article><article class="card mode" data-search>
+      <div class="kicker">EXPLAIN</div><h3>Explicar conceitos assumindo zero conhecimento prévio.</h3>
+      <div class="copy"><button onclick="copyText(this)">copiar</button>Explique FRC-05 para alguém que nunca ouviu falar em risco cognitivo.</div>
+      <p><strong>Saída:</strong> PLAIN EXPLANATION → EXAMPLE → EVIDENCE STATUS → LIMIT</p>
+    </article><article class="card mode" data-search>
+      <div class="kicker">RESEARCH</div><h3>Pesquisar evidência nova e compará-la com o SOT sem atualização automática.</h3>
+      <div class="copy"><button onclick="copyText(this)">copiar</button>Pesquise evidência nova sobre memória prospectiva e compare com o SOT.</div>
+      <p><strong>Saída:</strong> QUESTION → CURRENT → NEW EVIDENCE → CONFLICT → RECOMMENDATION → REVIEW REQUIRED</p>
+    </article><article class="card mode" data-search>
+      <div class="kicker">CLAIM-CHECK</div><h3>Validar se uma afirmação pode ser publicada.</h3>
+      <div class="copy"><button onclick="copyText(this)">copiar</button>Valide este claim: cada interrupção custa 23 minutos.</div>
+      <p><strong>Saída:</strong> PASS / PASS_WITH_DISCLOSURE / REVISE / BLOCK</p>
+    </article><article class="card mode" data-search>
+      <div class="kicker">AUDIT</div><h3>Auditar site, texto, design ou produto contra contratos vigentes.</h3>
+      <div class="copy"><button onclick="copyText(this)">copiar</button>Audite a página publicada contra ADR-001.</div>
+      <p><strong>Saída:</strong> OBSERVED → CONTRACT → GAP → PRIORITY → EVIDENCE → RECOMMENDATION</p>
+    </article><article class="card mode" data-search>
+      <div class="kicker">REFACTOR</div><h3>Refatorar preservando comportamento válido e autoridade canônica.</h3>
+      <div class="copy"><button onclick="copyText(this)">copiar</button>Refatore esta seção do site sem alterar os claims autorizados.</div>
+      <p><strong>Saída:</strong> CURRENT → PROBLEM → DECISION → TARGET → DIFF → TESTS → RISKS → STATE</p>
+    </article><article class="card mode" data-search>
+      <div class="kicker">PRODUCT</div><h3>Transformar decisões em ADR, PRD e requisitos estruturados.</h3>
+      <div class="copy"><button onclick="copyText(this)">copiar</button>Transforme esta decisão em ADR + PRD sem alterar claims.</div>
+      <p><strong>Saída:</strong> DECISION / REQUIREMENTS / NON-GOALS / ACCEPTANCE / DEPENDENCIES</p>
+    </article><article class="card mode" data-search>
+      <div class="kicker">EDITORIAL</div><h3>Criar ou revisar comunicação, narrativa e linguagem científica.</h3>
+      <div class="copy"><button onclick="copyText(this)">copiar</button>Reescreva esta seção para público leigo usando reconhecimento antes da terminologia.</div>
+      <p><strong>Saída:</strong> CLAIM → EXPLANATION → EXAMPLE → CONSEQUENCE</p>
+    </article><article class="card mode" data-search>
+      <div class="kicker">DESIGN</div><h3>Projetar visualização e interação sem aumentar causalidade ou magnitude implícita.</h3>
+      <div class="copy"><button onclick="copyText(this)">copiar</button>Como devo visualizar CLAIM-06 em scrollytelling?</div>
+      <p><strong>Saída:</strong> VISUAL SEMANTICS → INTERACTION → ACCESSIBILITY → FALLBACK</p>
+    </article><article class="card mode" data-search>
+      <div class="kicker">IMPLEMENTATION-HANDOFF</div><h3>Preparar instruções determinísticas para outro agente implementar.</h3>
+      <div class="copy"><button onclick="copyText(this)">copiar</button>Gere o handoff para implementar Story → Explore → Personalize.</div>
+      <p><strong>Saída:</strong> AUTHORITIES → SEQUENCE → CLAIM MAP → TESTS → BLOCKERS → DOD</p>
+    </article>
+  </div>
+</section>
+
+<section id="utilidades" data-search>
+  <div class="eyebrow">04 · Utilidades</div>
+  <h2>Infraestrutura interna</h2>
+  <div class="grid3">
+  <div class="card" data-search><div class="kicker">Roteamento &amp; Progressive Disclosure</div><h3>Roteamento &amp; Progressive Disclosure</h3><p><code>intent-routing</code> · <code>domain-map</code> · <code>loading-policy</code> · <code>source-priority</code></p></div><div class="card" data-search><div class="kicker">Source of Truth</div><h3>Source of Truth</h3><p><code>source-of-truth</code> · <code>canonical-objects</code> · <code>decision-register</code> · <code>state-model</code> · <code>product-glossary</code></p></div><div class="card" data-search><div class="kicker">Claims &amp; Evidência</div><h3>Claims &amp; Evidência</h3><p><code>claim-registry</code> · <code>evidence-matrix</code> · <code>claims-policy</code> · <code>evidence-policy</code> · <code>prohibited-claims</code> · <code>references-catalog</code></p></div><div class="card" data-search><div class="kicker">Schemas</div><h3>Schemas</h3><p><code>claim.schema.json</code> · <code>evidence.schema.json</code> · <code>source.schema.json</code> · <code>decision.schema.json</code> · <code>artifact.schema.json</code> · <code>story-scene.schema.json</code></p></div><div class="card" data-search><div class="kicker">Templates</div><h3>Templates</h3><p><code>ADR</code> · <code>PRD</code> · <code>Claim Review</code> · <code>Evidence Review</code> · <code>Research Brief</code> · <code>Website Audit</code> · <code>Agent Handoff</code></p></div><div class="card" data-search><div class="kicker">Workflows</div><h3>Workflows</h3><p><code>research-to-claim</code> · <code>claim-to-story</code> · <code>story-to-visual</code> · <code>audit-to-refactor</code> · <code>product-decision</code> · <code>update-source-of-truth</code></p></div><div class="card" data-search><div class="kicker">Validação</div><h3>Validação</h3><p><code>validate_claim_registry.py</code> · <code>validate_story_scenes.py</code> · <code>check_canonicality.py</code> · <code>validate_skill.py</code> · <code>build_manifest.py</code></p></div><div class="card" data-search><div class="kicker">Evals</div><h3>Evals</h3><p><code>claim-safety</code> · <code>source-grounding</code> · <code>framework-vs-science</code> · <code>product-refactor</code> · <code>regression</code></p></div>
+  </div>
+</section>
+
+<section id="areas" data-search>
+  <div class="eyebrow">05 · Áreas de especialidade</div>
+  <h2>O que o especialista domina</h2>
+  <div class="grid2">
+  <div class="card" data-search><h3>Risco Cognitivo</h3><p>Fatores, demanda, vulnerabilidade, exposição, risco, intervenção e Scanner.</p></div><div class="card" data-search><h3>Ciência &amp; Evidência</h3><p>Pesquisa, fontes, claims, evidência primária, normas, síntese e limites.</p></div><div class="card" data-search><h3>Comunicação Científica</h3><p>Plain science, linguagem para leigos, precisão e boundary statements.</p></div><div class="card" data-search><h3>Editorial &amp; Storytelling</h3><p>Narrativa explicativa, data storytelling, scrollytelling e progressive disclosure.</p></div><div class="card" data-search><h3>Design &amp; Visualização</h3><p>Linguagem visual, hierarquia, mapas, gráficos, motion, responsividade.</p></div><div class="card" data-search><h3>Acessibilidade Cognitiva</h3><p>Clareza, foco, reconhecimento, redução de complexidade e reduced motion.</p></div><div class="card" data-search><h3>Produto</h3><p>Tese, jornada, Story → Explore → Personalize, Scanner, VERA e analytics.</p></div><div class="card" data-search><h3>Arquitetura</h3><p>ADR, PRD, Story Engine, evidência, integrações e contratos.</p></div><div class="card" data-search><h3>Governança</h3><p>Canonicalidade, versionamento, QA, publicação, epistemologia e change control.</p></div><div class="card" data-search><h3>Implementação por Agentes</h3><p>Schemas, handoff, gates, testes, DoD e estados de entrega.</p></div>
+  </div>
+</section>
+
+<section id="prompts" data-search>
+  <div class="eyebrow">06 · Uso rápido</div>
+  <h2>Quero fazer X → use Y</h2>
+  <table><thead><tr><th>Objetivo</th><th>Modo</th><th>Exemplo</th></tr></thead><tbody>
+  <tr data-search><td>Quero saber o que está vigente</td><td><code>CONSULT</code></td><td>“@rc-cognitive-risk-expert quero saber o que está vigente.”</td></tr><tr data-search><td>Quero entender um conceito</td><td><code>EXPLAIN</code></td><td>“@rc-cognitive-risk-expert quero entender um conceito.”</td></tr><tr data-search><td>Quero verificar literatura nova</td><td><code>RESEARCH</code></td><td>“@rc-cognitive-risk-expert quero verificar literatura nova.”</td></tr><tr data-search><td>Quero saber se uma frase é segura</td><td><code>CLAIM-CHECK</code></td><td>“@rc-cognitive-risk-expert quero saber se uma frase é segura.”</td></tr><tr data-search><td>Quero encontrar problemas no site/produto</td><td><code>AUDIT</code></td><td>“@rc-cognitive-risk-expert quero encontrar problemas no site/produto.”</td></tr><tr data-search><td>Quero melhorar algo existente</td><td><code>REFACTOR</code></td><td>“@rc-cognitive-risk-expert quero melhorar algo existente.”</td></tr><tr data-search><td>Quero formalizar uma decisão</td><td><code>PRODUCT</code></td><td>“@rc-cognitive-risk-expert quero formalizar uma decisão.”</td></tr><tr data-search><td>Quero escrever/comunicar melhor</td><td><code>EDITORIAL</code></td><td>“@rc-cognitive-risk-expert quero escrever/comunicar melhor.”</td></tr><tr data-search><td>Quero criar uma visualização</td><td><code>DESIGN</code></td><td>“@rc-cognitive-risk-expert quero criar uma visualização.”</td></tr><tr data-search><td>Quero entregar para outro agente implementar</td><td><code>IMPLEMENTATION-HANDOFF</code></td><td>“@rc-cognitive-risk-expert quero entregar para outro agente implementar.”</td></tr>
+  </tbody></table>
+  <div class="notice good" style="margin-top:14px"><strong>Importante:</strong> o roteamento é automático. Você pode simplesmente fazer a pergunta; não é obrigatório escrever o nome do modo.</div>
+</section>
+
+<section id="claims" data-search>
+  <div class="eyebrow">07 · Claims</div>
+  <h2>Como validar uma afirmação</h2>
+  <p class="lead">O modo <code>CLAIM-CHECK</code> compara a frase com o registry, escopo, causalidade, certeza, disclosure de framework e linguagem proibida.</p>
+  <div class="grid2">
+    <div class="card"><h3>Exemplo seguro</h3><div class="copy"><button onclick="copyText(this)">copiar</button>@rc-cognitive-risk-expert valide este claim: “Trocar rapidamente de tarefa não significa trocar sem custo.”</div></div>
+    <div class="card"><h3>Exemplo a bloquear/revisar</h3><div class="copy"><button onclick="copyText(this)">copiar</button>@rc-cognitive-risk-expert valide: “Cada interrupção custa 23 minutos de produtividade.”</div></div>
+  </div>
+  <div class="flow" style="margin-top:14px">PASS <span>|</span> PASS_WITH_DISCLOSURE <span>|</span> REVISE <span>|</span> BLOCK</div>
+</section>
+
+<section id="research" data-search>
+  <div class="eyebrow">08 · Pesquisa</div>
+  <h2>Atualizar conhecimento sem destruir o SOT</h2>
+  <div class="list">
+    <div class="item"><div class="num">1</div><div><strong>Resolver CURRENT SOT.</strong><br>Descobrir o que o projeto afirma hoje.</div></div>
+    <div class="item"><div class="num">2</div><div><strong>Pesquisar evidência nova.</strong><br>Preferir fonte primária ou oficial e comparar o mesmo constructo/contexto.</div></div>
+    <div class="item"><div class="num">3</div><div><strong>Classificar como candidata.</strong><br>A pesquisa não altera automaticamente o registry.</div></div>
+    <div class="item"><div class="num">4</div><div><strong>Apontar conflito e impacto.</strong><br>Separar confirmação, ampliação, contradição e ausência de efeito.</div></div>
+    <div class="item"><div class="num">5</div><div><strong>Exigir review/change control.</strong><br>Somente depois uma mudança pode virar canônica.</div></div>
+  </div>
+  <div class="copy"><button onclick="copyText(this)">copiar</button>@rc-cognitive-risk-expert pesquise evidência nova sobre memória prospectiva, compare com o SOT atual e não atualize o registry automaticamente.</div>
+</section>
+
+<section id="audit" data-search>
+  <div class="eyebrow">09 · Audit + Refactor</div>
+  <h2>Auditar antes de refatorar</h2>
+  <div class="grid2">
+    <div class="card"><div class="kicker">AUDIT</div><h3>Observe primeiro</h3><p><code>OBSERVED → CONTRACT → GAP → PRIORITY → EVIDENCE → RECOMMENDATION</code></p><div class="copy"><button onclick="copyText(this)">copiar</button>@rc-cognitive-risk-expert audite o site publicado contra ADR-001 e PRD-001.</div></div>
+    <div class="card"><div class="kicker">REFACTOR</div><h3>Preserve o válido</h3><p><code>CURRENT → PROBLEM → DECISION → TARGET → DIFF → TESTS → RISKS → STATE</code></p><div class="copy"><button onclick="copyText(this)">copiar</button>@rc-cognitive-risk-expert refatore os gaps encontrados, preservando claims e comportamento válido.</div></div>
+  </div>
+</section>
+
+<section id="product" data-search>
+  <div class="eyebrow">10 · Produto</div>
+  <h2>ADR, PRD e decisões</h2>
+  <p class="lead">Use <code>PRODUCT</code> quando a mudança altera arquitetura, comportamento, jornada, escopo ou requisitos. A skill separa evidência, decisão e implementação.</p>
+  <div class="copy"><button onclick="copyText(this)">copiar</button>@rc-cognitive-risk-expert transforme esta decisão em ADR + PRD. Inclua non-goals, critérios de aceite, dependências, implicações nos claims e estados atual/alvo.</div>
+</section>
+
+<section id="design" data-search>
+  <div class="eyebrow">11 · Editorial + Design</div>
+  <h2>Comunicar sem fortalecer claims</h2>
+  <div class="grid2">
+    <div class="card"><h3>Para público leigo</h3><p>A regra é reconhecimento antes da terminologia: situação reconhecível → termo → mecanismo → evidência → limite.</p></div>
+    <div class="card"><h3>Para visualização</h3><p>O visual deve expressar o claim sem adicionar magnitude, causalidade ou certeza que a fonte não sustenta. Sempre prever fallback legível/reduced-motion.</p></div>
+  </div>
+  <div class="copy"><button onclick="copyText(this)">copiar</button>@rc-cognitive-risk-expert transforme CLAIM-06 em uma cena de scrollytelling para público leigo, com evidência, boundary e fallback sem animação.</div>
+</section>
+
+<section id="states" data-search>
+  <div class="eyebrow">12 · Estados</div>
+  <h2>Não confundir existência com verificação</h2>
+  <div class="flow">EXISTING <span>≠</span> COMPLETE <span>≠</span> APPROVED <span>≠</span> IMPLEMENTED <span>≠</span> TESTED <span>≠</span> VERIFIED <span>≠</span> RELEASED</div>
+  <p class="lead" style="margin-top:14px">A skill deve informar o estado real observado/documentado. Ela não pode chamar uma implementação de “verificada” sem teste e verificação.</p>
+</section>
+
+<section id="safety" data-search>
+  <div class="eyebrow">13 · Invariantes</div>
+  <h2>Regras que nunca devem ser quebradas</h2>
+  <div class="list">
+  <div class="item" data-search><div class="num">1</div><div>fator ≠ vulnerabilidade ≠ exposição ≠ risco.</div></div><div class="item" data-search><div class="num">2</div><div>Fator candidato não é risco confirmado.</div></div><div class="item" data-search><div class="num">3</div><div>Prioridade/ranking não é gravidade.</div></div><div class="item" data-search><div class="num">4</div><div>Não produzir diagnóstico clínico, score clínico ou causalidade não sustentada.</div></div><div class="item" data-search><div class="num">5</div><div>[FW] nunca pode ser apresentado como [E1], [E2] ou [S].</div></div><div class="item" data-search><div class="num">6</div><div>Existente ≠ completo ≠ aprovado ≠ implementado ≠ testado ≠ verificado ≠ released.</div></div><div class="item" data-search><div class="num">7</div><div>Redação autorizada no projeto não significa revisão externa por especialista.</div></div><div class="item" data-search><div class="num">8</div><div>Pesquisa web nova entra como candidate evidence até change control.</div></div><div class="item" data-search><div class="num">9</div><div>Quando há SOT interno, a skill não responde apenas de memória.</div></div><div class="item" data-search><div class="num">10</div><div>Reescrita, resumo, design ou implementação nunca podem fortalecer um claim.</div></div>
+  </div>
+</section>
+
+<section id="smoke" data-search>
+  <div class="eyebrow">14 · Testes</div>
+  <h2>Smoke tests após instalação</h2>
+  <p class="lead">Use estes cinco testes para confirmar que progressive disclosure, grounding e governança estão funcionando.</p>
+  <div class="list">
+  <div class="item" data-search><div class="num">1</div><div><div class="copy"><button onclick="copyText(this)">copiar</button>Qual a diferença entre fator e risco no projeto?</div></div></div><div class="item" data-search><div class="num">2</div><div><div class="copy"><button onclick="copyText(this)">copiar</button>Valide: cada interrupção custa 23 minutos.</div></div></div><div class="item" data-search><div class="num">3</div><div><div class="copy"><button onclick="copyText(this)">copiar</button>Explique task switching para alguém sem conhecimento prévio.</div></div></div><div class="item" data-search><div class="num">4</div><div><div class="copy"><button onclick="copyText(this)">copiar</button>Audite o site publicado contra ADR-001.</div></div></div><div class="item" data-search><div class="num">5</div><div><div class="copy"><button onclick="copyText(this)">copiar</button>Pesquise evidência nova e compare com o SOT sem atualizar automaticamente.</div></div></div>
+  </div>
+  <div class="notice good"><strong>Esperado:</strong> source-first; resolução do claim registry; distinção framework/ciência; pesquisa externa em quarentena; estados de implementação sem falsa verificação.</div>
+</section>
+
+<section id="troubleshooting" data-search>
+  <div class="eyebrow">15 · Troubleshooting</div>
+  <h2>Quando o comportamento parecer errado</h2>
+  <table><thead><tr><th>Sintoma</th><th>Verificação</th><th>Ação</th></tr></thead><tbody>
+    <tr data-search><td>Responde genericamente sobre o projeto</td><td>Confirmar que o diretório inteiro foi instalado e <code>SKILL.md</code> é o entry point.</td><td>Não achatar as pastas; preservar caminhos relativos.</td></tr>
+    <tr data-search><td>Claim foi fortalecido</td><td>Rodar modo <code>CLAIM-CHECK</code> e consultar <code>claim-registry.csv</code>.</td><td>Usar a redação autorizada mais segura.</td></tr>
+    <tr data-search><td>Pesquisa nova mudou o SOT</td><td>Verificar se <code>research.md</code> e <code>change-control.md</code> foram carregados.</td><td>Reverter para candidate evidence e abrir review.</td></tr>
+    <tr data-search><td>Framework apresentado como ciência</td><td>Checar etiquetas <code>FW/E1/E2/S</code>.</td><td>Inserir disclosure obrigatório e corrigir o claim.</td></tr>
+    <tr data-search><td>Auditoria chama algo de verificado sem teste</td><td>Checar <code>state-model.md</code>.</td><td>Reclassificar para IMPLEMENTED/TESTED conforme evidência real.</td></tr>
+  </tbody></table>
+</section>
+
+<section id="tree" data-search>
+  <div class="eyebrow">16 · Diretório</div>
+  <h2>Arquitetura da skill</h2>
+  <div class="tree">[F] MANIFEST.json
+[F] SKILL.md
+[F] VERSION
+[D] compatibility
+  [F] anthropic.md
+  [F] openai.md
+[D] docs
+  [F] ARCHITECTURE.md
+  [F] INSTALL.md
+  [F] USAGE.md
+[D] evals
+  [F] claim-safety.yaml
+  [F] eval-cases.yaml
+  [F] framework-vs-science.yaml
+  [F] product-refactor.yaml
+  [D] regression
+    [F] README.md
+  [F] source-grounding.yaml
+[D] examples
+  [F] story-claim06.json
+[D] references
+  [D] 00-router
+    [F] domain-map.md
+    [F] intent-routing.md
+    [F] loading-policy.md
+    [F] source-priority.md
+  [D] 10-canonical
+    [F] canonical-objects.md
+    [F] decision-register.md
+    [F] product-glossary.md
+    [F] source-of-truth.md
+    [F] state-model.md
+  [D] 20-domain
+    [F] cognitive-risk-model.md
+    [F] demand-vulnerability-exposure-risk.md
+    [F] factor-mece.md
+    [F] factor-taxonomy.md
+    [F] intervention-model.md
+    [F] scanner-model.md
+  [D] 30-evidence
+    [F] claim-registry.csv
+    [F] claims-policy.md
+    [F] evidence-matrix.csv
+    [F] evidence-policy.md
+    [F] prohibited-claims.md
+    [F] references-catalog.md
+    [F] scientific-method.md
+    [F] source-authority.md
+  [D] 40-communication
+    [F] communication-master.md
+    [F] data-storytelling.md
+    [F] editorial-language.md
+    [F] explanatory-storytelling.md
+    [F] plain-science-language.md
+    [F] progressive-disclosure.md
+    [F] science-communication.md
+    [F] scrollytelling.md
+  [D] 50-design
+    [F] cognitive-accessibility.md
+    [F] information-hierarchy.md
+    [F] interaction-motion.md
+    [F] responsive-rules.md
+    [F] visual-language.md
+    [F] visual-system.md
+    [F] visualization-rules.md
+  [D] 60-product
+    [F] analytics.md
+    [F] product-thesis.md
+    [F] scanner.md
+    [F] story-explore-personalize.md
+    [F] user-transformation.md
+    [F] vera.md
+    [F] website-current-state.md
+  [D] 70-architecture
+    [F] ADR-001-story-led-data-experience.md
+    [F] PRD-001-guided-data-story.md
+    [F] adr-index.md
+    [F] evidence-architecture.md
+    [F] integration-contracts.md
+    [F] prd-index.md
+    [F] story-engine.md
+  [D] 80-governance
+    [F] change-control.md
+    [F] epistemic-policy.md
+    [F] learning-policy.md
+    [F] publication-gate.md
+    [F] qa-gates.md
+    [F] versioning.md
+  [D] 90-modes
+    [F] audit.md
+    [F] claim-check.md
+    [F] consult.md
+    [F] design.md
+    [F] editorial.md
+    [F] explain.md
+    [F] implementation-handoff.md
+    [F] product.md
+    [F] refactor.md
+    [F] research.md
+[D] schemas
+  [F] artifact.schema.json
+  [F] claim.schema.json
+  [F] decision.schema.json
+  [F] evidence.schema.json
+  [F] source.schema.json
+  [F] story-scene.schema.json
+[D] scripts
+  [F] build_manifest.py
+  [F] check_canonicality.py
+  [F] validate_claim_registry.py
+  [F] validate_skill.py
+  [F] validate_story_scenes.py
+[D] sources
+  [D] external
+    [F] source-index.yaml
+  [D] internal
+    [D] RC-COMMUNICATION-CLAIMS-001
+      [F] AGENT-HANDOFF-RC-001.md
+      [F] CLAIM-QA-GATE-RC-001.md
+      [F] CLAIM-REGISTRY-RC-001.csv
+      [F] CLAIM-REGISTRY-SCHEMA-RC-001.json
+      [F] COMM-SPEC-RC-001.md
+      [F] MANIFEST.json
+      [F] PROMPT-IMPLEMENT-RC-COMM-001.md
+      [F] README.md
+      [F] REFERENCES-RC-001.md
+      [F] STORY-SCENE-SCHEMA-RC-001.yaml
+    [D] RC-KNW-001
+      [F] RC-KNW-001__knowledge-pack-tp001-fatores-risco-cognitivo__v01.docx
+[D] templates
+  [F] adr.md
+  [F] agent-handoff.md
+  [F] claim-review.md
+  [F] evidence-review.md
+  [F] prd.md
+  [F] research-brief.md
+  [F] website-audit.md
+[D] workflows
+  [F] audit-to-refactor.md
+  [F] claim-to-story.md
+  [F] product-decision.md
+  [F] research-to-claim.md
+  [F] story-to-visual.md
+  [F] update-source-of-truth.md
+</div>
+</section>
+
+<div class="footer">
+  <strong>RC Domain Expert OS · Manual de Uso v1.0</strong><br>
+  Baseado no SKILL.md, TREE.txt, INSTALL.md e USAGE.md da versão gerada em 04/09/2026.
+</div>
+
+</div>
+</main>
+</div>
+
+<script>
+function copyText(btn){
+  const box = btn.parentElement;
+  const text = box.innerText.replace(/^copiar\s*/i,'').trim();
+  navigator.clipboard.writeText(text);
+  const old = btn.textContent; btn.textContent='copiado';
+  setTimeout(()=>btn.textContent=old,1200);
+}
+const search=document.getElementById('search');
+search.addEventListener('input',()=>{
+  const q=search.value.toLowerCase().trim();
+  document.querySelectorAll('[data-search]').forEach(el=>{
+    el.classList.toggle('hidden-by-search', q && !el.innerText.toLowerCase().includes(q));
+  });
+});
+const links=[...document.querySelectorAll('nav a')];
+const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+e.target.id));
+    }
+  });
+},{rootMargin:'-30% 0px -60% 0px'});
+sections.forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+ID,Field Name,Status,Answer Length,Source ID,Locator,Support,Confidence,Notes
+1.1,Problema central,found,95,google_sheets_drive_20260913,01_Formulario!E8,supports,high,Resposta direta do formulário
+1.2,Público-alvo / ICP,found,312,google_sheets_drive_20260913,01_Formulario!E9,supports,high,Resposta completa com contexto
+1.3,Proposta de valor,found,198,google_sheets_drive_20260913,01_Formulario!E10,supports,high,Resposta sustentada e clara
+1.4,Canais de aquisição,found,287,google_sheets_drive_20260913,01_Formulario!E11,supports,high,GTM especificada em detalhe
+1.5,Métrica North Star,found,142,google_sheets_drive_20260913,01_Formulario!E12,supports,high,TTFBA bem definida
+1.6,Métricas guardrail,found,145,google_sheets_drive_20260913,01_Formulario!E13,supports,high,Guardrails financeiros propostos
+1.7,CAC (custo de aquisição),found,87,google_sheets_drive_20260913,01_Formulario!E14,supports,high,Alvo por tier especificado
+1.8,LTV (valor do tempo de vida),found,201,google_sheets_drive_20260913,01_Formulario!E15,supports,high,Valores calculados por tier
+1.9,Margem por unidade/usuário,found,276,google_sheets_drive_20260913,01_Formulario!E16,supports,medium,Simulações fornecidas
+1.10,Ponto de equilíbrio (breakeven),not_found,0,google_sheets_drive_20260913,01_Formulario!E17,context,null,Campo vazio — breakeven não foi preenchido
+1.11,Teto de gasto de infraestrutura,not_found,0,google_sheets_drive_20260913,01_Formulario!E18,context,null,Campo vazio — teto de infra não definido
+1.12,Gatilhos de upgrade de infra,not_found,0,google_sheets_drive_20260913,01_Formulario!E19,context,null,Campo vazio — gatilhos não especificados
+2.1,Nome do produto/feature,found,12,google_sheets_drive_20260913,01_Formulario!E23,supports,high,Claro e direto
+2.2,Contexto do PRD,found,218,google_sheets_drive_20260913,01_Formulario!E24,supports,high,Contexto bem articulado
+2.3,Objetivos (goals),found,312,google_sheets_drive_20260913,01_Formulario!E25,supports,high,Objetivos transversais definidos
+2.4,Não-objetivos (non-goals),found,287,google_sheets_drive_20260913,01_Formulario!E26,supports,high,Escopo explicitamente delimitado
+2.5,Requisitos funcionais (FRD),found,341,google_sheets_drive_20260913,01_Formulario!E27,supports,high,FRD com fluxo transversal
+2.6,Critérios de aceite,found,298,google_sheets_drive_20260913,01_Formulario!E28,supports,high,Critério transversal definido
+2.7,Persona principal,found,167,google_sheets_drive_20260913,01_Formulario!E29,supports,high,Persona bem caracterizada
+2.8,Jornada — Descoberta,found,178,google_sheets_drive_20260913,01_Formulario!E30,supports,high,Jornada orientada a conteúdo
+2.9,Jornada — Ativação,found,162,google_sheets_drive_20260913,01_Formulario!E31,supports,high,PLG self-service bem descrito
+2.10,Jornada — Uso recorrente,found,234,google_sheets_drive_20260913,01_Formulario!E32,supports,high,Ciclos e memória longitudinal explicados
+2.11,Momento 'aha',found,156,google_sheets_drive_20260913,01_Formulario!E33,supports,high,Aha moment bem identificado
+2.12,User story de referência,not_found,0,google_sheets_drive_20260913,01_Formulario!E34,context,null,Campo vazio — user story formato não foi registrado
+3.1,Stack — Frontend,found,289,google_sheets_drive_20260913,01_Formulario!E38,supports,high,Next Forge e design-system especificados
+3.2,Stack — Backend,found,312,google_sheets_drive_20260913,01_Formulario!E39,supports,high,Arquitetura backend bem estruturada
+3.3,Banco de dados,found,198,google_sheets_drive_20260913,01_Formulario!E40,supports,high,PostgreSQL via Supabase confirmado
+3.4,Infraestrutura / hosting,found,167,google_sheets_drive_20260913,01_Formulario!E41,supports,high,Vercel/Supabase/GitHub especificado
+3.5,Autenticação,found,243,google_sheets_drive_20260913,01_Formulario!E42,supports,high,Auth ponta a ponta especificada
+3.6,Estrutura de repositório,found,234,google_sheets_drive_20260913,01_Formulario!E43,supports,high,Monorepo Turborepo descrito
+3.7,Mapa de rotas principais,found,312,google_sheets_drive_20260913,01_Formulario!E44,supports,high,Rotas públicas e app especificadas
+3.8,Decisão de arquitetura #1 (ADR),found,154,google_sheets_drive_20260913,01_Formulario!E45,supports,high,ADR Visual Symbol Recognition formalizado
+3.9,Decisão de arquitetura #2 (ADR),found,143,google_sheets_drive_20260913,01_Formulario!E46,supports,high,ADR Copiloto especificado
+3.10,Trade-offs aceitos,found,167,google_sheets_drive_20260913,01_Formulario!E47,supports,high,Trade-offs conscientemente escolhidos
+4.1,Modelo de dados / schema,found,412,google_sheets_drive_20260913,01_Formulario!E51,supports,medium,Schema listado mas implementação não foi verificada
+4.2,Endpoints de API principais,not_found,0,google_sheets_drive_20260913,01_Formulario!E52,context,null,Campo vazio — endpoints específicos não listados
+4.3,Agentes/Tools MCP integrados,not_found,0,google_sheets_drive_20260913,01_Formulario!E53,context,null,Campo vazio — apenas mencionado como 'bloqueado'
+4.4,Dependências núcleo (obrigatórias),found,178,google_sheets_drive_20260913,01_Formulario!E54,supports,high,DINOv2 ONNX especificado como núcleo
+4.5,Dependências condicionais,found,289,google_sheets_drive_20260913,01_Formulario!E55,supports,high,Feature flags e degradação controlada
+4.6,Política de atualização de dependências,not_found,0,google_sheets_drive_20260913,01_Formulario!E56,context,null,Campo vazio — política não foi formalizada
+4.7,Componente frontend principal,found,201,google_sheets_drive_20260913,01_Formulario!E57,supports,high,Visual Symbol Scanner V2 identificado
+4.8,Testes automatizados,found,234,google_sheets_drive_20260913,01_Formulario!E58,supports,high,Matriz de testes com 11 categorias
+5.1,Checklist pré-deploy,found,287,google_sheets_drive_20260913,01_Formulario!E62,supports,high,Gate pré-release mestre definido
+5.2,Checks de saúde pós-deploy,found,167,google_sheets_drive_20260913,01_Formulario!E63,supports,high,Health check e smoke tests especificados
+5.3,Gatilho de rollback — taxa de erro,not_found,0,google_sheets_drive_20260913,01_Formulario!E64,context,null,Campo vazio — taxa de erro não foi definida
+5.4,Gatilho de rollback — latência,not_found,0,google_sheets_drive_20260913,01_Formulario!E65,context,null,Campo vazio — limiar de latência não foi especificado
+5.5,Gatilho de rollback — fluxo crítico,found,89,google_sheets_drive_20260913,01_Formulario!E66,supports,high,Fluxo de publicação identificado
+5.6,Procedimento de rollback,found,123,google_sheets_drive_20260913,01_Formulario!E67,supports,high,Procedimento genérico descrito
+10.4,Cadência de revisão,not_found,0,google_sheets_drive_20260913,01_Formulario!E106,context,null,Campo vazio — frequência de revisão não foi formalizada
+16.2,Link/atalho crítico,not_found,0,google_sheets_drive_20260913,01_Formulario!E142,context,null,Campo vazio — links críticos não foram listados

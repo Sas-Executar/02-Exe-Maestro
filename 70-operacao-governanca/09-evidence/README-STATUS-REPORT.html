@@ -1,0 +1,112 @@
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+<p class="p1">[Design de Documento · TECH-PRISM-A4-010]</p>
+<p class="p2">DOCUMENT READER · VALU-MODE V3</p>
+<hr>
+<p class="p2">ID<span class="Apple-converted-space">              </span>TECH-PRISM-A4-010<br>
+Tipo<span class="Apple-converted-space">            </span>Design/Engenharia · Template imprimível V4<br>
+Owner <span class="Apple-converted-space">          </span>Não determinado<br>
+Versão<span class="Apple-converted-space">          </span>4.0<br>
+Data<span class="Apple-converted-space">            </span>30/08/2026<br>
+Fase<span class="Apple-converted-space">            </span>Implementado<br>
+Projeto <span class="Apple-converted-space">        </span>Não determinado<br>
+PARA<span class="Apple-converted-space">            </span>Design/Engenharia · Calendário prisma A4<br>
+Referência<span class="Apple-converted-space">      </span>Vercel Geist Design System · Vercel Design Guidelines<br>
+3#<span class="Apple-converted-space">              </span>geist-system · print-grid · prism-calendar</p>
+<hr>
+<p class="p2">RESUMO EXECUTIVO</p>
+<hr>
+<p class="p2">O quê<span class="Apple-converted-space">            </span>V4 do calendário prisma implementado em HTML<br>
+Por quê<span class="Apple-converted-space">          </span>Corrigir hierarquia, tipografia, espaçamentos e linguagem de linhas do V3<br>
+Quem <span class="Apple-converted-space">            </span>Leitor do plano semanal e pipeline HTML→PDF<br>
+Como <span class="Apple-converted-space">            </span>Geist-inspired typography, grid explícito, regras finas, contraste neutro e escala física em mm/pt</p>
+<hr>
+<p class="p2">3P+N · APLICAÇÃO</p>
+<hr>
+<p class="p1">Problema <span class="Apple-converted-space">        </span>O V3 tinha boa arquitetura, mas tipografia excessivamente comprimida e espaçamentos pouco sistemáticos<br>
+Processo <span class="Apple-converted-space">        </span>Pesquisei diretamente o Geist Design System, Typography, Grid, Colors e as Design Guidelines da Vercel<br>
+Progresso<span class="Apple-converted-space">        </span>V4 gerado; 3 faces e geometria 99 + 99 + 99 mm preservadas<br>
+Next 01<span class="Apple-converted-space">          </span>Abrir a versão preenchida e avaliar a densidade física em impressão 100%</p>
+<h2><span class="s1"><b>V4 entregue</b></span></h2>
+<p class="p4"><b>Arquivo principal, preenchido para avaliação visual:</b></p>
+<p class="p1"><a href="sandbox:/mnt/data/status-report-prisma-a4-v4.html?_chatgptios_conversationID=6a9443d8-5950-83e9-b9cb-af09c71a2cf7&amp;_chatgptios_messageID=3992cb7d-4251-40d9-9f7d-06b400a4c133">Baixar Status Report Prisma A4 — V4</a></span><span class="s2">⁠<img src="file:///Attachment.png" alt="Attachment.png"></p>
+<p class="p4"><b>Versão reutilizável com placeholders:</b></p>
+<p class="p1"><a href="sandbox:/mnt/data/status-report-prisma-a4-v4-template.html?_chatgptios_conversationID=6a9443d8-5950-83e9-b9cb-af09c71a2cf7&amp;_chatgptios_messageID=3992cb7d-4251-40d9-9f7d-06b400a4c133">Baixar Status Report Prisma A4 — V4 Template</a></span><span class="s2">⁠<img src="file:///Attachment.png" alt="Attachment.png"></p>
+<h2><span class="s1"><b>O que foi aplicado da pesquisa Vercel</b></span></h2>
+<p class="p1">A Vercel descreve Geist como um sistema baseado em simplicidade, minimalismo, precisão e clareza, e identifica o </span><span class="s2"><b>Grid como parte importante de sua estética</b></span><span class="s1">.<span class="Apple-converted-space"> </span></p>
+<p class="p5">Por isso o V4 deixou de tratar cada bloco como um “card decorativo” e passou a usar </span><span class="s2"><b>linhas estruturais</b></span><span class="s1">:</p>
+<pre><code class="language-text">FACE 01
+────────────────────────────────────────
+META / STATUS / PERÍODO / PROGRESSO
+──────────────────────────────┬─────────
+                              │
+ÉPICA                         │ INTENÇÃO
+                              │
+──────────────────────────────┴─────────
+ KPI 01 │ KPI 02 │ KPI 03 │ KPI 04</code></pre>
+<p class="p5">Na face central:</p>
+<pre><code class="language-text">EXECUÇÃO                    W36 · PERÍODO
+────────────────────────────────────────
+
+┌────────┬────────┬────────┬────────┐
+│ DAY 01 │ DAY 02 │ DAY 03 │ DAY 04 │
+├────────┼────────┼────────┴────────┤
+│ DAY 05 │ DAY 06 │     DAY 07      │
+└────────┴────────┴─────────────────┘</code></pre>
+<p class="p1">Isso segue melhor o uso de Grid quando as </span><span class="s2"><b>guides e cell borders fazem parte do próprio desenho</b></span><span class="s1">, algo explicitamente recomendado pela documentação Geist.<span class="Apple-converted-space"> </span></p>
+<h3><span class="s1"><b>Tipografia</b></span></h3>
+<p class="p1">Passei a trabalhar com papéis tipográficos próximos às categorias documentadas pela Vercel — </span><span class="s2"><b>heading, copy, label e mono</b></span><span class="s1"> — em vez de dezenas de tamanhos independentes. A documentação Geist também distingue </span><code>Copy</code><span class="s1"> para múltiplas linhas e </span><code>Label</code><span class="s1"> para informação curta/terciária.<span class="Apple-converted-space"> </span></p>
+<p class="p5">O V4 agora usa aproximadamente:</p>
+<pre><code class="language-text">Display / Épica       20 pt
+Hero entregável       16 pt
+Section               13 pt
+Card title            9.5 pt
+Body                   9 pt
+Compact body        8.25 pt
+Label                 6.7 pt
+Metadata              6.2 pt</code></pre>
+<p class="p1">Ou seja, o texto que precisa ser realmente lido não fica mais preso em 6–7 pt.</p>
+<h3><span class="s1"><b>Linhas e contraste</b></span></h3>
+<p class="p1">A documentação atual da Vercel recomenda </span><span class="s2"><b>crisp borders</b></span><span class="s1"> e uso combinado de contraste e bordas para melhorar definição.<span class="Apple-converted-space"> </span></p>
+<p class="p1">Também segui a lógica do sistema de cores Geist: fundos, bordas e textos têm papéis de contraste separados, em vez de usar muitos tons decorativos.<span class="Apple-converted-space"> </span></p>
+<p class="p6">Resultado:</p>
+<ul><li><span class="s1">preto para informação dominante;</span></li><li><span class="s1">cinza escuro para corpo;</span></li><li><span class="s1">cinza médio para metadata;</span></li><li><span class="s1">linhas </span><code>#e6e6e6 / #cfcfcf</code><span class="s1">;</span></li><li><span class="s1">branco como superfície principal;</span></li><li><span class="s1"><b>lime preservado</b></span><span class="s2">, porém restrito a estado/milestone.</span></li></ul>
+<h3><span class="s1"><b>Geist</b></span></h3>
+<p class="p5">O CSS usa:</p>
+<pre><code class="language-css">font-family:
+  &quot;Geist&quot;,
+  &quot;Geist Sans&quot;,
+  &quot;Inter&quot;,
+  -apple-system,
+  BlinkMacSystemFont,
+  &quot;Segoe UI&quot;,
+  Arial,
+  sans-serif;</code></pre>
+<p class="p5">e para dados:</p>
+<pre><code class="language-css">&quot;Geist Mono&quot;,
+&quot;SFMono-Regular&quot;,
+Consolas,
+monospace;</code></pre>
+<p class="p1">Também ativei números tabulares para datas, percentuais e KPIs, reforçando alinhamento.</p>
+<h2><span class="s1"><b>Geometria preservada</b></span></h2>
+<pre><code class="language-text">A4 PORTRAIT
+210 × 297 mm
+
+┌──────────────────────────────┐
+│ FACE 01 · ÉPICA             │ 99 mm
+├──────────────────────────────┤
+│ FACE 02 · CALENDÁRIO BENTO  │ 99 mm
+├──────────────────────────────┤
+│ FACE 03 · ENTREGÁVEIS       │ 99 mm
+└──────────────────────────────┘
+
+297 mm total</code></pre>
+<p class="p1"><code>@page</code><span class="s1"> continua em </span><span class="s2"><b>A4 portrait com margin: 0</b></span><span class="s1">, e a segurança editorial continua sendo feita internamente.</span></p>
+<p class="p7">Incluí ainda um diagnóstico no próprio HTML: em modo de tela, qualquer componente marcado que ultrapasse sua caixa recebe </span><span class="s2"><b>contorno vermelho</b></span><span class="s1">, facilitando detectar overflow quando os placeholders forem preenchidos com conteúdo real.</p>
+
+</body>
+</html>
