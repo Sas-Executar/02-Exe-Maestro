@@ -1,0 +1,38 @@
+{
+  "skill_name": "executar-status-report",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Converta este documento textual em um status report EXECUTAR e gere HTML para impressão.",
+      "expected_output": "Canonical JSON grounded in source plus print-ready HTML using the EXECUTAR editorial visual system.",
+      "files": [
+        "examples/input-project.md"
+      ],
+      "assertions": [
+        "Does not invent unsupported progress metrics",
+        "Includes provenance for populated operational fields",
+        "Preserves canonical properties order",
+        "Produces HTML with print CSS"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Transforme estas notas em relatório, mas o texto não informa percentual de progresso.",
+      "expected_output": "Unknown percentages remain null and render as em dash.",
+      "files": [],
+      "assertions": [
+        "Unknown percentages remain null",
+        "Missing semantic fields are explicit"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Resuma este texto em três bullets.",
+      "expected_output": "This skill should not be the preferred trigger for generic summarization.",
+      "files": [],
+      "assertions": [
+        "Trigger remains specific to status-report conversion"
+      ]
+    }
+  ]
+}
