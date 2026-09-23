@@ -6,6 +6,17 @@ Toda projeção lê o mesmo `mapa_os` validado. Nenhuma projeção cria objeto, 
 
 Mostre posição, progresso sustentado, ação Agora, critério de conclusão, evidência necessária, bloqueios, itens Próximo/Depois e a pergunta: “A prova descrita existe?”.
 
+Existem duas formas de saída para esta projeção, conforme o que a fonte sustenta:
+
+- **Leitura de retomada** (texto/JSON simples): resposta direta na conversa, sem template fixo.
+- **Documento A4 permanente** (quando a fonte é grande e estruturada — ex.: um control plane com dezenas de macroáreas/domínios/documentos, não um projeto de sete dias): use `scripts/render_mapa_operacional.py` com `assets/templates` gerado dinamicamente a partir do payload (não há 100 placeholders fixos como no `prisma_7d` — o conteúdo tem comprimento variável, então o script itera sobre o payload e monta o HTML por seção). Estrutura mínima do payload: `meta`, `visao_geral` (resumo + números-chave), `como_ler_a_planilha` (passos), `mapa_operacional.macroareas` (nome, finalidade_executiva, domínios, quantidade_de_campos, aba_de_preenchimento, situação), `estrutura_da_planilha`, `pontos_de_atencao`, `legenda_executiva`, `fonte_e_rastreabilidade`. Reaproveita os mesmos tokens/componentes visuais do `executive-report-a4.html` (card, metric, callout, pill, section-head, table) — mesma identidade EXECUTAR, sem paleta paralela.
+
+  ```bash
+  python scripts/render_mapa_operacional.py payload.json output.html
+  ```
+
+  Este documento é permanente/de referência, não um plano de execução — não force nele uma estrutura de dias ou semana; isso é o `prisma_7d`, abaixo.
+
 ## agora_proximo_depois
 
 Agrupe por horizonte, preservando IDs e prazos. Um prazo original vencido permanece registrado; uma nova previsão é outro campo. O bloco Agora recebe WIP=1.

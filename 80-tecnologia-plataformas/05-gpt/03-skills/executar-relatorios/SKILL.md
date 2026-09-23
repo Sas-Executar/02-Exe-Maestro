@@ -157,7 +157,12 @@ com `python scripts/render_prism.py payload.json output.html` usando o
 template imutável `assets/templates/status-report-prisma-a4-v4.html` (A4
 retrato, três faces de 99mm, placeholders `DOC_*`/`EPIC_*`/`CALENDAR_*`/
 `RESULT_*`). Não edite HTML/CSS para acomodar conteúdo — condense
-semanticamente ou retorne erro de fit.
+semanticamente ou retorne erro de fit. Quando `mapa_operacional` precisa
+virar um documento A4 permanente (fonte grande e estruturada, não um plano
+de sete dias — ex.: um control plane com dezenas de macroáreas), use
+`python scripts/render_mapa_operacional.py payload.json output.html`; ao
+contrário do `prisma_7d`, o conteúdo é gerado dinamicamente a partir do
+payload, sem placeholders fixos. Ver `references/mapa-os/projections.md`.
 
 ## Passo 5 — capacidade 4: workbook visual (Desk&Go)
 
@@ -210,7 +215,8 @@ visual avulso como arquivo direto.
 ### Scripts
 Status report: `normalize_text.py`, `validate_report.py`, `render_report.py`,
 `validate_skill.py`, `list_templates.py`, `validate_templates.py`. Mapa-OS:
-`validate_mapa.py`, `audit_prism.py`, `render_prism.py`, `simple_schema.py`.
+`validate_mapa.py`, `audit_prism.py`, `render_prism.py`,
+`render_mapa_operacional.py`, `simple_schema.py`.
 Workbook: `tokens.py`, `validar_artefato.py`, `gerar_workbook.py`,
 `gerar_relatorio.py`, `gerar_wireframe.py`.
 
