@@ -80,6 +80,18 @@ nomes não existem mais). `assets/tokens/temas.json` registra essa identidade
 tema novo só se justifica se e quando o usuário pedir explicitamente uma
 segunda leitura visual da mesma estrutura.
 
+## Falha de contraste conhecida (bloqueia o workbook, não é LACUNA)
+
+`ink-placeholder` (`neutral-9`, `#959494`, herdado de `--text-muted` do
+contrato) TEM valor — mas esse valor dá 3,03:1 de contraste contra
+`surface-page`, abaixo do mínimo de 4,5:1 que `scripts/validar_artefato.py`
+exige para texto de placeholder (regra específica do workbook, ver
+`references/workbook/placeholder-checkbox.md`). `scripts/gerar_workbook.py`
+recusa corretamente gerar qualquer peça enquanto isso não for resolvido —
+não é um bug, é o validador funcionando. Três opções pendentes de decisão
+do usuário estão detalhadas em `MERGE_NOTES.md` (seção "2026-09-23 —
+Bugs reais..."). Não escolha uma sozinho.
+
 ## Lacunas em aberto
 
 Estes aliases não têm valor porque o contrato genuinamente não os cobre —

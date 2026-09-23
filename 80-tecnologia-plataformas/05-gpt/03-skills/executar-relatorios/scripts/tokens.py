@@ -186,6 +186,25 @@ class Tokens:
         return [n for n in self.alias if not n.startswith("_")]
 
     # -- saídas ------------------------------------------------------------
+    @staticmethod
+    def _nome_css(nome: str) -> str:
+        """Nome final da custom property CSS para um alias.
+
+        A camada alias em tokens.json guarda nomes "nus" (ex.: "brand",
+        "ink-title") mas cada consumidor espera um prefixo diferente
+        conforme sua vocabulary: `--exec-color-*` para a maioria dos
+        artefatos (report.css, peca-a4.svg, relatorio-exemplo.html...),
+        sem prefixo para o namespace PRISM (armazenado como "prism-*" só
+        dentro do JSON, para não colidir de nome), e sem prefixo também
+        para geometria/tipografia (`exec-page-width`, `exec-space-4`...),
+        que já carregam seu nome final de CSS na própria chave.
+        """
+        if nome.startswith("prism-"):
+            return nome[len("prism-"):]
+        if nome.startswith("exec-"):
+            return nome
+        return f"exec-color-{nome}"
+
     def css_block(self, indent: str = "  ") -> str:
         """Bloco :root com a camada alias resolvida. Componentes consomem só isto."""
         linhas = [":root{"]
@@ -193,7 +212,7 @@ class Tokens:
             valor = self.resolve(nome)
             if valor is None:
                 continue
-            linhas.append(f"{indent}--{nome}:{valor};")
+            linhas.append(f"{indent}--{self._nome_css(nome)}:{valor};")
         linhas.append("}")
         return "\n".join(linhas)
 

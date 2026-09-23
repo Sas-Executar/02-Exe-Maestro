@@ -12,7 +12,7 @@ arquivo. Trocar de cliente é trocar de spec.
 
 Uso:
   python3 gerar_relatorio.py --spec ../assets/data/exemplo-relatorio.json --saida rel.html
-  python3 gerar_relatorio.py --spec spec.json --saida rel.html --tema editorial --modo preenchido
+  python3 gerar_relatorio.py --spec spec.json --saida rel.html --modo preenchido
   python3 gerar_relatorio.py --lote specs/ --saida-dir out/
 """
 
@@ -378,7 +378,7 @@ def main() -> int:
     p.add_argument("--saida", type=Path)
     p.add_argument("--lote", type=Path, help="diretório com um .json por relatório")
     p.add_argument("--saida-dir", type=Path)
-    p.add_argument("--tema", default="playbook")
+    p.add_argument("--tema", default="executar", help="identidade única do contrato de tokens (ver assets/tokens/temas.json)")
     p.add_argument("--modo", choices=["branco", "preenchido"], default="preenchido")
     args = p.parse_args()
 

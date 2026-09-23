@@ -11,8 +11,7 @@ Duas garantias que valem mais que a aparência:
 
 Uso:
   python3 gerar_workbook.py --output-dir out/
-  python3 gerar_workbook.py --output-dir out/ --tema swiss
-  python3 gerar_workbook.py --output-dir out/ --tema editorial --force
+  python3 gerar_workbook.py --output-dir out/ --force
 """
 
 from __future__ import annotations
@@ -366,7 +365,7 @@ def gerar(output_dir: Path, tema: str, force: bool) -> list[Path]:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--output-dir", required=True, type=Path)
-    p.add_argument("--tema", default="playbook", help="playbook | swiss | editorial")
+    p.add_argument("--tema", default="executar", help="identidade única do contrato de tokens (ver assets/tokens/temas.json)")
     p.add_argument("--force", action="store_true", help="sobrescreve diretório não vazio; só com autorização explícita")
     args = p.parse_args()
     try:

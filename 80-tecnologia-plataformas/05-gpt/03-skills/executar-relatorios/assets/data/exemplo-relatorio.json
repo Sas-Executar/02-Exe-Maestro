@@ -1,7 +1,7 @@
 {
   "_nota": "Dados de exemplo com casos de borda de propósito: valor ausente, zero (que é dado, não ausência), texto longo, célula de tabela sem valor, campo para preencher à mão, e as três situações de caixa de marcar. Um exemplo só com o caminho feliz não prova nada.",
 
-  "tema": "playbook",
+  "tema": "executar",
 
   "meta": {
     "id": "REL-CICLO-07",

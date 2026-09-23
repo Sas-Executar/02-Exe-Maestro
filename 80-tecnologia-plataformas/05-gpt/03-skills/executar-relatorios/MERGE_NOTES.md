@@ -205,3 +205,59 @@ ou espelhamento direto de um componente do contrato):
 Nenhum desses valores foi alterado — são o contrato exatamente como
 enviado. Ficam registrados aqui como achado de validação para decisão do
 usuário, não como erro de merge.
+
+## 2026-09-23 — Bugs reais encontrados pelo loop de avaliação (eval workbook-deskgo-5-pecas)
+
+O eval "with_skill" da capacidade workbook (parte do loop de avaliação
+padrão do skill-creator) encontrou `scripts/gerar_workbook.py` completamente
+quebrado (exit 2 em qualquer tema, inclusive o único que existe). Causa raiz
+dupla, corrigida nesta rodada:
+
+1. **Tokens de geometria ausentes.** A integração do contrato de cor/
+   tipografia nunca migrou os 7 tokens em mm que `gerar_workbook.py` sempre
+   exigiu (`exec-page-margin`, `exec-page-width`, `exec-page-height`,
+   `exec-content-width`, `exec-grid-gutter`, `exec-check-size`,
+   `exec-check-stroke`) para `assets/tokens/tokens.json` — eles só existiam
+   soltos dentro do `:root` de `assets/templates/peca-a4.svg`. Adicionados
+   à camada `alias` de `tokens.json` com os mesmos valores (FONTE, não
+   inventado), junto com o resto da geometria/tipografia-em-mm de
+   `peca-a4.svg` (escala de espaço, raios, traços, escala de fonte em mm)
+   para fechar a lacuna por completo, não só os 7 mínimos.
+2. **`Tokens.css_block()` gerava nomes de custom property errados.** Emitia
+   `--brand`, `--ink-title` (nomes nus da camada alias) em vez de
+   `--exec-color-brand`, `--exec-color-ink-title` (o que `report.css`,
+   `peca-a4.svg` e todo o resto do pacote realmente consomem via `var()`).
+   O `:root` injetado pelo gerador nos SVGs nunca batia com o que os
+   componentes usavam, e o validador interno (`TK002`) reprovava toda
+   variável usada. Corrigido com um método `_nome_css()` que aplica o
+   prefixo certo por vocabulary (`exec-color-` para a maioria, nenhum
+   prefixo para o namespace PRISM ou para tokens que já carregam `exec-`
+   no próprio nome). `assets/tokens/tokens.css` foi regenerado a partir do
+   método corrigido (antes era escrito por um script Python avulso fora do
+   pacote; agora é `python3 scripts/tokens.py --css`, a mesma função que os
+   geradores chamam em tempo de execução — uma fonte só).
+3. **Resíduo de tema antigo.** `scripts/gerar_workbook.py` e
+   `scripts/gerar_relatorio.py` tinham `--tema` com default `"playbook"`
+   (tema que não existe mais); `scripts/validar_artefato.py` chamava
+   `.color("exec-color-ink-placeholder")` (nome com prefixo redundante,
+   quando a camada alias guarda `"ink-placeholder"` sem prefixo — mesma
+   classe do bug já corrigido em `PARES_CONTRASTE`, também silenciado por
+   um `except (KeyError, ValueError): return`). `references/workbook/
+   contrato-workbook.md`, `playbook-relatorios.md` e
+   `assets/data/exemplo-relatorio.json` ainda instruíam a perguntar entre
+   três temas (`playbook`/`swiss`/`editorial`) que não existem mais.
+   Todos corrigidos para refletir a identidade única `executar`.
+
+### Bloqueio real, não corrigido por conta própria
+
+Depois dos três bugs acima corrigidos, `gerar_workbook.py` roda e chega até
+o validador interno de contraste — que reprova de propósito:
+`ink-placeholder` (`neutral-9`, `#959494`, herdado 1:1 de `--text-muted` do
+contrato novo) dá 3,03:1 contra a página branca, abaixo do mínimo de 4,5:1
+que este pacote exige para texto de placeholder (mesmo problema que o stack
+anterior já tinha resolvido escurecendo esse tom só para essa camada — o
+contrato novo não repete essa correção). Isto é uma decisão de design
+pendente do usuário, não um bug de integração — ver
+`workbook-deskgo-5-pecas/with_skill/outputs/run-log.txt` no workspace de
+avaliação para as três opções levantadas. Nenhuma peça foi gerada; o
+gerador recusou corretamente entregar artefato incompleto/ilegível.

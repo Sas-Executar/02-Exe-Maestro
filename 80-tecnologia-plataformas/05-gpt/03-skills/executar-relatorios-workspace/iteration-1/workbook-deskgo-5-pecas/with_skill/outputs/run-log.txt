@@ -1,0 +1,73 @@
+Estado real da capacidade "workbook visual" após correção de dois bugs reais
+encontrados nesta rodada de avaliação — ver MERGE_NOTES.md para o registro
+completo. Este log substitui a tentativa anterior (que falhou por causa
+desses bugs, já corrigidos).
+
+## Bugs corrigidos nesta rodada (não são decisão de design, eram defeitos)
+
+1. `assets/tokens/tokens.json` não tinha os 7 tokens de geometria em mm que
+   `scripts/gerar_workbook.py` sempre exigiu (`exec-page-margin`,
+   `exec-page-width`, `exec-page-height`, `exec-content-width`,
+   `exec-grid-gutter`, `exec-check-size`, `exec-check-stroke`) — ficaram para
+   trás na integração do contrato de cor/tipografia. Adicionados com os
+   valores que já existiam em `assets/templates/peca-a4.svg` e
+   `references/workbook/contrato-workbook.md` (FONTE, não inventado).
+2. `Tokens.css_block()` (em `scripts/tokens.py`) gerava nomes de custom
+   property errados — `--brand`, `--ink-title` (nus) em vez de
+   `--exec-color-brand`, `--exec-color-ink-title` (o que todo SVG/CSS do
+   pacote realmente consome). Corrigido para prefixar corretamente por
+   vocabulary. `assets/tokens/tokens.css` foi regenerado a partir do método
+   corrigido.
+3. `scripts/validar_artefato.py`, `scripts/gerar_workbook.py` e
+   `scripts/gerar_relatorio.py` tinham resíduos do stack de temas antigo
+   (`--tema playbook/swiss/editorial` como default e como exemplo na
+   documentação) — o contrato atual define uma única identidade
+   (`executar`). Defaults e docs corrigidos.
+
+## Comando executado após as correções
+
+    python3 scripts/gerar_workbook.py --output-dir out/
+
+## Resultado: BLOQUEADO — e corretamente bloqueado
+
+    ERRO: peça 01 reprovou no validador — PH007 exec-color-ink-placeholder:
+    contraste 3.03:1 contra a superfície da página; mínimo 4.5:1.
+    Placeholder é mais leve que dado real, não ilegível.
+
+Isto NÃO é um bug de integração. É o validador interno do workbook
+recusando corretamente entregar uma peça com um problema real de
+legibilidade: o token `ink-placeholder` do contrato novo (`neutral-9`,
+`#959494`, mapeado 1:1 do `--text-muted` do contrato) dá 3,03:1 de
+contraste contra a página branca — abaixo do mínimo de 4,5:1 que este
+pacote específico exige para texto de placeholder (regra herdada do stack
+anterior, documentada em `references/design-tokens.md`).
+
+É literalmente o mesmo problema que o stack anterior (Executar Playbook)
+já tinha resolvido: o `text-secondary` medido na extração original também
+reprovava esse mesmo mínimo (3,07:1) e a camada alias corrigiu criando um
+tom mais escuro só para essa camada. O contrato novo não repete essa
+correção — ele define só uma camada de cinza "muted" (`neutral-9`), que
+funciona para rótulo decorativo (mínimo 3:1, que passa) mas não para
+placeholder de campo (mínimo 4,5:1, que não passa).
+
+## O que isto significa, e o que não fiz
+
+Não inventei um valor mais escuro para `ink-placeholder` só para o
+workbook conseguir gerar. Isso seria exatamente o tipo de "preenchimento
+por inferência silenciosa" que o contrato de tokens proíbe. As opções
+reais, que cabem ao usuário decidir:
+
+  a) aceitar `neutral-10` (`#7C7B7B`, já usado como `ink-secondary`) como
+     o tom de placeholder do workbook em vez de `neutral-9` — dá 8,83:1,
+     passa com folga, mas é mais escuro que "muted" tipicamente é;
+  b) definir um alias específico para placeholder de formulário físico,
+     mais escuro que `--text-muted` do contrato geral, do jeito que o
+     stack antigo fazia;
+  c) revisar se 4,5:1 é mesmo o mínimo certo para placeholder impresso
+     (o contrato geral EXECUTAR-REPORT-PRINT-DS-001 não fala de
+     formulário para caneta — essa regra é specific do workbook,
+     documentada em `references/workbook/placeholder-checkbox.md`).
+
+Nenhuma peça foi gerada. `scripts/validar_artefato.py` não rodou sobre
+nada porque não há artefato — o próprio gerador aborta antes de escrever
+qualquer SVG parcial, que é o comportamento documentado e correto.

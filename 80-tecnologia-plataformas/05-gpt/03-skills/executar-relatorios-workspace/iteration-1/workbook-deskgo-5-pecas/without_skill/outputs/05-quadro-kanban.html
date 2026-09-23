@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Desk&amp;Go — Quadro Kanban</title>
+<style>
+  @page { size: A4 landscape; margin: 10mm; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; color:#1f2937; margin:0; background:#f3f4f6; }
+  .page { width:297mm; min-height:210mm; margin:12px auto; background:#fff; padding:10mm; box-shadow:0 0 12px rgba(0,0,0,0.12); }
+  @media print { body{background:#fff;} .page{box-shadow:none; margin:0; width:auto; min-height:auto;} }
+  header.brand { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:3px solid #0f766e; padding-bottom:6px; margin-bottom:8px; }
+  .brand h1 { font-size:20px; margin:0; color:#0f766e; }
+  .brand .tag { font-size:9px; text-transform:uppercase; letter-spacing:1.5px; color:#6b7280; }
+  .piece-label { font-size:10px; color:#6b7280; text-align:right; }
+  .piece-label strong { color:#0f766e; display:block; font-size:12px; }
+
+  .board { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; height:172mm; }
+  .col { background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; display:flex; flex-direction:column; overflow:hidden; }
+  .col-head { padding:7px 9px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#fff; }
+  .col.backlog .col-head { background:#64748b; }
+  .col.doing .col-head { background:#d97706; }
+  .col.review .col-head { background:#2563eb; }
+  .col.done .col-head { background:#0f766e; }
+  .col-body { padding:8px; flex:1; display:flex; flex-direction:column; gap:7px; }
+
+  .task {
+    background:#fff; border:1px solid #e2e8f0; border-left:4px solid #94a3b8; border-radius:5px;
+    padding:6px 8px; font-size:10px; line-height:1.35;
+  }
+  .task .tag { display:inline-block; font-size:8px; text-transform:uppercase; letter-spacing:0.4px;
+    background:#f1f5f9; color:#475569; padding:1px 6px; border-radius:8px; margin-top:4px; }
+  .doing .task { border-left-color:#d97706; }
+  .review .task { border-left-color:#2563eb; }
+  .done .task { border-left-color:#0f766e; }
+  .task.blank { border-style:dashed; color:#cbd5e1; text-align:center; padding:14px 6px; }
+
+  footer.meta { margin-top:8px; padding-top:6px; border-top:1px solid #e5e7eb; font-size:9px; color:#9ca3af; display:flex; justify-content:space-between; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="brand">
+    <div>
+      <h1>Desk&amp;Go</h1>
+      <div class="tag">Workbook do Negócio · Peça 5 de 5</div>
+    </div>
+    <div class="piece-label"><strong>Quadro Kanban</strong>Operação semanal — pronto para preencher</div>
+  </header>
+
+  <div class="board">
+    <div class="col backlog">
+      <div class="col-head">Backlog</div>
+      <div class="col-body">
+        <div class="task">Mapear mais 5 cafés/coworkings candidatos a parceria<span class="tag">Parcerias</span></div>
+        <div class="task">Escrever roteiro de posts para Instagram (mês 1)<span class="tag">Marketing</span></div>
+        <div class="task">Pesquisar gateway de pagamento com Pix instantâneo<span class="tag">Produto</span></div>
+        <div class="task blank">+ adicionar tarefa</div>
+      </div>
+    </div>
+
+    <div class="col doing">
+      <div class="col-head">Em andamento</div>
+      <div class="col-body">
+        <div class="task">Fechar contrato com café-piloto do bairro<span class="tag">Parcerias</span></div>
+        <div class="task">Ajustar fluxo de reserva no protótipo do app<span class="tag">Produto</span></div>
+        <div class="task blank">+ adicionar tarefa</div>
+      </div>
+    </div>
+
+    <div class="col review">
+      <div class="col-head">Em revisão</div>
+      <div class="col-body">
+        <div class="task">Termos de uso e política de cancelamento<span class="tag">Jurídico</span></div>
+        <div class="task blank">+ adicionar tarefa</div>
+      </div>
+    </div>
+
+    <div class="col done">
+      <div class="col-head">Concluído</div>
+      <div class="col-body">
+        <div class="task">Definir nome, domínio e identidade "Desk&amp;Go"<span class="tag">Marca</span></div>
+        <div class="task">Rascunhar tabela de preços (avulso/pacote/ilimitado)<span class="tag">Produto</span></div>
+        <div class="task blank">+ adicionar tarefa</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="meta">
+    <span>Desk&amp;Go · Workbook do Negócio</span>
+    <span>Peça 5/5 — Quadro Kanban · A4 paisagem</span>
+  </footer>
+</div>
+</body>
+</html>

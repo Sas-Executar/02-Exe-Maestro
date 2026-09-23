@@ -208,7 +208,7 @@ def checar_tokens(rel: Relatorio, bruto: str, tk: Tokens, permitir_flat: bool):
 
 def checar_contraste_placeholder(rel: Relatorio, tk: Tokens):
     try:
-        r = contraste(tk.color("exec-color-ink-placeholder"), tk.color("exec-color-surface-page"))
+        r = contraste(tk.color("ink-placeholder"), tk.color("surface-page"))
     except (KeyError, ValueError):
         return
     if r < MIN_CONTRASTE_PLACEHOLDER:

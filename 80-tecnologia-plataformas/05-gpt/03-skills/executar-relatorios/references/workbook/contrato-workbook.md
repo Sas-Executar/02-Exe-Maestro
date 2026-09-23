@@ -35,9 +35,7 @@ gráfica.
 ## Gerando
 
 ```bash
-python3 scripts/gerar_workbook.py --output-dir out/ --tema playbook
-python3 scripts/gerar_workbook.py --output-dir out/ --tema swiss
-python3 scripts/gerar_workbook.py --output-dir out/ --tema editorial
+python3 scripts/gerar_workbook.py --output-dir out/
 ```
 
 `--force` só com autorização explícita para sobrescrever diretório não vazio.
@@ -65,14 +63,13 @@ cd out/ && zip -j /mnt/user-data/outputs/deskgo-workbook-<tema>.zip *.svg
 Nomeie com o tema para distinguir execuções. Entregue só o zip via
 `present_files`, nunca os cinco SVG soltos.
 
-## Perguntar ou não perguntar o tema
+## Tema
 
-Pergunte, com `ask_user_input_v0`, oferecendo os três temas. O padrão da família
-é `playbook`; ele não se aplica sozinho porque a mesma pessoa usa Swiss para
-prancha de parede e Editorial para material que vai a cliente, e adivinhar errado
-custa uma reimpressão.
-
-Se a pessoa já disse o tema na própria mensagem, não pergunte de novo.
+O contrato atual (`EXECUTAR-REPORT-PRINT-DS-001`) define uma identidade única,
+`executar` — não há mais família de temas trocáveis (`playbook`/`swiss`/
+`editorial` foram descontinuados junto com o stack de tokens anterior; ver
+`references/design-tokens.md`). Não pergunte tema ao usuário: `--tema` do
+gerador já usa `executar` como padrão e não precisa ser informado.
 
 ## Estendendo uma peça
 

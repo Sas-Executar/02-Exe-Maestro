@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Desk&amp;Go — Roadmap 90 Dias</title>
+<style>
+  @page { size: A4; margin: 16mm 14mm; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; color:#1f2937; margin:0; background:#f3f4f6; }
+  .page { width:210mm; min-height:297mm; margin:12px auto; background:#fff; padding:16mm 14mm; box-shadow:0 0 12px rgba(0,0,0,0.12); }
+  @media print { body{background:#fff;} .page{box-shadow:none; margin:0; width:auto; min-height:auto;} }
+  header.brand { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:3px solid #0f766e; padding-bottom:8px; margin-bottom:6px; }
+  .brand h1 { font-size:22px; margin:0; color:#0f766e; }
+  .brand .tag { font-size:10px; text-transform:uppercase; letter-spacing:1.5px; color:#6b7280; }
+  .piece-label { font-size:11px; color:#6b7280; text-align:right; }
+  .piece-label strong { color:#0f766e; display:block; font-size:13px; }
+  h2.section-title { font-size:13px; text-transform:uppercase; letter-spacing:1px; color:#0f766e; border-left:4px solid #0f766e; padding-left:8px; margin:16px 0 8px; }
+  p, li, td, th { font-size:12px; line-height:1.5; }
+
+  .timeline { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:6px; }
+  .phase { border:1px solid #e2e8f0; border-radius:8px; overflow:hidden; }
+  .phase-head { background:#0f766e; color:#fff; padding:8px 10px; }
+  .phase-head .num { font-size:9px; text-transform:uppercase; letter-spacing:1px; opacity:0.85; }
+  .phase-head h3 { font-size:13px; margin:2px 0 0; }
+  .phase-body { padding:9px 10px; background:#f8fafc; }
+  .phase-body ul { margin:0; padding-left:14px; }
+  .phase-body li { font-size:10.5px; margin-bottom:4px; }
+  .milestone { margin-top:8px; padding-top:6px; border-top:1px dashed #cbd5e1; font-size:10px; color:#0f766e; font-weight:600; }
+
+  table { width:100%; border-collapse:collapse; margin-top:6px; }
+  th, td { border:1px solid #e2e8f0; padding:5px 7px; text-align:left; font-size:11px; }
+  th { background:#ecfdf5; color:#0f766e; text-transform:uppercase; font-size:10px; }
+
+  footer.meta { margin-top:18px; padding-top:8px; border-top:1px solid #e5e7eb; font-size:9.5px; color:#9ca3af; display:flex; justify-content:space-between; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="brand">
+    <div>
+      <h1>Desk&amp;Go</h1>
+      <div class="tag">Workbook do Negócio · Peça 4 de 5</div>
+    </div>
+    <div class="piece-label"><strong>Roadmap 90 Dias</strong>Do zero ao primeiro trimestre operando</div>
+  </header>
+
+  <h2 class="section-title">Trimestre 1 — visão geral</h2>
+  <div class="timeline">
+    <div class="phase">
+      <div class="phase-head"><div class="num">Dias 1–30</div><h3>Fundação</h3></div>
+      <div class="phase-body">
+        <ul>
+          <li>Fechar 8–12 espaços parceiros na região piloto</li>
+          <li>Definir preço, termos de comissão e contrato simples</li>
+          <li>Construir MVP do app (reserva + pagamento)</li>
+          <li>Criar identidade de marca e página de espera</li>
+        </ul>
+        <div class="milestone">Marco: app MVP funcional + primeiros 10 parceiros assinados</div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-head"><div class="num">Dias 31–60</div><h3>Beta e ajuste</h3></div>
+      <div class="phase-body">
+        <ul>
+          <li>Abrir beta fechado para 50 usuários convidados</li>
+          <li>Medir ocupação por espaço e ajustar horários</li>
+          <li>Iterar app com base em bugs e atrito de reserva</li>
+          <li>Montar processo de suporte (chat + FAQ)</li>
+        </ul>
+        <div class="milestone">Marco: 50 usuários beta, taxa de recompra acima de 40%</div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-head"><div class="num">Dias 61–90</div><h3>Lançamento e tração</h3></div>
+      <div class="phase-body">
+        <ul>
+          <li>Abrir cadastro público na região piloto</li>
+          <li>Rodar campanha local (redes + parceiros físicos)</li>
+          <li>Lançar plano de assinatura ilimitada</li>
+          <li>Revisar unit economics e decidir expansão</li>
+        </ul>
+        <div class="milestone">Marco: 300 usuários ativos, 60% em plano pago</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Marcos-chave por semana</h2>
+  <table>
+    <tr><th>Semana</th><th>Entregável</th><th>Responsável</th></tr>
+    <tr><td>1–2</td><td>Contrato-padrão de parceria + primeiros 4 espaços assinados</td><td>Fundador(a)</td></tr>
+    <tr><td>3–4</td><td>MVP do app pronto para teste interno</td><td>Fundador(a) / dev freelance</td></tr>
+    <tr><td>5–6</td><td>Beta fechado no ar com 50 convidados</td><td>Fundador(a)</td></tr>
+    <tr><td>7–8</td><td>Ajustes de produto com base no feedback do beta</td><td>Fundador(a) / dev freelance</td></tr>
+    <tr><td>9–10</td><td>Campanha de lançamento público preparada</td><td>Fundador(a)</td></tr>
+    <tr><td>11–12</td><td>Lançamento público + primeira leitura de métricas</td><td>Fundador(a)</td></tr>
+  </table>
+
+  <footer class="meta">
+    <span>Desk&amp;Go · Workbook do Negócio</span>
+    <span>Peça 4/5 — Roadmap 90 Dias · A4</span>
+  </footer>
+</div>
+</body>
+</html>

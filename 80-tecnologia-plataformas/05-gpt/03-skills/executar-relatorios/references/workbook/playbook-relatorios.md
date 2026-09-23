@@ -27,19 +27,18 @@ recebe tem que adivinhar:
 
 ```bash
 python3 scripts/gerar_relatorio.py --spec spec.json --saida rel.html
-python3 scripts/gerar_relatorio.py --spec spec.json --saida rel.html --tema editorial
 python3 scripts/gerar_relatorio.py --lote specs/ --saida-dir out/
 ```
 
-O tema pode vir no próprio spec (`"tema": "editorial"`), que ganha da linha de
-comando. `--modo branco` gera um relatório para preencher à mão; o padrão é
-`preenchido`.
+O contrato atual define uma identidade única, `executar` (ver
+`references/design-tokens.md`) — `--tema` não precisa ser informado. `--modo
+branco` gera um relatório para preencher à mão; o padrão é `preenchido`.
 
 ## Estrutura do spec
 
 ```json
 {
-  "tema": "playbook",
+  "tema": "executar",
   "meta": { "id", "serie", "titulo", "subtitulo", "cliente",
             "periodo", "responsavel", "confidencialidade", "versao" },
   "resumo_executivo": ["parágrafo", "parágrafo"],
