@@ -1,30 +1,21 @@
 ---
 name: executar-relatorios
 description: >
-  Skill consolidada de quatro capacidades EXECUTAR com progressive disclosure:
-  (1) status report — converter texto/documento em relatório editorial
-  source-grounded, com JSON canônico e HTML pronto para impressão; (2) pacote
-  de templates de negócio — ~60 documentos (memo, proposta, SOP, RAID log,
-  RACI, OKR, business case, post-mortem, e-mails operacionais, workbooks);
-  (3) Mapa-OS / PRISM — mapa operacional semanal com posição canônica,
-  horizontes Agora/Próximo/Depois, WIP=1, evidência classificada, e projeção
-  Prisma A4 de três faces; (4) workbook visual estilo Desk&Go — kit de 5
-  peças A4 em SVG, relatório extenso em HTML, wireframes sob demanda, e
-  validador de placeholder/caixa/contraste/impressão. Ative esta skill
-  sempre que pedirem para "gerar status report", "converter em relatório",
-  "criar relatório EXECUTAR", "gerar report HTML", "sintetizar como status
-  report", "criar memo/proposta/SOP/RAID/RACI/OKR/business case/postmortem",
-  "escrever e-mail de status/kickoff/escalação", "criar Mapa-OS", "mapa
-  operacional", "centro de comando", "Agora Próximo Depois", "plano semanal
-  Prisma", "status EXECUTAR", ou os atalhos 00/01/02 (/ajuda-mapa,
-  /criar-mapa-semanal, /testar-mapa-prisma); e também para "gerar o workbook
-  do negócio", "montar as 5 peças", "recriar as pranchas Desk&Go",
-  "fundação/GTM/roadmap/kanban/canvas", "relatório longo de ciclo",
-  "wireframe ou rascunho de estrutura", ou "conferir um SVG/HTML antes de
-  mandar para a gráfica". Esta skill substitui quatro skills antigas
-  (executar-status-report, executar-status-report-business-pack,
-  executar-mapa-os, deskgo-business-workbook) — roteie qualquer pedido que
-  antes iria para elas até aqui.
+  Skill EXECUTAR consolidada, cinco capacidades com progressive disclosure:
+  (1) status report — texto vira relatório editorial source-grounded, JSON
+  canônico + HTML de impressão; (2) relatório executivo A4 — diagnóstico,
+  recomendação e roadmap para board, pronto para PDF; (3) ~60 templates de
+  negócio (memo, proposta, SOP, RAID, RACI, OKR, business case, postmortem,
+  e-mails, workbooks); (4) Mapa-OS/PRISM — mapa operacional semanal,
+  Agora/Próximo/Depois, WIP=1, projeção Prisma A4; (5) workbook visual
+  Desk&Go — 5 peças A4 em SVG, wireframes, validador de contraste/impressão.
+  Ative para status report, relatório executivo/para o board,
+  memo/proposta/SOP/RAID/RACI/OKR/business case/postmortem, e-mail de
+  status/kickoff, Mapa-OS, centro de comando, Agora-Próximo-Depois, Prisma
+  (ou atalhos 00/01/02), workbook, Desk&Go, as 5 peças,
+  fundação/GTM/roadmap/kanban/canvas, ou conferir SVG/HTML antes da gráfica.
+  Substitui executar-status-report, executar-status-report-business-pack,
+  executar-mapa-os, deskgo-business-workbook.
 ---
 
 # EXECUTAR Relatórios
