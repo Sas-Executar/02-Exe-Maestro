@@ -1,0 +1,12 @@
+{
+  "eval_id": 1,
+  "eval_name": "relatorio-executivo-a4",
+  "prompt": "Preciso de um relatório executivo A4 pra apresentar pro board sobre a saúde do projeto de migração de dados: diagnóstico, recomendação e próximos passos, pronto pra virar PDF.",
+  "assertions": [
+    "Usa assets/templates/executive-report-a4.html como base, nao recria a peca do zero",
+    "Nenhum placeholder {{...}} remanescente no HTML final",
+    "Usa somente cores ja resolvidas em assets/tokens/tokens.json (nenhum hex novo introduzido fora do contrato)",
+    "Estrutura tem capa propria (page: cover) + paginas de miolo (page: report) com cabecalho/rodape via string-set",
+    "Cada pagina/bloco expressa uma mensagem executiva principal (padrao resposta-primeiro, nao tema solto)"
+  ]
+}

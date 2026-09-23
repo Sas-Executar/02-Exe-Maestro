@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "Usa templates/execution/raid-log.md como base",
+      "passed": false,
+      "evidence": "Baseline nao tem acesso ao catalogo de templates; agente estruturou o RAID log por conhecimento geral do formato."
+    },
+    {
+      "text": "Cobre as 4 categorias do RAID",
+      "passed": true,
+      "evidence": "Agente relatou 6 riscos, 5 premissas, 4 issues, 5 dependencias — todas as 4 categorias presentes; verificacao independente encontrou 13 mencoes."
+    },
+    {
+      "text": "Nao apresenta conteudo sintetico como se tivesse fonte real",
+      "passed": true,
+      "evidence": "Agente relatou incluir nota explicita de que o conteudo e ficticio/demonstrativo."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 1,
+    "total": 3,
+    "pass_rate": 0.67
+  }
+}

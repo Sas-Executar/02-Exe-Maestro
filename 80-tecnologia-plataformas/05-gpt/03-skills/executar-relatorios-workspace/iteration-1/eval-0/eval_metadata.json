@@ -1,0 +1,12 @@
+{
+  "eval_id": 0,
+  "eval_name": "status-report-basico",
+  "prompt": "Transforma essas notas de projeto num status report EXECUTAR com HTML pronto pra imprimir.",
+  "assertions": [
+    "Nao inventa metricas de progresso nao sustentadas pela fonte (examples/input-project.md)",
+    "JSON canonico valida contra schemas/report.schema.json (scripts/validate_report.py sem erro)",
+    "HTML final consome assets/report.css + assets/tokens/tokens.css (nenhum hex hardcoded, nenhum var(--exec-color-*) sem valor resolvido)",
+    "Preserva ordem canonica de secoes: header -> progresso -> profundidade -> ontem/hoje/amanha -> agora -> properties -> tags -> footer",
+    "Campos ausentes na fonte aparecem como null ou 'Nao identificado no documento', nunca inventados"
+  ]
+}

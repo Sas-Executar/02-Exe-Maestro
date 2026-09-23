@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Nao inventa metricas de progresso nao sustentadas pela fonte",
+      "passed": true,
+      "evidence": "Agente relatou extrair diretamente de input-project.md sem inventar numeros novos."
+    },
+    {
+      "text": "JSON canonico valida contra schemas/report.schema.json",
+      "passed": false,
+      "evidence": "Sem a skill nao ha nocao do schema canonico EXECUTAR; o proprio agente notou que so produziu um JSON simples e so ganhou a estrutura EXECUTAR_STATUS_REPORT_V1 porque o arquivo foi sobrescrito por outro processo (o with_skill run gravando no mesmo caminho por engano de path do workspace), nao porque seguiu o schema por conta propria."
+    },
+    {
+      "text": "HTML final consome assets/report.css + assets/tokens/tokens.css, nenhum hex hardcoded",
+      "passed": false,
+      "evidence": "Baseline nao tem acesso ao pacote de tokens; HTML foi construido com CSS proprio do zero (paleta e tipografia inventadas pelo agente)."
+    },
+    {
+      "text": "Preserva ordem canonica de secoes",
+      "passed": false,
+      "evidence": "Nao ha contrato de ordem sem a skill; o agente organizou o HTML por julgamento proprio, nao pela ordem fixa header->progresso->profundidade->..."
+    },
+    {
+      "text": "Campos ausentes aparecem como null, nunca inventados",
+      "passed": true,
+      "evidence": "Agente relatou nao inventar dados ausentes, mas sem o vocabulario/schema EXECUTAR para marcar isso de forma padronizada."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 3,
+    "total": 5,
+    "pass_rate": 0.4
+  }
+}

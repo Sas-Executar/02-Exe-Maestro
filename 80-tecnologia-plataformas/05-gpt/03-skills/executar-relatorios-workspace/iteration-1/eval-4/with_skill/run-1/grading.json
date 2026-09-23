@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Usa scripts/gerar_workbook.py em vez de desenhar SVG a mao",
+      "passed": true,
+      "evidence": "run-log.txt documenta o comando `python3 scripts/gerar_workbook.py --output-dir out/` executado apos as correcoes."
+    },
+    {
+      "text": "Gera exatamente 5 pecas",
+      "passed": false,
+      "evidence": "Geracao bloqueada por reprovacao real do validador interno de contraste (PH007, ink-placeholder 3.03:1 contra o minimo 4.5:1) — nenhuma peca foi gerada. Bloqueio documentado como decisao pendente do usuario, nao um bug (os dois bugs reais que impediam a execucao ate aqui — tokens de geometria ausentes e nomes de custom property incorretos em Tokens.css_block — foram corrigidos nesta mesma rodada)."
+    },
+    {
+      "text": "Roda scripts/validar_artefato.py e reporta o status, nao entrega sem validar",
+      "passed": true,
+      "evidence": "gerar_workbook.py roda o validador internamente antes de mover qualquer peca para o destino final e abortou corretamente ao encontrar a reprovacao, sem entregar pacote parcial (garantia documentada em contrato-workbook.md)."
+    },
+    {
+      "text": "Nenhum marcador /* A DEFINIR */ remanescente onde ja existe valor real",
+      "passed": true,
+      "evidence": "Apos a correcao dos bugs de geometria/naming, os 27 aliases de cor com valor real resolvem corretamente (verificado via scripts/tokens.py --css); os 9 marcadores restantes sao LACUNA genuina e documentada, nao residuo de bug."
+    },
+    {
+      "text": "Entrega como zip unico, nao pecas soltas",
+      "passed": false,
+      "evidence": "Nao aplicavel — nenhuma peca foi gerada devido ao bloqueio de contraste, entao nao houve entrega para embalar."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 2,
+    "total": 5,
+    "pass_rate": 0.6
+  }
+}

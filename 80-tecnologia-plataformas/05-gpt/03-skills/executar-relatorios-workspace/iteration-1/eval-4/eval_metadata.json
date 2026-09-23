@@ -1,0 +1,12 @@
+{
+  "eval_id": 4,
+  "eval_name": "workbook-deskgo-5-pecas",
+  "prompt": "Monta o workbook Desk&Go com as 5 peças pro meu negócio novo.",
+  "assertions": [
+    "Usa scripts/gerar_workbook.py em vez de desenhar SVG a mao",
+    "Gera exatamente 5 pecas: Fundacao, GTM, Roadmap, Kanban, Business Model Canvas",
+    "Roda scripts/validar_artefato.py sobre o resultado e reporta o status (nao entrega sem validar)",
+    "Nenhum marcador '/* A DEFINIR */' remanescente onde ja existe valor real em assets/tokens/tokens.json",
+    "Entrega como zip unico, nao como 5 arquivos SVG soltos"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Usa assets/templates/executive-report-a4.html como base",
+      "passed": true,
+      "evidence": "Agente confirmou ter lido references/200-executive-report-print-contract.md e assets/templates/executive-report-a4.html e preenchido os placeholders do template, nao recriado do zero."
+    },
+    {
+      "text": "Nenhum placeholder {{...}} remanescente",
+      "passed": true,
+      "evidence": "Verificacao independente: `grep -c '{{' report.html` = 0."
+    },
+    {
+      "text": "Usa somente cores ja resolvidas em tokens.json",
+      "passed": true,
+      "evidence": "Verificacao independente: todo hex no arquivo final pertence ao conjunto de 36 valores declarados no :root do proprio template (paleta Green/Azure/Neutral completa); nenhum hex fora desse conjunto."
+    },
+    {
+      "text": "Estrutura tem capa propria + paginas de miolo com cabecalho/rodape via string-set",
+      "passed": true,
+      "evidence": "Verificacao independente: 2 ocorrencias de declaracao de pagina 'cover'/'report' preservadas do template original."
+    },
+    {
+      "text": "Cada pagina/bloco expressa uma mensagem executiva principal",
+      "passed": true,
+      "evidence": "Agente relatou seguir a estrutura evidencia->implicacao->acao por secao (resumo, diagnostico, leitura quantitativa, recomendacoes, roadmap, riscos/decisoes, apendice) com uma resposta por pagina, sem se desviar do contrato."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  }
+}

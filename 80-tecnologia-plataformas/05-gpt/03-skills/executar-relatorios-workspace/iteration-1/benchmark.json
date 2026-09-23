@@ -1,0 +1,467 @@
+{
+  "metadata": {
+    "skill_name": "executar-relatorios",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-09-23T14:13:30Z",
+    "evals_run": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 61.5,
+        "tokens": 75205,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Nao inventa metricas de progresso nao sustentadas pela fonte",
+          "passed": true,
+          "evidence": "Agente reportou todos os campos rastreados a input-project.md (26%, ciclo 3/8, 33% hoje); dois percentuais ausentes (ontem/amanha) ficaram null em vez de estimados; quality.missing_fields registra a lacuna."
+        },
+        {
+          "text": "JSON canonico valida contra schemas/report.schema.json",
+          "passed": true,
+          "evidence": "scripts/validate_report.py rodado pelo agente e por mim (verificacao independente): 'VALID: report structure, ranges, required fields, and provenance gates passed.'"
+        },
+        {
+          "text": "HTML final consome assets/report.css + assets/tokens/tokens.css, nenhum hex hardcoded",
+          "passed": true,
+          "evidence": "scripts/render_report.py (ja corrigido para injetar tokens.css antes de report.css) rodou sem erro sobre o mesmo report.json em verificacao independente."
+        },
+        {
+          "text": "Preserva ordem canonica de secoes",
+          "passed": true,
+          "evidence": "Agente relatou reading order header->progresso->profundidade->ontem/hoje/amanha->agora->properties->tags->footer, que e a ordem fixa do renderer (scripts/render_report.py nao aceita reordenar)."
+        },
+        {
+          "text": "Campos ausentes aparecem como null, nunca inventados",
+          "passed": true,
+          "evidence": "Agente: 'quality.missing_fields lists the two percentages (yesterday/tomorrow) that the source doesn't state, preserved as null rather than guessed.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 109.9,
+        "tokens": 87836,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Usa assets/templates/executive-report-a4.html como base",
+          "passed": true,
+          "evidence": "Agente confirmou ter lido references/200-executive-report-print-contract.md e assets/templates/executive-report-a4.html e preenchido os placeholders do template, nao recriado do zero."
+        },
+        {
+          "text": "Nenhum placeholder {{...}} remanescente",
+          "passed": true,
+          "evidence": "Verificacao independente: `grep -c '{{' report.html` = 0."
+        },
+        {
+          "text": "Usa somente cores ja resolvidas em tokens.json",
+          "passed": true,
+          "evidence": "Verificacao independente: todo hex no arquivo final pertence ao conjunto de 36 valores declarados no :root do proprio template (paleta Green/Azure/Neutral completa); nenhum hex fora desse conjunto."
+        },
+        {
+          "text": "Estrutura tem capa propria + paginas de miolo com cabecalho/rodape via string-set",
+          "passed": true,
+          "evidence": "Verificacao independente: 2 ocorrencias de declaracao de pagina 'cover'/'report' preservadas do template original."
+        },
+        {
+          "text": "Cada pagina/bloco expressa uma mensagem executiva principal",
+          "passed": true,
+          "evidence": "Agente relatou seguir a estrutura evidencia->implicacao->acao por secao (resumo, diagnostico, leitura quantitativa, recomendacoes, roadmap, riscos/decisoes, apendice) com uma resposta por pagina, sem se desviar do contrato."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 48.7,
+        "tokens": 63782,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Usa templates/execution/raid-log.md como base",
+          "passed": true,
+          "evidence": "Agente confirmou roteamento via references/100-business-template-routing.md e references/110-renderer-profiles.md ate templates/execution/raid-log.md, e usou scripts/list_templates.py para confirmar a selecao."
+        },
+        {
+          "text": "Cobre as 4 categorias do RAID",
+          "passed": true,
+          "evidence": "Agente relatou 5 riscos, 4 premissas, 3 issues, 4 dependencias, todas as 4 categorias presentes; verificacao independente encontrou 12 mencoes das 4 palavras-chave no arquivo."
+        },
+        {
+          "text": "Nao apresenta conteudo sintetico como se tivesse fonte real",
+          "passed": true,
+          "evidence": "Agente relatou marcar explicitamente o documento como DEMO/ficticio no topo e no rodape, seguindo a regra de grounding do pacote mesmo para conteudo convidado a ser inventado."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 98.8,
+        "tokens": 93679,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Reconhece o atalho '01' e roteia para o roteiro de mapa semanal",
+          "passed": true,
+          "evidence": "Agente confirmou roteamento via references/mapa-os/activation-index.md ate prompts/01-prompt-mestre-prisma.md, seguindo architecture-executar.md e mapa-os-contract.md."
+        },
+        {
+          "text": "Respeita WIP=1",
+          "passed": true,
+          "evidence": "Agente relatou exatamente um item ativo por nivel (DLV-001, FLW-001, ACT-003), validado programaticamente por scripts/validate_mapa.py com wip_valid=true."
+        },
+        {
+          "text": "Produz next_action unica ou justifica ausencia",
+          "passed": true,
+          "evidence": "Agente relatou next_action=ACT-003 com autoridade DETERMINISTICO por ser a unica acao elegivel (dependencia ACT-002 implementada com evidencia, sem bloqueio ativo)."
+        },
+        {
+          "text": "Nao promove estado para verificado/testado/publicado sem evidencia",
+          "passed": true,
+          "evidence": "Agente relatou registrar um gap nao-bloqueante (ISS-001) em vez de inventar uma data de previsao, e marcou explicitamente o nivel alcancado como 'Validado', nao 'Renderizado' ou 'Inspecionado em impressao' (nao reivindicou mais do que fez)."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.6,
+        "passed": 3,
+        "failed": 2,
+        "total": 5,
+        "time_seconds": 114.3,
+        "tokens": 80353,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Usa scripts/gerar_workbook.py em vez de desenhar SVG a mao",
+          "passed": true,
+          "evidence": "run-log.txt documenta o comando `python3 scripts/gerar_workbook.py --output-dir out/` executado apos as correcoes."
+        },
+        {
+          "text": "Gera exatamente 5 pecas",
+          "passed": false,
+          "evidence": "Geracao bloqueada por reprovacao real do validador interno de contraste (PH007, ink-placeholder 3.03:1 contra o minimo 4.5:1) \u2014 nenhuma peca foi gerada. Bloqueio documentado como decisao pendente do usuario, nao um bug (os dois bugs reais que impediam a execucao ate aqui \u2014 tokens de geometria ausentes e nomes de custom property incorretos em Tokens.css_block \u2014 foram corrigidos nesta mesma rodada)."
+        },
+        {
+          "text": "Roda scripts/validar_artefato.py e reporta o status, nao entrega sem validar",
+          "passed": true,
+          "evidence": "gerar_workbook.py roda o validador internamente antes de mover qualquer peca para o destino final e abortou corretamente ao encontrar a reprovacao, sem entregar pacote parcial (garantia documentada em contrato-workbook.md)."
+        },
+        {
+          "text": "Nenhum marcador /* A DEFINIR */ remanescente onde ja existe valor real",
+          "passed": true,
+          "evidence": "Apos a correcao dos bugs de geometria/naming, os 27 aliases de cor com valor real resolvem corretamente (verificado via scripts/tokens.py --css); os 9 marcadores restantes sao LACUNA genuina e documentada, nao residuo de bug."
+        },
+        {
+          "text": "Entrega como zip unico, nao pecas soltas",
+          "passed": false,
+          "evidence": "Nao aplicavel \u2014 nenhuma peca foi gerada devido ao bloqueio de contraste, entao nao houve entrega para embalar."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.4,
+        "passed": 2,
+        "failed": 3,
+        "total": 5,
+        "time_seconds": 85.1,
+        "tokens": 62093,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Nao inventa metricas de progresso nao sustentadas pela fonte",
+          "passed": true,
+          "evidence": "Agente relatou extrair diretamente de input-project.md sem inventar numeros novos."
+        },
+        {
+          "text": "JSON canonico valida contra schemas/report.schema.json",
+          "passed": false,
+          "evidence": "Sem a skill nao ha nocao do schema canonico EXECUTAR; o proprio agente notou que so produziu um JSON simples e so ganhou a estrutura EXECUTAR_STATUS_REPORT_V1 porque o arquivo foi sobrescrito por outro processo (o with_skill run gravando no mesmo caminho por engano de path do workspace), nao porque seguiu o schema por conta propria."
+        },
+        {
+          "text": "HTML final consome assets/report.css + assets/tokens/tokens.css, nenhum hex hardcoded",
+          "passed": false,
+          "evidence": "Baseline nao tem acesso ao pacote de tokens; HTML foi construido com CSS proprio do zero (paleta e tipografia inventadas pelo agente)."
+        },
+        {
+          "text": "Preserva ordem canonica de secoes",
+          "passed": false,
+          "evidence": "Nao ha contrato de ordem sem a skill; o agente organizou o HTML por julgamento proprio, nao pela ordem fixa header->progresso->profundidade->..."
+        },
+        {
+          "text": "Campos ausentes aparecem como null, nunca inventados",
+          "passed": true,
+          "evidence": "Agente relatou nao inventar dados ausentes, mas sem o vocabulario/schema EXECUTAR para marcar isso de forma padronizada."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.4,
+        "passed": 2,
+        "failed": 3,
+        "total": 5,
+        "time_seconds": 74.4,
+        "tokens": 59957,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Usa assets/templates/executive-report-a4.html como base",
+          "passed": false,
+          "evidence": "Baseline nao tem acesso ao arquivo; agente construiu HTML/CSS do zero."
+        },
+        {
+          "text": "Nenhum placeholder {{...}} remanescente",
+          "passed": true,
+          "evidence": "Nao aplicavel como teste real (nao havia template com placeholders a preencher), mas o output final nao contem {{...}} porque foi escrito direto com conteudo."
+        },
+        {
+          "text": "Usa somente cores ja resolvidas em tokens.json",
+          "passed": false,
+          "evidence": "Verificacao independente: paleta inventada pelo agente (#1a1d24, #1e6b45, #1f4b8f, #8a5a10, #a33a2c...) nao corresponde a nenhum valor do contrato EXECUTAR-REPORT-PRINT-DS-001."
+        },
+        {
+          "text": "Estrutura tem capa propria + paginas de miolo com cabecalho/rodape via string-set",
+          "passed": false,
+          "evidence": "Agente relatou layout de uma pagina so, sem @page nomeada 'cover'/'report' nem string-set de cabecalho/rodape corrente."
+        },
+        {
+          "text": "Cada pagina/bloco expressa uma mensagem executiva principal",
+          "passed": true,
+          "evidence": "Agente organizou por secoes com titulos e recomendacao clara, ainda que sem seguir o vocabulario formal evidencia->implicacao->acao do contrato."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.67,
+        "passed": 2,
+        "failed": 1,
+        "total": 3,
+        "time_seconds": 41.5,
+        "tokens": 54725,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Usa templates/execution/raid-log.md como base",
+          "passed": false,
+          "evidence": "Baseline nao tem acesso ao catalogo de templates; agente estruturou o RAID log por conhecimento geral do formato."
+        },
+        {
+          "text": "Cobre as 4 categorias do RAID",
+          "passed": true,
+          "evidence": "Agente relatou 6 riscos, 5 premissas, 4 issues, 5 dependencias \u2014 todas as 4 categorias presentes; verificacao independente encontrou 13 mencoes."
+        },
+        {
+          "text": "Nao apresenta conteudo sintetico como se tivesse fonte real",
+          "passed": true,
+          "evidence": "Agente relatou incluir nota explicita de que o conteudo e ficticio/demonstrativo."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.25,
+        "passed": 1,
+        "failed": 3,
+        "total": 4,
+        "time_seconds": 29.8,
+        "tokens": 53342,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Reconhece o atalho '01' e roteia para o roteiro de mapa semanal",
+          "passed": false,
+          "evidence": "Sem a skill nao ha conceito de atalho '01'; agente tratou o pedido como uma solicitacao generica de plano semanal."
+        },
+        {
+          "text": "Respeita WIP=1",
+          "passed": false,
+          "evidence": "Documento produzido lista 4 trilhas de trabalho simultaneas (Produto/Conteudo, Design, Implementacao tecnica, Validacao e divulgacao) todas ativas na mesma semana, sem o conceito de uma unica entrega/fluxo/acao ativos por vez."
+        },
+        {
+          "text": "Produz next_action unica ou justifica ausencia",
+          "passed": false,
+          "evidence": "Documento tem um checklist de tarefas por trilha, nao uma unica proxima acao elegivel destacada com justificativa de exclusividade."
+        },
+        {
+          "text": "Nao promove estado para verificado/testado/publicado sem evidencia",
+          "passed": true,
+          "evidence": "Documento nao contem essas alegacoes de estado (nao chega a esse nivel de rigor, mas tambem nao viola a regra por nao ter o vocabulario)."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.4,
+        "passed": 2,
+        "failed": 3,
+        "total": 5,
+        "time_seconds": 125.0,
+        "tokens": 67754,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Usa scripts/gerar_workbook.py em vez de desenhar SVG a mao",
+          "passed": false,
+          "evidence": "Baseline nao tem acesso ao gerador; agente escreveu 5 arquivos HTML/CSS a mao."
+        },
+        {
+          "text": "Gera exatamente 5 pecas",
+          "passed": true,
+          "evidence": "Agente relatou e o diretorio confirma 5 arquivos HTML (fundacao, business model canvas, GTM, roadmap, kanban) \u2014 mais pe\u00e7as do que o with_skill run conseguiu entregar, mas sem nenhuma garantia de contraste/impressao/placeholder do pacote."
+        },
+        {
+          "text": "Roda scripts/validar_artefato.py e reporta o status",
+          "passed": false,
+          "evidence": "Nenhum validador do pacote foi usado; sem checagem de contraste, caixa de marcar minima, ou regras de impressao fisica."
+        },
+        {
+          "text": "Nenhum marcador /* A DEFINIR */ remanescente",
+          "passed": true,
+          "evidence": "Nao aplicavel (baseline nao usa o sistema de tokens do pacote, entao nao ha marcador desse tipo para vazar), mas tambem nao ha garantia de acessibilidade equivalente."
+        },
+        {
+          "text": "Entrega como zip unico, nao pecas soltas",
+          "passed": false,
+          "evidence": "Agente entregou 5 arquivos HTML soltos no diretorio de saida, nao um zip unico."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.92,
+        "stddev": 0.1789,
+        "min": 0.6,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 86.64,
+        "stddev": 29.6877,
+        "min": 48.7,
+        "max": 114.3
+      },
+      "tokens": {
+        "mean": 80171.0,
+        "stddev": 11559.7566,
+        "min": 63782,
+        "max": 93679
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.424,
+        "stddev": 0.1521,
+        "min": 0.25,
+        "max": 0.67
+      },
+      "time_seconds": {
+        "mean": 71.16,
+        "stddev": 37.7291,
+        "min": 29.8,
+        "max": 125.0
+      },
+      "tokens": {
+        "mean": 59574.2,
+        "stddev": 5825.699,
+        "min": 53342,
+        "max": 67754
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.50",
+      "time_seconds": "+15.5",
+      "tokens": "+20597"
+    }
+  },
+  "notes": []
+}

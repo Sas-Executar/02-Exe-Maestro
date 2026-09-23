@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Reconhece o atalho '01' e roteia para o roteiro de mapa semanal",
+      "passed": false,
+      "evidence": "Sem a skill nao ha conceito de atalho '01'; agente tratou o pedido como uma solicitacao generica de plano semanal."
+    },
+    {
+      "text": "Respeita WIP=1",
+      "passed": false,
+      "evidence": "Documento produzido lista 4 trilhas de trabalho simultaneas (Produto/Conteudo, Design, Implementacao tecnica, Validacao e divulgacao) todas ativas na mesma semana, sem o conceito de uma unica entrega/fluxo/acao ativos por vez."
+    },
+    {
+      "text": "Produz next_action unica ou justifica ausencia",
+      "passed": false,
+      "evidence": "Documento tem um checklist de tarefas por trilha, nao uma unica proxima acao elegivel destacada com justificativa de exclusividade."
+    },
+    {
+      "text": "Nao promove estado para verificado/testado/publicado sem evidencia",
+      "passed": true,
+      "evidence": "Documento nao contem essas alegacoes de estado (nao chega a esse nivel de rigor, mas tambem nao viola a regra por nao ter o vocabulario)."
+    }
+  ],
+  "summary": {
+    "passed": 1,
+    "failed": 3,
+    "total": 4,
+    "pass_rate": 0.25
+  }
+}

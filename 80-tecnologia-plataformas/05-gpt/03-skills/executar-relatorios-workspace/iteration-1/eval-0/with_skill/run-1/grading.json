@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Nao inventa metricas de progresso nao sustentadas pela fonte",
+      "passed": true,
+      "evidence": "Agente reportou todos os campos rastreados a input-project.md (26%, ciclo 3/8, 33% hoje); dois percentuais ausentes (ontem/amanha) ficaram null em vez de estimados; quality.missing_fields registra a lacuna."
+    },
+    {
+      "text": "JSON canonico valida contra schemas/report.schema.json",
+      "passed": true,
+      "evidence": "scripts/validate_report.py rodado pelo agente e por mim (verificacao independente): 'VALID: report structure, ranges, required fields, and provenance gates passed.'"
+    },
+    {
+      "text": "HTML final consome assets/report.css + assets/tokens/tokens.css, nenhum hex hardcoded",
+      "passed": true,
+      "evidence": "scripts/render_report.py (ja corrigido para injetar tokens.css antes de report.css) rodou sem erro sobre o mesmo report.json em verificacao independente."
+    },
+    {
+      "text": "Preserva ordem canonica de secoes",
+      "passed": true,
+      "evidence": "Agente relatou reading order header->progresso->profundidade->ontem/hoje/amanha->agora->properties->tags->footer, que e a ordem fixa do renderer (scripts/render_report.py nao aceita reordenar)."
+    },
+    {
+      "text": "Campos ausentes aparecem como null, nunca inventados",
+      "passed": true,
+      "evidence": "Agente: 'quality.missing_fields lists the two percentages (yesterday/tomorrow) that the source doesn't state, preserved as null rather than guessed.'"
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  }
+}

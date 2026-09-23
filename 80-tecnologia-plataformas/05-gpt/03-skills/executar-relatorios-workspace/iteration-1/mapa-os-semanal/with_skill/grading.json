@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Reconhece o atalho '01' e roteia para o roteiro de mapa semanal",
+      "passed": true,
+      "evidence": "Agente confirmou roteamento via references/mapa-os/activation-index.md ate prompts/01-prompt-mestre-prisma.md, seguindo architecture-executar.md e mapa-os-contract.md."
+    },
+    {
+      "text": "Respeita WIP=1",
+      "passed": true,
+      "evidence": "Agente relatou exatamente um item ativo por nivel (DLV-001, FLW-001, ACT-003), validado programaticamente por scripts/validate_mapa.py com wip_valid=true."
+    },
+    {
+      "text": "Produz next_action unica ou justifica ausencia",
+      "passed": true,
+      "evidence": "Agente relatou next_action=ACT-003 com autoridade DETERMINISTICO por ser a unica acao elegivel (dependencia ACT-002 implementada com evidencia, sem bloqueio ativo)."
+    },
+    {
+      "text": "Nao promove estado para verificado/testado/publicado sem evidencia",
+      "passed": true,
+      "evidence": "Agente relatou registrar um gap nao-bloqueante (ISS-001) em vez de inventar uma data de previsao, e marcou explicitamente o nivel alcancado como 'Validado', nao 'Renderizado' ou 'Inspecionado em impressao' (nao reivindicou mais do que fez)."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  }
+}

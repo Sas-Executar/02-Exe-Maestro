@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "Usa templates/execution/raid-log.md como base",
+      "passed": true,
+      "evidence": "Agente confirmou roteamento via references/100-business-template-routing.md e references/110-renderer-profiles.md ate templates/execution/raid-log.md, e usou scripts/list_templates.py para confirmar a selecao."
+    },
+    {
+      "text": "Cobre as 4 categorias do RAID",
+      "passed": true,
+      "evidence": "Agente relatou 5 riscos, 4 premissas, 3 issues, 4 dependencias, todas as 4 categorias presentes; verificacao independente encontrou 12 mencoes das 4 palavras-chave no arquivo."
+    },
+    {
+      "text": "Nao apresenta conteudo sintetico como se tivesse fonte real",
+      "passed": true,
+      "evidence": "Agente relatou marcar explicitamente o documento como DEMO/ficticio no topo e no rodape, seguindo a regra de grounding do pacote mesmo para conteudo convidado a ser inventado."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  }
+}

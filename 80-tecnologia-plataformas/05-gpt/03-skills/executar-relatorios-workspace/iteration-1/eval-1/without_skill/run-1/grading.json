@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Usa assets/templates/executive-report-a4.html como base",
+      "passed": false,
+      "evidence": "Baseline nao tem acesso ao arquivo; agente construiu HTML/CSS do zero."
+    },
+    {
+      "text": "Nenhum placeholder {{...}} remanescente",
+      "passed": true,
+      "evidence": "Nao aplicavel como teste real (nao havia template com placeholders a preencher), mas o output final nao contem {{...}} porque foi escrito direto com conteudo."
+    },
+    {
+      "text": "Usa somente cores ja resolvidas em tokens.json",
+      "passed": false,
+      "evidence": "Verificacao independente: paleta inventada pelo agente (#1a1d24, #1e6b45, #1f4b8f, #8a5a10, #a33a2c...) nao corresponde a nenhum valor do contrato EXECUTAR-REPORT-PRINT-DS-001."
+    },
+    {
+      "text": "Estrutura tem capa propria + paginas de miolo com cabecalho/rodape via string-set",
+      "passed": false,
+      "evidence": "Agente relatou layout de uma pagina so, sem @page nomeada 'cover'/'report' nem string-set de cabecalho/rodape corrente."
+    },
+    {
+      "text": "Cada pagina/bloco expressa uma mensagem executiva principal",
+      "passed": true,
+      "evidence": "Agente organizou por secoes com titulos e recomendacao clara, ainda que sem seguir o vocabulario formal evidencia->implicacao->acao do contrato."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 3,
+    "total": 5,
+    "pass_rate": 0.4
+  }
+}

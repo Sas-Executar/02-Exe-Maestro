@@ -1,0 +1,11 @@
+{
+  "eval_id": 3,
+  "eval_name": "mapa-os-semanal",
+  "prompt": "01 — quero criar meu mapa da semana.",
+  "assertions": [
+    "Reconhece o atalho '01' e roteia para o roteiro de criacao de mapa semanal (references/mapa-os/prompts/01-prompt-mestre-prisma.md)",
+    "Respeita WIP=1: no maximo uma entrega, um fluxo, uma acao ativos simultaneamente",
+    "Produz uma unica next_action elegivel, ou justifica explicitamente a ausencia (EXIGE_HUMANO)",
+    "Nao promove estado para verificado/testado/publicado sem evidencia associada"
+  ]
+}

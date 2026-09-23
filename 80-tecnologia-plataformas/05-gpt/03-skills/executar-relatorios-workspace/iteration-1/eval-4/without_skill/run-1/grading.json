@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Usa scripts/gerar_workbook.py em vez de desenhar SVG a mao",
+      "passed": false,
+      "evidence": "Baseline nao tem acesso ao gerador; agente escreveu 5 arquivos HTML/CSS a mao."
+    },
+    {
+      "text": "Gera exatamente 5 pecas",
+      "passed": true,
+      "evidence": "Agente relatou e o diretorio confirma 5 arquivos HTML (fundacao, business model canvas, GTM, roadmap, kanban) — mais peças do que o with_skill run conseguiu entregar, mas sem nenhuma garantia de contraste/impressao/placeholder do pacote."
+    },
+    {
+      "text": "Roda scripts/validar_artefato.py e reporta o status",
+      "passed": false,
+      "evidence": "Nenhum validador do pacote foi usado; sem checagem de contraste, caixa de marcar minima, ou regras de impressao fisica."
+    },
+    {
+      "text": "Nenhum marcador /* A DEFINIR */ remanescente",
+      "passed": true,
+      "evidence": "Nao aplicavel (baseline nao usa o sistema de tokens do pacote, entao nao ha marcador desse tipo para vazar), mas tambem nao ha garantia de acessibilidade equivalente."
+    },
+    {
+      "text": "Entrega como zip unico, nao pecas soltas",
+      "passed": false,
+      "evidence": "Agente entregou 5 arquivos HTML soltos no diretorio de saida, nao um zip unico."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 3,
+    "total": 5,
+    "pass_rate": 0.4
+  }
+}
