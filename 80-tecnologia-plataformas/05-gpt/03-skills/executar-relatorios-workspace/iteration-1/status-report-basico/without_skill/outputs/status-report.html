@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Status Report — Projeto de Lançamento</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --ink:#1a1a1a;
+    --ink-soft:#4a4a4a;
+    --muted:#8a8a8a;
+    --line:#dcdcdc;
+    --accent:#0f4c81;
+    --accent-soft:#e8f0f7;
+    --bg:#ffffff;
+    --panel:#f7f7f5;
+    --warn:#8a4b00;
+    --warn-bg:#fdf1e0;
+    --ok:#1e6b3e;
+    --ok-bg:#e9f5ee;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#e9e9e7;
+    font-family:"Georgia","Iowan Old Style","Palatino Linotype",serif;
+    color:var(--ink);
+  }
+  .page{
+    max-width:850px;
+    margin:32px auto;
+    background:var(--bg);
+    padding:56px 64px;
+    box-shadow:0 0 24px rgba(0,0,0,0.12);
+  }
+  header.masthead{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    border-bottom:3px solid var(--ink);
+    padding-bottom:18px;
+    margin-bottom:28px;
+  }
+  .brand{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+  h1{
+    font-size:30px;
+    margin:6px 0 4px;
+    line-height:1.15;
+  }
+  .subtitle{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink-soft);
+    font-size:14px;
+  }
+  .meta{
+    text-align:right;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12px;
+    color:var(--muted);
+    line-height:1.7;
+  }
+  .status-pill{
+    display:inline-block;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:3px;
+    background:var(--ok-bg);
+    color:var(--ok);
+    border:1px solid #bfe2cc;
+  }
+
+  section{margin-bottom:26px;}
+  h2{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--accent);
+    border-bottom:1px solid var(--line);
+    padding-bottom:6px;
+    margin:0 0 14px;
+  }
+
+  /* Progress block */
+  .progress-grid{
+    display:flex;
+    gap:24px;
+    align-items:center;
+  }
+  .progress-num{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:44px;
+    font-weight:700;
+    color:var(--accent);
+    line-height:1;
+    min-width:110px;
+  }
+  .progress-num span{
+    display:block;
+    font-size:11px;
+    font-weight:400;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-top:6px;
+  }
+  .bar-wrap{flex:1;}
+  .bar-track{
+    background:var(--line);
+    border-radius:4px;
+    height:14px;
+    overflow:hidden;
+  }
+  .bar-fill{
+    background:var(--accent);
+    height:100%;
+    width:26%;
+  }
+  .bar-labels{
+    display:flex;
+    justify-content:space-between;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:11px;
+    color:var(--muted);
+    margin-top:6px;
+  }
+  .stat-row{
+    display:flex;
+    gap:32px;
+    margin-top:16px;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .stat-row strong{
+    display:block;
+    font-family:"Georgia",serif;
+    font-size:18px;
+    color:var(--ink);
+  }
+
+  /* Timeline */
+  .timeline{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:16px;
+  }
+  .tl-card{
+    background:var(--panel);
+    border-left:3px solid var(--line);
+    padding:14px 16px;
+  }
+  .tl-card.today{
+    border-left-color:var(--accent);
+    background:var(--accent-soft);
+  }
+  .tl-label{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:6px;
+  }
+  .tl-card.today .tl-label{color:var(--accent);}
+  .tl-text{font-size:14px; line-height:1.5;}
+
+  /* Next action callout */
+  .callout{
+    background:var(--warn-bg);
+    border:1px solid #f0d7ac;
+    border-left:4px solid var(--warn);
+    padding:14px 18px;
+    font-size:15px;
+    display:flex;
+    gap:12px;
+    align-items:baseline;
+  }
+  .callout .tag{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--warn);
+    white-space:nowrap;
+  }
+
+  /* Narrative two-col */
+  .narrative-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px 32px;
+  }
+  .n-item h3{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 4px;
+  }
+  .n-item p{margin:0; font-size:14px; line-height:1.55;}
+
+  /* Steps */
+  ol.steps{
+    list-style:none;
+    margin:0; padding:0;
+    counter-reset:step;
+  }
+  ol.steps li{
+    counter-increment:step;
+    display:flex;
+    gap:14px;
+    padding:10px 0;
+    border-bottom:1px solid var(--line);
+    align-items:center;
+  }
+  ol.steps li:last-child{border-bottom:none;}
+  .step-num{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-weight:700;
+    font-size:13px;
+    width:26px; height:26px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--ink);
+    color:#fff;
+    flex-shrink:0;
+  }
+  li.in-progress .step-num{background:var(--accent);}
+  .step-text{flex:1; font-size:14px;}
+  .step-status{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    padding:3px 9px;
+    border-radius:10px;
+    background:var(--panel);
+    color:var(--muted);
+    white-space:nowrap;
+  }
+  li.in-progress .step-status{background:var(--accent-soft); color:var(--accent);}
+
+  /* Risk */
+  .risk-box{
+    background:#fdecec;
+    border:1px solid #f2b8b8;
+    border-radius:4px;
+    padding:16px 18px;
+  }
+  .risk-box .row{display:flex; gap:10px; margin-bottom:8px;}
+  .risk-box .row:last-child{margin-bottom:0;}
+  .risk-box .label{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:#a53d3d;
+    min-width:100px;
+  }
+  .risk-box .text{font-size:14px; line-height:1.5;}
+
+  /* Delivery */
+  .delivery-box{
+    background:var(--ok-bg);
+    border:1px solid #bfe2cc;
+    border-radius:4px;
+    padding:16px 18px;
+    font-size:15px;
+    line-height:1.5;
+  }
+  .delivery-box .label{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--ok);
+    display:block;
+    margin-bottom:6px;
+  }
+
+  footer{
+    margin-top:36px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:10px;
+    color:var(--muted);
+    display:flex;
+    justify-content:space-between;
+  }
+
+  @media print{
+    body{background:#fff;}
+    .page{
+      box-shadow:none;
+      margin:0;
+      padding:0 8mm;
+      max-width:100%;
+    }
+    @page{
+      size:A4;
+      margin:16mm 14mm;
+    }
+    section{break-inside:avoid;}
+    .timeline, .narrative-grid, ol.steps, .risk-box, .delivery-box, .callout, .progress-grid{
+      break-inside:avoid;
+    }
+  }
+
+  @media (max-width:640px){
+    .page{padding:28px 20px;}
+    header.masthead{flex-direction:column; gap:12px;}
+    .meta{text-align:left;}
+    .timeline, .narrative-grid{grid-template-columns:1fr;}
+    .progress-grid{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <div>
+      <div class="brand">EXECUTAR · Status Report</div>
+      <h1>Projeto de Lançamento</h1>
+      <div class="subtitle">Consolidação da campanha editorial — ciclo 3 de 8</div>
+    </div>
+    <div class="meta">
+      <div><span class="status-pill">Ativo</span></div>
+      <div style="margin-top:8px;">Data do relatório<br><strong style="color:var(--ink);">28 de agosto de 2026</strong></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Progresso Geral</h2>
+    <div class="progress-grid">
+      <div class="progress-num">26%<span>concluído</span></div>
+      <div class="bar-wrap">
+        <div class="bar-track"><div class="bar-fill"></div></div>
+        <div class="bar-labels">
+          <span>10 de 38 blocos finalizados</span>
+          <span>Avanço de hoje: 33%</span>
+        </div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div><strong>3 / 8</strong>Ciclo atual</div>
+      <div><strong>10 / 38</strong>Blocos concluídos</div>
+      <div><strong>33%</strong>Avanço do dia</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Linha do Tempo</h2>
+    <div class="timeline">
+      <div class="tl-card">
+        <div class="tl-label">Ontem</div>
+        <div class="tl-text">Concluída a direção estratégica.</div>
+      </div>
+      <div class="tl-card today">
+        <div class="tl-label">Hoje</div>
+        <div class="tl-text">Foco em produzir a landing page e as peças editoriais.</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-label">Amanhã</div>
+        <div class="tl-text">Validar e publicar a campanha.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Próxima Ação</h2>
+    <div class="callout">
+      <span class="tag">Ação imediata</span>
+      <span>Revisar a headline da landing page.</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contexto do Projeto</h2>
+    <div class="narrative-grid">
+      <div class="n-item">
+        <h3>Contexto</h3>
+        <p>Consolidar a primeira campanha editorial antes de ampliar o produto.</p>
+      </div>
+      <div class="n-item">
+        <h3>Problema</h3>
+        <p>O material está distribuído em documentos diferentes e ainda não existe uma peça canônica para publicação.</p>
+      </div>
+      <div class="n-item">
+        <h3>Processo</h3>
+        <p>Consolidar a tese, revisar evidências e produzir os ativos na sequência definida.</p>
+      </div>
+      <div class="n-item">
+        <h3>Progresso</h3>
+        <p>Estrutura editorial e posicionamento já foram definidos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Plano de Ação</h2>
+    <ol class="steps">
+      <li class="in-progress">
+        <div class="step-num">1</div>
+        <div class="step-text">Revisar a headline.</div>
+        <div class="step-status">Em andamento</div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-text">Fechar a landing page.</div>
+        <div class="step-status">Pendente</div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-text">Validar as peças antes da publicação.</div>
+        <div class="step-status">Pendente</div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Risco &amp; Prevenção</h2>
+    <div class="risk-box">
+      <div class="row">
+        <div class="label">Risco</div>
+        <div class="text">Publicar peças inconsistentes antes da validação da tese.</div>
+      </div>
+      <div class="row">
+        <div class="label">Prevenção</div>
+        <div class="text">Manter uma fonte canônica e revisar cada peça contra ela.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Entrega Esperada</h2>
+    <div class="delivery-box">
+      <span class="label">Resultado final</span>
+      Campanha validada, publicada e rastreável a uma fonte canônica.
+    </div>
+  </section>
+
+  <footer>
+    <span>Projeto de Lançamento — Status Report</span>
+    <span>Gerado em 28 Aug 2026</span>
+  </footer>
+
+</div>
+</body>
+</html>

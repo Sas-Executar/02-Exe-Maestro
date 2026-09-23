@@ -1,0 +1,10 @@
+{
+  "eval_id": 2,
+  "eval_name": "template-negocio-raid-log",
+  "prompt": "Preciso de um RAID log pra reunião de amanhã sobre o projeto de migração.",
+  "assertions": [
+    "Usa templates/execution/raid-log.md como base, nao um RAID log generico inventado do zero",
+    "Conteudo cobre as 4 categorias do RAID: Riscos, Premissas (Assumptions), Issues, Dependencias",
+    "Nao apresenta conteudo sintetico/demo como se tivesse fonte real (marca claramente como ilustrativo)"
+  ]
+}

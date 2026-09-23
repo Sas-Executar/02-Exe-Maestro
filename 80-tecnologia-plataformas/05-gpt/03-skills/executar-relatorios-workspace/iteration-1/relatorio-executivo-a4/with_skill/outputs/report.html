@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Migração de Dados: diagnóstico e recomendação — EXECUTAR</title>
+
+<!--
+EXECUTAR-REPORT-PRINT-DS-001
+Version: 1.0
+Purpose: HTML paginado A4 para relatórios executivos.
+Visual source: EXECUTAR Green/Azure + IBM Plex design system.
+Composition source: EXECUTAR Showroom grammar (white space, neutral surfaces,
+controlled green/azure accents, fine rules, low visual noise).
+
+Conteúdo: dados sintéticos para fins de demonstração (não é entregável real de cliente).
+-->
+
+<style>
+/* =========================================================
+   01. EXECUTAR — CANONICAL DESIGN TOKENS
+   Source family: Green / Azure / Neutral + IBM Plex
+   ========================================================= */
+:root {
+  /* Green */
+  --green-1:#FCFDFC; --green-2:#F3FAF6; --green-3:#E4F6ED;
+  --green-4:#CFF4E2; --green-5:#B4F4D5; --green-6:#8BF6C2;
+  --green-7:#58FBAD; --green-8:#1FFF93; --green-9:#00BF63;
+  --green-10:#008C49; --green-11:#007A45; --green-12:#064727;
+
+  /* Azure */
+  --azure-1:#FCFCFD; --azure-2:#F3F6FA; --azure-3:#E4EDF6;
+  --azure-4:#CFE2F4; --azure-5:#B4D5F4; --azure-6:#8BC2F6;
+  --azure-7:#58ACFB; --azure-8:#3CA0FD; --azure-9:#1F93FF;
+  --azure-10:#007AEB; --azure-11:#0B6FD3; --azure-12:#062747;
+
+  /* Neutral */
+  --neutral-1:#FFFFFF; --neutral-2:#F6F6F6; --neutral-3:#F0F0F0;
+  --neutral-4:#EAEAEA; --neutral-5:#E4E4E4; --neutral-6:#DEDEDE;
+  --neutral-7:#C5C5C5; --neutral-8:#ADADAD; --neutral-9:#959494;
+  --neutral-10:#7C7B7B; --neutral-11:#646363; --neutral-12:#4B4A4A;
+
+  /* Semantic */
+  --bg:var(--neutral-1);
+  --surface:var(--neutral-2);
+  --surface-strong:var(--neutral-3);
+  --text:var(--neutral-12);
+  --text-secondary:var(--neutral-10);
+  --text-muted:var(--neutral-9);
+  --border:var(--neutral-5);
+  --border-strong:var(--neutral-7);
+  --action:var(--green-9);
+  --action-dark:var(--green-11);
+  --info:var(--azure-9);
+  --info-dark:var(--azure-11);
+  --focus:var(--azure-8);
+  --warning:#B45309;
+  --error:#DC2626;
+
+  /* Typography */
+  --font-sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --font-mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+  --display:56px;
+  --h1:44px; --h2:34px; --h3:26px;
+  --title:20px; --subtitle:18px;
+  --body-lg:18px; --body:16px; --body-sm:14px;
+  --caption:12px; --overline:11px; --mono:14px;
+
+  /* Geometry */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px;
+  --s8:32px; --s12:48px; --s16:64px; --s24:96px; --s32:128px;
+  --r-sm:4px; --r-md:8px; --r-lg:12px; --r-xl:16px; --r-pill:999px;
+  --shadow-sm:0 1px 2px rgba(20,20,20,.04);
+  --shadow-md:0 4px 12px rgba(20,20,20,.06);
+
+  /* Print-specific semantic tokens */
+  --page-w:210mm;
+  --page-h:297mm;
+  --page-top:15mm;
+  --page-side:16mm;
+  --page-bottom:18mm;
+  --rule:.35pt solid var(--border);
+  --rule-strong:.7pt solid var(--border-strong);
+}
+
+/* =========================================================
+   02. PAGED MEDIA CONTRACT
+   ========================================================= */
+@page {
+  size:A4 portrait;
+  margin:var(--page-top) var(--page-side) var(--page-bottom);
+}
+
+@page cover {
+  size:A4 portrait;
+  margin:0;
+}
+
+@page report {
+  size:A4 portrait;
+  margin:15mm 16mm 18mm 16mm;
+
+  @top-left {
+    content:string(report-title);
+    font-family:Arial,sans-serif;
+    font-size:8pt;
+    color:#7C7B7B;
+  }
+  @top-right {
+    content:"EXECUTAR";
+    font-family:Arial,sans-serif;
+    font-size:8pt;
+    font-weight:700;
+    color:#4B4A4A;
+  }
+  @bottom-left {
+    content:string(report-meta);
+    font-family:Arial,sans-serif;
+    font-size:7.5pt;
+    color:#959494;
+  }
+  @bottom-right {
+    content:counter(page) " / " counter(pages);
+    font-family:Arial,sans-serif;
+    font-size:7.5pt;
+    color:#959494;
+  }
+}
+
+* { box-sizing:border-box; }
+html { background:#ddd; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-sans);
+  font-size:10.5pt;
+  line-height:1.42;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+.report-title-string { string-set:report-title content(text); }
+.report-meta-string { string-set:report-meta content(text); }
+
+.cover {
+  page:cover;
+  width:210mm;
+  height:297mm;
+  padding:22mm 20mm 18mm;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  background:
+    linear-gradient(180deg, rgba(0,191,99,.03), transparent 33%),
+    var(--bg);
+  position:relative;
+  overflow:hidden;
+  break-after:page;
+}
+
+.cover::after {
+  content:"";
+  position:absolute;
+  right:-34mm;
+  bottom:-38mm;
+  width:125mm;
+  height:125mm;
+  border:1px solid var(--green-5);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 18mm rgba(0,191,99,.025),
+    0 0 0 38mm rgba(31,147,255,.018);
+}
+
+.report-page {
+  page:report;
+  min-height:260mm;
+  break-after:page;
+  position:relative;
+}
+
+.report-page:last-child { break-after:auto; }
+
+.page-break { break-before:page; }
+.avoid-break, .card, table, .callout, .metric, figure { break-inside:avoid; }
+h1,h2,h3 { break-after:avoid; }
+p { orphans:3; widows:3; }
+
+/* =========================================================
+   03. SHOWROOM → REPORT VISUAL GRAMMAR
+   ========================================================= */
+.brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  font-size:15pt;
+}
+.brand-mark {
+  width:10mm;
+  height:10mm;
+  border-radius:3mm;
+  display:grid;
+  place-items:center;
+  background:var(--action);
+  color:#fff;
+  font-weight:700;
+  font-size:13pt;
+}
+
+.eyebrow {
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  color:var(--action-dark);
+  font-size:8pt;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.eyebrow::before {
+  content:"";
+  width:9mm;
+  height:1.2pt;
+  background:var(--action);
+}
+
+.cover-main {
+  align-self:center;
+  max-width:156mm;
+  position:relative;
+  z-index:1;
+}
+.cover h1 {
+  margin:7mm 0 5mm;
+  font-size:31pt;
+  line-height:1.03;
+  letter-spacing:-.04em;
+  max-width:165mm;
+}
+.cover .dek {
+  font-size:14pt;
+  line-height:1.4;
+  color:var(--text-secondary);
+  max-width:135mm;
+}
+.cover-meta {
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8mm;
+  align-items:end;
+  padding-top:8mm;
+  border-top:var(--rule);
+  color:var(--text-secondary);
+  font-size:9pt;
+}
+
+.kicker {
+  font-size:7.5pt;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:var(--text-muted);
+  margin-bottom:2mm;
+}
+
+h1,h2,h3,p { margin-top:0; }
+h1 {
+  font-size:25pt;
+  line-height:1.07;
+  letter-spacing:-.035em;
+  margin-bottom:5mm;
+}
+h2 {
+  font-size:18pt;
+  line-height:1.15;
+  letter-spacing:-.025em;
+  margin-bottom:4mm;
+}
+h3 {
+  font-size:12.5pt;
+  line-height:1.25;
+  letter-spacing:-.01em;
+  margin-bottom:2.5mm;
+}
+.lead {
+  font-size:12pt;
+  line-height:1.46;
+  color:var(--text-secondary);
+  max-width:160mm;
+}
+
+.section-head {
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:5mm;
+  align-items:end;
+  margin-bottom:7mm;
+  padding-bottom:4mm;
+  border-bottom:var(--rule);
+}
+.section-no {
+  font-family:var(--font-mono);
+  font-size:9pt;
+  color:var(--action-dark);
+  font-weight:700;
+}
+.section-head h2 { margin:0; }
+
+/* Consulting-style answer-first structure */
+.answer-first {
+  border-top:2.2pt solid var(--action);
+  padding-top:5mm;
+  margin-bottom:7mm;
+}
+.answer-first .answer {
+  font-size:17pt;
+  line-height:1.25;
+  letter-spacing:-.02em;
+  font-weight:600;
+  max-width:170mm;
+}
+.answer-first .implication {
+  margin-top:3mm;
+  color:var(--text-secondary);
+  font-size:10.5pt;
+}
+
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:5mm; }
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:4mm; }
+.grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:3.5mm; }
+.stack { display:grid; gap:4mm; }
+
+.card {
+  border:var(--rule);
+  border-radius:var(--r-lg);
+  padding:5mm;
+  background:#fff;
+  box-shadow:var(--shadow-sm);
+}
+.card.soft { background:var(--surface); border-color:transparent; }
+.card.info { background:var(--azure-2); border-color:var(--azure-4); }
+.card.action { background:var(--green-2); border-color:var(--green-4); }
+
+.metric {
+  padding:4mm 4mm 3.5mm;
+  border-top:1.8pt solid var(--action);
+  background:var(--surface);
+}
+.metric .value {
+  font-size:22pt;
+  font-weight:600;
+  line-height:1;
+  letter-spacing:-.04em;
+}
+.metric .label {
+  margin-top:2mm;
+  font-size:8.5pt;
+  color:var(--text-secondary);
+}
+.metric.info { border-top-color:var(--info); }
+
+.callout {
+  border-left:3pt solid var(--info);
+  padding:4mm 5mm;
+  background:var(--azure-2);
+  border-radius:0 var(--r-md) var(--r-md) 0;
+}
+.callout.action {
+  border-left-color:var(--action);
+  background:var(--green-2);
+}
+.callout strong { display:block; margin-bottom:1.2mm; }
+
+.pill {
+  display:inline-flex;
+  padding:1.2mm 2.6mm;
+  border-radius:var(--r-pill);
+  font-size:7.5pt;
+  font-weight:700;
+  color:var(--action-dark);
+  background:var(--green-3);
+  white-space:nowrap;
+}
+.pill.info { color:var(--info-dark); background:var(--azure-3); }
+.pill.neutral { color:var(--text-secondary); background:var(--surface-strong); }
+
+/* Tables */
+table {
+  width:100%;
+  border-collapse:collapse;
+  font-size:8.8pt;
+  line-height:1.35;
+}
+th {
+  text-align:left;
+  font-size:7.5pt;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--text-secondary);
+  background:var(--surface);
+  border-top:var(--rule-strong);
+  border-bottom:var(--rule-strong);
+  padding:2.8mm 2.5mm;
+}
+td {
+  vertical-align:top;
+  border-bottom:var(--rule);
+  padding:3mm 2.5mm;
+}
+td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+
+/* Evidence / recommendation matrix */
+.matrix td:first-child { width:22%; font-weight:600; }
+.matrix td:nth-child(2) { width:28%; }
+.matrix td:nth-child(3) { width:28%; }
+.matrix td:nth-child(4) { width:22%; }
+
+/* Roadmap */
+.roadmap {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:3mm;
+}
+.phase {
+  min-height:42mm;
+  padding:4mm;
+  background:var(--surface);
+  border-top:2pt solid var(--border-strong);
+}
+.phase.active { border-top-color:var(--action); background:var(--green-2); }
+.phase.info { border-top-color:var(--info); background:var(--azure-2); }
+.phase .n {
+  font-family:var(--font-mono);
+  font-size:7.5pt;
+  color:var(--text-muted);
+  margin-bottom:3mm;
+}
+.phase h3 { font-size:10.5pt; }
+
+/* Simple data bars — replace width inline */
+.bar-row {
+  display:grid;
+  grid-template-columns:34mm 1fr 14mm;
+  gap:3mm;
+  align-items:center;
+  margin:2.2mm 0;
+  font-size:8.8pt;
+}
+.track { height:4.5mm; background:var(--surface-strong); border-radius:999px; overflow:hidden; }
+.fill { height:100%; background:var(--action); border-radius:999px; }
+.fill.info { background:var(--info); }
+
+/* Source notes */
+.source-note {
+  margin-top:4mm;
+  padding-top:2.5mm;
+  border-top:var(--rule);
+  color:var(--text-muted);
+  font-size:7.4pt;
+  line-height:1.35;
+}
+.mono { font-family:var(--font-mono); }
+.muted { color:var(--text-secondary); }
+.small { font-size:8.5pt; }
+
+/* Print-safe helpers */
+.screen-only { display:block; }
+.print-only { display:none; }
+
+@media screen {
+  body { max-width:210mm; margin:16px auto; box-shadow:0 0 25px rgba(0,0,0,.12); }
+  .report-page { padding:15mm 16mm 18mm; }
+}
+
+@media print {
+  html,body { background:#fff; }
+  body { max-width:none; box-shadow:none; }
+  .report-page { padding:0; }
+  .screen-only { display:none !important; }
+  .print-only { display:block; }
+  a { text-decoration:none; color:inherit; }
+}
+</style>
+</head>
+
+<body>
+<!-- Running strings for paged-media engines -->
+<span class="report-title-string" style="display:none">Migração de Dados — Saúde do Programa</span>
+<span class="report-meta-string" style="display:none">EXEC-MIGDADOS-2026-09 · v1.0 · 23 set. 2026</span>
+
+<!-- ======================================================
+     COVER
+     ====================================================== -->
+<section class="cover">
+  <div class="brand">
+    <span class="brand-mark">E</span>
+    <span>EXECUTAR</span>
+  </div>
+
+  <div class="cover-main">
+    <div class="eyebrow">Programa de Modernização de Dados</div>
+    <h1>Migração de dados: 68% concluída, qualidade dos registros de clientes exige decisão antes do go-live</h1>
+    <p class="dek">Diagnóstico de saúde do projeto de migração da plataforma legada de ERP para o novo data warehouse em nuvem, com recomendação de ação e plano dos próximos 30 dias para o board.</p>
+  </div>
+
+  <div class="cover-meta">
+    <div>
+      <div class="kicker">Preparado para</div>
+      <strong>Board Executivo</strong><br>
+      <span>Programa de Modernização de Dados</span>
+    </div>
+    <div style="text-align:right">
+      <div class="kicker">Documento</div>
+      <span class="mono">EXEC-MIGDADOS-2026-09</span><br>
+      <span>23 set. 2026 · v1.0</span>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     PAGE 1 — EXECUTIVE SUMMARY
+     ====================================================== -->
+<section class="report-page">
+  <div class="section-head">
+    <div class="section-no">01</div>
+    <h2>Resumo executivo</h2>
+  </div>
+
+  <div class="answer-first">
+    <div class="answer">A migração está no cronograma em volume, mas um risco de qualidade de dados em registros de clientes ameaça a data de corte do go-live.</div>
+    <div class="implication">Sem uma sprint dedicada de reconciliação, o board deve esperar um atraso de 3 a 4 semanas no desligamento do sistema legado, não uma falha total do programa.</div>
+  </div>
+
+  <div class="grid-3" style="margin-bottom:7mm">
+    <div class="metric">
+      <div class="value">68%</div>
+      <div class="label">Registros migrados e validados</div>
+    </div>
+    <div class="metric info">
+      <div class="value">3 / 5</div>
+      <div class="label">Sistemas legados já desligados</div>
+    </div>
+    <div class="metric">
+      <div class="value">1</div>
+      <div class="label">Risco crítico aberto</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <span class="pill">Diagnóstico</span>
+      <h3 style="margin-top:3mm">Progresso sólido em volume, mas inconsistências de dados legados concentradas em clientes</h3>
+      <p>A migração de transações financeiras e catálogo de produtos está completa e validada. O bloco remanescente — cadastro de clientes — apresenta duplicidade e campos obrigatórios ausentes herdados do sistema de origem, o que está atrasando a reconciliação final.</p>
+    </div>
+    <div class="card action">
+      <span class="pill">Decisão recomendada</span>
+      <h3 style="margin-top:3mm">Aprovar sprint de 3 semanas de limpeza de dados antes do corte definitivo</h3>
+      <p>Recomendamos manter a arquitetura e o cronograma geral, mas inserir uma sprint dedicada de reconciliação de clientes antes de desligar o último sistema legado, protegendo a integridade dos dados no go-live.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:6mm">
+    <strong>Implicação executiva</strong>
+    Um go-live sem essa sprint arrisca propagar registros de clientes duplicados ou incompletos para o novo ambiente, com custo de correção mais alto depois do corte do que antes dele.
+  </div>
+
+  <div class="source-note">
+    Fontes principais: relatório de progresso do time de dados (18 set. 2026), log de validação do pipeline ETL, ata do comitê de migração (15 set. 2026) · Base temporal: ago.–set. 2026 ·
+    Hipóteses relevantes: capacidade da equipe de dados permanece estável nas próximas 4 semanas
+  </div>
+</section>
+
+<!-- ======================================================
+     PAGE 2 — DIAGNOSIS / EVIDENCE
+     ====================================================== -->
+<section class="report-page">
+  <div class="section-head">
+    <div class="section-no">02</div>
+    <h2>Diagnóstico e evidências</h2>
+  </div>
+
+  <div class="answer-first">
+    <div class="answer">O gargalo não é técnico nem de infraestrutura — é qualidade dos dados de origem no domínio de clientes.</div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:6mm">
+    <div class="card soft">
+      <div class="kicker">Evidência 1</div>
+      <h3>Taxa de erro de validação concentrada em um domínio</h3>
+      <p>Do total de registros com falha de validação no pipeline ETL, 82% pertencem ao domínio de cadastro de clientes; os domínios financeiro e de catálogo mantêm taxa de erro abaixo de 1%.</p>
+    </div>
+    <div class="card soft">
+      <div class="kicker">Evidência 2</div>
+      <h3>Duplicidade herdada do sistema de origem</h3>
+      <p>A auditoria de amostra identificou aproximadamente 12 mil registros de clientes com CPF/CNPJ duplicado ou campos de contato ausentes no ERP legado, anteriores ao início da migração.</p>
+    </div>
+  </div>
+
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th>Questão</th>
+        <th>Evidência</th>
+        <th>Implicação</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Registros de clientes duplicados</td>
+        <td>~12 mil registros com CPF/CNPJ duplicado identificados na amostra de auditoria</td>
+        <td>Risco de dados inconsistentes no CRM pós-migração, afetando faturamento e suporte</td>
+        <td>Rodar rotina de deduplicação antes do corte final</td>
+      </tr>
+      <tr>
+        <td>Campos obrigatórios ausentes</td>
+        <td>Log de validação do pipeline ETL aponta 82% das falhas concentradas em clientes</td>
+        <td>Bloqueia o desligamento do último sistema legado dentro do prazo original</td>
+        <td>Sprint dedicada de reconciliação de 3 semanas</td>
+      </tr>
+      <tr>
+        <td>Dependência de janela de manutenção do fornecedor</td>
+        <td>Ata do comitê de migração registra restrição de janela de corte do provedor de nuvem</td>
+        <td>Reduz a flexibilidade para reagendar o corte final sem novo aviso prévio</td>
+        <td>Confirmar nova janela com o fornecedor em até 5 dias úteis</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="source-note">Evidências consolidadas a partir do log de validação do pipeline ETL (17 set. 2026) e da auditoria de amostra de cadastro de clientes (10 set. 2026).</div>
+</section>
+
+<!-- ======================================================
+     PAGE 3 — QUANT / COMPARISON
+     ====================================================== -->
+<section class="report-page">
+  <div class="section-head">
+    <div class="section-no">03</div>
+    <h2>Leitura quantitativa</h2>
+  </div>
+
+  <div class="answer-first">
+    <div class="answer">Dois dos três domínios de dados já atingem o padrão de qualidade exigido para o go-live; o domínio de clientes ainda está abaixo da meta.</div>
+    <div class="implication">O intervalo entre o estado atual e a meta de qualidade de clientes é o principal indicador a monitorar nas próximas semanas.</div>
+  </div>
+
+  <div class="card" style="margin-bottom:6mm">
+    <h3>Registros migrados e validados, por domínio</h3>
+    <div class="bar-row">
+      <span>Financeiro</span>
+      <div class="track"><div class="fill" style="width:99%"></div></div>
+      <strong class="mono">99%</strong>
+    </div>
+    <div class="bar-row">
+      <span>Catálogo de produtos</span>
+      <div class="track"><div class="fill info" style="width:97%"></div></div>
+      <strong class="mono">97%</strong>
+    </div>
+    <div class="bar-row">
+      <span>Cadastro de clientes</span>
+      <div class="track"><div class="fill" style="width:54%"></div></div>
+      <strong class="mono">54%</strong>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Indicador</th>
+        <th class="num">Atual</th>
+        <th class="num">Meta / referência</th>
+        <th>Leitura executiva</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Registros totais migrados e validados</td>
+        <td class="num">68%</td>
+        <td class="num">100% até o corte</td>
+        <td>No ritmo atual, dentro do prazo se a sprint de clientes for aprovada</td>
+      </tr>
+      <tr>
+        <td>Taxa de erro de validação (cadastro de clientes)</td>
+        <td class="num">18%</td>
+        <td class="num">&lt; 2%</td>
+        <td>Principal bloqueio para o corte final; requer sprint dedicada</td>
+      </tr>
+      <tr>
+        <td>Sistemas legados desligados</td>
+        <td class="num">3 de 5</td>
+        <td class="num">5 de 5</td>
+        <td>Os 2 restantes dependem da reconciliação de clientes</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="source-note">Fonte: painel de acompanhamento do pipeline ETL, corte de dados em 21 set. 2026.</div>
+</section>
+
+<!-- ======================================================
+     PAGE 4 — RECOMMENDATIONS
+     ====================================================== -->
+<section class="report-page">
+  <div class="section-head">
+    <div class="section-no">04</div>
+    <h2>Recomendações</h2>
+  </div>
+
+  <div class="answer-first">
+    <div class="answer">Proteger a integridade do dado no go-live vale mais do que manter a data original de corte a qualquer custo.</div>
+  </div>
+
+  <div class="stack">
+    <div class="card action">
+      <span class="pill">Prioridade 1</span>
+      <h3 style="margin-top:3mm">Aprovar sprint de reconciliação de clientes (3 semanas)</h3>
+      <p>Alocar a equipe de dados para deduplicação e completude de campos obrigatórios no domínio de clientes antes de qualquer novo corte de sistema legado.</p>
+      <p class="small muted"><strong>Resultado esperado:</strong> taxa de erro de validação de clientes abaixo de 2%, liberando o desligamento dos 2 sistemas legados restantes.</p>
+    </div>
+    <div class="card">
+      <span class="pill info">Prioridade 2</span>
+      <h3 style="margin-top:3mm">Confirmar nova janela de corte com o fornecedor de nuvem</h3>
+      <p>Reagendar a janela de manutenção do provedor para alinhar com o novo prazo de go-live, evitando um segundo atraso por restrição externa.</p>
+      <p class="small muted"><strong>Resultado esperado:</strong> janela de corte confirmada por escrito em até 5 dias úteis.</p>
+    </div>
+    <div class="card">
+      <span class="pill neutral">Prioridade 3</span>
+      <h3 style="margin-top:3mm">Instituir checkpoint semanal de qualidade de dados até o go-live</h3>
+      <p>Reportar ao board a evolução da taxa de erro de validação de clientes semanalmente até que a meta seja atingida, evitando surpresas na reta final.</p>
+      <p class="small muted"><strong>Resultado esperado:</strong> visibilidade contínua e decisão de corte final com evidência atualizada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     PAGE 5 — ROADMAP
+     ====================================================== -->
+<section class="report-page">
+  <div class="section-head">
+    <div class="section-no">05</div>
+    <h2>Plano de execução</h2>
+  </div>
+
+  <div class="answer-first">
+    <div class="answer">Com a sprint de reconciliação aprovada, o go-live completo é viável em 5 semanas a partir de hoje.</div>
+  </div>
+
+  <div class="roadmap">
+    <div class="phase active">
+      <div class="n">01 · Semana 1</div>
+      <h3>Deduplicação de clientes</h3>
+      <p>Executar rotina de deduplicação e completude de campos nos ~12 mil registros identificados na auditoria.</p>
+    </div>
+    <div class="phase active">
+      <div class="n">02 · Semanas 2–3</div>
+      <h3>Revalidação e reconciliação</h3>
+      <p>Reprocessar o domínio de clientes no pipeline ETL até atingir taxa de erro abaixo de 2%.</p>
+    </div>
+    <div class="phase info">
+      <div class="n">03 · Semana 4</div>
+      <h3>Confirmação com fornecedor</h3>
+      <p>Validar nova janela de corte com o provedor de nuvem e alinhar plano de contingência.</p>
+    </div>
+    <div class="phase">
+      <div class="n">04 · Semana 5</div>
+      <h3>Corte final e desligamento</h3>
+      <p>Desligar os 2 sistemas legados restantes e encerrar formalmente o programa de migração.</p>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top:7mm">
+    <div class="callout action">
+      <strong>Gate de aceite</strong>
+      Taxa de erro de validação do domínio de clientes abaixo de 2% antes de autorizar o corte final.
+    </div>
+    <div class="callout">
+      <strong>Dependência crítica</strong>
+      Janela de manutenção do provedor de nuvem confirmada por escrito antes da Semana 5.
+    </div>
+  </div>
+
+  <table style="margin-top:7mm">
+    <thead>
+      <tr>
+        <th>Entregável</th>
+        <th>Responsável</th>
+        <th>Critério de aceite</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Deduplicação de registros de clientes</td><td>Equipe de Dados</td><td>Zero duplicidade de CPF/CNPJ na base migrada</td><td><span class="pill">Em andamento</span></td></tr>
+      <tr><td>Revalidação do pipeline ETL (clientes)</td><td>Equipe de Dados</td><td>Taxa de erro &lt; 2%</td><td><span class="pill info">Planejado</span></td></tr>
+      <tr><td>Confirmação de janela com fornecedor</td><td>Gerência de Programa</td><td>Confirmação por escrito recebida</td><td><span class="pill neutral">Não iniciado</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ======================================================
+     PAGE 6 — RISKS / DECISIONS
+     ====================================================== -->
+<section class="report-page">
+  <div class="section-head">
+    <div class="section-no">06</div>
+    <h2>Riscos, decisões e próximos passos</h2>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <h3>Riscos prioritários</h3>
+      <table>
+        <thead><tr><th>Risco</th><th>Tratamento</th></tr></thead>
+        <tbody>
+          <tr><td>Qualidade de dados de clientes insuficiente no corte final</td><td>Sprint de reconciliação de 3 semanas antes de qualquer novo desligamento</td></tr>
+          <tr><td>Indisponibilidade de janela de manutenção do fornecedor</td><td>Confirmação antecipada e plano de contingência com janela alternativa</td></tr>
+          <tr><td>Sobrecarga da equipe de dados durante a sprint</td><td>Priorização exclusiva da reconciliação de clientes na Semana 1–3</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Decisões necessárias</h3>
+      <div class="stack">
+        <div class="card soft"><strong>Aprovar a sprint de 3 semanas de reconciliação</strong><p class="small muted">Adia o corte final em cerca de 3 a 4 semanas em relação ao plano original.</p></div>
+        <div class="card soft"><strong>Autorizar priorização exclusiva da equipe de dados</strong><p class="small muted">Pausa temporariamente outras demandas não críticas da equipe durante a sprint.</p></div>
+        <div class="card soft"><strong>Validar tolerância a novo prazo de go-live</strong><p class="small muted">Confirmar com as áreas de negócio impactadas o novo horizonte de corte final.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout action" style="margin-top:7mm">
+    <strong>Próxima ação executável</strong>
+    Aprovar até sexta-feira o início da sprint de reconciliação de clientes, para manter o novo go-live viável em 5 semanas.
+  </div>
+
+  <div class="source-note">
+    EVIDENCE: log de validação do pipeline ETL, auditoria de amostra de clientes, ata do comitê de migração · AUTOMATION_LEVEL: relatório preparado manualmente a partir de fontes internas do programa ·
+    HANDOFF: gerência de programa de migração de dados
+  </div>
+</section>
+
+<!-- ======================================================
+     APPENDIX — OPTIONAL
+     ====================================================== -->
+<section class="report-page">
+  <div class="section-head">
+    <div class="section-no">A</div>
+    <h2>Apêndice metodológico</h2>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Critérios de qualidade</h3>
+      <p>MECE quando aplicável; resposta primeiro; evidência antes de opinião; separação entre fato, hipótese e recomendação; unidade visual; rastreabilidade de fontes.</p>
+    </div>
+    <div class="card">
+      <h3>Contrato visual</h3>
+      <p>Green/Azure + IBM Plex; alto espaço negativo; superfícies neutras; linhas finas; cor reservada para ação, informação e destaque; nenhum HEX novo sem token ou justificativa.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:6mm">
+    <strong>Regra de paginação</strong>
+    Uma página deve responder uma pergunta executiva principal. Se um bloco não altera decisão, entendimento ou ação, ele deve ser removido ou movido para o apêndice.
+  </div>
+</section>
+
+</body>
+</html>

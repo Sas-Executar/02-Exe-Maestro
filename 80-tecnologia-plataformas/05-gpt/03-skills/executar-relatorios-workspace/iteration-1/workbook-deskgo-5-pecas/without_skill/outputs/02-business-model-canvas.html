@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Desk&amp;Go — Business Model Canvas</title>
+<style>
+  @page { size: A4 landscape; margin: 10mm; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; color: #1f2937; margin: 0; background: #f3f4f6; }
+  .page {
+    width: 297mm; min-height: 210mm; margin: 12px auto; background: #fff;
+    padding: 10mm; box-shadow: 0 0 12px rgba(0,0,0,0.12);
+  }
+  @media print { body{background:#fff;} .page{ box-shadow:none; margin:0; width:auto; min-height:auto;} }
+  header.brand { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:3px solid #0f766e; padding-bottom:6px; margin-bottom:8px; }
+  .brand h1 { font-size:20px; margin:0; color:#0f766e; }
+  .brand .tag { font-size:9px; text-transform:uppercase; letter-spacing:1.5px; color:#6b7280; }
+  .piece-label { font-size:10px; color:#6b7280; text-align:right; }
+  .piece-label strong { color:#0f766e; display:block; font-size:12px; }
+
+  .canvas {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto auto auto;
+    gap: 6px;
+    height: 172mm;
+  }
+  .block {
+    background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:7px 8px; overflow:hidden;
+  }
+  .block h3 { font-size:9.5px; text-transform:uppercase; letter-spacing:0.3px; color:#0f766e; margin:0 0 4px; }
+  .block p, .block li { font-size:9px; line-height:1.35; margin:0 0 3px; }
+  .block ul { margin:0; padding-left:12px; }
+
+  .key-partners { grid-column: 1; grid-row: 1 / 3; }
+  .key-activities { grid-column: 2; grid-row: 1; }
+  .key-resources { grid-column: 2; grid-row: 2; }
+  .value-prop { grid-column: 3; grid-row: 1 / 3; background:#ecfdf5; border-color:#99f6e4; }
+  .customer-rel { grid-column: 4; grid-row: 1; }
+  .channels { grid-column: 4; grid-row: 2; }
+  .customer-seg { grid-column: 5; grid-row: 1 / 3; }
+  .cost-structure { grid-column: 1 / 4; grid-row: 3; }
+  .revenue-streams { grid-column: 4 / 6; grid-row: 3; }
+
+  footer.meta { margin-top:8px; padding-top:6px; border-top:1px solid #e5e7eb; font-size:9px; color:#9ca3af; display:flex; justify-content:space-between; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="brand">
+    <div>
+      <h1>Desk&amp;Go</h1>
+      <div class="tag">Workbook do Negócio · Peça 2 de 5</div>
+    </div>
+    <div class="piece-label"><strong>Business Model Canvas</strong>Estrutura de valor e receita</div>
+  </header>
+
+  <div class="canvas">
+    <div class="block key-partners">
+      <h3>Parceiros-chave</h3>
+      <ul>
+        <li>Cafés e coworkings credenciados</li>
+        <li>Processadora de pagamento (Pix/cartão)</li>
+        <li>Provedores de internet nos espaços</li>
+        <li>Plataformas de agenda (Google/Outlook)</li>
+      </ul>
+    </div>
+
+    <div class="block key-activities">
+      <h3>Atividades-chave</h3>
+      <ul>
+        <li>Credenciamento e curadoria de espaços</li>
+        <li>Manutenção do app de reserva</li>
+        <li>Suporte ao usuário e ao parceiro</li>
+        <li>Marketing local (bairro a bairro)</li>
+      </ul>
+    </div>
+
+    <div class="block key-resources">
+      <h3>Recursos-chave</h3>
+      <ul>
+        <li>App e backend de reservas</li>
+        <li>Rede de espaços credenciados</li>
+        <li>Marca e reputação local</li>
+        <li>Dados de ocupação/demanda</li>
+      </ul>
+    </div>
+
+    <div class="block value-prop">
+      <h3>Proposta de valor</h3>
+      <ul>
+        <li><strong>Para o usuário:</strong> um lugar bom para trabalhar, perto, sem contrato longo, reserva em segundos.</li>
+        <li><strong>Para o espaço parceiro:</strong> receita extra em mesas ociosas, sem gerir reserva/cobrança.</li>
+        <li>Preço transparente, cancelamento fácil, avaliação por espaço.</li>
+      </ul>
+    </div>
+
+    <div class="block customer-rel">
+      <h3>Relacionamento</h3>
+      <ul>
+        <li>Autoatendimento via app</li>
+        <li>Suporte humano em chat (SLA 1h)</li>
+        <li>Comunidade local (grupo de usuários frequentes)</li>
+      </ul>
+    </div>
+
+    <div class="block channels">
+      <h3>Canais</h3>
+      <ul>
+        <li>App próprio (iOS/Android/Web)</li>
+        <li>Instagram/TikTok local + indicação</li>
+        <li>Parcerias com espaços (ponto físico)</li>
+      </ul>
+    </div>
+
+    <div class="block customer-seg">
+      <h3>Segmentos de cliente</h3>
+      <ul>
+        <li>Freelancers e híbridos (primário)</li>
+        <li>Pequenas equipes remotas (secundário)</li>
+        <li>Espaços parceiros (lado da oferta)</li>
+      </ul>
+    </div>
+
+    <div class="block cost-structure">
+      <h3>Estrutura de custos</h3>
+      <ul>
+        <li>Desenvolvimento e manutenção do app · Taxas de pagamento · Marketing local · Suporte ao cliente · Comissão paga a espaços em campanhas de lançamento</li>
+      </ul>
+    </div>
+
+    <div class="block revenue-streams">
+      <h3>Fontes de receita</h3>
+      <ul>
+        <li>Assinatura mensal ilimitada · Pacotes de dias · Reserva avulsa (comissão %) · Serviços extras (impressão, sala de reunião, correspondência)</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="meta">
+    <span>Desk&amp;Go · Workbook do Negócio</span>
+    <span>Peça 2/5 — Business Model Canvas · A4 paisagem</span>
+  </footer>
+</div>
+</body>
+</html>

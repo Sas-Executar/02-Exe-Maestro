@@ -1,0 +1,191 @@
+{
+  "document": {
+    "id": "OPS-MAPA-AURORA-LP-W39",
+    "version": "1.0",
+    "generated_at": "2026-09-23T15:00:00Z",
+    "source_refs": ["SRC-INTERVIEW-001"]
+  },
+  "project": {
+    "id": "PRJ-001",
+    "title": "Landing page de lançamento — Aurora Co",
+    "state": "active",
+    "owner": "Marina Duarte"
+  },
+  "position": {
+    "mode": "EXECUTAR",
+    "project_id": "PRJ-001",
+    "delivery_id": "DLV-001",
+    "workflow_id": "FLW-001",
+    "action_id": "ACT-003"
+  },
+  "three_p_n": {
+    "problem": "A landing page de lançamento ainda não foi publicada nem validada publicamente antes do lançamento.",
+    "process": "Concluir copy e montagem, publicar no domínio próprio, configurar captura de e-mail e só então divulgar — uma ação ativa por vez (WIP=1).",
+    "progress": "Copy finalizada e página montada no builder (Framer); publicação pública ainda pendente.",
+    "next": ["Publicar a landing page no domínio próprio e confirmar acesso público."]
+  },
+  "items": [
+    {
+      "id": "PRJ-001",
+      "level": "project",
+      "title": "Landing page de lançamento — Aurora Co",
+      "state": "active",
+      "parent_id": null,
+      "dependencies": [],
+      "blocked": false,
+      "completion_criterion": "Landing page publicada, com captura de e-mail funcionando e divulgada nos canais definidos.",
+      "original_due": "2026-09-27",
+      "current_forecast": null,
+      "evidence_refs": [],
+      "source_refs": ["SRC-INTERVIEW-001"]
+    },
+    {
+      "id": "DLV-001",
+      "level": "delivery",
+      "title": "Landing page publicada e validada",
+      "state": "active",
+      "parent_id": "PRJ-001",
+      "dependencies": [],
+      "blocked": false,
+      "completion_criterion": "Página acessível publicamente, com captura de e-mail ativa e divulgação iniciada.",
+      "original_due": "2026-09-27",
+      "current_forecast": null,
+      "evidence_refs": [],
+      "source_refs": ["SRC-INTERVIEW-001"]
+    },
+    {
+      "id": "FLW-001",
+      "level": "workflow",
+      "title": "Construção e publicação da página",
+      "state": "active",
+      "parent_id": "DLV-001",
+      "dependencies": [],
+      "blocked": false,
+      "completion_criterion": "Página construída, publicada e com captura de e-mail configurada.",
+      "original_due": null,
+      "current_forecast": null,
+      "evidence_refs": [],
+      "source_refs": ["SRC-INTERVIEW-001"]
+    },
+    {
+      "id": "ACT-001",
+      "level": "action",
+      "title": "Escrever copy da página",
+      "state": "implemented",
+      "parent_id": "FLW-001",
+      "dependencies": [],
+      "blocked": false,
+      "completion_criterion": "Copy revisada e aprovada pela fundadora.",
+      "original_due": "2026-09-22",
+      "current_forecast": null,
+      "evidence_refs": ["EVID-001"],
+      "source_refs": ["SRC-INTERVIEW-001"]
+    },
+    {
+      "id": "ACT-002",
+      "level": "action",
+      "title": "Montar a página no builder (Framer)",
+      "state": "implemented",
+      "parent_id": "FLW-001",
+      "dependencies": ["ACT-001"],
+      "blocked": false,
+      "completion_criterion": "Layout completo com a copy final aplicada.",
+      "original_due": "2026-09-23",
+      "current_forecast": null,
+      "evidence_refs": ["EVID-002"],
+      "source_refs": ["SRC-INTERVIEW-001"]
+    },
+    {
+      "id": "ACT-003",
+      "level": "action",
+      "title": "Publicar no domínio próprio",
+      "state": "active",
+      "parent_id": "FLW-001",
+      "dependencies": ["ACT-002"],
+      "blocked": false,
+      "completion_criterion": "Página acessível publicamente no domínio, sem erros de carregamento.",
+      "original_due": "2026-09-24",
+      "current_forecast": null,
+      "evidence_refs": [],
+      "source_refs": ["SRC-INTERVIEW-001"]
+    },
+    {
+      "id": "ACT-004",
+      "level": "action",
+      "title": "Configurar captura de e-mail (Mailchimp)",
+      "state": "not_started",
+      "parent_id": "FLW-001",
+      "dependencies": ["ACT-003"],
+      "blocked": false,
+      "completion_criterion": "Formulário ativo grava contatos em lista testável.",
+      "original_due": "2026-09-25",
+      "current_forecast": null,
+      "evidence_refs": [],
+      "source_refs": ["SRC-INTERVIEW-001"]
+    },
+    {
+      "id": "ACT-005",
+      "level": "action",
+      "title": "Divulgar em 3 canais (Instagram, LinkedIn, comunidade)",
+      "state": "not_started",
+      "parent_id": "FLW-001",
+      "dependencies": ["ACT-004"],
+      "blocked": false,
+      "completion_criterion": "Post publicado nos três canais com link ativo.",
+      "original_due": "2026-09-27",
+      "current_forecast": null,
+      "evidence_refs": [],
+      "source_refs": ["SRC-INTERVIEW-001"]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EVID-001",
+      "epistemic_class": "D_INTERNO",
+      "description": "Documento de copy revisado e aprovado pela fundadora.",
+      "source_ref": "SRC-INTERVIEW-001",
+      "supports": ["ACT-001"]
+    },
+    {
+      "evidence_id": "EVID-002",
+      "epistemic_class": "A_OBSERVADO",
+      "description": "Captura de tela da página montada no builder, com layout completo.",
+      "source_ref": "SRC-INTERVIEW-001",
+      "supports": ["ACT-002"]
+    }
+  ],
+  "horizons": {
+    "now": ["ACT-003"],
+    "next": ["ACT-004"],
+    "later": ["ACT-005"]
+  },
+  "next_action": {
+    "action_id": "ACT-003",
+    "instruction": "Publicar a landing page no domínio próprio (aurora.co) e confirmar acesso público.",
+    "completion_criterion": "Página acessível publicamente no domínio, sem erros de carregamento.",
+    "evidence_required": ["Captura de tela ou link ativo confirmando a publicação"],
+    "authority": "DETERMINISTICO"
+  },
+  "issues": [
+    {
+      "issue_id": "ISS-001",
+      "type": "gap",
+      "description": "Prazo original de publicação foi informado apenas de forma aproximada (fim da semana); não há previsão atual distinta registrada.",
+      "severity": "info",
+      "source_refs": ["SRC-INTERVIEW-001"],
+      "resolution": null
+    }
+  ],
+  "projection": {
+    "type": "agora_proximo_depois",
+    "artifact_path": null,
+    "state": "validated"
+  },
+  "validation": {
+    "schema_valid": true,
+    "wip_valid": true,
+    "dependencies_valid": true,
+    "evidence_valid": true,
+    "result": "PASS"
+  }
+}

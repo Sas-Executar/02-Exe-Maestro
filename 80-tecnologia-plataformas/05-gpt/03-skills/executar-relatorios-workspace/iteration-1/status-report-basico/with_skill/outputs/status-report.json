@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "title": "Projeto de lançamento",
+    "kicker": "EXECUTAR / STATUS REPORT",
+    "schema": "EXECUTAR_STATUS_REPORT_V1",
+    "status": "Ativo",
+    "date": "28 Aug 2026",
+    "source_count": 1
+  },
+  "progress": {
+    "overall_percent": 26,
+    "cycle_current": 3,
+    "cycle_total": 8,
+    "today_percent": 33
+  },
+  "depth": {
+    "project": "Projeto de lançamento",
+    "cycle": "Ciclo 3 de 8",
+    "today": "Produzir a landing page e as peças editoriais",
+    "task": "Landing page",
+    "action": "Revisar a headline da landing page"
+  },
+  "triptych": {
+    "yesterday": {
+      "title": "Direção estratégica",
+      "state": "Concluída",
+      "percent": null
+    },
+    "today": {
+      "title": "Landing page e peças editoriais",
+      "state": "Em produção",
+      "percent": 33
+    },
+    "tomorrow": {
+      "title": "Validar e publicar a campanha",
+      "state": "Planejado",
+      "percent": null
+    }
+  },
+  "now": {
+    "title": "Revisar a headline da landing page",
+    "meta": "Passo 1 de 3 · ciclo 3 de 8",
+    "chip": "PRÓXIMA AÇÃO"
+  },
+  "properties": {
+    "context": "Consolidar a primeira campanha editorial antes de ampliar o produto.",
+    "problem": "O material está distribuído em documentos diferentes e ainda não existe uma peça canônica para publicação.",
+    "process": "Consolidar a tese, revisar evidências e produzir os ativos na sequência definida.",
+    "progress": "Estrutura editorial e posicionamento já foram definidos.",
+    "step_1": "Revisar a headline.",
+    "step_2": "Fechar a landing page.",
+    "step_3": "Validar as peças antes da publicação.",
+    "risk": "Publicar peças inconsistentes antes da validação da tese.",
+    "prevention": "Manter uma fonte canônica e revisar cada peça contra ela.",
+    "delivery": "Campanha validada, publicada e rastreável a uma fonte canônica."
+  },
+  "tags": {
+    "focus": ["Landing Page", "Peças Editoriais"],
+    "state": ["Ativo"],
+    "origin": ["Documento único (S01)"]
+  },
+  "provenance": {
+    "sources": [
+      {
+        "id": "S01",
+        "name": "input-project.md"
+      }
+    ],
+    "field_map": {
+      "meta.title": ["S01:L1"],
+      "meta.status": ["S01:L3"],
+      "meta.date": ["S01:L4"],
+      "progress.overall_percent": ["S01:L6"],
+      "progress.cycle_current": ["S01:L7"],
+      "progress.cycle_total": ["S01:L7"],
+      "progress.today_percent": ["S01:L7"],
+      "depth.project": ["S01:L1"],
+      "depth.cycle": ["S01:L7"],
+      "depth.today": ["S01:L10"],
+      "depth.task": ["S01:L10", "S01:L13"],
+      "depth.action": ["S01:L13"],
+      "triptych.yesterday.title": ["S01:L9"],
+      "triptych.yesterday.state": ["S01:L9"],
+      "triptych.today.title": ["S01:L10"],
+      "triptych.today.state": ["S01:L10"],
+      "triptych.today.percent": ["S01:L7"],
+      "triptych.tomorrow.title": ["S01:L11"],
+      "triptych.tomorrow.state": ["S01:L11"],
+      "now.title": ["S01:L13"],
+      "now.meta": ["S01:L19", "S01:L7"],
+      "now.chip": ["S01:L13"],
+      "properties.context": ["S01:L15"],
+      "properties.problem": ["S01:L16"],
+      "properties.process": ["S01:L17"],
+      "properties.progress": ["S01:L18"],
+      "properties.step_1": ["S01:L19"],
+      "properties.step_2": ["S01:L20"],
+      "properties.step_3": ["S01:L21"],
+      "properties.risk": ["S01:L22"],
+      "properties.prevention": ["S01:L23"],
+      "properties.delivery": ["S01:L24"],
+      "tags.focus": ["S01:L10"],
+      "tags.state": ["S01:L3"]
+    }
+  },
+  "quality": {
+    "conflicts": [],
+    "warnings": [
+      "triptych.yesterday.percent não identificado no documento — ausência preservada como null.",
+      "triptych.tomorrow.percent não identificado no documento — ausência preservada como null.",
+      "depth.task e depth.today derivados por síntese explícita do foco descrito para hoje, não são rótulos literais da fonte."
+    ],
+    "missing_fields": [
+      "triptych.yesterday.percent",
+      "triptych.tomorrow.percent"
+    ]
+  }
+}

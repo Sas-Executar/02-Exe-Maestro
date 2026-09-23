@@ -1,37 +1,71 @@
 {
-  "skill_name": "executar-status-report",
+  "skill_name": "executar-relatorios",
   "evals": [
     {
-      "id": 1,
-      "prompt": "Converta este documento textual em um status report EXECUTAR e gere HTML para impressão.",
-      "expected_output": "Canonical JSON grounded in source plus print-ready HTML using the EXECUTAR editorial visual system.",
-      "files": [
-        "examples/input-project.md"
-      ],
+      "id": 0,
+      "eval_name": "status-report-basico",
+      "prompt": "Transforma essas notas de projeto num status report EXECUTAR com HTML pronto pra imprimir.",
+      "expected_output": "JSON canônico grounded na fonte + HTML pronto para impressão usando o sistema visual EXECUTAR (tokens reais, não placeholders).",
+      "files": ["examples/input-project.md"],
       "assertions": [
-        "Does not invent unsupported progress metrics",
-        "Includes provenance for populated operational fields",
-        "Preserves canonical properties order",
-        "Produces HTML with print CSS"
+        "Nao inventa metricas de progresso nao sustentadas pela fonte (examples/input-project.md)",
+        "JSON canonico valida contra schemas/report.schema.json (scripts/validate_report.py sem erro)",
+        "HTML final consome assets/report.css + assets/tokens/tokens.css (nenhum hex hardcoded, nenhum var(--exec-color-*) sem valor resolvido)",
+        "Preserva ordem canonica de secoes: header -> progresso -> profundidade -> ontem/hoje/amanha -> agora -> properties -> tags -> footer",
+        "Campos ausentes na fonte aparecem como null ou 'Nao identificado no documento', nunca inventados"
+      ]
+    },
+    {
+      "id": 1,
+      "eval_name": "relatorio-executivo-a4",
+      "prompt": "Preciso de um relatório executivo A4 pra apresentar pro board sobre a saúde do projeto de migração de dados: diagnóstico, recomendação e próximos passos, pronto pra virar PDF.",
+      "expected_output": "HTML preenchido a partir de assets/templates/executive-report-a4.html, sem placeholders remanescentes, usando só as cores do contrato de tokens.",
+      "files": [],
+      "assertions": [
+        "Usa assets/templates/executive-report-a4.html como base, nao recria a peca do zero",
+        "Nenhum placeholder {{...}} remanescente no HTML final",
+        "Usa somente cores ja resolvidas em assets/tokens/tokens.json (nenhum hex novo introduzido fora do contrato)",
+        "Estrutura tem capa propria (page: cover) + paginas de miolo (page: report) com cabecalho/rodape via string-set",
+        "Cada pagina/bloco expressa uma mensagem executiva principal (padrao resposta-primeiro, nao tema solto)"
       ]
     },
     {
       "id": 2,
-      "prompt": "Transforme estas notas em relatório, mas o texto não informa percentual de progresso.",
-      "expected_output": "Unknown percentages remain null and render as em dash.",
+      "eval_name": "template-negocio-raid-log",
+      "prompt": "Preciso de um RAID log pra reunião de amanhã sobre o projeto de migração.",
+      "expected_output": "RAID log baseado em templates/execution/raid-log.md, com as 4 categorias preenchidas.",
       "files": [],
       "assertions": [
-        "Unknown percentages remain null",
-        "Missing semantic fields are explicit"
+        "Usa templates/execution/raid-log.md como base, nao um RAID log generico inventado do zero",
+        "Conteudo cobre as 4 categorias do RAID: Riscos, Premissas (Assumptions), Issues, Dependencias",
+        "Nao apresenta conteudo sintetico/demo como se tivesse fonte real (marca claramente como ilustrativo)"
       ]
     },
     {
       "id": 3,
-      "prompt": "Resuma este texto em três bullets.",
-      "expected_output": "This skill should not be the preferred trigger for generic summarization.",
+      "eval_name": "mapa-os-semanal",
+      "prompt": "01 — quero criar meu mapa da semana.",
+      "expected_output": "Roteamento pelo atalho leigo '01' para o roteiro de mapa semanal, com WIP=1 e next_action única (ou ausência justificada).",
       "files": [],
       "assertions": [
-        "Trigger remains specific to status-report conversion"
+        "Reconhece o atalho '01' e roteia para o roteiro de criacao de mapa semanal (references/mapa-os/prompts/01-prompt-mestre-prisma.md)",
+        "Respeita WIP=1: no maximo uma entrega, um fluxo, uma acao ativos simultaneamente",
+        "Produz uma unica next_action elegivel, ou justifica explicitamente a ausencia (EXIGE_HUMANO)",
+        "Nao promove estado para verificado/testado/publicado sem evidencia associada"
+      ]
+    },
+    {
+      "id": 4,
+      "eval_name": "workbook-deskgo-5-pecas",
+      "prompt": "Monta o workbook Desk&Go com as 5 peças pro meu negócio novo.",
+      "expected_output": "5 peças A4 SVG geradas por scripts/gerar_workbook.py, validadas por scripts/validar_artefato.py, entregues como zip único.",
+      "files": [],
+      "assertions": [
+        "Usa scripts/gerar_workbook.py em vez de desenhar SVG a mao",
+        "Gera exatamente 5 pecas: Fundacao, GTM, Roadmap, Kanban, Business Model Canvas",
+        "Roda scripts/validar_artefato.py sobre o resultado e reporta o status (nao entrega sem validar)",
+        "Nenhum marcador '/* A DEFINIR */' remanescente onde ja existe valor real em assets/tokens/tokens.json",
+        "Entrega como zip unico, nao como 5 arquivos SVG soltos"
       ]
     }
   ]

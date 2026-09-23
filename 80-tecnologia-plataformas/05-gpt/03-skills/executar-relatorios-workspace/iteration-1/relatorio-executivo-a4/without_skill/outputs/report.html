@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Relatório Executivo — Migração de Dados</title>
+<meta name="description" content="Relatório executivo A4 sobre a saúde do projeto de migração de dados: diagnóstico, recomendação e próximos passos.">
+<style>
+  :root{
+    --ink:#1a1d24;
+    --ink-soft:#4a5160;
+    --ink-faint:#8992a3;
+    --line:#dde1e8;
+    --line-soft:#eceff3;
+    --bg:#ffffff;
+    --bg-panel:#f6f7f9;
+    --accent:#1f4b8f;
+    --accent-soft:#e8eef8;
+    --risk:#a33a2c;
+    --risk-soft:#faece9;
+    --ok:#1e6b45;
+    --ok-soft:#e7f3ec;
+    --warn:#8a5a10;
+    --warn-soft:#fbf1de;
+    --font-sans: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+    --font-serif: Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin:0;
+    padding:0;
+    background:#e9eaed;
+    font-family: var(--font-sans);
+    color: var(--ink);
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 16px auto;
+    background: var(--bg);
+    padding: 18mm 16mm;
+    position: relative;
+  }
+
+  /* ---------- Header ---------- */
+  .doc-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 10px;
+    margin-bottom: 4mm;
+  }
+  .doc-header .brand {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 700;
+  }
+  .doc-header .meta {
+    text-align:right;
+    font-size: 10px;
+    color: var(--ink-faint);
+    line-height:1.5;
+  }
+  .title-block { margin: 5mm 0 6mm; }
+  .title-block .kicker {
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .title-block h1 {
+    font-size: 25px;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+  .title-block .sub {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    max-width: 92%;
+  }
+
+  /* ---------- Status strip ---------- */
+  .status-strip {
+    display:flex;
+    gap: 10px;
+    margin: 6mm 0;
+  }
+  .status-chip {
+    flex:1;
+    border:1px solid var(--line);
+    border-radius: 3px;
+    padding: 9px 12px;
+    background: var(--bg-panel);
+  }
+  .status-chip .label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .status-chip .value {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .status-chip.accent { border-left: 3px solid var(--accent); }
+  .status-chip.ok-chip .value { color: var(--ok); }
+  .status-chip.warn-chip .value { color: var(--warn); }
+  .status-chip.risk-chip .value { color: var(--risk); }
+
+  .dot {
+    display:inline-block;
+    width:8px; height:8px;
+    border-radius:50%;
+    margin-right:6px;
+    position:relative;
+    top:-1px;
+  }
+  .dot.ok { background: var(--ok); }
+  .dot.warn { background: var(--warn); }
+  .dot.risk { background: var(--risk); }
+
+  /* ---------- Section ---------- */
+  section { margin-bottom: 6.5mm; }
+  h2.section-title {
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 5px;
+    margin: 0 0 3mm;
+  }
+  h2.section-title .num {
+    color: var(--accent);
+    margin-right: 6px;
+  }
+
+  p { font-size: 11px; line-height: 1.65; color: var(--ink-soft); margin: 0 0 8px; }
+  strong { color: var(--ink); }
+
+  /* ---------- KPI grid ---------- */
+  .kpi-grid {
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 4mm;
+  }
+  .kpi {
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 10px 11px;
+  }
+  .kpi .kpi-label {
+    font-size: 8.7px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .kpi .kpi-value {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height:1;
+  }
+  .kpi .kpi-note {
+    font-size: 9px;
+    color: var(--ink-faint);
+    margin-top: 4px;
+  }
+
+  /* progress bar */
+  .progress-track {
+    height: 6px;
+    background: var(--line-soft);
+    border-radius: 4px;
+    margin-top: 6px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 4px;
+  }
+
+  /* ---------- Two column layout ---------- */
+  .cols {
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 10mm;
+  }
+
+  /* ---------- Timeline table ---------- */
+  table.timeline {
+    width:100%;
+    border-collapse: collapse;
+    font-size: 10.3px;
+  }
+  table.timeline th {
+    text-align:left;
+    font-size: 8.7px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+    font-weight:700;
+    border-bottom: 1px solid var(--ink);
+    padding: 0 6px 5px 0;
+  }
+  table.timeline td {
+    padding: 7px 6px 7px 0;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--ink-soft);
+    vertical-align: top;
+  }
+  table.timeline tr:last-child td { border-bottom: none; }
+  .pill {
+    display:inline-block;
+    font-size: 8.5px;
+    font-weight:700;
+    padding: 2px 7px;
+    border-radius: 20px;
+    white-space:nowrap;
+  }
+  .pill.done { background: var(--ok-soft); color: var(--ok); }
+  .pill.progress { background: var(--accent-soft); color: var(--accent); }
+  .pill.next { background: var(--line-soft); color: var(--ink-faint); }
+
+  /* ---------- Risk box ---------- */
+  .risk-box {
+    border: 1px solid #e3c3bc;
+    border-left: 4px solid var(--risk);
+    background: var(--risk-soft);
+    border-radius: 3px;
+    padding: 11px 13px;
+  }
+  .risk-box .risk-head {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom: 6px;
+  }
+  .risk-box .risk-head .name {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--risk);
+  }
+  .risk-meter {
+    display:flex;
+    gap:3px;
+  }
+  .risk-meter span {
+    width:14px; height:6px;
+    border-radius:2px;
+    background: var(--line);
+  }
+  .risk-meter span.on { background: var(--risk); }
+  .risk-box p { font-size: 10.3px; margin-bottom: 6px; }
+  .risk-box .risk-meta {
+    font-size: 9px;
+    color: var(--ink-faint);
+    display:flex;
+    gap: 14px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #e3c3bc;
+  }
+  .risk-meta b { color: var(--ink-soft); }
+
+  /* ---------- Recommendation box ---------- */
+  .reco-box {
+    border: 1px solid #c7d6ec;
+    border-left: 4px solid var(--accent);
+    background: var(--accent-soft);
+    border-radius: 3px;
+    padding: 11px 13px;
+  }
+  .reco-box .reco-head {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .reco-box p { font-size: 10.3px; }
+
+  /* ---------- Next steps list ---------- */
+  .steps { list-style:none; margin:0; padding:0; }
+  .steps li {
+    display:flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 10.5px;
+    color: var(--ink-soft);
+  }
+  .steps li:last-child { border-bottom: none; }
+  .steps .step-num {
+    flex: 0 0 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    font-size: 9.5px;
+    font-weight: 700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .steps .step-body b { display:block; color: var(--ink); font-size: 10.7px; margin-bottom:1px; }
+  .steps .step-owner { color: var(--ink-faint); font-size: 9px; margin-left: auto; white-space: nowrap; padding-left: 8px; }
+
+  /* ---------- Ask box ---------- */
+  .ask-box {
+    margin-top: 5mm;
+    border: 1px dashed var(--ink-faint);
+    border-radius: 3px;
+    padding: 10px 13px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ask-box .ask-label {
+    font-size: 8.7px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    font-weight:700;
+  }
+  .ask-box .ask-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ---------- Footer ---------- */
+  .doc-footer {
+    margin-top: 10mm;
+    padding-top: 6px;
+    border-top: 1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    font-size: 8.7px;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- Print ---------- */
+  @media print {
+    html, body { background: #fff; }
+    .page {
+      width: auto;
+      min-height: auto;
+      margin: 0;
+      padding: 14mm 15mm;
+      box-shadow: none;
+    }
+    @page { size: A4; margin: 0; }
+    section { break-inside: avoid; }
+    .cols { break-inside: avoid; }
+    table.timeline tr { break-inside: avoid; }
+    .risk-box, .reco-box, .kpi-grid, .status-strip { break-inside: avoid; }
+  }
+
+  @media screen {
+    .page { box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 12px 30px rgba(0,0,0,0.12); }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="doc-header">
+    <div class="brand">Programa de Transformação de Dados</div>
+    <div class="meta">
+      Relatório executivo · Confidencial — uso interno<br>
+      Preparado para o Board · 23 de setembro de 2026
+    </div>
+  </div>
+
+  <div class="title-block">
+    <div class="kicker">Saúde do Projeto</div>
+    <h1>Migração de Dados: Plataforma Legada → Data Cloud</h1>
+    <div class="sub">Diagnóstico consolidado, recomendação e próximos passos para decisão do Board. Ciclo de reporte: Q3 2026 (semana 38).</div>
+  </div>
+
+  <div class="status-strip">
+    <div class="status-chip accent">
+      <div class="label">Status Geral</div>
+      <div class="value"><span class="dot warn"></span>Atenção</div>
+    </div>
+    <div class="status-chip">
+      <div class="label">Progresso Físico</div>
+      <div class="value">68%</div>
+    </div>
+    <div class="status-chip">
+      <div class="label">Prazo</div>
+      <div class="value">Risco de +5 sem.</div>
+    </div>
+    <div class="status-chip">
+      <div class="label">Orçamento</div>
+      <div class="value">92% consumido</div>
+    </div>
+  </div>
+
+  <section>
+    <h2 class="section-title"><span class="num">01</span>Diagnóstico</h2>
+    <p>O programa migrou com sucesso <strong>3 dos 5 domínios de dados</strong> planejados (Clientes, Produtos e Financeiro) para a nova plataforma, com validação de qualidade acima de 99,2% e zero incidentes críticos em produção desde o corte. A cutover dos domínios de Operações e RH permanece em curso, com testes de reconciliação em andamento.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">Domínios Migrados</div>
+        <div class="kpi-value">3 / 5</div>
+        <div class="progress-track"><div class="progress-fill" style="width:60%"></div></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Qualidade dos Dados</div>
+        <div class="kpi-value">99,2%</div>
+        <div class="kpi-note">Acima da meta de 98,5%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Incidentes Críticos</div>
+        <div class="kpi-value">0</div>
+        <div class="kpi-note">Desde o primeiro cutover</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Orçamento Consumido</div>
+        <div class="kpi-value">92%</div>
+        <div class="kpi-note">R$ 4,6M de R$ 5,0M aprovados</div>
+      </div>
+    </div>
+
+    <p>O ritmo de entrega dos três primeiros domínios foi consistentemente dentro do prazo, resultado da automação de pipelines de ETL e de um processo maduro de validação dupla (fonte vs. destino). No entanto, o domínio de <strong>Operações</strong> revelou dependências de sistemas legados não mapeadas na fase de descoberta, o que já consumiu 3 semanas de contingência e ameaça o cronograma dos dois domínios restantes.</p>
+
+    <table class="timeline">
+      <thead>
+        <tr><th>Domínio</th><th>Status</th><th>Qualidade</th><th>Conclusão</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Clientes</td><td><span class="pill done">Concluído</span></td><td>99,6%</td><td>Mai/2026</td></tr>
+        <tr><td>Produtos</td><td><span class="pill done">Concluído</span></td><td>99,4%</td><td>Jul/2026</td></tr>
+        <tr><td>Financeiro</td><td><span class="pill done">Concluído</span></td><td>98,9%</td><td>Ago/2026</td></tr>
+        <tr><td>Operações</td><td><span class="pill progress">Em andamento</span></td><td>96,1% (parcial)</td><td>Nov/2026 (em risco)</td></tr>
+        <tr><td>RH</td><td><span class="pill next">Não iniciado</span></td><td>—</td><td>Dez/2026 (em risco)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="num">02</span>Risco Principal</h2>
+    <div class="risk-box">
+      <div class="risk-head">
+        <span class="name">Dependências legadas não mapeadas no domínio de Operações</span>
+        <div class="risk-meter" title="Severidade: Alta">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span>
+        </div>
+      </div>
+      <p>O sistema legado de Operações possui integrações ponto-a-ponto com 14 sistemas satélite não documentados, descobertos apenas durante os testes de reconciliação. Cada integração exige mapeamento manual de regras de transformação, elevando o esforço estimado em cerca de 35% para este domínio e criando efeito cascata sobre o cronograma de RH, que depende da mesma equipe de engenharia de dados.</p>
+      <p>Se não endereçado, o risco materializa um atraso de <strong>4 a 6 semanas</strong> na conclusão do programa e pressão adicional sobre o orçamento remanescente (8% de contingência restante).</p>
+      <div class="risk-meta">
+        <span><b>Probabilidade:</b> Alta</span>
+        <span><b>Impacto:</b> Prazo e orçamento</span>
+        <span><b>Dono:</b> Diretoria de Engenharia de Dados</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="num">03</span>Recomendação</h2>
+    <div class="reco-box">
+      <div class="reco-head">Aprovar reforço temporário de equipe e replanejamento de 5 semanas</div>
+      <p>Recomenda-se ao Board a aprovação de (i) alocação temporária de 2 engenheiros de integração sênior por 8 semanas para acelerar o mapeamento das dependências legadas de Operações, e (ii) ajuste formal do marco final do programa de dezembro/2026 para janeiro/2027, preservando o escopo e a qualidade já validados nos três domínios concluídos. O custo incremental estimado é de R$ 340 mil, coberto por realocação da contingência não utilizada em fases anteriores — sem necessidade de aporte adicional de orçamento.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="num">04</span>Próximos Passos</h2>
+    <div class="cols">
+      <div>
+        <ol class="steps">
+          <li>
+            <span class="step-num">1</span>
+            <div class="step-body"><b>Concluir mapeamento das 14 integrações legadas</b>Documentar regras de transformação e validar com áreas de negócio de Operações.</div>
+            <span class="step-owner">Até 07/out</span>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <div class="step-body"><b>Formalizar alocação da equipe de reforço</b>Onboarding dos 2 engenheiros sênior e integração ao squad atual.</div>
+            <span class="step-owner">Até 30/set</span>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <div class="step-body"><b>Executar cutover piloto de Operações (ambiente controlado)</b>Validar reconciliação em subconjunto de dados de baixo risco.</div>
+            <span class="step-owner">Até 21/out</span>
+          </li>
+          <li>
+            <span class="step-num">4</span>
+            <div class="step-body"><b>Atualizar cronograma mestre e replanejar marco de RH</b>Publicar nova baseline com o marco final revisado.</div>
+            <span class="step-owner">Até 30/set</span>
+          </li>
+          <li>
+            <span class="step-num">5</span>
+            <div class="step-body"><b>Reporte de acompanhamento ao Board</b>Checkpoint intermediário sobre progresso de Operações e riscos residuais.</div>
+            <span class="step-owner">28/out</span>
+          </li>
+        </ol>
+      </div>
+      <div>
+        <div class="ask-box" style="margin-top:0; flex-direction:column; align-items:flex-start; gap:10px;">
+          <div>
+            <div class="ask-label">Pedido ao Board</div>
+            <div class="ask-value">Aprovação de reforço de equipe (R$ 340 mil) e novo marco final</div>
+          </div>
+          <div>
+            <div class="ask-label">Nova Data de Conclusão Proposta</div>
+            <div class="ask-value">Janeiro / 2027</div>
+          </div>
+          <div>
+            <div class="ask-label">Impacto no Orçamento Total</div>
+            <div class="ask-value">Sem aporte adicional (uso de contingência)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="doc-footer">
+    <span>Relatório Executivo — Migração de Dados · Confidencial</span>
+    <span>Página 1 de 1 · Preparado por PMO de Transformação de Dados</span>
+  </div>
+
+</div>
+
+</body>
+</html>

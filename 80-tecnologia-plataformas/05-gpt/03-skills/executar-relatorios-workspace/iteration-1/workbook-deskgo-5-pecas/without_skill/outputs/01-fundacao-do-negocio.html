@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Desk&amp;Go — Fundação do Negócio</title>
+<style>
+  @page { size: A4; margin: 16mm 14mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    color: #1f2937;
+    margin: 0;
+    padding: 0;
+    background: #f3f4f6;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 12px auto;
+    background: #ffffff;
+    padding: 16mm 14mm;
+    box-shadow: 0 0 12px rgba(0,0,0,0.12);
+  }
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; width: auto; min-height: auto; }
+  }
+  header.brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 3px solid #0f766e;
+    padding-bottom: 8px;
+    margin-bottom: 6px;
+  }
+  .brand h1 { font-size: 22px; margin: 0; color: #0f766e; letter-spacing: 0.5px; }
+  .brand .tag { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #6b7280; }
+  .piece-label { font-size: 11px; color: #6b7280; text-align: right; }
+  .piece-label strong { color: #0f766e; display: block; font-size: 13px; }
+  h2.section-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0f766e;
+    border-left: 4px solid #0f766e;
+    padding-left: 8px;
+    margin: 18px 0 8px;
+  }
+  p, li { font-size: 12.5px; line-height: 1.5; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+  .card h3 { font-size: 11.5px; margin: 0 0 6px; color: #0f766e; text-transform: uppercase; letter-spacing: 0.4px; }
+  .fill-line { border-bottom: 1px dashed #9ca3af; display: inline-block; min-width: 100%; height: 14px; }
+  .badge {
+    display: inline-block; background: #ccfbf1; color: #0f766e; font-size: 10px;
+    padding: 2px 8px; border-radius: 10px; margin-right: 6px; margin-bottom: 4px;
+  }
+  footer.meta {
+    margin-top: 24px; padding-top: 8px; border-top: 1px solid #e5e7eb;
+    font-size: 9.5px; color: #9ca3af; display: flex; justify-content: space-between;
+  }
+  .values-list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; padding-left: 0; list-style: none; }
+  .values-list li { padding-left: 14px; position: relative; }
+  .values-list li::before { content: "◆"; color: #0f766e; font-size: 9px; position: absolute; left: 0; top: 2px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="brand">
+    <div>
+      <h1>Desk&amp;Go</h1>
+      <div class="tag">Workbook do Negócio · Peça 1 de 5</div>
+    </div>
+    <div class="piece-label">
+      <strong>Fundação do Negócio</strong>
+      Missão · Visão · Valores · Problema/Solução
+    </div>
+  </header>
+
+  <h2 class="section-title">1. O que é o Desk&amp;Go</h2>
+  <p>
+    Desk&amp;Go é uma rede de <strong>estações de trabalho por assinatura flexível</strong>, combinando mesas avulsas
+    em cafés e coworkings parceiros com um app de reserva instantânea e serviços de apoio (impressão, recebimento
+    de correspondência, sala de reunião avulsa). Modelo de portfólio híbrido: receita recorrente de assinatura +
+    comissão por reserva avulsa + parcerias com espaços físicos.
+  </p>
+
+  <h2 class="section-title">2. Missão, Visão e Propósito</h2>
+  <div class="grid3">
+    <div class="card">
+      <h3>Missão</h3>
+      <p>Dar a qualquer profissional um lugar bom para trabalhar, a poucos minutos de onde estiver, sem contrato longo.</p>
+    </div>
+    <div class="card">
+      <h3>Visão (3 anos)</h3>
+      <p>Ser a forma padrão de reservar um lugar para trabalhar em qualquer cidade média/grande do Brasil.</p>
+    </div>
+    <div class="card">
+      <h3>Propósito</h3>
+      <p>Reduzir o atrito entre "preciso de um lugar para trabalhar agora" e "estou produtivo".</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">3. Valores</h2>
+  <ul class="values-list">
+    <li>Simplicidade acima de recursos — reservar em menos de 30 segundos.</li>
+    <li>Confiança com os parceiros de espaço — pagamento pontual, dados claros.</li>
+    <li>Transparência de preço — sem taxa oculta para o usuário final.</li>
+    <li>Presença local — decisões pensadas por bairro/cidade, não só nacional.</li>
+  </ul>
+
+  <h2 class="section-title">4. Problema que resolvemos</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>Dor do usuário (profissional híbrido/freelancer)</h3>
+      <p>Trabalha de casa, mas às vezes precisa de silêncio, internet estável ou um endereço para receber
+      cliente — sem pagar coworking fixo o mês todo.</p>
+    </div>
+    <div class="card">
+      <h3>Dor do parceiro (café/coworking)</h3>
+      <p>Tem mesas ociosas em horários específicos e quer receita extra sem gerir reservas manualmente.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">5. Nossa solução</h2>
+  <p>
+    App + rede de espaços parceiros credenciados. Três formas de uso: <span class="badge">Avulso (drop-in)</span>
+    <span class="badge">Pacote de dias/mês</span> <span class="badge">Assinatura ilimitada</span>. Cada espaço define
+    janelas de disponibilidade; o Desk&amp;Go cuida da reserva, cobrança e suporte.
+  </p>
+
+  <h2 class="section-title">6. Cliente-alvo inicial (ICP)</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>Perfil primário</h3>
+      <p>Freelancers e profissionais em regime híbrido, 25–45 anos, em cidades de porte médio/grande, que já usam
+      apps de assinatura (streaming, delivery) e valorizam flexibilidade sobre status.</p>
+    </div>
+    <div class="card">
+      <h3>Perfil secundário</h3>
+      <p>Pequenas equipes remotas (2–5 pessoas) que precisam de encontros presenciais ocasionais sem alugar sede.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">7. Espaço para anotações — sua versão</h2>
+  <div class="grid2">
+    <div class="card"><h3>O que muda no seu caso</h3><span class="fill-line"></span><span class="fill-line"></span></div>
+    <div class="card"><h3>Riscos que você já enxerga</h3><span class="fill-line"></span><span class="fill-line"></span></div>
+  </div>
+
+  <footer class="meta">
+    <span>Desk&amp;Go · Workbook do Negócio</span>
+    <span>Peça 1/5 — Fundação do Negócio · A4</span>
+  </footer>
+</div>
+</body>
+</html>
