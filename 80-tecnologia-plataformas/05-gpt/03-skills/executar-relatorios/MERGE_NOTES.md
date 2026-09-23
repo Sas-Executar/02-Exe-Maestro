@@ -141,3 +141,67 @@ skill (não é lido por `SKILL.md`).
 - `tests/` do mapa-os (`smoke.py`, `test_activation.py`) e `README.md` do
   mapa-os — não fazem parte da árvore-alvo especificada para esta
   consolidação.
+
+## 2026-09-22/23 — Integração do contrato real de tokens (EXECUTAR-REPORT-PRINT-DS-001 v1.0)
+
+O usuário enviou o contrato de tokens definitivo (paleta Green/Azure/Neutral,
+IBM Plex, contrato `@page` A4, componentes de relatório executivo). Esta
+rodada substitui os placeholders da rodada anterior pelos valores reais.
+
+### Arquivos adicionados
+- `references/200-executive-report-print-contract.md` — contrato completo,
+  verbatim (fonte de verdade em prosa).
+- `assets/templates/executive-report-a4.html` — implementação de referência
+  do contrato, copiada verbatim (já vem com valores concretos, não foi
+  stripada).
+- `assets/tokens/tokens.json` — camadas raw/alias/componente resolvidas.
+  Duas vocabulárias de alias coexistem no mesmo arquivo: `--exec-color-*`
+  (report.css, peca-a4.svg, relatorio-exemplo.html, source-reference.html,
+  examples/report-project.html, template-catalog.html) e o namespace PRISM
+  sem prefixo (`bg`, `fg`, `muted`... — status-report-prisma-a4-v4.html),
+  armazenado com prefixo `prism-` só dentro do JSON para não colidir de
+  nome com a primeira vocabulário.
+- `assets/tokens/tokens.css` — gerado a partir de `tokens.json` (não editar
+  à mão); `scripts/render_report.py` agora injeta este arquivo antes de
+  `assets/report.css`.
+- `assets/tokens/temas.json` — um único tema (`executar`), `overrides: {}`.
+
+### Mapeamento alias -> valor
+Toda decisão de mapeamento (FONTE vs DECISAO, com a base de cada uma) está
+registrada em `assets/tokens/tokens.json`. Resumo: a maioria dos aliases
+`--exec-color-*` já existentes mapeou 1:1 ou por espelhamento direto de um
+componente do contrato (ex.: `accent-soft` = `azure-2`, porque
+`.card.info { background: azure-2 }` no contrato). Nove aliases continuam
+`LACUNA` porque o contrato genuinamente não os cobre — ver
+`references/design-tokens.md` § "Lacunas em aberto" para a lista e o porquê
+de cada um. Nenhum valor foi inventado para preencher uma lacuna.
+
+### Bug real encontrado e corrigido em `scripts/tokens.py`
+`PARES_CONTRASTE` usava nomes com o prefixo `--exec-color-` embutido (ex.:
+`"exec-color-ink-body"`), mas a camada `alias` de `tokens.json` guarda os
+nomes SEM esse prefixo (`"ink-body"`). Como `relatorio_contraste()` engole
+`KeyError`/`ValueError` em silêncio, `--contraste` rodava sem erro e sem
+imprimir nada — nenhum par era de fato checado. Corrigido para usar os
+nomes corretos; a validação agora roda de verdade (ver achados abaixo).
+
+### Achados de contraste (contrato como está, não corrigidos por conta própria)
+`python3 scripts/tokens.py --contraste` agora reporta 4 reprovações reais,
+usando os valores exatamente como o contrato define (todos `origem: FONTE`
+ou espelhamento direto de um componente do contrato):
+
+- `ink-placeholder` (#959494) sobre `surface-page` (#FFFFFF): 3.03:1,
+  abaixo do mínimo de 4.5:1 para texto.
+- `brand` (#00BF63) sobre `surface-page`: 2.43:1, abaixo de 4.5:1 — Green 9
+  não deveria ser usado como cor de TEXTO; o próprio contrato já reserva
+  Green 11 (`brand-strong`, #007A45) para "texto/acento acessível" (§3).
+- `ink-inverse` (branco) sobre `brand` (verde): 2.43:1, abaixo de 4.5:1 —
+  o padrão `.brand-mark { background: var(--action); color:#fff }` do
+  próprio template de impressão fica abaixo do mínimo de texto (aceitável
+  como logotipo de uma letra/marca, questionável como texto genérico).
+- `rule-strong` (#C5C5C5) sobre `surface-page`: 1.73:1, abaixo do mínimo de
+  3:1 para objeto gráfico — não deveria ser usado como contorno de checkbox
+  ou campo sem reforço adicional (ex.: preenchimento ou traço mais espesso).
+
+Nenhum desses valores foi alterado — são o contrato exatamente como
+enviado. Ficam registrados aqui como achado de validação para decisão do
+usuário, não como erro de merge.

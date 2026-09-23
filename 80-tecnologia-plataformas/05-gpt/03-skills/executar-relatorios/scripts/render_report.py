@@ -4,7 +4,8 @@ from html import escape
 import json, sys
 
 ROOT = Path(__file__).resolve().parents[1]
-CSS = (ROOT / "assets" / "report.css").read_text(encoding="utf-8")
+TOKENS_CSS = (ROOT / "assets" / "tokens" / "tokens.css").read_text(encoding="utf-8")
+CSS = TOKENS_CSS + "\n" + (ROOT / "assets" / "report.css").read_text(encoding="utf-8")
 
 def pct(v):
     if v is None:

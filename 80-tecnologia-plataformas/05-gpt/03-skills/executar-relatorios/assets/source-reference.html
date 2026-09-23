@@ -5,7 +5,70 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>EXECUTAR · Status Report</title>
 <style>
-  /* AGUARDANDO CONTRATO DE TOKENS — ver assets/report.css e references/design-tokens.md. Valores var(--exec-color-*) não definidos de propósito. */
+/*
+  Gerado a partir de assets/tokens/tokens.json — não editar à mão.
+  Para atualizar: edite tokens.json e rode scripts/tokens.py --sincronizar (ou regenere este arquivo).
+  Fonte: EXECUTAR-REPORT-PRINT-DS-001 v1.0 (references/200-executive-report-print-contract.md).
+*/
+:root{
+  --exec-color-brand: #00BF63;
+  --exec-color-brand-strong: #007A45;
+  --exec-color-brand-soft: #F3FAF6;
+  --exec-color-accent-soft: #F3F6FA;
+  --exec-color-accent-soft-alt: #E4EDF6;
+  --exec-color-accent-soft-strong: #CFE2F4;
+  --exec-color-ink-title: #4B4A4A;
+  --exec-color-ink-body: #4B4A4A;
+  --exec-color-ink-secondary: #7C7B7B;
+  --exec-color-ink-secondary-strong: #646363;
+  --exec-color-ink-muted: #959494;
+  /* --exec-color-ink-muted-alt: A DEFINIR — LACUNA, ver tokens.json:alias.ink-muted-alt */
+  --exec-color-ink-placeholder: #959494;
+  --exec-color-ink-data: #4B4A4A;
+  --exec-color-ink-inverse: #FFFFFF;
+  /* --exec-color-ink-inverse-muted: A DEFINIR — LACUNA, ver tokens.json:alias.ink-inverse-muted */
+  --exec-color-rule-subtle: #EAEAEA;
+  --exec-color-rule-default: #E4E4E4;
+  --exec-color-rule-strong: #C5C5C5;
+  --exec-color-rule-brand: #00BF63;
+  --exec-color-surface-shell: #FFFFFF;
+  --exec-color-surface-page: #FFFFFF;
+  --exec-color-surface-raised: #FFFFFF;
+  --exec-color-surface-sunken: #F6F6F6;
+  --exec-color-surface-sunken-alt: #F0F0F0;
+  --exec-color-surface-cool: #FCFCFD;
+  /* --exec-color-surface-inverse: A DEFINIR — LACUNA, ver tokens.json:alias.surface-inverse */
+  --exec-color-data-fill: #00BF63;
+  --exec-color-data-fill-alt: #1F93FF;
+  --exec-color-data-track: #F0F0F0;
+  /* --exec-color-data-neutral: A DEFINIR — LACUNA, ver tokens.json:alias.data-neutral */
+  /* --exec-color-accent-blue: A DEFINIR — LACUNA, ver tokens.json:alias.accent-blue */
+  /* --exec-color-accent-green: A DEFINIR — LACUNA, ver tokens.json:alias.accent-green */
+  /* --exec-color-accent-lavender: A DEFINIR — LACUNA, ver tokens.json:alias.accent-lavender */
+  /* --exec-color-accent-peach: A DEFINIR — LACUNA, ver tokens.json:alias.accent-peach */
+  /* --exec-color-accent-violet: A DEFINIR — LACUNA, ver tokens.json:alias.accent-violet */
+}
+
+/* Namespace PRISM (status-report-prisma-a4-v4.html usa estes nomes sem prefixo, não --exec-color-*) */
+:root{
+  --bg: #FFFFFF;
+  --fg: #4B4A4A;
+  --fg-strong: #4B4A4A;
+  --muted: #7C7B7B;
+  --faint: #959494;
+  --line: #E4E4E4;
+  --line-strong: #C5C5C5;
+  --soft: #F6F6F6;
+  --soft-2: #F0F0F0;
+  --accent: #00BF63;
+  --accent-ink: #007A45;
+  --accent-soft: #F3FAF6;
+  --status-positive: #00BF63;
+  --status-positive-soft: #F3FAF6;
+}
+
+</style>
+<style>
   html,body{margin:0;padding:0;background:var(--exec-color-surface-shell);color:var(--exec-color-ink-title);}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;padding:24px 12px 64px;}
   .sheet{max-width:760px;margin:0 auto;background:var(--exec-color-surface-page);border:1px solid var(--exec-color-rule-default);}

@@ -32,16 +32,16 @@ description: >
 Skill única, quatro capacidades, um só contrato de grounding. Leia apenas o
 que a tarefa exige — não carregue toda a árvore de `references/` de uma vez.
 
-**Camada de tokens de design: placeholder.** `assets/tokens/` não contém
-nenhum valor concreto de cor, espaçamento ou tema — só os schemas que
-documentam a forma esperada (`tokens.schema.json`, `temas.schema.json`) e um
-`README.md` explicando o que falta. Isso é intencional: o usuário está prestes
-a enviar um novo contrato de tokens. **Nunca renderize saída visual com cores
-inventadas.** Onde um template precisa de um valor para funcionar, use o
-marcador `/* A DEFINIR */` ou `var(--exec-color-*)` sem declaração — nunca um
-hex chutado. Se o pedido exigir uma decisão de cor que os tokens ainda não
-cobrem, pergunte ou entregue em modo grayscale/estrutural e diga por quê. Ver
-`references/design-tokens.md`.
+**Camada de tokens de design: resolvida.** `assets/tokens/tokens.json`
+contém os valores reais do contrato `EXECUTAR-REPORT-PRINT-DS-001` v1.0
+(Green/Azure/Neutral + IBM Plex — ver `references/200-executive-report-print-contract.md`),
+publicados como `assets/tokens/tokens.css`. Use sempre o alias
+(`var(--exec-color-*)` ou, no template PRISM, o nome sem prefixo) — nunca um
+hex literal. Um pequeno conjunto de aliases herdados permanece
+intencionalmente indefinido porque o contrato não os cobre (ver "Lacunas em
+aberto" em `references/design-tokens.md`); se o pedido exigir exatamente um
+desses, pergunte ou entregue em modo grayscale/estrutural e diga por quê —
+nunca invente o valor.
 
 ## Núcleo não-negociável (vale para as quatro capacidades)
 
@@ -76,10 +76,11 @@ cobrem, pergunte ou entregue em modo grayscale/estrutural e diga por quê. Ver
 | O pedido fala de… | Capacidade | Leia antes |
 |---|---|---|
 | status report, converter documento/texto em relatório, sintetizar como report, progresso/riscos/ações de um projeto | Status report | `references/00-operating-contract.md`, `references/20-report-schema.md`, `references/30-information-mapping.md` |
+| relatório executivo A4 para impressão/PDF, "one-pager para diretoria", diagnóstico → recomendação → roadmap, matriz evidência-implicação-ação, capa própria, cabeçalho/rodapé paginado | Relatório executivo (impressão) | `references/200-executive-report-print-contract.md`, `assets/templates/executive-report-a4.html` |
 | memo, proposta, SOP, RAID log, RACI, OKR, business case, postmortem, e-mail operacional, brief, ADR, PRD/FRD, kanban, roadmap, retro, canvas — qualquer artefato de negócio fora do status report padrão | Pacote de templates de negócio | `references/100-business-template-routing.md`, `references/110-renderer-profiles.md`, `templates/catalog.json` |
 | Mapa-OS, mapa operacional, centro de comando, retomada, Agora/Próximo/Depois, plano semanal Prisma, status EXECUTAR, ou os atalhos 00/01/02 | Mapa-OS / PRISM | `references/mapa-os/architecture-executar.md`, `references/mapa-os/mapa-os-contract.md`, `references/mapa-os/activation-index.md` |
 | workbook, Desk&Go, "as 5 peças", Fundação/GTM/Roadmap/Kanban/Canvas, relatório longo de ciclo, painel/comparativo/cronograma numa folha, wireframe, conferir SVG/HTML antes da gráfica | Workbook visual | `references/workbook/contrato-workbook.md` (5 peças), `references/workbook/playbook-relatorios.md` (relatório extenso), `references/workbook/visuais-sob-demanda.md` (visual avulso), `references/workbook/placeholder-checkbox.md` (validação) |
-| paleta, tema, "muda a cor", token, contraste, ajuste de stack visual | Contrato de tokens (placeholder) | `references/design-tokens.md` |
+| paleta, tema, "muda a cor", token, contraste, ajuste de stack visual | Contrato de tokens | `references/design-tokens.md` |
 
 Pedido ambíguo ou que cruza duas capacidades: pergunte antes de gerar, ou
 combine as referências indicadas — os arquivos não conflitam entre si (ex.:
@@ -226,7 +227,8 @@ Workbook: `tokens.py`, `validar_artefato.py`, `gerar_workbook.py`,
 `assets/report.css`, `assets/source-reference.html`,
 `assets/templates/status-report-prisma-a4-v4.html`,
 `assets/templates/peca-a4.svg`, `assets/templates/relatorio-exemplo.html`,
-`assets/tokens/` (placeholder — ver acima), `assets/data/`.
+`assets/templates/executive-report-a4.html` (relatório executivo A4),
+`assets/tokens/` (tokens resolvidos — ver acima), `assets/data/`.
 
 ### Exemplos e evals
 `examples/` (status report + `mapa-os-*` prefixados), `evals/evals.json`,

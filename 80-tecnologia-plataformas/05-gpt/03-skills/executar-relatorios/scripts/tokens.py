@@ -39,15 +39,19 @@ TEMAS_PATH = ASSETS / "temas.json"
 # Pares que precisam de verificação de contraste toda vez que a paleta mudar.
 # (frente, fundo, uso, minimo)
 PARES_CONTRASTE = [
-    ("exec-color-ink-body", "exec-color-surface-page", "corpo de texto", 4.5),
-    ("exec-color-ink-title", "exec-color-surface-page", "titulo", 4.5),
-    ("exec-color-ink-placeholder", "exec-color-surface-page", "placeholder", 4.5),
-    ("exec-color-ink-muted", "exec-color-surface-page", "rotulo decorativo", 3.0),
-    ("exec-color-brand", "exec-color-surface-page", "texto de marca", 4.5),
-    ("exec-color-ink-inverse", "exec-color-surface-inverse", "texto sobre capa escura", 4.5),
-    ("exec-color-ink-inverse", "exec-color-brand", "texto sobre azul", 4.5),
-    ("exec-color-rule-strong", "exec-color-surface-page", "contorno de checkbox/campo", 3.0),
+    ("ink-body", "surface-page", "corpo de texto", 4.5),
+    ("ink-title", "surface-page", "titulo", 4.5),
+    ("ink-placeholder", "surface-page", "placeholder", 4.5),
+    ("ink-muted", "surface-page", "rotulo decorativo", 3.0),
+    ("brand", "surface-page", "texto de marca", 4.5),
+    ("ink-inverse", "surface-inverse", "texto sobre capa escura", 4.5),
+    ("ink-inverse", "brand", "texto sobre azul", 4.5),
+    ("rule-strong", "surface-page", "contorno de checkbox/campo", 3.0),
 ]
+# Nomes de token, sem o prefixo `exec-color-` (esse prefixo só existe quando o
+# alias vira custom property CSS, não na camada alias do JSON). O par
+# ink-inverse/surface-inverse é pulado até surface-inverse deixar de ser
+# LACUNA — ver references/design-tokens.md.
 
 
 def _luminancia(hexcolor: str) -> float:
@@ -75,8 +79,8 @@ class Tokens:
         self.raw = data["raw"]
         self.alias = data["alias"]
         self.componente = data["componente"]
-        self.tema = "playbook"
-        self.tema_rotulo = "Executar Playbook"
+        self.tema = "executar"
+        self.tema_rotulo = "EXECUTAR"
         self._cache: dict[str, object] = {}
 
     @classmethod

@@ -1,28 +1,29 @@
 # Contrato de tokens de design
 
-**Este arquivo descreve o CONTRATO estrutural de tokens. Os valores concretos
-(cores, espaçamento, temas) aguardam o novo contrato de tokens do usuário e
-devem ser preenchidos em `assets/tokens/` antes de qualquer renderização
-visual.**
+**Os valores concretos existem.** Fonte: `EXECUTAR-REPORT-PRINT-DS-001` v1.0,
+trazido verbatim em `references/200-executive-report-print-contract.md` e
+implementado em `assets/templates/executive-report-a4.html`. Os valores
+resolvidos vivem em `assets/tokens/tokens.json` (camadas raw/alias/componente)
+e são publicados como custom properties CSS em `assets/tokens/tokens.css`,
+gerado a partir do JSON — não edite o `.css` à mão.
 
-Não hardcode hex, nem em CSS, nem em SVG, nem em prosa de referência, enquanto
-esse preenchimento não acontecer. Onde um valor concreto é necessário para o
-artefato funcionar (ex.: `:root` de um template), use um marcador `/* A
-DEFINIR */` — nunca um palpite.
+Não hardcode hex, nem em CSS, nem em SVG, nem em prosa de referência — use o
+alias correspondente (`var(--exec-color-*)` ou, no template PRISM, o nome sem
+prefixo). Um punhado de aliases herdados da vocabulary anterior continua sem
+valor porque o contrato novo genuinamente não os cobre — ver "Lacunas em
+aberto" abaixo. Onde um desses aparece num `:root`, o marcador permanece
+`/* A DEFINIR — LACUNA */`: isso é honesto, não um resíduo de merge.
 
 ## De onde vem esse contrato
 
-Esta skill herdou um stack de tokens de uma extração visual anterior
-(família "Executar Playbook"). Essa extração se declarava `REFERENCE_ONLY`:
-boa parte dos itens não tinha valor físico recuperável, e toda a geometria
-de origem estava em `px-image` — pixel de uma imagem de referência, não
-medida física de papel. O arquivo de extração bruta não foi trazido para
-este pacote; só a estrutura conceitual permanece, documentada aqui e em
-`assets/tokens/tokens.schema.json`.
-
-Isso importa porque muda como qualquer valor futuro deve ser tratado: uma cor
-medida é um fato; uma margem "de 28px" sobre uma imagem não é fato nenhum
-sobre papel até alguém decidir e registrar a base do cálculo.
+O stack anterior (família "Executar Playbook", extração `REFERENCE_ONLY` de
+JPGs de referência) foi descartado por inteiro nesta integração — não é mais
+a fonte de nenhum valor. O contrato atual vem de uma hierarquia de autoridade
+própria (ver `references/200-executive-report-print-contract.md` §2):
+Desyng-System-ecossistema → `01-Executar-Echo/packages/design-tokens` →
+`01-Executar-Echo/packages/design-system` → Showroom EXECUTAR. É a paleta
+Green/Azure/Neutral + IBM Plex, com valor hex medido diretamente — não mais
+`px-image` de uma extração.
 
 ## As três camadas
 
@@ -72,10 +73,30 @@ novo, nunca mexe em grade, geometria ou hierarquia. Se um tema precisar
 mudar layout, ele não é tema: é outro contrato de peça, e o lugar dele é em
 `references/workbook/contrato-workbook.md`.
 
-A forma esperada de `assets/tokens/temas.json` está em
-`assets/tokens/temas.schema.json`. Nomes de tema específicos (a família
-anterior usava `playbook`/`swiss`/`editorial`) não são parte deste contrato;
-o novo contrato de tokens do usuário define quais temas existem.
+O contrato atual define UMA identidade canônica, não uma família de temas
+trocáveis (a família anterior tinha `playbook`/`swiss`/`editorial`; esses
+nomes não existem mais). `assets/tokens/temas.json` registra essa identidade
+única (`executar`) com `overrides: {}` — é a base, não uma variação dela. Um
+tema novo só se justifica se e quando o usuário pedir explicitamente uma
+segunda leitura visual da mesma estrutura.
+
+## Lacunas em aberto
+
+Estes aliases não têm valor porque o contrato genuinamente não os cobre —
+decidir antes de usar, não inferir:
+
+- `surface-inverse`, `ink-muted-alt`, `ink-inverse-muted`, `data-neutral` —
+  ver `base` de cada um em `assets/tokens/tokens.json` para o raciocínio.
+- `accent-blue`, `accent-green`, `accent-lavender`, `accent-peach`,
+  `accent-violet` — paleta categórica de 5 cores do gerador de wireframe
+  (`scripts/gerar_wireframe.py`). O contrato novo define só verde/azure
+  funcionais e proíbe paleta paralela (§1 do contrato). Na prática, nenhum
+  desses aliases é hoje consumido pelo wireframe (ele usa `ink-placeholder`,
+  `surface-page`, `rule-subtle`/`rule-default`, `ink-title`, `ink-muted` —
+  todos já resolvidos); a lacuna só importa se alguém reintroduzir uma
+  paleta categórica de rascunho no futuro. Decidir então se ela deve vir de
+  tons de verde/azure/neutro ou permanecer fora do contrato por ser artefato
+  de rascunho não-final.
 
 ## Unidades
 
@@ -99,19 +120,18 @@ definido:
 - raio de checkbox (quase reto de propósito: arredondado demais lê como
   botão, e ninguém escreve dentro de um botão).
 
-## Como preencher quando o novo contrato chegar
+## Como mexer sem quebrar
 
-1. Escreva `assets/tokens/tokens.json` seguindo
-   `assets/tokens/tokens.schema.json` (raw → alias → componente, com
-   `origem`/`base` em cada item).
-2. Escreva `assets/tokens/temas.json` (se houver mais de um tema) seguindo
-   `assets/tokens/temas.schema.json`.
-3. Rode `python3 scripts/tokens.py --contraste --lacunas` — nenhuma
-   reprovação, nenhuma lacuna aberta antes de usar em produção.
-4. Rode `python3 scripts/tokens.py --sincronizar assets/templates/*.{svg,html}`
-   para reescrever os blocos `/* TOKENS:INICIO */ … /* TOKENS:FIM */`.
-5. Substitua os marcadores `/* A DEFINIR */` e "A DEFINIR — aguardando
-   contrato de tokens" em `assets/report.css`, `references/40-visual-system.md`
-   e nos templates de `assets/templates/`.
-6. Regere e valide os artefatos (`scripts/validar_artefato.py`,
-   `scripts/gerar_workbook.py`, `scripts/gerar_relatorio.py`).
+1. Edite `assets/tokens/tokens.json` (nunca `tokens.css` diretamente — ele é
+   gerado).
+2. Rode `python3 scripts/tokens.py --contraste --lacunas` — nenhuma
+   reprovação nova, e confirme que a lista de lacunas ainda bate com a seção
+   acima (nem mais, nem menos).
+3. Regenere `assets/tokens/tokens.css` e ressincronize os blocos
+   `/* TOKENS:INICIO */ … /* TOKENS:FIM */` em `assets/templates/peca-a4.svg`,
+   `assets/templates/relatorio-exemplo.html` e
+   `assets/templates/status-report-prisma-a4-v4.html`.
+4. Regere e valide os artefatos (`scripts/validar_artefato.py`,
+   `scripts/gerar_workbook.py`, `scripts/gerar_relatorio.py`,
+   `scripts/render_report.py` — este último já injeta `tokens.css` antes de
+   `assets/report.css` automaticamente).

@@ -26,7 +26,7 @@
   <title>Fixture quebrada</title>
   <style>
     /* AGUARDANDO CONTRATO DE TOKENS — valores A DEFINIR, exceto o defeito TK001 abaixo. */
-    :root{ --exec-color-ink-body: /* A DEFINIR */; --exec-color-rule-strong: /* A DEFINIR */; }
+    :root{ --exec-color-ink-body: #4B4A4A; --exec-color-rule-strong: #C5C5C5; }
     text { font-family: Helvetica, Arial, sans-serif; font-size: 3.2px; fill: var(--exec-color-ink-body); }
     .exec-field__box { fill:none; stroke: var(--exec-color-rule-strong); }
     .exec-check__box { fill:none; stroke: var(--exec-color-rule-strong); }

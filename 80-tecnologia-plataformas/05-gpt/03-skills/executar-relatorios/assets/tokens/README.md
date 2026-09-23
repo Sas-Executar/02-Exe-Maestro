@@ -1,15 +1,19 @@
-# assets/tokens/ — aguardando novo contrato de tokens do usuário
+# assets/tokens/ — identidade EXECUTAR resolvida
 
-Esta pasta não contém valores concretos de cor, espaçamento ou tema.
+Uma identidade canônica, não uma família de temas trocáveis.
 
-- `tokens.schema.json` — forma esperada de `tokens.json` (raw → alias →
-  componente, com proveniência `FONTE`/`DECISAO`/`LACUNA` por item).
-- `temas.schema.json` — forma esperada de `temas.json` (sobreposições de
-  tema na camada alias).
+- `tokens.json` — valores reais (raw → alias → componente, proveniência
+  `FONTE`/`DECISAO`/`LACUNA` por item), fonte: `EXECUTAR-REPORT-PRINT-DS-001`
+  v1.0 (ver `references/200-executive-report-print-contract.md`).
+- `tokens.css` — gerado a partir de `tokens.json`; **não edite à mão**, edite
+  o JSON e regenere.
+- `temas.json` — um único tema (`executar`) com `overrides: {}`: é a base,
+  não uma variação dela.
+- `tokens.schema.json` / `temas.schema.json` — forma esperada dos dois
+  arquivos acima.
 
-Quando o novo contrato de tokens chegar, crie `tokens.json` e (se houver mais
-de um tema) `temas.json` nesta pasta seguindo esses schemas. Depois rode
-`python3 scripts/tokens.py --contraste --lacunas` antes de gerar qualquer
-artefato visual.
+Rode `python3 scripts/tokens.py --contraste --lacunas` antes de gerar
+qualquer artefato visual — confirme que a lista de lacunas bate com a seção
+"Lacunas em aberto" de `references/design-tokens.md`, nem mais nem menos.
 
 Ver `references/design-tokens.md` para o contrato completo.
