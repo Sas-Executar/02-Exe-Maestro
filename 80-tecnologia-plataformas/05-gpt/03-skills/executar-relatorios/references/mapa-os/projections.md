@@ -17,6 +17,35 @@ Existem duas formas de saída para esta projeção, conforme o que a fonte suste
 
   Este documento é permanente/de referência, não um plano de execução — não force nele uma estrutura de dias ou semana; isso é o `prisma_7d`, abaixo.
 
+  **Variante compacta (uma folha A4):** quando o pedido é por uma visão geral
+  de uma folha só (não o documento de referência completo em várias
+  páginas), reaproveite o mesmo template e schema do `prisma_7d`
+  (`assets/templates/status-report-prisma-a4-v4.html` +
+  `schemas/prism-report.schema.json`) remapeando a semântica dos campos —
+  o template é sobre estrutura visual (3 faces, KPIs, 7 blocos, hero +
+  4 itens), não sobre "semana": nada nele exige que `calendar.days` sejam
+  dias do calendário. Mapeamento: `epic` = visão geral da fonte (não
+  "épica"); `epic.intent` = como interpretar; `kpis` = 4 números
+  estruturais (contagens, não situação operacional — conflitos/gates não
+  entram aqui); `calendar.days` = até 7 blocos de navegação/agrupamento
+  temático (não dias — reescreva `weekday`/`date` como rótulo+rastreio
+  curto, ex. `weekday:"ÁREA"`, `date:"A02-A04"`); `deliverables.hero` =
+  como operar/usar a fonte; `deliverables.items` = as camadas de uso (ex.
+  entrada, consulta, rastreio, governança); `deliverables.next` = pontos
+  que exigem atenção/decisão; `deliverables.trace` = fonte e abas.
+
+  O template tem três rótulos de canto fixos ("FACE 01 · ÉPICA", "FACE 02 ·
+  EXECUÇÃO", "FACE 03 · RESULTADO") que não vêm do payload — são texto
+  estático do arquivo imutável. Para uma leitura não-semanal eles ficam
+  incoerentes com o conteúdo; ajuste-os no HTML já renderizado (não no
+  template-fonte) para casar com os três `eyebrow` do payload, por exemplo:
+
+  ```python
+  html = html.replace("FACE 01 · ÉPICA", "FACE 01 · " + epic_eyebrow)
+  html = html.replace("FACE 02 · EXECUÇÃO", "FACE 02 · " + calendar_eyebrow)
+  html = html.replace("FACE 03 · RESULTADO", "FACE 03 · " + deliverables_eyebrow)
+  ```
+
 ## agora_proximo_depois
 
 Agrupe por horizonte, preservando IDs e prazos. Um prazo original vencido permanece registrado; uma nova previsão é outro campo. O bloco Agora recebe WIP=1.
